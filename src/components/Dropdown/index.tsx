@@ -13,10 +13,10 @@ export const DropdownNav = (props: Props) => {
   return (
     <nav className='grid grid-cols-12 bg-primary-blue-600  font-poppins text-[1.4rem] font-medium text-white'>
       <ul className='col-start-2 col-end-12 grid grid-cols-12'>
-        <div className='col-start-2 flex h-[4.5rem] items-center'>
-          <li className='flex h-[3.5rem] w-fit cursor-pointer items-center gap-2 rounded-md bg-primary-yellow-300 py-2 px-4  uppercase text-white'>
+        <div className='col-start-1 flex h-[4.5rem] items-center'>
+          <li className='flex h-[3.5rem] w-fit cursor-pointer items-center gap-2 rounded-md py-2 font-bold uppercase  text-primary-yellow-100 '>
             <span>Categories</span>
-            <Bars3BottomRightIcon className='h-6 w-6 font-bold' />
+            <Bars3BottomRightIcon className='h-6 w-6 font-bold text-primary-yellow-100' />
           </li>
         </div>
 

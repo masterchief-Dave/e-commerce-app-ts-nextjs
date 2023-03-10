@@ -29,14 +29,14 @@ export const Navbar = (props: Props) => {
         <div className='flex items-center gap-x-4'>
           <li>
             <Link href='/auth/login'>
-              <button className='auth-btn bg-white text-primary-yellow-100'>
+              <button className='auth-btn bg-white text-primary-blue-100'>
                 Login
               </button>
             </Link>
           </li>
           <li>
             <Link href='/auth/register'>
-              <button className='auth-btn bg-primary-yellow-100 text-white'>
+              <button className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
                 Sign up
               </button>
             </Link>
