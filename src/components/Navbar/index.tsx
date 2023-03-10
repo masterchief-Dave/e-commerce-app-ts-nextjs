@@ -9,7 +9,7 @@ export const Navbar = (props: Props) => {
       <ul className='col-start-2 col-end-12 flex items-center justify-between gap-x-8'>
         <li>
           <Link href='#' className='text-[2rem] font-black text-white'>
-            Warehouse
+            Sage - Warehouse
           </Link>
         </li>
         <li className='grow'>
