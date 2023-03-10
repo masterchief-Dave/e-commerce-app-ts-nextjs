@@ -71,4 +71,18 @@
 
 @layer components {
   /*  */
+  button {
+    outline: none;
+    border: none;
+  }
+
+  .auth-btn {
+    @apply h-[3.5rem] w-fit rounded-xl px-[1.5rem] font-poppins text-[1.3rem] font-semibold opacity-80 hover:opacity-95;
+  }
+
+  input:focus-within,
+  input:focus-visible {
+    outline: none;
+    border: none;
+  }
 }

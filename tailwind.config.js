@@ -40,6 +40,9 @@ module.exports = {
         'primary-grey-200': '#a1a1a1',
         'primary-grey-300': '#666666',
       },
+      fontFamily: {
+        poppins: ['poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [],
