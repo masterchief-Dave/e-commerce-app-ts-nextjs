@@ -1,1 +1,7 @@
 https://nuranium-electronic.myshopify.com/
+
+[
+  "//cdn.shopify.com/s/files/1/0272/1493/8165/files/slider-show-2_341dac96-3ed1-4ce8-8343-daa4c6d8b224_2048x.jpg?v=1614755002",
+  "//cdn.shopify.com/s/files/1/0272/1493/8165/files/slider-show-3_35382bde-054c-4c31-a610-76b28ce97330_2048x.jpg?v=1614755002",
+  "//cdn.shopify.com/s/files/1/0272/1493/8165/files/slider-show-1_66ffbc40-efeb-48a4-95d8-590eba9597fd_2048x.jpg?v=1614755002"
+]

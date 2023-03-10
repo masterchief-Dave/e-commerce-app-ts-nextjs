@@ -67,6 +67,10 @@
     font-weight: 100;
     font-display: swap;
   }
+
+  html {
+    font-size: 62.5%;
+  }
 }
 
 @layer components {

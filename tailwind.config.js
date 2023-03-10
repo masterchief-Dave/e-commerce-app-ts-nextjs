@@ -28,6 +28,7 @@ module.exports = {
         'primary-blue-300': '#3361cc',
         'primary-blue-400': '#105caa',
         'primary-blue-500': '#67a1df',
+        'primary-blue-600': '#0c549f',
 
         'primary-white-100': '#fefefe',
         'primary-white-200': '#d9d9d9',
