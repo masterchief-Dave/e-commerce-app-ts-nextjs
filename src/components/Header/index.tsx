@@ -3,6 +3,7 @@ import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 import appleLaptop from 'public/assets/img/apple-laptop.jpg'
+import heroOne from 'public/assets/img/hero-1.jpg'
 
 type Props = {}
 
@@ -15,7 +16,7 @@ type Header = {
   price: string
   formerPrice: string
   promoPrice: string
-  img: string
+  img: string | StaticImageData
 }[]
 
 const data: Header = [
@@ -51,13 +52,13 @@ const data: Header = [
     promoPrice: '',
     description: `At Sage, we don't just provide a service, we create an experience. Our passion for innovation and commitment to excellence sets us apart from the rest`,
     // img: appleLaptop,
-    img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1026&q=80',
+    img: heroOne,
   },
 ]
 
 export const Header = (props: Props) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -65,18 +66,21 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <>
+    <div className='max-w-full'>
       <Slider {...settings}>
         {data.map((data, index: number): JSX.Element => {
           return (
-            <div className='relative' key={index}>
+            <div
+              className='relative max-h-[80vh] w-full max-w-[100vw]'
+              key={index}
+            >
               <div className='relative w-full font-poppins'>
                 <Image
                   src={data.img}
                   alt='landing'
-                  className='w-full object-cover'
-                  width='7000'
-                  height='7000'
+                  className='h-full w-full object-contain'
+                  width='1000'
+                  height='1000'
                 />
                 <div className='absolute top-0 z-10  grid h-full w-full grid-cols-12 flex-col items-center justify-center'>
                   <div
@@ -112,6 +116,6 @@ export const Header = (props: Props) => {
           )
         })}
       </Slider>
-    </>
+    </div>
   )
 }
