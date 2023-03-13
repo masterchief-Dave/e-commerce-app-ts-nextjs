@@ -17,11 +17,9 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>
-        <Navbar />
-        <DropdownNav />
-        <Header />
-      </div>
+      <Navbar />
+      <DropdownNav />
+      <Header />
       <main className='grid grid-cols-12 bg-primary-white py-12'>
         <div className='col-start-2 col-end-12 space-y-12'>
           <section className='weekly-deals-component bg-white'>

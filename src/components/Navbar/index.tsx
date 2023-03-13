@@ -1,14 +1,46 @@
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import {
+  MagnifyingGlassIcon,
+  ShoppingCartIcon,
+} from '@heroicons/react/24/outline'
 
 type Props = {}
 
 export const Navbar = (props: Props) => {
+  const [scroll, setScroll] = useState<number | null>(null)
+  const [isTop, setIsTop] = useState<boolean>(false)
+
+  useEffect(() => {
+    setScroll(window.scrollY)
+  }, [])
+
+  const handleNavbar = () => {
+    if (window.scrollY > 0) {
+      return setIsTop(true)
+    } else {
+      return setIsTop(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleNavbar)
+
+    return () => {
+      document.removeEventListener('scroll', handleNavbar)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scroll])
+
   return (
-    <nav className='grid grid-cols-12 bg-primary-blue-100 py-4 font-poppins'>
+    <nav
+      className={`grid grid-cols-12 bg-primary-blue-100 py-4 font-poppins ${
+        isTop ? 'fixed top-0 right-0 z-50 w-full' : ''
+      }`}
+    >
       <ul className='col-start-2 col-end-12 flex items-center justify-between gap-x-8'>
         <li>
-          <Link href='#' className='text-[2rem] font-black text-white'>
+          <Link href='/' className='text-[2rem] font-black text-white'>
             Sage - Warehouse
           </Link>
         </li>
@@ -39,6 +71,14 @@ export const Navbar = (props: Props) => {
               <button className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
                 Sign up
               </button>
+            </Link>
+          </li>
+          <li>
+            <Link href='' className='relative'>
+              <ShoppingCartIcon className='h-8 w-8' />
+              <span className='absolute top-0 left-[10px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-[#000] text-white'>
+                5
+              </span>
             </Link>
           </li>
         </div>
