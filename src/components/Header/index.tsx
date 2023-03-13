@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
@@ -57,6 +58,8 @@ const data: Header = [
 ]
 
 export const Header = (props: Props) => {
+  const sliderRef = useRef<Slider | null>(null)
+
   const settings = {
     dots: false,
     infinite: true,
@@ -65,10 +68,23 @@ export const Header = (props: Props) => {
     slidesToScroll: 1,
   }
 
+  // console.log(sliderRef.current)
+  const handleLeftSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext()
+    }
+  }
+
+  const handleRightSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev()
+    }
+  }
+
   return (
-    <div className='max-w-full'>
-      <Slider {...settings}>
-        {data.map((data, index: number): JSX.Element => {
+    <div className='max-w-[100vw]'>
+      <Slider {...settings} ref={sliderRef}>
+        {data.map((data: IHeader, index: number): JSX.Element => {
           return (
             <div
               className='relative max-h-[80vh] w-full max-w-[100vw]'
@@ -104,11 +120,17 @@ export const Header = (props: Props) => {
                 </div>
               </div>
               <div className='absolute top-0 z-50 flex h-full w-full items-center justify-between px-[5rem]'>
-                <div className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white'>
+                <div
+                  className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white'
+                  onClick={handleLeftSlide}
+                >
                   <ChevronLeftIcon className='h-8 w-8 text-white' />
                 </div>
 
-                <div className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white'>
+                <div
+                  className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white'
+                  onClick={handleRightSlide}
+                >
                   <ChevronRightIcon className='h-8 w-8 text-white' />
                 </div>
               </div>

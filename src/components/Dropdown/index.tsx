@@ -7,7 +7,8 @@ type Props = {}
 
 export const DropdownNav = (props: Props) => {
   const styles = {
-    list: `flex items-center gap-2 uppercase cursor-pointer h-[4.5rem]`,
+    list: `flex items-center gap-1 uppercase cursor-pointer h-[4.5rem]`,
+    icon: `font-bold h-5 w-5 mt-[.3rem]`,
   }
 
   return (
@@ -26,19 +27,19 @@ export const DropdownNav = (props: Props) => {
           </li>
           <li className={styles.list}>
             <span>All demos</span>
-            <ChevronDownIcon className='h-4 w-4' />
+            <ChevronDownIcon className={styles.icon} />
           </li>
           <li className={styles.list}>
             <span>pages</span>
-            <ChevronDownIcon className='h-4 w-4' />
+            <ChevronDownIcon className={styles.icon} />
           </li>
           <li className={styles.list}>
             <span>categories</span>
-            <ChevronDownIcon className='h-4 w-4' />
+            <ChevronDownIcon className={styles.icon} />
           </li>
           <li className={styles.list}>
             <span>blog</span>
-            <ChevronDownIcon className='h-4 w-4' />
+            <ChevronDownIcon className={styles.icon} />
           </li>
         </div>
       </ul>
