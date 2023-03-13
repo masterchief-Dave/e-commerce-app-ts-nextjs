@@ -6,3 +6,7 @@ https://nuranium-electronic.myshopify.com/?preview_theme_id=83823493173
   https://cdn.shopify.com/s/files/1/0272/1493/8165/files/slidershow-1-1_3519e856-a85a-4a83-ad9c-a5b3896ed871_2048x.jpg?v=1614755383,
   "https://cdn.shopify.com/s/files/1/0272/1493/8165/files/slider-show-1_66ffbc40-efeb-48a4-95d8-590eba9597fd_2048x.jpg?v=1614755002"
 ]
+
+TODO
+1. make the navbar sticky, not the dropdown just the navbar
+2. changes the images in the header

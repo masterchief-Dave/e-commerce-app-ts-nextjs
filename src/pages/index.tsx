@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { Navbar } from '@/components/Navbar'
 import { DropdownNav } from '@/components/Dropdown'
 import { Header } from '@/components/Header'
+import { WeeklyDeals } from '@/components/Deals'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,17 @@ export default function Home() {
         <DropdownNav />
         <Header />
       </div>
-      <main></main>
+      <main className='grid grid-cols-12 bg-primary-white py-12'>
+        <div className='col-start-2 col-end-12 space-y-12'>
+          <section className='weekly-deals-component bg-white'>
+            <WeeklyDeals />
+          </section>
+
+          <section className='products-component bg-white'>
+            <p className='p-2'>products</p>
+          </section>
+        </div>
+      </main>
     </>
   )
 }

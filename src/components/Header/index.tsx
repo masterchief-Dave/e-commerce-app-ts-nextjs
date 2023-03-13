@@ -66,6 +66,7 @@ export const Header = (props: Props) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
   }
 
   // console.log(sliderRef.current)
@@ -82,19 +83,19 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <div className='max-w-[100vw]'>
+    <div className='max-w-[100vw] overflow-hidden'>
       <Slider {...settings} ref={sliderRef}>
         {data.map((data: IHeader, index: number): JSX.Element => {
           return (
             <div
-              className='relative max-h-[80vh] w-full max-w-[100vw]'
+              className='relative h-[100%] max-h-[80vh] w-full max-w-[100vw]'
               key={index}
             >
               <div className='relative w-full font-poppins'>
                 <Image
                   src={data.img}
                   alt='landing'
-                  className='h-full w-full object-contain'
+                  className='h-full w-full object-cover'
                   width='1000'
                   height='1000'
                 />
