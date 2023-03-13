@@ -16,7 +16,10 @@ export const WeeklyDeals = (props: Props) => {
   const styles = {
     iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center`,
     icon: `h-6 w-6 text-primary-grey-400`,
+    weeklyDealsTimeHead: `font-roboto font-bold text-[#999]`,
+    weeklyDealsTimeText: `flex text-white font-bold`,
   }
+
   return (
     <div className='py-2 font-poppins'>
       <header className='flex items-center justify-between border-b px-4 py-3'>
@@ -26,34 +29,34 @@ export const WeeklyDeals = (props: Props) => {
           </h2>
           <div className='flex gap-x-4'>
             <div>
-              <span>Days</span>
-              <div className='flex'>
-                <span>0</span>
-                <span>0</span>
+              <span className={styles.weeklyDealsTimeHead}>Days</span>
+              <div className={styles.weeklyDealsTimeText}>
+                <span className='bg-primary-yellow-200 p-2'>0</span>
+                <span className='bg-primary-yellow-300 p-2'>0</span>
               </div>
             </div>
 
             <div>
-              <span>Hours</span>
-              <div className='flex'>
-                <span>0</span>
-                <span>0</span>
+              <span className={styles.weeklyDealsTimeHead}>Hours</span>
+              <div className={styles.weeklyDealsTimeText}>
+                <span className='bg-primary-yellow-200 p-2'>0</span>
+                <span className='bg-primary-yellow-300 p-2'>0</span>
               </div>
             </div>
 
             <div>
-              <span>Mins</span>
-              <div className='flex'>
-                <span>0</span>
-                <span>0</span>
+              <span className={styles.weeklyDealsTimeHead}>Mins</span>
+              <div className={styles.weeklyDealsTimeText}>
+                <span className='bg-primary-yellow-200 p-2'>0</span>
+                <span className='bg-primary-yellow-300 p-2'>0</span>
               </div>
             </div>
 
             <div>
-              <span>Secs</span>
-              <div className='flex'>
-                <span>0</span>
-                <span>0</span>
+              <span className={styles.weeklyDealsTimeHead}>Secs</span>
+              <div className={styles.weeklyDealsTimeText}>
+                <span className='bg-primary-yellow-200 p-2'>0</span>
+                <span className='bg-primary-yellow-300 p-2'>0</span>
               </div>
             </div>
           </div>
@@ -71,7 +74,7 @@ export const WeeklyDeals = (props: Props) => {
 
       <section className='flex space-x-1'>
         <div className='h-[17rem] py-8 px-8'>
-          <div className='h-full w-[17rem] bg-[#999]'></div>
+          <div className='h-full w-[17rem] bg-[#eee]'></div>
           <div></div>
         </div>
         <div></div>
