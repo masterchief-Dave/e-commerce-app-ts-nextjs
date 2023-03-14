@@ -1,19 +1,36 @@
+import { useState } from 'react'
 import {
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  HeartIcon,
   StarIcon,
 } from '@heroicons/react/24/outline'
+
+import { HeartIcon } from '@/globals/icons'
 
 type Props = {}
 
 export const WeeklyDeals = (props: Props) => {
+  const [like, setLike] = useState<boolean>(false)
+
+  const handleClick = () => {
+    setLike(!like)
+  }
+
   const styles = {
     iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center`,
     icon: `h-6 w-6 text-primary-grey-400`,
     weeklyDealsTimeHead: `font-roboto font-bold text-[#999]`,
     weeklyDealsTimeText: `flex text-white font-bold`,
+  }
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
   }
 
   return (
@@ -95,10 +112,14 @@ export const WeeklyDeals = (props: Props) => {
                   </div>
                   <div className='flex gap-4'>
                     <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
-                      <CheckIcon className='h-8 w-8 text-[#222]' />
+                      <CheckIcon className='h-6 w-6 text-[#222]' />
                     </div>
                     <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
-                      <HeartIcon className='h-8 w-8 text-[#222]' />
+                      <HeartIcon
+                        className='h-8 w-8 text-[#222]'
+                        onClick={handleClick}
+                        like={like}
+                      />
                     </div>
                   </div>
                 </div>
