@@ -1,16 +1,12 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  HeartIcon,
+  StarIcon,
+} from '@heroicons/react/24/outline'
 
 type Props = {}
-
-const bestDeals = [
-  {
-    name: '',
-    img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/products/8_9da9f451-69b8-45eb-b5dd-8d261a4aae6b_480x.jpg?v=1573184521',
-    rating: 5,
-    price: 450,
-    formerPrice: 500,
-  },
-]
 
 export const WeeklyDeals = (props: Props) => {
   const styles = {
@@ -72,13 +68,44 @@ export const WeeklyDeals = (props: Props) => {
         </div>
       </header>
 
-      <section className='flex space-x-1'>
-        <div className='h-[17rem] py-8 px-8'>
-          <div className='h-full w-[17rem] bg-[#eee]'></div>
-          <div></div>
-        </div>
-        <div></div>
-        <div></div>
+      <section className='grid grid-cols-3 divide-x font-poppins'>
+        {[0, 0, 0].map((_index, data) => {
+          return (
+            <>
+              <div className='flex h-[17rem] items-start gap-4 py-8 px-8'>
+                <div className='h-full w-[17rem] bg-[#eee]'></div>
+                <div className='space-y-4'>
+                  <p className='text-[1.2rem] font-medium text-[#222]'>
+                    Diamond Halo stud
+                  </p>
+                  <div className='flex gap-1'>
+                    {[0, 0, 0, 0].map((_, index: number) => {
+                      return (
+                        <StarIcon
+                          key={index}
+                          className='h-4 w-4 text-primary-yellow-400'
+                          fill='#ffd201'
+                        />
+                      )
+                    })}
+                  </div>
+                  <div className='flex gap-4 text-xl font-bold'>
+                    <p>$450</p>
+                    <p className='text-primary-white-200 line-through'>$650</p>
+                  </div>
+                  <div className='flex gap-4'>
+                    <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
+                      <CheckIcon className='h-8 w-8 text-[#222]' />
+                    </div>
+                    <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
+                      <HeartIcon className='h-8 w-8 text-[#222]' />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )
+        })}
       </section>
     </div>
   )
