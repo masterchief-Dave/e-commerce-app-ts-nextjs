@@ -1,11 +1,24 @@
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 type Props = {}
 
 const ForgotPassword = (props: Props) => {
+  const router = useRouter()
+
+  const handleAuthClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    router.push('/auth/forgot-password-email-sent')
+  }
+
   return (
     <div className='space-y-24 py-16 font-poppins'>
       <div className='px-12'>
         <p className='text-[1.4rem]'>
-          Retun to <span className='text-text-primary-link'>Sign in</span>
+          Retun to{' '}
+          <span className='text-text-primary-link'>
+            <Link href='/auth/login'>Sign in</Link>
+          </span>
         </p>
       </div>
 
@@ -19,7 +32,7 @@ const ForgotPassword = (props: Props) => {
             send you a link with which you can reset your password
           </p>
 
-          <div className='text-[1.4rem]'>
+          <form className='text-[1.4rem]'>
             <label htmlFor='email' className='block font-medium'>
               Email
             </label>
@@ -30,10 +43,13 @@ const ForgotPassword = (props: Props) => {
               className='mb-4 h-[3.5rem] w-full rounded-md border px-4 font-normal focus:ring-1'
             />
 
-            <button className='h-[3.5rem] w-full rounded-md bg-primary-blue-100 text-white'>
+            <button
+              className='h-[3.5rem] w-full rounded-md bg-primary-blue-100 text-white'
+              onClick={handleAuthClick}
+            >
               Sign in
             </button>
-          </div>
+          </form>
         </section>
       </div>
     </div>
