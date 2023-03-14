@@ -43,6 +43,8 @@ module.exports = {
         'primary-grey-200': '#a1a1a1',
         'primary-grey-300': '#666666',
         'primary-grey-400': '#999999',
+
+        'text-primary-link': '#3e92f2',
       },
       fontFamily: {
         poppins: ['poppins', 'sans-serif'],
