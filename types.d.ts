@@ -1,4 +1,4 @@
-type Header = {
+interface Header {
   id: number
   title: string
   nameBold: string
@@ -8,18 +8,6 @@ type Header = {
   formerPrice: string
   promoPrice: string
   img: JSX.Element | string | StaticImageData
-}[]
-
-interface IHeader {
-  id: number
-  title: string
-  nameBold: string
-  nameNormal: string
-  description: string
-  price: string
-  formerPrice: string
-  promoPrice: string
-  img: string | StaticImageData
 }
 
 interface BestDeals {
