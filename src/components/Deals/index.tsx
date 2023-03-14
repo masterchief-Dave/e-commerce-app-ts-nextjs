@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import {
   CheckIcon,
   ChevronLeftIcon,
@@ -7,18 +7,22 @@ import {
 } from '@heroicons/react/24/outline'
 
 import { HeartIcon } from '@/globals/icons'
+import Slider from 'react-slick'
+import { bestDeals } from '@/globals/bestDeals'
+import Image from 'next/image'
 
 type Props = {}
 
 export const WeeklyDeals = (props: Props) => {
   const [like, setLike] = useState<boolean>(false)
+  const sliderRef = useRef<Slider | null>(null)
 
   const handleClick = () => {
     setLike(!like)
   }
 
   const styles = {
-    iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center`,
+    iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center cursor-pointer`,
     icon: `h-6 w-6 text-primary-grey-400`,
     weeklyDealsTimeHead: `font-roboto font-bold text-[#999]`,
     weeklyDealsTimeText: `flex text-white font-bold`,
@@ -31,6 +35,19 @@ export const WeeklyDeals = (props: Props) => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
+    arrows: false,
+  }
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev()
+    }
+  }
+
+  const handlePrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext()
+    }
   }
 
   return (
@@ -76,58 +93,72 @@ export const WeeklyDeals = (props: Props) => {
         </div>
 
         <div className='flex items-center gap-2'>
-          <div className={styles.iconContainer}>
+          <div className={styles.iconContainer} onClick={handlePrev}>
             <ChevronLeftIcon className={styles.icon} />
           </div>
-          <div className={styles.iconContainer}>
+          <div className={styles.iconContainer} onClick={handleNext}>
             <ChevronRightIcon className={styles.icon} />
           </div>
         </div>
       </header>
 
-      <section className='grid grid-cols-3 divide-x font-poppins'>
-        {[0, 0, 0].map((_index, data) => {
-          return (
-            <>
-              <div className='flex h-[17rem] items-start gap-4 py-8 px-8'>
-                <div className='h-full w-[17rem] bg-[#eee]'></div>
-                <div className='space-y-4'>
-                  <p className='text-[1.2rem] font-medium text-[#222]'>
-                    Diamond Halo stud
-                  </p>
-                  <div className='flex gap-1'>
-                    {[0, 0, 0, 0].map((_, index: number) => {
-                      return (
-                        <StarIcon
-                          key={index}
-                          className='h-4 w-4 text-primary-yellow-400'
-                          fill='#ffd201'
-                        />
-                      )
-                    })}
+      <>
+        <Slider {...settings} ref={sliderRef}>
+          {bestDeals.map((data: BestDeals, index) => {
+            return (
+              <>
+                <div
+                  className='flex h-[17rem] items-start gap-4 border-r py-8 px-8'
+                  key={index}
+                >
+                  <div className='h-full w-[17rem] bg-[#eee]'>
+                    <Image
+                      src={data.img}
+                      alt={data.name}
+                      width={1000}
+                      height={1000}
+                    />
                   </div>
-                  <div className='flex gap-4 text-xl font-bold'>
-                    <p>$450</p>
-                    <p className='text-primary-white-200 line-through'>$650</p>
-                  </div>
-                  <div className='flex gap-4'>
-                    <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
-                      <CheckIcon className='h-6 w-6 text-[#222]' />
+                  <div className='space-y-4'>
+                    <p className='text-[1.2rem] font-medium text-[#222]'>
+                      {data.name}
+                    </p>
+                    <div className='flex gap-1'>
+                      {[0, 0, 0, 0].map((_, index: number) => {
+                        return (
+                          <StarIcon
+                            key={index}
+                            className='h-4 w-4 text-primary-yellow-400'
+                            fill='#ffd201'
+                          />
+                        )
+                      })}
                     </div>
-                    <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
-                      <HeartIcon
-                        className='h-8 w-8 text-[#222]'
-                        onClick={handleClick}
-                        like={like}
-                      />
+                    <div className='flex gap-4 text-xl font-bold'>
+                      <p>${data.price}</p>
+                      <p className='text-primary-white-200 line-through'>
+                        ${data.formerPrice}
+                      </p>
+                    </div>
+                    <div className='flex gap-4'>
+                      <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
+                        <CheckIcon className='h-6 w-6 text-[#222]' />
+                      </div>
+                      <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
+                        <HeartIcon
+                          className='h-8 w-8 text-[#222]'
+                          onClick={handleClick}
+                          like={like}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
-          )
-        })}
-      </section>
+              </>
+            )
+          })}
+        </Slider>
+      </>
     </div>
   )
 }

@@ -21,3 +21,12 @@ interface IHeader {
   promoPrice: string
   img: string | StaticImageData
 }
+
+interface BestDeals {
+  id: number
+  name: string
+  img: string | StaticImageData
+  rating: number
+  price: number
+  formerPrice: number
+}
