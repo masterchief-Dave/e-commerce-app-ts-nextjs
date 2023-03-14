@@ -1,0 +1,5 @@
+1. fix the header component and use good images
+2. use good images for the best deals component 
+3. start creating responsiveness before I go too far in ,my desings
+4. solve the like button for the weekly deals
+5. 
