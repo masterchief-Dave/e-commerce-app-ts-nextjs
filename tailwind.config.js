@@ -30,6 +30,7 @@ module.exports = {
         'primary-blue-400': '#105caa',
         'primary-blue-500': '#67a1df',
         'primary-blue-600': '#193558',
+        'primary-blue-700': '#6eabeb',
 
         'primary-white': '#f2f3f7',
         'primary-white-100': '#fefefe',
