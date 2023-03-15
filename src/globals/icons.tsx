@@ -1,23 +1,17 @@
-// import { useState } from 'react'
-
 type Props = {
   className: string
-  onClick: () => void
-  like: boolean
+  fill: string
 }
 
-export const HeartIcon = ({ className, onClick, like }: Props) => {
-  // const [selected, setSelected] = useState<boolean>(false)
-
+export const HeartIcon = ({ className, fill }: Props) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      fill={like ? '#000' : 'none'}
+      fill={fill}
       viewBox='0 0 24 24'
       strokeWidth={1.5}
       stroke='currentColor'
       className={className ? className : 'h-6 w-6'}
-      onClick={onClick}
     >
       <path
         strokeLinecap='round'
