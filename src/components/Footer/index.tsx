@@ -52,7 +52,7 @@ export const Footer = (props: Props) => {
 
         <div className='space-y-8'>
           <h4 className={styles.footerHeader}>Legal</h4>
-          <ul className='space-y-8 font-roboto text-[1.3rem] font-normal text-primary-blue-700'>
+          <ul className='space-y-6 font-roboto text-[1.3rem] font-normal text-primary-blue-700'>
             <li>
               <Link href='#'>Terms and Condition</Link>
             </li>
@@ -67,7 +67,7 @@ export const Footer = (props: Props) => {
 
         <div className='space-y-8'>
           <h4 className={styles.footerHeader}>Company</h4>
-          <ul className='space-y-8 font-roboto text-[1.3rem] font-normal text-primary-blue-700'>
+          <ul className='space-y-6 font-roboto text-[1.3rem] font-normal text-primary-blue-700'>
             <li>
               <Link href='#'>Shipping and Returns</Link>
             </li>

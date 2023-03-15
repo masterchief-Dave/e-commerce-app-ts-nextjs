@@ -46,15 +46,15 @@ export const DealCard = ({ key, data }: Props) => {
             </p>
           </div>
           <div className='flex gap-4'>
-            <div className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'>
-              <CheckIcon className='h-6 w-6 text-[#222]' />
+            <div className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center bg-[#d9d9d9] hover:bg-primary-blue-400'>
+              <CheckIcon className='h-6 w-6 text-[#fff]' />
             </div>
             <div
-              className='flex h-[3rem] w-[3rem] items-center justify-center bg-[#d9d9d9]'
+              className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center bg-[#d9d9d9] hover:bg-primary-blue-400'
               onClick={handleLike}
             >
               <HeartIcon
-                className='h-8 w-8 text-[#222]'
+                className='h-8 w-8 text-[#fff]'
                 fill={like ? '#000' : 'none'}
               />
             </div>
