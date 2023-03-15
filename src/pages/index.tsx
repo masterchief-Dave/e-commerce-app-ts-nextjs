@@ -5,6 +5,7 @@ import { Navbar } from '@/components/Navbar'
 import { DropdownNav } from '@/components/Dropdown'
 import { Header } from '@/components/Header'
 import { WeeklyDeals } from '@/components/Deals'
+import { Footer } from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +32,7 @@ export default function Home() {
           </section>
         </div>
       </main>
+      <Footer />
     </>
   )
 }
