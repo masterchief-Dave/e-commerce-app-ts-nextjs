@@ -69,6 +69,20 @@
     font-display: swap;
   }
 
+  @font-face {
+    font-family: 'matter';
+    src: url('/assets/fonts/Matter SQ Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'matter';
+    src: url('/assets/fonts/matter.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+  }
+
   html {
     font-size: 62.5%;
   }
