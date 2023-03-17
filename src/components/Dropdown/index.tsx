@@ -12,8 +12,8 @@ export const DropdownNav = (props: Props) => {
   }
 
   return (
-    <nav className='grid grid-cols-12 bg-primary-blue-600  font-poppins text-[1.4rem] font-medium text-white'>
-      <ul className='col-start-2 col-end-12 grid grid-cols-12'>
+    <nav className='grid h-[8rem] grid-cols-12  bg-primary-blue-600 font-poppins text-[1.4rem] font-medium text-white'>
+      <ul className='col-start-2 col-end-12 grid grid-cols-12 items-center'>
         <div className='col-start-1 flex h-[4.5rem] items-center'>
           <li className='flex h-[3.5rem] w-fit cursor-pointer items-center gap-2 rounded-md py-2 font-bold uppercase  text-primary-yellow-100 '>
             <span>Categories</span>
@@ -21,7 +21,7 @@ export const DropdownNav = (props: Props) => {
           </li>
         </div>
 
-        <div className='col-start-4 col-end-10 flex items-center justify-evenly gap-x-8'>
+        <div className='Dropdown col-start-4 col-end-10 flex items-center justify-evenly gap-x-8'>
           <li className={styles.list}>
             <span>Home</span>
           </li>
@@ -29,13 +29,24 @@ export const DropdownNav = (props: Props) => {
             <span>All demos</span>
             <ChevronDownIcon className={styles.icon} />
           </li>
-          <li className={styles.list}>
-            <span>pages</span>
-            <ChevronDownIcon className={styles.icon} />
+          <li className='dropdown-target'>
+            <div className='flex items-center'>
+              <span>pages</span>
+              <ChevronDownIcon className={styles.icon} />
+            </div>
+            <div className='dropdown-content absolute w-[20rem] rounded-xl  px-8'>
+              <ul className='divide-y divide-black'>
+                <li className='cursor-pointer'>Home</li>
+                <li className='cursor-pointer'>About Us</li>
+                <li className='cursor-pointer'>Contact Us</li>
+              </ul>
+            </div>
           </li>
-          <li className={styles.list}>
-            <span>categories</span>
-            <ChevronDownIcon className={styles.icon} />
+          <li>
+            <div className='flex items-center'>
+              <span>categories</span>
+              <ChevronDownIcon className={styles.icon} />
+            </div>
           </li>
           <li className={styles.list}>
             <span>blog</span>

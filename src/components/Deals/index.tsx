@@ -106,11 +106,7 @@ export const WeeklyDeals = (props: Props) => {
       <>
         <Slider {...settings} ref={sliderRef}>
           {bestDeals.map((data: BestDeals, index) => {
-            return (
-              <>
-                <DealCard key={index} data={data} />
-              </>
-            )
+            return <DealCard key={index} data={data} />
           })}
         </Slider>
       </>

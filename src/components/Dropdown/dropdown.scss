@@ -1,0 +1,17 @@
+.Dropdown {
+  .dropdown-target {
+  }
+
+  .dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    background-color: rgba($color: #fff, $alpha: 0.9);
+    backdrop-filter: blur(4);
+    color: #000;
+  }
+
+  .dropdown-target:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+  }
+}

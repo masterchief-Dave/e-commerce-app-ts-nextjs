@@ -10,3 +10,4 @@ https://nuranium-electronic.myshopify.com/?preview_theme_id=83823493173
 TODO
 1. make the navbar sticky, not the dropdown just the navbar
 2. changes the images in the header
+3. add toast so when I click on favourite / like it would alert that an item has been liked
