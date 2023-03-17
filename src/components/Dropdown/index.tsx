@@ -7,12 +7,12 @@ type Props = {}
 
 export const DropdownNav = (props: Props) => {
   const styles = {
-    list: `flex items-center gap-1 uppercase cursor-pointer h-[4.5rem]`,
+    list: `flex items-center gap-1 uppercase cursor-pointer h-[3.5rem]`,
     icon: `font-bold h-5 w-5 mt-[.3rem]`,
   }
 
   return (
-    <nav className='grid h-[8rem] grid-cols-12  bg-primary-blue-600 font-poppins text-[1.4rem] font-medium text-white'>
+    <nav className='grid h-[7rem] grid-cols-12  bg-primary-blue-600 font-poppins text-[1.4rem] font-medium text-white'>
       <ul className='col-start-2 col-end-12 grid grid-cols-12 items-center'>
         <div className='col-start-1 flex h-[4.5rem] items-center'>
           <li className='flex h-[3.5rem] w-fit cursor-pointer items-center gap-2 rounded-md py-2 font-bold uppercase  text-primary-yellow-100 '>
@@ -34,11 +34,11 @@ export const DropdownNav = (props: Props) => {
               <span>pages</span>
               <ChevronDownIcon className={styles.icon} />
             </div>
-            <div className='dropdown-content absolute w-[20rem] rounded-xl  px-8'>
-              <ul className='divide-y divide-black'>
-                <li className='cursor-pointer'>Home</li>
-                <li className='cursor-pointer'>About Us</li>
-                <li className='cursor-pointer'>Contact Us</li>
+            <div className='dropdown-content absolute w-[15rem] rounded-xl px-8'>
+              <ul className='divide-y divide-[#fff]'>
+                <li className='cursor-pointer p-4'>Home</li>
+                <li className='cursor-pointer p-4'>About Us</li>
+                <li className='cursor-pointer p-4'>Contact Us</li>
               </ul>
             </div>
           </li>
