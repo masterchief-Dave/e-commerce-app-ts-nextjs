@@ -13,7 +13,7 @@ export const DropdownNav = (props: Props) => {
 
   return (
     <nav className='grid h-[7rem] grid-cols-12  bg-primary-blue-600 font-poppins text-[1.4rem] font-medium text-white'>
-      <ul className='col-start-2 col-end-12 grid grid-cols-12 items-center'>
+      <ul className='relative col-start-2 col-end-12 grid grid-cols-12 items-center'>
         <div className='col-start-1 flex h-[4.5rem] items-center'>
           <li className='flex h-[3.5rem] w-fit cursor-pointer items-center gap-2 rounded-md py-2 font-bold uppercase  text-primary-yellow-100 '>
             <span>Categories</span>
@@ -42,10 +42,36 @@ export const DropdownNav = (props: Props) => {
               </ul>
             </div>
           </li>
-          <li>
+          <li className='dropdown-target__menu'>
             <div className='flex items-center'>
               <span>categories</span>
               <ChevronDownIcon className={styles.icon} />
+            </div>
+            <div className='mega-menu absolute flex text-white'>
+              <div className='row'>
+                <ul className='space-y-8'>
+                  <li>Header links 1</li>
+                  <li>Category 1 </li>
+                  <li>Category 2</li>
+                  <li>Category 3</li>
+                </ul>
+              </div>
+              <div className='row'>
+                <ul className='space-y-8'>
+                  <li>Header links 2</li>
+                  <li>Category 1 </li>
+                  <li>Category 2</li>
+                  <li>Category 3</li>
+                </ul>
+              </div>
+              <div className='row'>
+                <ul className='space-y-8'>
+                  <li>Header links 3</li>
+                  <li>Category 1 </li>
+                  <li>Category 2</li>
+                  <li>Category 3</li>
+                </ul>
+              </div>
             </div>
           </li>
           <li className={styles.list}>
