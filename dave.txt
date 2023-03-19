@@ -11,3 +11,11 @@ TODO
 1. make the navbar sticky, not the dropdown just the navbar
 2. changes the images in the header
 3. add toast so when I click on favourite / like it would alert that an item has been liked
+4. create a wish list page 
+5. create a cart page 
+
+types of card
+1. category card
+2. feature card
+3. normal product card on the home pages
+4. 

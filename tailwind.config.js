@@ -44,15 +44,18 @@ module.exports = {
         'primary-grey-200': '#a1a1a1',
         'primary-grey-300': '#666666',
         'primary-grey-400': '#999999',
+        'primary-grey-500': '#d5d5d5',
 
         'text-primary-link': '#3e92f2',
       },
       fontFamily: {
         poppins: ['poppins', 'sans-serif'],
         roboto: ['roboto', 'sans-serif'],
+        matter: ['matter', 'sans-serif'],
       },
       boxShadow: {
         'primary-box-shadow': 'rgba(0, 0, 0, 0.08) 0px 4px 12px',
+        'product-card-box-shadow': 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
       },
     },
   },

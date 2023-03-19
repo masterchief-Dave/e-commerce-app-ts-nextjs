@@ -1,3 +1,4 @@
+import { ProductCard } from '@/components/Product/Card'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 type Props = {}
@@ -12,6 +13,15 @@ const demo = (props: Props) => {
       <Menu />
 
       {/* <DropdownMenu /> */}
+
+      {/* product card */}
+      <div className='mx-auto max-w-[70rem]'>
+        <ProductCard
+          img={''}
+          productName='Apple watch series 5'
+          productPrice='$500'
+        />
+      </div>
     </div>
   )
 }
