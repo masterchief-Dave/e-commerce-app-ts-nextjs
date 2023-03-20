@@ -3,7 +3,6 @@ import Image, { StaticImageData } from 'next/image'
 import Slider from 'react-slick'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
-import appleLaptop from 'public/assets/img/apple-laptop.jpg'
 import { data } from '@/globals/header'
 
 type Props = {}
@@ -45,7 +44,7 @@ export const Header = (props: Props) => {
               <div className='relative max-h-[30rem] w-full font-poppins'>
                 <Image
                   src={data.img}
-                  alt='landing'
+                  alt={data.title}
                   className='h-full w-full object-cover'
                   width='1000'
                   height='1000'
@@ -59,14 +58,16 @@ export const Header = (props: Props) => {
                     <h2 className='text-[2rem] font-extralight'>
                       Top Best Seller 2023
                     </h2>
-                    <h1 className='text-[6rem] uppercase leading-[5rem]'>
+                    <h1 className='max-w-[50rem] text-[6rem] uppercase leading-[5rem]'>
                       {' '}
-                      <span className='font-extrabold'>Sport</span> {''}
-                      <span className='font-thin'>Iwatch</span>
+                      <span className='font-extrabold leading-10'>
+                        {data.nameBold}
+                      </span>{' '}
+                      {''}
+                      <span className='font-thin'>{data.nameNormal}</span>
                     </h1>
                     <p className='max-w-[45rem] text-[1.5rem] font-light'>
-                      Stay ahead of the game with our smartwatch - your personal
-                      assistant on your wrist
+                      {data.description}
                     </p>
                   </div>
                 </div>

@@ -8,13 +8,7 @@ interface Props {
   }
 }
 
-interface ICategory {
-  img: string | StaticImageData
-  name: string
-}
-
 export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
-  console.log(categoryItems)
   return (
     <div className='w-fit bg-white p-8 shadow-product-card-box-shadow'>
       <div>
@@ -29,25 +23,24 @@ export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
         </div>
 
         <section className='grid grid-cols-2 gap-4'>
-          {categoryItems.map((data: ICategory, index) => {
+          {categoryItems.map((data: ICategory, index): JSX.Element => {
             return (
-              <div
-                key={index}
-                className='flex h-[15rem] w-[15rem] flex-col items-center justify-center bg-primary-white-500 p-2'
-              >
-                <div className='relative mb-4 h-[10rem] w-[10rem]'>
-                  <Image
-                    src={data.img}
-                    alt={data.name}
-                    width={1000}
-                    height={1000}
-                    className='object-contain'
-                  />
+              <Link href='#' key={index}>
+                <div className='flex h-[15rem] w-[15rem] flex-col items-center justify-center bg-primary-white-500 p-2'>
+                  <div className='relative mb-4 h-[10rem] w-[10rem]'>
+                    <Image
+                      src={data.img}
+                      alt={data.name}
+                      width={1000}
+                      height={1000}
+                      className='object-contain'
+                    />
+                  </div>
+                  <p className='truncate text-[1rem] font-semibold uppercase text-primary-grey-300'>
+                    {data.name}
+                  </p>
                 </div>
-                <p className='truncate text-[1rem] font-semibold uppercase text-primary-grey-300'>
-                  {data.name}
-                </p>
-              </div>
+              </Link>
             )
           })}
         </section>
