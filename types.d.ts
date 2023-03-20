@@ -18,3 +18,8 @@ interface BestDeals {
   price: number
   formerPrice: number
 }
+
+interface ICategory {
+  img: string | StaticImageData
+  name: string
+}

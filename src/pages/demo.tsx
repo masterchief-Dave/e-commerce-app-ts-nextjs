@@ -1,9 +1,38 @@
+import { CategoryCard } from '@/components/Category/Card'
 import { ProductCard } from '@/components/Product/Card'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import Image from 'next/image'
 import Link from 'next/link'
 type Props = {}
 
 const demo = (props: Props) => {
+  interface Category {
+    name: string
+    categoryItems: ICategory[]
+  }
+
+  const data: Category = {
+    name: 'Electronics',
+    categoryItems: [
+      {
+        img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-8_ebadef87-550c-43f8-b44f-46ce88b7a9a3_1920x.jpg?v=1614755384',
+        name: 'Headphone',
+      },
+      {
+        img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-1_78e3a695-570b-407c-93d8-24a18b560921_1920x.jpg?v=1614755384',
+        name: 'Air Conditioner',
+      },
+      {
+        img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-2_60c66f45-d04e-4a59-b0e1-535614501fac_1920x.jpg?v=1614755384',
+        name: 'Microwave',
+      },
+      {
+        img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-3_13f34ae3-32b2-4a7e-9016-db5dfdba3253_1920x.jpg?v=1614755384',
+        name: 'Washing Machine',
+      },
+    ],
+  }
+
   return (
     <div className='space-y-24 font-poppins text-[1.4rem]'>
       <div className='Navbar space-y-24'>{/* <Navbar /> */}</div>
@@ -21,6 +50,10 @@ const demo = (props: Props) => {
           productName='Apple watch series 5'
           productPrice='$500'
         />
+      </div>
+
+      <div className='my-12 px-12'>
+        <CategoryCard data={data} />
       </div>
     </div>
   )
@@ -109,9 +142,7 @@ const Menu = () => {
             <a href='#'>Mega menu</a>
             <div className='mega-box'>
               <div className='content'>
-                <div className='row'>
-                  <img src='#' alt='' />
-                </div>
+                <div className='row'>{/* <Image src='#' alt='' /> */}</div>
                 <div className='row'>
                   <header>Design services</header>
                   <ul className='mega-links'>
