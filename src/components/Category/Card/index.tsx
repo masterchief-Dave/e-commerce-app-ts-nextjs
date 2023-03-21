@@ -33,7 +33,7 @@ export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
                       alt={data.name}
                       width={1000}
                       height={1000}
-                      className='object-contain'
+                      className='object-fill'
                     />
                   </div>
                   <p className='truncate text-[1rem] font-semibold uppercase text-primary-grey-300'>

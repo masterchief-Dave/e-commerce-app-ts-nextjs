@@ -1,15 +1,9 @@
 import { useState, useRef } from 'react'
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  StarIcon,
-} from '@heroicons/react/24/outline'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
-import { HeartIcon } from '@/globals/icons'
 import Slider from 'react-slick'
 import { bestDeals } from '@/globals/bestDeals'
-import Image from 'next/image'
+
 import { DealCard } from './DealCard'
 
 type Props = {}
@@ -17,10 +11,6 @@ type Props = {}
 export const WeeklyDeals = (props: Props) => {
   const [like, setLike] = useState<boolean>(false)
   const sliderRef = useRef<Slider | null>(null)
-
-  const handleClick = () => {
-    setLike(!like)
-  }
 
   const styles = {
     iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center cursor-pointer`,
@@ -52,7 +42,7 @@ export const WeeklyDeals = (props: Props) => {
   }
 
   return (
-    <div className='py-2 font-poppins'>
+    <div className='py-2 font-matter'>
       <header className='flex items-center justify-between border-b px-4 py-3'>
         <div className='flex items-center gap-4'>
           <h2 className='text-[2rem] font-bold uppercase text-primary-black-200'>

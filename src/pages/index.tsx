@@ -6,6 +6,8 @@ import { DropdownNav } from '@/components/Dropdown'
 import { Header } from '@/components/Header'
 import { WeeklyDeals } from '@/components/Deals'
 import { Footer } from '@/components/Footer'
+import { electronicsData, gamingData, computerData } from '@/globals/category'
+import { CategoryCard } from '@/components/Category/Card'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +25,17 @@ export default function Home() {
       <Header />
       <main className='grid grid-cols-12 bg-primary-white py-12'>
         <div className='col-start-2 col-end-12 space-y-12'>
+          <section>
+            <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
+              Product Categories
+            </h2>
+            <div className='flex items-center justify-between gap-8'>
+              <CategoryCard data={electronicsData} />
+              <CategoryCard data={computerData} />
+              <CategoryCard data={gamingData} />
+            </div>
+          </section>
+
           <section className='weekly-deals-component bg-white'>
             <WeeklyDeals />
           </section>

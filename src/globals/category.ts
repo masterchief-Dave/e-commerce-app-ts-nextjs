@@ -1,8 +1,13 @@
-export const electronicsData = {
+type CategoryList = {
+  name: string
+  categoryItems: ICategory[]
+}
+
+export const electronicsData: CategoryList = {
   name: 'Electronics',
   categoryItems: [
     {
-      img: '//cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-4_f8504c2c-6f34-4d33-ba75-a133e88ae394_1920x.jpg?v=1614755384',
+      img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-4_f8504c2c-6f34-4d33-ba75-a133e88ae394_1920x.jpg?v=1614755384',
       name: 'Blender',
     },
     {
@@ -20,7 +25,7 @@ export const electronicsData = {
   ],
 }
 
-export const computerData = {
+export const computerData: CategoryList = {
   name: 'Computer',
   categoryItems: [
     {
@@ -36,10 +41,30 @@ export const computerData = {
       name: 'Mouse',
     },
     {
-      img: '//cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-7_42649201-5669-47a1-a202-e7c58d6306bf_1920x.jpg?v=1614755384',
+      img: 'https://cdn.shopify.com/s/files/1/0272/1493/8165/files/Colection-7_42649201-5669-47a1-a202-e7c58d6306bf_1920x.jpg?v=1614755384',
       name: 'Monitor',
     },
   ],
 }
 
-// export const
+export const gamingData: CategoryList = {
+  name: 'Gaming',
+  categoryItems: [
+    {
+      img: 'https://images.unsplash.com/photo-1507457379470-08b800bebc67?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=909&q=80',
+      name: 'PS4',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1605901309584-818e25960a8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1019&q=80',
+      name: 'Xbox',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1612036781124-847f8939b154?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+      name: 'Nintendo Switch',
+    },
+    {
+      img: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+      name: 'PS5',
+    },
+  ],
+}
