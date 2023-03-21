@@ -28,7 +28,7 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
   }
 
   return (
-    <div className='w-[25rem] p-4 shadow-product-card-box-shadow'>
+    <div className='max-w-[25rem] p-4 shadow-product-card-box-shadow'>
       <div className='relative rounded-lg'>
         <Image
           src='https://images.unsplash.com/photo-1617043786394-f977fa12eddf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'

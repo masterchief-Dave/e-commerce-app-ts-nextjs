@@ -8,10 +8,15 @@ import { WeeklyDeals } from '@/components/Deals'
 import { Footer } from '@/components/Footer'
 import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { CategoryCard } from '@/components/Category/Card'
+import { ProductCard } from '@/components/Product/Card'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const styles = {
+    productContainer: `flex justify-center`,
+  }
+
   return (
     <>
       <Head>
@@ -40,8 +45,22 @@ export default function Home() {
             <WeeklyDeals />
           </section>
 
-          <section className='products-component bg-white'>
-            <p className='p-2'>products</p>
+          <section className='products-component bg-white py-12'>
+            <section className='flex justify-center px-8'>
+              <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
+                {[0, 0, 0, 0, 0, 0, 0].map((data, index) => {
+                  return (
+                    <div className={styles.productContainer} key={index}>
+                      <ProductCard
+                        img={''}
+                        productName='Apple watch series 5'
+                        productPrice='$500'
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            </section>
           </section>
         </div>
       </main>
