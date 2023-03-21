@@ -9,6 +9,7 @@ import { Footer } from '@/components/Footer'
 import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { CategoryCard } from '@/components/Category/Card'
 import { ProductCard } from '@/components/Product/Card'
+import { partnersData } from '@/globals/partners'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,41 +29,65 @@ export default function Home() {
       <Navbar />
       <DropdownNav />
       <Header />
-      <main className='grid grid-cols-12 bg-primary-white py-12'>
-        <div className='col-start-2 col-end-12 space-y-12'>
-          <section>
-            <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
-              Product Categories
-            </h2>
-            <div className='flex items-center justify-between gap-8'>
-              <CategoryCard data={electronicsData} />
-              <CategoryCard data={computerData} />
-              <CategoryCard data={gamingData} />
-            </div>
-          </section>
+      <main className='grid grid-cols-12 space-y-12 bg-primary-white py-12'>
+        <div className='col-span-full grid grid-cols-12'>
+          <div className='col-start-2 col-end-12 space-y-12'>
+            <section>
+              <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
+                Product Categories
+              </h2>
+              <div className='flex items-center justify-between gap-8'>
+                <CategoryCard data={electronicsData} />
+                <CategoryCard data={computerData} />
+                <CategoryCard data={gamingData} />
+              </div>
+            </section>
 
-          <section className='weekly-deals-component bg-white'>
-            <WeeklyDeals />
-          </section>
+            <section className='weekly-deals-component bg-white'>
+              <WeeklyDeals />
+            </section>
 
-          <section className='products-component bg-white py-12'>
-            <section className='flex justify-center px-8'>
-              <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
-                {[0, 0, 0, 0, 0, 0, 0].map((data, index) => {
+            <section className='products-component bg-white py-12'>
+              <section className='flex justify-center px-8'>
+                <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
+                  {[0, 0, 0, 0, 0, 0, 0].map((data, index) => {
+                    return (
+                      <div className={styles.productContainer} key={index}>
+                        <ProductCard
+                          img={''}
+                          productName='Apple watch series 5'
+                          productPrice='$500'
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
+              </section>
+            </section>
+          </div>
+        </div>
+
+        <section className='company-component col-span-full w-full bg-white py-12'>
+          <section className='flex items-center justify-center gap-8 px-8 py-20'>
+            <div className='grid grid-cols-12'>
+              <div className='col-start-2 col-end-12 flex justify-center'>
+                {partnersData.map((data, index) => {
                   return (
                     <div className={styles.productContainer} key={index}>
-                      <ProductCard
-                        img={''}
-                        productName='Apple watch series 5'
-                        productPrice='$500'
+                      <Image
+                        src={data.img}
+                        alt='moten-image'
+                        className='h-[6rem] object-contain'
+                        width={1000}
+                        height={1000}
                       />
                     </div>
                   )
                 })}
               </div>
-            </section>
+            </div>
           </section>
-        </div>
+        </section>
       </main>
       <Footer />
     </>
