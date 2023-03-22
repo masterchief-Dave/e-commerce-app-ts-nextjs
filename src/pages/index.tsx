@@ -8,10 +8,16 @@ import { WeeklyDeals } from '@/components/Deals'
 import { Footer } from '@/components/Footer'
 import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { CategoryCard } from '@/components/Category/Card'
+import { ProductCard } from '@/components/Product/Card'
+import { partnersData } from '@/globals/partners'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const styles = {
+    productContainer: `flex justify-center`,
+  }
+
   return (
     <>
       <Head>
@@ -23,28 +29,26 @@ export default function Home() {
       <Navbar />
       <DropdownNav />
       <Header />
-      <main className='grid grid-cols-12 bg-primary-white py-12'>
-        <div className='col-start-2 col-end-12 space-y-12'>
-          <section>
-            <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
-              Product Categories
-            </h2>
-            <div className='flex items-center justify-between gap-8'>
-              <CategoryCard data={electronicsData} />
-              <CategoryCard data={computerData} />
-              <CategoryCard data={gamingData} />
-            </div>
-          </section>
+      <main className='grid grid-cols-12 space-y-12 bg-primary-white py-12'>
+        <div className='col-span-full grid grid-cols-12'>
+          <div className='col-start-2 col-end-12 space-y-12'>
+            <section>
+              <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
+                Product Categories
+              </h2>
+              <div className='flex items-center justify-between gap-8'>
+                <CategoryCard data={electronicsData} />
+                <CategoryCard data={computerData} />
+                <CategoryCard data={gamingData} />
+              </div>
+            </section>
 
-          <section className='weekly-deals-component bg-white'>
-            <WeeklyDeals />
-          </section>
+            <section className='weekly-deals-component bg-white'>
+              <WeeklyDeals />
+            </section>
 
-          <section className='products-component'>
-            <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
-              products
-            </h2>
-            <div className=''></div>
+          <section className='products-component bg-white'>
+            <p className='p-2'>products</p>
           </section>
         </div>
       </main>

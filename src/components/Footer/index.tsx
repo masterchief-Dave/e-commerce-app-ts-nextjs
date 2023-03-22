@@ -17,7 +17,7 @@ type Props = {}
 export const Footer = (props: Props) => {
   const styles = {
     footerCardIcons: `h-12 w-12`,
-    footerHeader: `text-[1.8rem] font-semibold text-white`,
+    footerHeader: `text-[1.8rem] font-semibold text-white font-matter`,
     socialMediaIcons: `h-12 w-12`,
   }
 
