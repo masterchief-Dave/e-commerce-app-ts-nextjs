@@ -19,6 +19,18 @@ const Demots = (props: Props) => {
       quote: '',
       author: 'Sage',
     },
+    3: {
+      quote: '',
+      author: '',
+    },
+    4: {
+      quote: '',
+      author: '',
+    },
+    5: {
+      quote: '',
+      author: '',
+    },
   }
   return <div>Demots</div>
 }

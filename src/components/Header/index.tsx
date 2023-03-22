@@ -33,7 +33,7 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <div className='max-h-[30rem] max-w-[100vw] overflow-hidden'>
+    <div className='max-h-[40rem] max-w-[100vw] overflow-hidden'>
       <Slider {...settings} ref={sliderRef}>
         {data.map((data: Header, index: number): JSX.Element => {
           return (
@@ -41,7 +41,7 @@ export const Header = (props: Props) => {
               className='relative h-[100%] max-h-[80vh] w-full max-w-[100vw]'
               key={index}
             >
-              <div className='relative max-h-[30rem] w-full font-poppins'>
+              <div className='relative max-h-[40rem] w-full font-poppins'>
                 <Image
                   src={data.img}
                   alt={data.title}
