@@ -21,7 +21,7 @@ export const DropdownNav = (props: Props) => {
           </li>
         </div>
 
-        <div className='Dropdown col-start-4 col-end-10 flex items-center justify-evenly gap-x-8'>
+        <div className='Dropdown col-start-4 col-end-10 flex items-center justify-evenly gap-x-8 text-[1.2rem]'>
           <li className={styles.list}>
             <span>Home</span>
           </li>

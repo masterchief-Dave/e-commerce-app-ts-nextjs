@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // #ededed
         'primary-green-100': '#56cb82',
         'primary-green-200': '#5fbb52',
 
@@ -45,6 +46,8 @@ module.exports = {
         'primary-grey-300': '#666666',
         'primary-grey-400': '#999999',
         'primary-grey-500': '#d5d5d5',
+
+        'primary-breadcrumb': '#ededed',
 
         'text-primary-link': '#3e92f2',
       },
