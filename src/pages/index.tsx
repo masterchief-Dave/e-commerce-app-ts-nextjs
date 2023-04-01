@@ -70,7 +70,7 @@ export default function Home() {
         <section className='company-component col-span-full w-full bg-white py-12'>
           <section className='flex items-center justify-center gap-8 px-8 py-20'>
             <div className='grid grid-cols-12'>
-              <div className='col-start-2 col-end-12 flex justify-center'>
+              <div className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] justify-center'>
                 {partnersData.map((data, index) => {
                   return (
                     <div className={styles.productContainer} key={index}>

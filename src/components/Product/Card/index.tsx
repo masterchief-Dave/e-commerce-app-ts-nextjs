@@ -55,7 +55,7 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
       </div>
 
       <div className='space-y-2 font-matter'>
-        <h3 className='max-w-[20rem] truncate text-center font-medium'>
+        <h3 className='max-w-[20rem] truncate text-center text-[1.4rem] font-medium'>
           Apple watch series 4
         </h3>
         <div className='flex items-center justify-center gap-2 font-semibold'>

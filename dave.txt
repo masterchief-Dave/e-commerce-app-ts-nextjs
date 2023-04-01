@@ -17,6 +17,7 @@ TODO
 6. Add github workflow
 7. Add test for my react code
 8. work on the responsiveness
+9. create a product description page
 
 
 types of card
