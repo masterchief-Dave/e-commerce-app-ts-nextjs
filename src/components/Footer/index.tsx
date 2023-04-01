@@ -22,7 +22,7 @@ export const Footer = (props: Props) => {
   }
 
   return (
-    <footer className='grid grid-cols-12'>
+    <footer className='mx-auto grid w-full max-w-[144rem] grid-cols-12'>
       <div className='col-span-full grid grid-cols-12 border-b bg-primary-blue-400 py-8'>
         <section className='col-start-2 col-end-12 flex items-center justify-between'>
           <div className='order-2 space-y-8'>

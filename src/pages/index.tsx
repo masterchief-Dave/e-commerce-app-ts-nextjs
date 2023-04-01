@@ -30,7 +30,7 @@ export default function Home() {
       <DropdownNav />
       <Header />
       <main className='grid grid-cols-12 space-y-12 bg-primary-white py-12'>
-        <div className='col-span-full grid grid-cols-12'>
+        <div className='col-span-full mx-auto grid  w-full max-w-[144rem] grid-cols-12'>
           <div className='col-start-2 col-end-12 space-y-12'>
             <section>
               <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
@@ -43,7 +43,7 @@ export default function Home() {
               </div>
             </section>
 
-            <section className='weekly-deals-component bg-white'>
+            <section className='weekly-deals-component  bg-white'>
               <WeeklyDeals />
             </section>
 
@@ -67,10 +67,10 @@ export default function Home() {
           </div>
         </div>
 
-        <section className='company-component col-span-full w-full bg-white py-12'>
+        <section className='company-component col-span-full mx-auto w-full max-w-[144rem] bg-white py-12'>
           <section className='flex items-center justify-center gap-8 px-8 py-20'>
             <div className='grid grid-cols-12'>
-              <div className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] justify-center'>
+              <div className='col-start-2 col-end-12 flex justify-center'>
                 {partnersData.map((data, index) => {
                   return (
                     <div className={styles.productContainer} key={index}>
