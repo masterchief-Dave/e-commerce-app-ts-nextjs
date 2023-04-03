@@ -15,7 +15,11 @@ const wishlist = (props: Props) => {
           <h1 className='font-matter text-[2rem] font-black'>Wishlist</h1>
 
           <section>
-            <ProductCard img='' productName='' productPrice='' />
+            {/* <ProductCard img='' productName='' productPrice='' /> */}
+
+            <div className=''>
+              <NoItemInWishList />
+            </div>
           </section>
         </section>
       </main>
@@ -25,3 +29,7 @@ const wishlist = (props: Props) => {
 }
 
 export default wishlist
+
+const NoItemInWishList = () => {
+  return <section className=''>no items in your wishlist yet</section>
+}
