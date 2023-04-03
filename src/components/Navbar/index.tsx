@@ -74,7 +74,7 @@ export const Navbar = (props: Props) => {
             </Link>
           </li>
           <li>
-            <Link href='' className='relative'>
+            <Link href='/cart' className='relative'>
               <ShoppingCartIcon className='h-8 w-8 text-white' />
               <span className='absolute top-0 left-[10px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
                 5

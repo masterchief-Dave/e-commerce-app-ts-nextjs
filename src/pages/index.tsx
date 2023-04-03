@@ -10,6 +10,7 @@ import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { CategoryCard } from '@/components/Category/Card'
 import { ProductCard } from '@/components/Product/Card'
 import { partnersData } from '@/globals/partners'
+import { ShoppingFixedBag } from '@/components/ShoppingBag'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -90,6 +91,8 @@ export default function Home() {
         </section>
       </main>
       <Footer />
+
+      <ShoppingFixedBag />
     </>
   )
 }

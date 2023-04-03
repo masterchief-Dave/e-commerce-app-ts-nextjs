@@ -14,14 +14,36 @@ const cart = (props: Props) => {
   return (
     <div>
       <Navbar />
-      <main className='grid grid-cols-12'>
+      <main className='grid grid-cols-12  font-matter'>
         <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
-          <h1 className='font-matter text-[2rem] font-black uppercase'>Cart</h1>
+          <h1 className='text-[2rem] font-black uppercase'>Cart</h1>
 
           {/* cart product design layout and design*/}
-          <div className='grid grid-cols-4 bg-[orange] px-12 py-2'>
+          <div className='px-12'>
             <CheckoutProduct />
           </div>
+
+          <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
+            <div className='space-y-4 border-b'>
+              <div className='flex items-center justify-between'>
+                <p>Subtotal</p>
+                <p>$4000</p>
+              </div>
+              <div className='flex items-center justify-between'>
+                <p>Shipping</p>
+                <p>0.00</p>
+              </div>
+              <div className='flex items-center justify-between'>
+                <p>Tax</p>
+                <p>0</p>
+              </div>
+            </div>
+
+            <div className='flex items-center justify-between font-semibold'>
+              <p>Total</p>
+              <p>$6000</p>
+            </div>
+          </section>
         </section>
       </main>
     </div>
