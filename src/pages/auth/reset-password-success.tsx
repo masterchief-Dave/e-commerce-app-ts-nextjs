@@ -1,3 +1,4 @@
+import { Layout } from '@/components/Layout'
 import { useRouter } from 'next/router'
 
 type Props = {}
@@ -6,7 +7,7 @@ const ResetPasswordSuccess = (props: Props) => {
   const router = useRouter()
 
   return (
-    <div>
+    <Layout>
       <div className='space-y-24 py-16 font-poppins'>
         <div className='flex items-center justify-center'>
           <section className='w-[35rem] max-w-[40rem] space-y-12 rounded-xl border px-8 py-4'>
@@ -26,7 +27,7 @@ const ResetPasswordSuccess = (props: Props) => {
           </section>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
 

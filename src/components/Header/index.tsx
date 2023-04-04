@@ -33,7 +33,7 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <div className='mx-auto max-h-[40rem] w-full max-w-[144rem] overflow-hidden'>
+    <div className='mx-auto max-h-[40rem] w-full overflow-hidden'>
       <Slider {...settings} ref={sliderRef}>
         {data.map((data: Header, index: number): JSX.Element => {
           return (

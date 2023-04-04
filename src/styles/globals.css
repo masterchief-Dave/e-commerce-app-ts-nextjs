@@ -92,7 +92,7 @@
   /*  */
   button {
     outline: none;
-    border: none;
+    /* border: none; */
   }
 
   .auth-btn {

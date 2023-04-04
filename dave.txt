@@ -18,6 +18,7 @@ TODO
 7. Add test for my react code
 8. work on the responsiveness
 9. create a product description page
+10. create the user account section, where the user can setup card for payment edit thier username etc
 
 
 types of card

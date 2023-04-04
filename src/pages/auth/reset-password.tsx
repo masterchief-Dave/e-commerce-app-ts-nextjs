@@ -1,3 +1,5 @@
+import { Layout } from '@/components/Layout'
+
 type Props = {}
 
 const ResetPassword = (props: Props) => {
@@ -8,39 +10,41 @@ const ResetPassword = (props: Props) => {
   }
 
   return (
-    <div className='py-16 font-poppins'>
-      <div className='flex items-center justify-center'>
-        <section className='w-[35rem] max-w-[40rem] space-y-12 rounded-xl border px-8 py-4'>
-          <header>
-            <h1 className='text-center text-[2rem] font-semibold'>
-              ResetPassword
-            </h1>
-          </header>
+    <Layout>
+      <div className='py-16 font-poppins'>
+        <div className='flex items-center justify-center'>
+          <section className='w-[35rem] max-w-[40rem] space-y-12 rounded-xl border px-8 py-4'>
+            <header>
+              <h1 className='text-center text-[2rem] font-semibold'>
+                ResetPassword
+              </h1>
+            </header>
 
-          <form action='' className='space-y-4 text-[1.4rem]'>
-            <div>
-              <label htmlFor='newPassword'>New Password</label>
-              <input
-                type='password'
-                id='newPassword'
-                className={styles.input}
-              />
-            </div>
+            <form action='' className='space-y-4 text-[1.4rem]'>
+              <div>
+                <label htmlFor='newPassword'>New Password</label>
+                <input
+                  type='password'
+                  id='newPassword'
+                  className={styles.input}
+                />
+              </div>
 
-            <div>
-              <label htmlFor='confirmPassword'>Confirm Password</label>
-              <input
-                type='password'
-                id='confirmPassword'
-                className={styles.input}
-              />
-            </div>
+              <div>
+                <label htmlFor='confirmPassword'>Confirm Password</label>
+                <input
+                  type='password'
+                  id='confirmPassword'
+                  className={styles.input}
+                />
+              </div>
 
-            <button className={styles.btn}>Submit</button>
-          </form>
-        </section>
+              <button className={styles.btn}>Submit</button>
+            </form>
+          </section>
+        </div>
       </div>
-    </div>
+    </Layout>
   )
 }
 

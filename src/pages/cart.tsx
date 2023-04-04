@@ -1,4 +1,5 @@
 import CheckoutProduct from '@/components/CheckoutProduct'
+import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { useRouter } from 'next/router'
 
@@ -12,41 +13,43 @@ const cart = (props: Props) => {
   }
 
   return (
-    <div>
-      <Navbar />
-      <main className='grid grid-cols-12  font-matter'>
-        <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
-          <h1 className='text-[2rem] font-black uppercase'>Cart</h1>
+    <Layout>
+      <div>
+        <Navbar />
+        <main className='grid grid-cols-12  font-matter'>
+          <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
+            <h1 className='text-[2rem] font-black uppercase'>Cart</h1>
 
-          {/* cart product design layout and design*/}
-          <div className='px-12'>
-            <CheckoutProduct />
-          </div>
-
-          <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
-            <div className='space-y-4 border-b'>
-              <div className='flex items-center justify-between'>
-                <p>Subtotal</p>
-                <p>$4000</p>
-              </div>
-              <div className='flex items-center justify-between'>
-                <p>Shipping</p>
-                <p>0.00</p>
-              </div>
-              <div className='flex items-center justify-between'>
-                <p>Tax</p>
-                <p>0</p>
-              </div>
+            {/* cart product design layout and design*/}
+            <div className='px-12'>
+              <CheckoutProduct />
             </div>
 
-            <div className='flex items-center justify-between font-semibold'>
-              <p>Total</p>
-              <p>$6000</p>
-            </div>
+            <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
+              <div className='space-y-4 border-b'>
+                <div className='flex items-center justify-between'>
+                  <p>Subtotal</p>
+                  <p>$4000</p>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <p>Shipping</p>
+                  <p>0.00</p>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <p>Tax</p>
+                  <p>0</p>
+                </div>
+              </div>
+
+              <div className='flex items-center justify-between font-semibold'>
+                <p>Total</p>
+                <p>$6000</p>
+              </div>
+            </section>
           </section>
-        </section>
-      </main>
-    </div>
+        </main>
+      </div>
+    </Layout>
   )
 }
 
