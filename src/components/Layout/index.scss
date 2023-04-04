@@ -1,0 +1,27 @@
+.Legal {
+  &_Header {
+    background-image: linear-gradient(to right bottom, #2c3635, #5b6365, #8f9396, #c7c8ca, #ffffff);
+    height: 35rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  &_active {
+    color: rgb(68, 74, 88) !important;
+    border-left: 3px solid rgb(68, 74, 88) !important;
+  }
+
+  nav .link {
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    border-left: 2px solid rgb(128, 128, 128);
+    margin-bottom: 0;
+    font-size: 1.6rem;
+    color: rgb(128, 128, 128);
+  }
+
+  &_Sidebar {
+    position: sticky;
+    top: 10rem;
+  }
+}
