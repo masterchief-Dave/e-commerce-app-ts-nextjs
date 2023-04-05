@@ -49,6 +49,8 @@ module.exports = {
 
         'primary-breadcrumb': '#ededed',
 
+        'primary-link': '#3e92f2',
+
         'text-primary-link': '#3e92f2',
       },
       fontFamily: {

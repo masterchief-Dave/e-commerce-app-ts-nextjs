@@ -1,5 +1,5 @@
 type Props = {}
 
-const reviews = (props: Props) => {
+export const Reviews = (props: Props) => {
   return <div>reviews</div>
 }

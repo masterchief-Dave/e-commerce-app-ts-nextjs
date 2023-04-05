@@ -1,19 +1,58 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+
 import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
-import Link from 'next/link'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { HeartIcon } from '@heroicons/react/24/outline'
 import { Layout } from '@/components/Layout'
 
+import { Overview } from '@/components/Product/Tabs/overview'
+import { Description } from '@/components/Product/Tabs/description'
+import { ReturnPolicy } from '@/components/Product/Tabs/returnPolicy'
+import { Reviews } from '@/components/Product/Tabs/reviews'
+import { Shipping } from '@/components/Product/Tabs/shipping'
+import { Warranty } from '@/components/Product/Tabs/warranty'
+import { Footer } from '@/components/Footer'
+
 type Props = {}
 
 const ProductSlug = (props: Props) => {
+  const [selectedTab, setSelectedTab] = useState('overview')
+
+  const styles = {
+    tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer`,
+  }
+
+  const render = () => {
+    if (selectedTab === 'overview') {
+      return <Overview />
+    } else if (selectedTab === 'description') {
+      return <Description />
+    } else if (selectedTab === 'returnPolicy') {
+      return <ReturnPolicy />
+    } else if (selectedTab === 'reviews') {
+      return <Reviews />
+    } else if (selectedTab === 'shipping') {
+      return <Shipping />
+    } else if (selectedTab === 'warranty') {
+      return <Warranty />
+    }
+  }
+
+  // MouseEvent<HTMLHeadingElement, MouseEvent>
+  const handleSelectedTab = (e: any) => {
+    if (e.target.id !== null) {
+      setSelectedTab(e.target.id)
+    }
+  }
+
   return (
     <Layout>
       <>
         <Navbar />
-        <main className='mx-auto grid w-full grid-cols-12 space-y-12 font-matter'>
+        <main className='mx-auto grid w-full grid-cols-12 space-y-12 pb-16 font-matter'>
           <div className='col-span-full'>
             <BreadCrumb />
           </div>
@@ -79,29 +118,84 @@ const ProductSlug = (props: Props) => {
             </section>
           </div>
 
-          <div className='col-span-full col-start-2 col-end-12'>
-            <section className='grid grid-cols-6'>
-              <div>
-                <h2 id='overview'>Overview</h2>
+          {/* product breakdown tab */}
+          <div className='col-span-full col-start-2 col-end-12 bg-primary-grey-500 py-2'>
+            <section>
+              <div className='grid grid-cols-6 px-4'>
+                <div>
+                  <h2
+                    id='overview'
+                    className={`${styles.tabHeader} ${
+                      selectedTab === 'overview' ? 'text-primary-link' : ''
+                    }`}
+                    onClick={handleSelectedTab}
+                  >
+                    Overview
+                  </h2>
+                </div>
+                <div>
+                  <h2
+                    id='description'
+                    className={`${styles.tabHeader} ${
+                      selectedTab === 'description' ? 'text-primary-link' : ''
+                    }`}
+                    onClick={handleSelectedTab}
+                  >
+                    Description
+                  </h2>
+                </div>
+                <div>
+                  <h2
+                    id='shipping'
+                    className={`${styles.tabHeader} ${
+                      selectedTab === 'shipping' ? 'text-primary-link' : ''
+                    }`}
+                    onClick={handleSelectedTab}
+                  >
+                    Shipping
+                  </h2>
+                </div>
+                <div>
+                  <h2
+                    id='warranty'
+                    className={`${styles.tabHeader} ${
+                      selectedTab === 'warranty' ? 'text-primary-link' : ''
+                    }`}
+                    onClick={handleSelectedTab}
+                  >
+                    Warranty
+                  </h2>
+                </div>
+                <div>
+                  <h2
+                    id='returnPolicy'
+                    className={`${styles.tabHeader} ${
+                      selectedTab === 'returnPolicy' ? 'text-primary-link' : ''
+                    }`}
+                    onClick={handleSelectedTab}
+                  >
+                    Return policy
+                  </h2>
+                </div>
+                <div>
+                  <h2
+                    id='reviews'
+                    className={`${styles.tabHeader} ${
+                      selectedTab === 'reviews' ? 'text-primary-link' : ''
+                    }`}
+                    onClick={handleSelectedTab}
+                  >
+                    Reviews
+                  </h2>
+                </div>
               </div>
-              <div>
-                <h2 id='description'>Description</h2>
-              </div>
-              <div>
-                <h2 id='shipping'>Shipping</h2>
-              </div>
-              <div>
-                <h2 id='warranty'>Warranty</h2>
-              </div>
-              <div>
-                <h2 id='returnPolicy'>Return policy</h2>
-              </div>
-              <div>
-                <h2 id='reviews'>Reviews</h2>
-              </div>
+              <article className='max-h-[50vh] overflow-y-auto px-8 py-8 text-primary-grey-100'>
+                {render()}
+              </article>
             </section>
           </div>
         </main>
+        <Footer />
         <ShoppingFixedBag />
       </>
     </Layout>
