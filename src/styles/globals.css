@@ -102,6 +102,6 @@
   input:focus-within,
   input:focus-visible {
     outline: none;
-    border: none;
+    /* border: none; */
   }
 }

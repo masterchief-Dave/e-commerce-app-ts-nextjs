@@ -1,3 +1,4 @@
+import { SideBar } from '@/components/Layout/Account'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 
 import { policyData } from '@/globals/policy'
@@ -7,11 +8,13 @@ const trial = () => {
     <div className='p-24'>
       <ShoppingFixedBag />
 
-      <article>
+      {/* <article>
         {descriptionData.split(/\r?\n/).map((text, index) => {
           return <p key={index}>{text}</p>
         })}
-      </article>
+      </article> */}
+
+      <SideBar />
     </div>
   )
 }
