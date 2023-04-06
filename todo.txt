@@ -3,3 +3,8 @@
 3. start creating responsiveness before I go too far in ,my desings
 4. solve the like button for the weekly deals
 5. 
+
+FOR THE BACKEND
+1. when an order is made and payment confirmed send a confirmation with the reciept to the user email
+2. when a delivery is made send an email to the user
+3. when a user registers send an email to authenticate themselves

@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { Order } from '@/components/Account/Order/order'
 import { AccountLayout } from '@/components/Layout/Account'
 
 const Orders = () => {
+  const [step, setStep] = useState(1)
+
   return (
     <div>
       <AccountLayout>

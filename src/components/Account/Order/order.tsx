@@ -12,7 +12,7 @@ export const Order = (props: Props) => {
               Order Date: <span className='font-light'> 29 Sept 2023</span>
             </h2>
             <button className='h-fit w-fit bg-primary-black-100 px-4 py-2 text-[1.4rem] font-semibold text-white'>
-              view Details
+              View Details
             </button>
           </header>
         </div>
