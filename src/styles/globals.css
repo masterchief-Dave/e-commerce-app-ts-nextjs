@@ -105,3 +105,21 @@
     /* border: none; */
   }
 }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  background-image: url('../../public/assets/icons/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: 50%;
+  /* border: 1px solid #dfdfdf; */
+  border-radius: 2px;
+  margin-right: 2rem;
+  padding: 1rem;
+  padding-right: 2rem;
+  outline: none;
+  height: 100%;
+}

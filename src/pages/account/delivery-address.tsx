@@ -1,25 +1,26 @@
+import { useState } from 'react'
+import { AddressBox } from '@/components/Account/addressBox'
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
+import { AddressForm } from '@/components/Account/addressForm'
 
 type Props = {}
 
 const DeliveryAddress = (props: Props) => {
-  return (
-    <div>
-      <AccountLayout>
-        <div>
-          <header className='flex items-center justify-between border-b p-8'>
-            <h1 className='text-xl font-black lg:text-2xl'>Delivery Address</h1>
+  const [step, setStep] = useState<number>(1)
 
-            <button
-              className='h-fit w-fit rounded-md bg-primary-red-100 px-4 py-2 text-[1.4rem] font-semibold text-white'
-              id='newAddress'
-            >
-              {' '}
-              Add new Address{' '}
-            </button>
-          </header>
-        </div>
+  const render = () => {
+    if (step === 1) {
+      return <AddressBox setState={setStep} />
+    } else if (step === 2) {
+      return <AddressForm setState={setStep} />
+    }
+  }
+
+  return (
+    <div className='font-matter'>
+      <AccountLayout>
+        <div>{render()}</div>
       </AccountLayout>
       <Footer />
     </div>
