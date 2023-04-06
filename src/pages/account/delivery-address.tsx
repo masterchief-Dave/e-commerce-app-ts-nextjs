@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { AddressBox } from '@/components/Account/addressBox'
+import { AddressBox } from '@/components/Account/Address/addressBox'
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
-import { AddressForm } from '@/components/Account/addressForm'
+import { AddressForm } from '@/components/Account/Address/addressForm'
 
 type Props = {}
 

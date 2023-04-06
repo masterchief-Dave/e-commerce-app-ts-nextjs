@@ -9,6 +9,7 @@ export const AddressForm = ({ setState }: Props) => {
     input: `text-[1.4rem] font-medium border h-[4rem] w-full px-4`,
     label: `text-[1.4rem] font-medium text-primary block`,
   }
+
   return (
     <div>
       <header className='flex items-center justify-between border-b p-8'>

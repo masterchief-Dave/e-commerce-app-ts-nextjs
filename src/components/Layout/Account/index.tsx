@@ -34,37 +34,37 @@ export const SideBar = () => {
   }
 
   return (
-    <div className='w-full space-y-4 divide-y rounded-[1rem] border p-8 font-matter'>
-      <section className='flex gap-x-8'>
+    <div className='w-full space-y-4 divide-y rounded-[1rem] border font-matter'>
+      <section className='flex gap-x-8 p-8'>
         <div>
           <UserCircleIcon className='h-8 w-8' />
         </div>
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Profile</h2>
           <li>
-            <Link href='#'>Account information</Link>
+            <Link href='/account/profile'>Account information</Link>
           </li>
 
           <li>
-            <Link href='#'>Delivery address</Link>
+            <Link href='/account/delivery-address'>Delivery address</Link>
           </li>
         </ul>
       </section>
 
-      <section className='flex gap-x-8 py-4'>
+      <section className='flex gap-x-8 p-8 py-4'>
         <div>
           <ShoppingBagIcon className='h-8 w-8' />
         </div>
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Orders</h2>
           <li>
-            <Link href='#'>Order History</Link>
+            <Link href='/account/orders'>Order History</Link>
           </li>
           <li>My reviews</li>
         </ul>
       </section>
 
-      <section className='flex gap-x-8 py-4'>
+      <section className='flex gap-x-8 p-8 py-4'>
         <div>
           <WalletIcon className='h-8 w-8' />
         </div>
