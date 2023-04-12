@@ -1,11 +1,14 @@
 import Image from 'next/image'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
+import { useRouter } from 'next/router'
 
 // import AppleImage from 'public/assets/img/apple-macbook-with-chip.png'
 
 type Props = {}
 
 const CheckoutProduct = (props: Props) => {
+  const router = useRouter()
+
   return (
     <div className='flex items-center justify-between gap-x-12 border-b'>
       <section className='flex w-full items-start justify-between gap-x-12'>
@@ -21,10 +24,15 @@ const CheckoutProduct = (props: Props) => {
         <div className='grow-[2] flex-col justify-between gap-x-8 text-xl lg:text-2xl'>
           <h2 className='mb-4 font-semibold'>Macbook air with M1 chip</h2>
           <div className='flex items-center text-text-primary-link'>
-            <p className='text-xl font-medium lg:text-2xl'>
+            <button
+              className='text-xl font-medium lg:text-2xl'
+              onClick={() => {
+                router.push('/product/1')
+              }}
+            >
               {' '}
               Show product details
-            </p>
+            </button>
             <span>
               <ChevronDownIcon className='h-6 w-6' />
             </span>

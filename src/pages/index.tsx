@@ -13,8 +13,6 @@ import { partnersData } from '@/globals/partners'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Layout } from '@/components/Layout'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
   const styles = {
     productContainer: `flex justify-center`,

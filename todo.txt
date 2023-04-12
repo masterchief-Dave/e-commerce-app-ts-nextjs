@@ -8,3 +8,26 @@ FOR THE BACKEND
 1. when an order is made and payment confirmed send a confirmation with the reciept to the user email
 2. when a delivery is made send an email to the user
 3. when a user registers send an email to authenticate themselves
+
+//
+1. do the login authentication
+2. do the register authentication
+3. do the order processing
+4. add dashboard where a vendor can upload products
+5. create the react native application for the logistics part where I have a rider that does the logistics part
+6.
+
+
+TODO
+1. make the navbar sticky, not the dropdown just the navbar (done)
+2. changes the images in the header (done)
+3. add toast so when I click on favourite / like it would alert that an item has been liked (done)
+
+4. create a wish list page 
+5. create a cart page (done)
+6. Add github workflow
+7. Add test for my react code
+8. work on the responsiveness
+9. create a product description page (done)
+10. create the user account section, where the user can setup card for payment edit thier username etc
+11. in the product page, where there is a dropdown for the product details, I can add a modal when the user clicks to check the product detail.

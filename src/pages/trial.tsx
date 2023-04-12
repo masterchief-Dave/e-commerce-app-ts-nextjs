@@ -3,7 +3,13 @@ import { ShoppingFixedBag } from '@/components/ShoppingBag'
 
 import { policyData } from '@/globals/policy'
 import { descriptionData } from '@/globals/product'
-const trial = () => {
+import useMediaQuery from '@/hooks/useMediaQuery'
+
+const Trial = () => {
+  const isAboveMediumScreen = useMediaQuery('(min-width: 1060px)')
+
+  console.log({ isAboveMediumScreen })
+
   return (
     <div className='p-24'>
       <ShoppingFixedBag />
@@ -14,9 +20,9 @@ const trial = () => {
         })}
       </article> */}
 
-      <SideBar />
+      {/* <SideBar /> */}
     </div>
   )
 }
 
-export default trial
+export default Trial
