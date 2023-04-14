@@ -2,7 +2,10 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 interface User {
-  avatar: Object
+  avatar: {
+    public_id: string
+    url: string
+  }
   _id: string
   name: string
   email: string
@@ -33,6 +36,7 @@ export default NextAuth({
           headers: { 'Content-Type': 'application/json' },
         })
         const user = await res.json()
+        // console.log(user)
 
         if (res.ok && user) {
           // console.log(res.body)
@@ -60,27 +64,60 @@ export default NextAuth({
       return { token, user }
     },
     async session({ session, token, user }) {
-      const userSession = { ...session, accessToken: null, userId: '' }
+      const userSession = {
+        ...session,
+        accessToken: '',
+        userId: '',
+        email: '',
+        name: '',
+        photo: '',
+        role: '',
+        success: false,
+        iat: '',
+        exp: '',
+      }
+
       const tokenData: {
-        token: Object
+        token: string
+        success: boolean
         user: {
           success: boolean
           token: string
           user: User
-          iat: Date
-          exp: Date
-          jti: string
         }
+        iat: string
+        exp: string
+        jti: string
       } = token.token as any
 
-      console.log(tokenData.user.user)
+      // console.log(tokenData.user.user)
 
-      // session.user
+      // console.log({ tokenData })
+
+      userSession.email = tokenData.user.user.email
+      userSession.name = tokenData.user.user.name
+      userSession.photo = tokenData.user.user.avatar.url
+      userSession.role = tokenData.user.user.role
+      userSession.accessToken = tokenData.user.token
+      userSession.success = tokenData.user.success
+      userSession.iat = tokenData.iat
+      userSession.exp = tokenData.exp
+
+      // session.user = tokenData.user.user.name
+      // session.email = tokenData.user.user.email
 
       // console.log(token?.token?.user?.user)
 
       // userSession['accessToken'] = token
-      return session
+      // console.log({ userSession })
+      return userSession
     },
   },
 })
+
+/**
+ * session {
+ * name: string
+ * photo: string
+ * }
+ */

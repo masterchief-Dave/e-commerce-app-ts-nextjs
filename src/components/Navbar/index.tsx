@@ -11,7 +11,7 @@ type Props = {}
 
 export const Navbar = (props: Props) => {
   const { data: session } = useSession()
-  console.log({ session })
+  console.log(session)
 
   const [scroll, setScroll] = useState<number | null>(null)
   const [isTop, setIsTop] = useState<boolean>(false)
@@ -66,6 +66,7 @@ export const Navbar = (props: Props) => {
           </div>
         </li>
         <div className='flex items-center gap-x-4'>
+          {/* {user} */}
           <li>
             <Link href='/auth/login'>
               <button

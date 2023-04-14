@@ -1,7 +1,7 @@
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import Link from 'next/link'
-import { signIn, getSession } from 'next-auth/react'
+import { signIn, getSession, useSession } from 'next-auth/react'
 import { useState } from 'react'
 
 type Props = {}
@@ -9,6 +9,9 @@ type Props = {}
 const Login = (props: Props) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  const { data: session } = useSession()
+  // console.log({ session })
 
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
