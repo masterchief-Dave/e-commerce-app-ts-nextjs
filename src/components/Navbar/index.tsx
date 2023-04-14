@@ -5,9 +5,14 @@ import {
   ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
 
+import { signIn, signOut, useSession } from 'next-auth/react'
+
 type Props = {}
 
 export const Navbar = (props: Props) => {
+  const { data: session } = useSession()
+  console.log({ session })
+
   const [scroll, setScroll] = useState<number | null>(null)
   const [isTop, setIsTop] = useState<boolean>(false)
 
@@ -31,6 +36,8 @@ export const Navbar = (props: Props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scroll])
+
+  const mobileNavbar = <nav className=''></nav>
 
   return (
     <nav
@@ -61,7 +68,10 @@ export const Navbar = (props: Props) => {
         <div className='flex items-center gap-x-4'>
           <li>
             <Link href='/auth/login'>
-              <button className='auth-btn bg-white text-primary-blue-100'>
+              <button
+                className='auth-btn bg-white text-primary-blue-100'
+                onClick={() => signIn()}
+              >
                 Login
               </button>
             </Link>

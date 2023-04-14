@@ -7,12 +7,17 @@ import '@/styles/main.scss'
 import { Toaster } from 'react-hot-toast'
 
 import type { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
+import type { Session } from 'next-auth'
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   return (
-    <div>
+    <SessionProvider session={session}>
       <Component {...pageProps} />
       <Toaster />
-    </div>
+    </SessionProvider>
   )
 }

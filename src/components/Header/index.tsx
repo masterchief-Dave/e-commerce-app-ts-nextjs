@@ -33,21 +33,19 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <div className='mx-auto max-h-[40rem] w-full overflow-hidden'>
+    <div className='mx-auto max-h-[40rem] min-h-[40rem] w-full overflow-hidden'>
       <Slider {...settings} ref={sliderRef}>
         {data.map((data: Header, index: number): JSX.Element => {
           return (
-            <div
-              className='relative h-[100%] max-h-[80vh] w-full max-w-[100vw]'
-              key={index}
-            >
-              <div className='relative max-h-[40rem] w-full font-poppins'>
+            <div className='relative h-[100%] w-full max-w-[100vw]' key={index}>
+              <div className='relative h-full w-full font-poppins'>
                 <Image
                   src={data.img}
                   alt={data.title}
-                  className='h-full w-full object-cover'
+                  className='h-[40rem] w-full object-cover'
                   width='1000'
                   height='1000'
+                  priority
                 />
                 <div className='absolute top-0 z-10  grid h-full w-full grid-cols-12 flex-col items-center justify-center'>
                   <div

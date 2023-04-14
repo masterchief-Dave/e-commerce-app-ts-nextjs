@@ -1,14 +1,25 @@
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import Link from 'next/link'
+import { signIn, getSession } from 'next-auth/react'
+import { useState } from 'react'
 
 type Props = {}
 
-const login = (props: Props) => {
+const Login = (props: Props) => {
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
     input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
     btn: `h-[3.5rem] w-full bg-primary-blue-100 text-white font-medium text-[1.4rem] rounded-md`,
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    signIn('credentials-login', { email, password })
   }
 
   return (
@@ -28,6 +39,11 @@ const login = (props: Props) => {
                 type='text'
                 placeholder='Email Address'
                 id='email'
+                name='email'
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                }}
                 className={styles.input}
               />
             </div>
@@ -40,11 +56,18 @@ const login = (props: Props) => {
                 type='password'
                 placeholder='Password'
                 id='password'
+                name='password'
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                }}
                 className={styles.input}
               />
             </div>
 
-            <button className={styles.btn}>Submit</button>
+            <button className={styles.btn} onClick={handleSubmit} type='submit'>
+              Submit
+            </button>
 
             <div className='mb-8 flex justify-end'>
               <Link
@@ -75,4 +98,4 @@ const login = (props: Props) => {
   )
 }
 
-export default login
+export default Login

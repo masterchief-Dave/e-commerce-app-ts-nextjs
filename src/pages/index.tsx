@@ -12,8 +12,11 @@ import { ProductCard } from '@/components/Product/Card'
 import { partnersData } from '@/globals/partners'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Layout } from '@/components/Layout'
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 export default function Home() {
+  const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
+
   const styles = {
     productContainer: `flex justify-center`,
   }

@@ -8,7 +8,7 @@ import useMediaQuery from '@/hooks/useMediaQuery'
 const Trial = () => {
   const isAboveMediumScreen = useMediaQuery('(min-width: 1060px)')
 
-  console.log({ isAboveMediumScreen })
+  // console.log({ isAboveMediumScreen })
 
   return (
     <div className='p-24'>
