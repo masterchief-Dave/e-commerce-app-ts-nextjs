@@ -1,9 +1,10 @@
-import { Layout } from '@/components/Layout'
-import { AuthNavbar } from '@/components/Navbar/authNavbar'
-import Link from 'next/link'
-import { signIn, getSession, useSession } from 'next-auth/react'
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { Layout } from '@/components/Layout'
+import { AuthNavbar } from '@/components/Navbar/authNavbar'
+
+import { signIn, getSession, useSession } from 'next-auth/react'
 
 type Props = {}
 
@@ -24,6 +25,12 @@ const Login = (props: Props) => {
     e.preventDefault()
 
     signIn('credentials-login', { email, password })
+  }
+
+  // handle google auth
+  const handleGoogleAuth = async (e: any) => {
+    e.preventDefault()
+    signIn('google', { callbackUrl: 'http://localhost:3000' })
   }
 
   return (
@@ -56,6 +63,7 @@ const Login = (props: Props) => {
               <label htmlFor='password' className={styles.label}>
                 Password
               </label>
+              {/* add fingerprint icon, makes it look really cool */}
               <input
                 type='password'
                 placeholder='Password'
@@ -108,6 +116,7 @@ const Login = (props: Props) => {
             <div className='space-y-4'>
               <button
                 className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100`}
+                onClick={handleGoogleAuth}
               >
                 <p>Sign In with Google</p>
                 <Image

@@ -36,3 +36,18 @@ WORKING ON THE RESPONSIVENESS
 1. CREATE THE MOBILE NAVBAR
 2. CREATE THE MOBILE DROPDOWN NAVBAR
 3. 
+
+steps invloved in connecting next-auth and google
+1. go to cloud.google.com
+2. create a new project and give it a unique name to the projects u are building
+3. once the projct has been created select the project
+4. in the sidedbar menu navigate to apis & services > credentials 
+5. click on configure consent screen
+6. click on external for the user type
+7. fill in fields for (app name, support email, and developer email)
+8. click on save and continue till you go back to the dashboard
+9. click on credentials in the dashboard sidedbar
+10. click on create credentials, click on oAuth2clientid
+11. a form will come out for oauth - application type is web application, and leave the name as the default and if you scroll down u will see a place provisioned for url 
+12. on the first one enter the index page for your app http://localhost:4000, on the second one enter http://localhost:4000/api/auth/callback/google
+13. click on create/save

@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 interface User {
   avatar: {
@@ -18,6 +19,11 @@ interface User {
 
 export default NextAuth({
   providers: [
+    // google provider
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
     CredentialsProvider({
       name: 'Credentials',
       id: 'credentials-login',
@@ -27,7 +33,7 @@ export default NextAuth({
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const res = await fetch('http://localhost:3000/api/v1/auth/login', {
+        const res = await fetch('http://localhost:8000/api/v1/auth/login', {
           method: 'POST',
           body: JSON.stringify({
             email: credentials?.email,
@@ -54,64 +60,64 @@ export default NextAuth({
     async redirect({ url, baseUrl }) {
       // console.log({ url, baseUrl })
       if (url.startsWith('/')) {
-        return `http://localhost:3000/api/v1/auth/login`
+        return `http://localhost:8000/api/v1/auth/login`
       }
 
       return url
     },
-    async jwt({ token, user }) {
-      // console.log({ user })
-      return { token, user }
-    },
-    async session({ session, token, user }) {
-      const userSession = {
-        ...session,
-        accessToken: '',
-        userId: '',
-        email: '',
-        name: '',
-        photo: '',
-        role: '',
-        success: false,
-        iat: '',
-        exp: '',
-      }
+    // async jwt({ token, user }) {
+    //   // console.log({ user })
+    //   // return { token, user }
+    // },
+    // async session({ session, token, user }) {
+    //   const userSession = {
+    //     ...session,
+    //     accessToken: '',
+    //     userId: '',
+    //     email: '',
+    //     name: '',
+    //     photo: '',
+    //     role: '',
+    //     success: false,
+    //     iat: '',
+    //     exp: '',
+    //   }
 
-      const tokenData: {
-        token: string
-        success: boolean
-        user: {
-          success: boolean
-          token: string
-          user: User
-        }
-        iat: string
-        exp: string
-        jti: string
-      } = token.token as any
+    //   const tokenData: {
+    //     token: string
+    //     success: boolean
+    //     user: {
+    //       success: boolean
+    //       token: string
+    //       user: User
+    //     }
+    //     iat: string
+    //     exp: string
+    //     jti: string
+    //   } = token.token as any
 
-      // console.log(tokenData.user.user)
+    //   // console.log(tokenData.user.user)
 
-      // console.log({ tokenData })
+    //   // console.log({ tokenData })
 
-      userSession.email = tokenData.user.user.email
-      userSession.name = tokenData.user.user.name
-      userSession.photo = tokenData.user.user.avatar.url
-      userSession.role = tokenData.user.user.role
-      userSession.accessToken = tokenData.user.token
-      userSession.success = tokenData.user.success
-      userSession.iat = tokenData.iat
-      userSession.exp = tokenData.exp
+    //   userSession.email = tokenData.user.user.email
+    //   userSession.name = tokenData.user.user.name
+    //   userSession.photo = tokenData.user.user.avatar.url
+    //   userSession.role = tokenData.user.user.role
+    //   userSession.accessToken = tokenData.user.token
+    //   userSession.success = tokenData.user.success
+    //   userSession.iat = tokenData.iat
+    //   userSession.exp = tokenData.exp
 
-      // session.user = tokenData.user.user.name
-      // session.email = tokenData.user.user.email
+    //   // session.user = tokenData.user.user.name
+    //   // session.email = tokenData.user.user.email
 
-      // console.log(token?.token?.user?.user)
+    //   // console.log(token?.token?.user?.user)
 
-      // userSession['accessToken'] = token
-      // console.log({ userSession })
-      return userSession
-    },
+    //   // userSession['accessToken'] = token
+    //   // console.log({ userSession })
+    //   return userSession
+    // },
   },
 })
 

@@ -13,6 +13,8 @@ export const Navbar = (props: Props) => {
   const { data: session } = useSession()
   console.log(session)
 
+  console.log(session?.user)
+
   const [scroll, setScroll] = useState<number | null>(null)
   const [isTop, setIsTop] = useState<boolean>(false)
 
