@@ -3,6 +3,7 @@ import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import Link from 'next/link'
 import { signIn, getSession, useSession } from 'next-auth/react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 type Props = {}
 
@@ -16,7 +17,7 @@ const Login = (props: Props) => {
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
     input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-100 text-white font-medium text-[1.4rem] rounded-md`,
+    btn: `h-[3.5rem] w-full bg-primary-blue-100  font-medium text-[1.4rem] rounded-md`,
   }
 
   const handleSubmit = (e: any) => {
@@ -68,7 +69,11 @@ const Login = (props: Props) => {
               />
             </div>
 
-            <button className={styles.btn} onClick={handleSubmit} type='submit'>
+            <button
+              className={`${styles.btn} text-white`}
+              onClick={handleSubmit}
+              type='submit'
+            >
               Submit
             </button>
 
@@ -93,6 +98,39 @@ const Login = (props: Props) => {
                   </Link>
                 </span>{' '}
               </p>
+            </div>
+
+            <div className='flex justify-center'>
+              <span className='inline-block h-[1px] '></span>
+              <p className='font-bold'>OR</p>
+            </div>
+
+            <div className='space-y-4'>
+              <button
+                className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100`}
+              >
+                <p>Sign In with Google</p>
+                <Image
+                  src='/assets/icons/google.svg'
+                  alt='Google'
+                  className='h-[13px] w-[13px]'
+                  width={1000}
+                  height={1000}
+                />
+              </button>
+              <button
+                className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100`}
+              >
+                <p>Sign In with Github</p>
+
+                <Image
+                  src='/assets/icons/github.svg'
+                  alt='github'
+                  className='h-[13px] w-[13px]'
+                  width={1000}
+                  height={1000}
+                />
+              </button>
             </div>
           </form>
         </section>
