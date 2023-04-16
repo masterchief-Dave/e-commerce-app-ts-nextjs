@@ -35,7 +35,10 @@ TODO
 WORKING ON THE RESPONSIVENESS
 1. CREATE THE MOBILE NAVBAR
 2. CREATE THE MOBILE DROPDOWN NAVBAR
-3. 
+3. REGISTER A NEW USER
+4. GET ALL THE PRODUCTS
+5. CREATE A CATEGORY IN MY BACKEND FOR FLASH SALES 
+6. HOOK UP CREATING AN ORDER
 
 steps invloved in connecting next-auth and google
 1. go to cloud.google.com
@@ -51,3 +54,7 @@ steps invloved in connecting next-auth and google
 11. a form will come out for oauth - application type is web application, and leave the name as the default and if you scroll down u will see a place provisioned for url 
 12. on the first one enter the index page for your app http://localhost:4000, on the second one enter http://localhost:4000/api/auth/callback/google
 13. click on create/save
+
+
+routine for registering with google
+https://stackoverflow.com/questions/60294161/whats-the-nodejs-backend-routine-for-register-signin-with-google

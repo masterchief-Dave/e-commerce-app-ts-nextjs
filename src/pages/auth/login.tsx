@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 
@@ -9,11 +10,13 @@ import { signIn, getSession, useSession } from 'next-auth/react'
 type Props = {}
 
 const Login = (props: Props) => {
+  const router = useRouter()
+
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const { data: session } = useSession()
-  // console.log({ session })
+  console.log({ session })
 
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
@@ -21,15 +24,27 @@ const Login = (props: Props) => {
     btn: `h-[3.5rem] w-full bg-primary-blue-100  font-medium text-[1.4rem] rounded-md`,
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    signIn('credentials-login', { email, password })
+    const status = await signIn('credentials-login', {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: '/',
+    })
+
+    // if (status?.ok === true) {
+    //   router.push('/')
+    // }
+
+    console.log(status)
   }
 
   // handle google auth
   const handleGoogleAuth = async (e: any) => {
     e.preventDefault()
+    // create a post request with the user email as a means of identification and then send a callback url: to my server with the data to get the user id and stuff like that
     signIn('google', { callbackUrl: 'http://localhost:3000' })
   }
 

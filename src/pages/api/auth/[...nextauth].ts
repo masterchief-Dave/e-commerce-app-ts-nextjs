@@ -41,12 +41,29 @@ export default NextAuth({
           }),
           headers: { 'Content-Type': 'application/json' },
         })
-        const user = await res.json()
-        // console.log(user)
+        // console.log(await res.json())
+
+        const { user, role, token, success } = await res.json()
+        // console.log({ user }, { role }, { token }, { success })
+        // user.role = role
+
+        // create the new user object in this place
+        const newUser = {
+          user: user.name,
+          email: user.email,
+          role: user.role,
+          image: user.avatar.url,
+          token: token,
+          success: success,
+          password: user.password,
+          id: user._id,
+        }
+
+        // console.log({ newUser })
 
         if (res.ok && user) {
           // console.log(res.body)
-          return user
+          return newUser
         }
 
         return null
@@ -57,15 +74,26 @@ export default NextAuth({
     signIn: '/auth/login',
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // console.log({ url, baseUrl })
-      if (url.startsWith('/')) {
-        return `http://localhost:8000/api/v1/auth/login`
-      }
-
-      return url
+    async jwt({ token, user }) {
+      // console.log({ user })
+      return { ...token, ...user }
     },
-    // async jwt({ token, user }) {
+    async session({ session, token, user }) {
+      session.user = token as any
+      return session
+    },
+  },
+})
+
+/**
+ * session {
+ * name: string
+ * photo: string
+ * }
+ */
+
+/**
+ *  // async jwt({ token, user }) {
     //   // console.log({ user })
     //   // return { token, user }
     // },
@@ -118,12 +146,4 @@ export default NextAuth({
     //   // console.log({ userSession })
     //   return userSession
     // },
-  },
-})
-
-/**
- * session {
- * name: string
- * photo: string
- * }
  */

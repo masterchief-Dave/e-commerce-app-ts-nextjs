@@ -5,7 +5,9 @@ import {
   ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession, getSession } from 'next-auth/react'
+import Image from 'next/image'
+import { NextApiRequest } from 'next'
 
 type Props = {}
 
@@ -13,7 +15,8 @@ export const Navbar = (props: Props) => {
   const { data: session } = useSession()
   console.log(session)
 
-  console.log(session?.user)
+  // const photo = session?.user?.photo!
+  // console.log(session?.user)
 
   const [scroll, setScroll] = useState<number | null>(null)
   const [isTop, setIsTop] = useState<boolean>(false)
@@ -68,24 +71,38 @@ export const Navbar = (props: Props) => {
           </div>
         </li>
         <div className='flex items-center gap-x-4'>
-          {/* {user} */}
-          <li>
-            <Link href='/auth/login'>
-              <button
-                className='auth-btn bg-white text-primary-blue-100'
-                onClick={() => signIn()}
-              >
-                Login
-              </button>
-            </Link>
-          </li>
-          <li>
-            <Link href='/auth/register'>
-              <button className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
-                Sign up
-              </button>
-            </Link>
-          </li>
+          {session ? (
+            <div className='h-[4rem] w-[4rem] rounded-full'>
+              <Image
+                src={session?.user?.image!}
+                alt='profile image'
+                width={1000}
+                height={1000}
+                className='h-[4rem] w-[4rem] rounded-full'
+              />
+            </div>
+          ) : (
+            <div className='flex items-center gap-x-8'>
+              <li>
+                <Link href='/auth/login'>
+                  <button
+                    className='auth-btn bg-white text-primary-blue-100'
+                    onClick={() => signIn()}
+                  >
+                    Login
+                  </button>
+                </Link>
+              </li>
+              <li>
+                <Link href='/auth/register'>
+                  <button className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
+                    Sign up
+                  </button>
+                </Link>
+              </li>
+            </div>
+          )}
+
           <li>
             <Link href='/cart' className='relative'>
               <ShoppingCartIcon className='h-8 w-8 text-white' />
@@ -99,3 +116,22 @@ export const Navbar = (props: Props) => {
     </nav>
   )
 }
+
+// export async function getServerSideProps(req: NextApiRequest) {
+//   console.log(req)
+//   const session = await getSession({ req })
+//   console.log(session)
+
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/login',
+//         permanent: false,
+//       },
+//     }
+//   }
+
+//   return {
+//     props: { session },
+//   }
+// }
