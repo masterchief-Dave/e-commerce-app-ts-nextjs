@@ -142,19 +142,6 @@ const Login = (props: Props) => {
                   height={1000}
                 />
               </button>
-              <button
-                className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100`}
-              >
-                <p>Sign In with Github</p>
-
-                <Image
-                  src='/assets/icons/github.svg'
-                  alt='github'
-                  className='h-[13px] w-[13px]'
-                  width={1000}
-                  height={1000}
-                />
-              </button>
             </div>
           </form>
         </section>

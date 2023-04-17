@@ -1,10 +1,29 @@
+import Link from 'next/link'
+import { useState } from 'react'
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
-import Link from 'next/link'
 
 type Props = {}
 
-const register = (props: Props) => {
+interface FormData {
+  fullName: string
+  password: string
+  email: string
+  confirmPassword: string
+}
+
+const Register = (props: Props) => {
+  const [formData, setFormData] = useState<FormData>({
+    fullName: '',
+    password: '',
+    email: '',
+    confirmPassword: '',
+  })
+
+  const handleForm = () => {
+    // some code
+  }
+
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
     input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
@@ -32,6 +51,7 @@ const register = (props: Props) => {
                 type='text'
                 placeholder='Firstname Lastname'
                 id='fullName'
+                name='fullName'
                 className={styles.input}
               />
             </div>
@@ -102,4 +122,4 @@ const register = (props: Props) => {
   )
 }
 
-export default register
+export default Register
