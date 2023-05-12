@@ -52,9 +52,11 @@ export const Navbar = (props: Props) => {
     >
       <ul className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] items-center justify-between gap-x-8'>
         <li>
-          <Link href='/' className='text-[2rem] font-black text-white'>
-            Sage - Warehouse
-          </Link>
+          <h1>
+            <Link href='/' className='text-[2rem] font-black text-white'>
+              Sage - Warehouse
+            </Link>
+          </h1>
         </li>
         <li className='grow'>
           <div className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2'>

@@ -68,3 +68,6 @@ TODO - AUTHENTICATION
 4. Do signup with GoogleProvider
 -- if I signup with a google provider then it means that I have to create that user on the backend as well with the data the user provides but the things is the user will not have a password can I will leave that user authentication to google to handle, so  if that user login with thier google email, then I would check my backend if the user with that email exists and send a token to the user
 - I will have to create another api endpoint for such users
+
+MOBILE RESPONSIVENESS
+1. make the navbar responsive and put a hamburger icon when the display is in sm -md range

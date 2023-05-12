@@ -46,7 +46,7 @@ export const WeeklyDeals = (props: Props) => {
       <header className='flex items-center justify-between border-b px-4 py-3'>
         <div className='flex items-center gap-4'>
           <h2 className='text-[2rem] font-bold uppercase text-primary-black-200'>
-            Weekly Deals
+            Flash Sales
           </h2>
           <div className='flex gap-x-4'>
             <div>
