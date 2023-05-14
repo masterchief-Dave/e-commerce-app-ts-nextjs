@@ -33,7 +33,7 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <div className='mx-auto max-h-[40rem] min-h-[40rem] w-full overflow-hidden'>
+    <div className='mx-auto h-[20rem] w-full  overflow-hidden lg:h-[40rem]'>
       <Slider {...settings} ref={sliderRef}>
         {data.map((data: Header, index: number): JSX.Element => {
           return (
@@ -42,7 +42,7 @@ export const Header = (props: Props) => {
                 <Image
                   src={data.img}
                   alt={data.title}
-                  className='h-[40rem] w-full object-cover'
+                  className='h-[20rem] w-full object-cover lg:h-[40rem]'
                   width='1000'
                   height='1000'
                   priority
@@ -53,10 +53,10 @@ export const Header = (props: Props) => {
                       true ? 'text-black' : 'text-white'
                     }`}
                   >
-                    <h2 className='text-[2rem] font-extralight'>
+                    <h2 className='text-base font-extralight lg:text-[2rem]'>
                       Top Best Seller 2023
                     </h2>
-                    <h1 className='max-w-[50rem] text-[6rem] uppercase leading-[5rem]'>
+                    <h1 className='max-w-[50rem] text-base uppercase leading-[5rem] lg:text-[6rem]'>
                       {' '}
                       <span className='font-extrabold leading-10'>
                         {data.nameBold}
@@ -64,7 +64,7 @@ export const Header = (props: Props) => {
                       {''}
                       <span className='font-thin'>{data.nameNormal}</span>
                     </h1>
-                    <p className='max-w-[45rem] text-[1.5rem] font-light'>
+                    <p className='max-w-[45rem] text-base font-light lg:text-[1.5rem]'>
                       {data.description}
                     </p>
                   </div>
