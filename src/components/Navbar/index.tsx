@@ -139,6 +139,7 @@ const Desktop = ({ session, isTop }: Props) => {
 const MobileNavbar = () => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
+  const barIconRef = useRef<HTMLLIElement | null>(null)
 
   const styles = {
     list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
@@ -147,6 +148,13 @@ const MobileNavbar = () => {
 
   useEffect(() => {
     const handler = (e: any) => {
+      // check if the mousedown occurs in the barIcon
+      if (barIconRef.current) {
+        if (barIconRef.current.contains(e.target)) {
+          return null
+        }
+      }
+
       if (
         mobileNavbarRef.current !== undefined &&
         mobileNavbarRef.current !== null
@@ -176,7 +184,11 @@ const MobileNavbar = () => {
           </h1>
         </li>
 
-        <li className='cursor-pointer' onClick={() => setShowMenu(!showMenu)}>
+        <li
+          className='cursor-pointer'
+          onClick={() => setShowMenu(!showMenu)}
+          ref={barIconRef}
+        >
           <Bars3Icon className='h-10 w-10 text-white' />
         </li>
 
