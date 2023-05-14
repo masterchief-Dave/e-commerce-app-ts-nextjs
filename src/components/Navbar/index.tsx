@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import {
+  Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
@@ -8,8 +9,12 @@ import {
 import { signIn, signOut, useSession, getSession } from 'next-auth/react'
 import Image from 'next/image'
 import { NextApiRequest } from 'next'
+import { Session } from 'next-auth'
 
-type Props = {}
+type Props = {
+  session: Session | null
+  isTop: boolean
+}
 
 export const Navbar = (props: Props) => {
   const { data: session } = useSession()
@@ -42,8 +47,20 @@ export const Navbar = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scroll])
 
-  const mobileNavbar = <nav className=''></nav>
+  return (
+    <div className=''>
+      <div className='block lg:hidden'>
+        <MobileNavbar />
+      </div>
 
+      <div className='hidden lg:block'>
+        <Desktop session={session} isTop={isTop} />
+      </div>
+    </div>
+  )
+}
+
+const Desktop = ({ session, isTop }: Props) => {
   return (
     <nav
       className={`grid grid-cols-12 bg-primary-blue-100 py-4 font-poppins ${
@@ -58,7 +75,7 @@ export const Navbar = (props: Props) => {
             </Link>
           </h1>
         </li>
-        <li className='grow'>
+        <li className='w-[40%]'>
           <div className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2'>
             <input
               type='text'
@@ -119,21 +136,77 @@ export const Navbar = (props: Props) => {
   )
 }
 
-// export async function getServerSideProps(req: NextApiRequest) {
-//   console.log(req)
-//   const session = await getSession({ req })
-//   console.log(session)
+const MobileNavbar = () => {
+  const [showMenu, setShowMenu] = useState<Boolean>(false)
+  const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
 
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: '/login',
-//         permanent: false,
-//       },
-//     }
-//   }
+  const styles = {
+    list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
+    links: `w-full h-full block`,
+  }
 
-//   return {
-//     props: { session },
-//   }
-// }
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (
+        mobileNavbarRef.current !== undefined &&
+        mobileNavbarRef.current !== null
+      ) {
+        if (!mobileNavbarRef?.current!.contains(e.target)) {
+          setShowMenu(false)
+        }
+      }
+    }
+
+    document.addEventListener('mousedown', handler)
+
+    return () => {
+      document.removeEventListener('mousedown', handler)
+    }
+  })
+  // handle the case for click outside of the opened menu or when esc key is pressed on the keyboard
+
+  return (
+    <nav className='relative z-[999] bg-primary-blue-100 py-4'>
+      <ul className='relative flex items-center justify-between px-24'>
+        <li>
+          <h1>
+            <Link href='/' className='text-lg font-black text-white'>
+              Sage-Warehouse
+            </Link>
+          </h1>
+        </li>
+
+        <li className='cursor-pointer' onClick={() => setShowMenu(!showMenu)}>
+          <Bars3Icon className='h-10 w-10 text-white' />
+        </li>
+
+        {showMenu && (
+          <div
+            className='absolute top-16 left-[10%] mx-auto w-[80%] rounded-xl bg-[#000] p-10 text-white'
+            ref={mobileNavbarRef}
+          >
+            <ul className='space-y-4'>
+              <li className={styles.list}>
+                <Link href='/profile' className={styles.links}>
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <input
+                  type='text'
+                  placeholder='Search'
+                  className={`block w-full rounded-md p-4 font-medium text-black`}
+                />
+              </li>
+              <li className={styles.list}>
+                <Link href='/cart' className={styles.links}>
+                  Cart
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </ul>
+    </nav>
+  )
+}

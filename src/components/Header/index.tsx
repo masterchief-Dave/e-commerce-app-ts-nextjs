@@ -72,14 +72,14 @@ export const Header = (props: Props) => {
               </div>
               <div className='absolute top-0 z-50 flex h-full w-full items-center justify-between px-[5rem]'>
                 <div
-                  className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white'
+                  className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white ring-primary-yellow-100 hover:ring-2'
                   onClick={handleLeftSlide}
                 >
                   <ChevronLeftIcon className='h-8 w-8 text-white' />
                 </div>
 
                 <div
-                  className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white'
+                  className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white ring-primary-yellow-100 hover:ring-2'
                   onClick={handleRightSlide}
                 >
                   <ChevronRightIcon className='h-8 w-8 text-white' />

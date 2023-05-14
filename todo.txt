@@ -71,3 +71,6 @@ TODO - AUTHENTICATION
 
 MOBILE RESPONSIVENESS
 1. make the navbar responsive and put a hamburger icon when the display is in sm -md range
+
+TYPOGRAPHY 
+1. change the font family to perhaps inter
