@@ -28,7 +28,11 @@ export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
           {categoryItems.map((data: ICategory, index): JSX.Element => {
             return (
               <Link href='#' key={index}>
-                <div className='flex h-[15rem] max-w-[15rem] flex-col items-center justify-center bg-primary-white-500 p-8'>
+                <div
+                  className={`${
+                    index > 1 ? 'hidden lg:block' : ''
+                  } flex h-[15rem] max-w-[15rem] flex-col items-center justify-center bg-primary-white-500 p-8`}
+                >
                   <div className='relative mb-4 h-[10rem] w-[10rem]'>
                     <Image
                       src={data.img}
