@@ -38,7 +38,7 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
           className='rounded-xl'
         />
         <div className='absolute top-5 left-5 z-10'>
-          <div className='bg-primary-red-100 px-2 text-[1.2rem] text-white'>
+          <div className='bg-primary-red-100 px-2 text-base text-white lg:text-[1.2rem]'>
             25%
           </div>
         </div>
@@ -54,8 +54,8 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
         </div>
       </div>
 
-      <div className='space-y-2 font-matter'>
-        <h3 className='max-w-[20rem] truncate text-center text-[1.4rem] font-medium'>
+      <div className='space-y-2 font-inter'>
+        <h3 className='max-w-[20rem] truncate text-center text-base font-normal lg:text-[1.4rem]'>
           Apple watch series 4
         </h3>
         <div className='flex items-center justify-center gap-2 font-semibold'>
@@ -72,7 +72,9 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
         </div>
         <button className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-[25rem] bg-primary-grey-500 font-semibold hover:bg-primary-blue-400 hover:text-white'>
           <ShoppingBagIcon className='h-4 w-4' />
-          <span className='text-[1.2rem] uppercase'>Add to cart</span>
+          <span className='text-base uppercase lg:text-[1.2rem]'>
+            Add to cart
+          </span>
         </button>
       </div>
     </div>

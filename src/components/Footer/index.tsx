@@ -18,17 +18,17 @@ export const Footer = (props: Props) => {
   const styles = {
     footerCardIcons: `h-12 w-12`,
     footerHeader: `text-[1.8rem] font-semibold text-white font-matter`,
-    socialMediaIcons: `h-12 w-12`,
+    socialMediaIcons: `h-12 w-12 cursor-pointer`,
   }
 
   return (
     <footer className='mx-auto grid w-full grid-cols-12'>
-      <div className='col-span-full grid grid-cols-12 border-b bg-primary-blue-400 py-8'>
-        <section className='col-start-2 col-end-12 flex items-center justify-between'>
-          <div className='order-2 space-y-8'>
+      <div className='col-span-full  grid-cols-12 border-b bg-primary-blue-400 py-8 lg:grid'>
+        <section className='col-start-2 col-end-12 flex flex-col items-center justify-between gap-4 p-12 lg:flex-row'>
+          <div className='order-2 w-full space-y-8'>
             <h4 className={styles.footerHeader}>Newsletter</h4>
             <form>
-              <div className='flex h-[4.5rem] w-[40rem] items-center gap-2 font-poppins text-[1.2rem]'>
+              <div className='flex h-[4.5rem] w-full items-center gap-2 font-poppins text-[1.2rem] lg:w-[40rem]'>
                 <input
                   type='text'
                   placeholder='email'
@@ -41,7 +41,7 @@ export const Footer = (props: Props) => {
             </form>
           </div>
 
-          <div className='flex items-center gap-6'>
+          <div className='flex w-full items-start gap-6 lg:items-center'>
             <Image
               src={instagram}
               alt='instagram'
@@ -125,7 +125,7 @@ export const Footer = (props: Props) => {
 
       <section className='col-span-full col-start-1 border-t bg-primary-blue-300 font-roboto text-[1.3rem] font-medium text-white'>
         <div className='grid grid-cols-12'>
-          <div className='col-start-2 col-end-12 flex items-center justify-between'>
+          <div className='col-start-2 col-end-12 flex flex-col items-center justify-between lg:flex-row'>
             <p className='font-roboto text-[1.2rem] font-bold'>
               Copyright &copy; {new Date().getFullYear()} Bodunrin. All rights
               reserved.

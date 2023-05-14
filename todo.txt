@@ -70,7 +70,8 @@ TODO - AUTHENTICATION
 - I will have to create another api endpoint for such users
 
 MOBILE RESPONSIVENESS
-1. make the navbar responsive and put a hamburger icon when the display is in sm -md range
+1. make the navbar responsive and put a hamburger icon when the display is in sm -md range (done)
+2. remove 2 items from the category section component when the screen is small and leave it as 4 items when the screen is large
 
 TYPOGRAPHY 
 1. change the font family to perhaps inter

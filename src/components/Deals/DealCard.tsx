@@ -26,7 +26,9 @@ export const DealCard = ({ key, data }: Props) => {
         <Image src={img} alt={name} width={1000} height={1000} />
       </div>
       <div className='space-y-4'>
-        <p className='text-[1.2rem] font-medium text-[#222]'>{name}</p>
+        <p className='text-base font-medium text-[#222] lg:text-[1.2rem]'>
+          {name}
+        </p>
         <div className='flex gap-1'>
           {[0, 0, 0, 0].map((_, index: number) => {
             return (

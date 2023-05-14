@@ -64,7 +64,7 @@ export const Header = (props: Props) => {
                       {''}
                       <span className='font-thin'>{data.nameNormal}</span>
                     </h1>
-                    <p className='max-w-[45rem] text-base font-light lg:text-[1.5rem]'>
+                    <p className='max-w-[45rem] text-[0.8rem] font-light lg:text-[1.5rem]'>
                       {data.description}
                     </p>
                   </div>

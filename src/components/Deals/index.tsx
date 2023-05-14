@@ -68,9 +68,9 @@ export const WeeklyDeals = (props: Props) => {
 
   return (
     <div className='py-2 font-matter'>
-      <header className='flex items-center justify-between border-b px-4 py-3'>
-        <div className='flex items-center gap-4'>
-          <h2 className='text-[2rem] font-bold uppercase text-primary-black-200'>
+      <header className='flex items-end justify-between border-b px-4 py-3 lg:items-center'>
+        <div className='flex flex-col items-center gap-4 lg:flex-row'>
+          <h2 className='text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
             Flash Sales
           </h2>
           <div className='flex gap-x-4'>
@@ -108,7 +108,7 @@ export const WeeklyDeals = (props: Props) => {
           </div>
         </div>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex h-full items-end justify-end gap-2 lg:items-center'>
           <div className={styles.iconContainer} onClick={handlePrev}>
             <ChevronLeftIcon className={styles.icon} />
           </div>
