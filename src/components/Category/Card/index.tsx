@@ -13,7 +13,9 @@ export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
     <div className='w-fit bg-white p-8 shadow-product-card-box-shadow'>
       <div>
         <div className='mb-8 flex items-center justify-between uppercase'>
-          <h3 className='font-matter text-[1.4rem] font-bold'>{name}</h3>
+          <h3 className='font-matter text-base font-bold lg:text-[1.4rem]'>
+            {name}
+          </h3>
           <Link
             href='#'
             className='text-[1rem] text-primary-grey-500 hover:text-primary-blue-300'

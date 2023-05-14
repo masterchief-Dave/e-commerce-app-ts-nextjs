@@ -57,6 +57,7 @@ module.exports = {
         poppins: ['poppins', 'sans-serif'],
         roboto: ['roboto', 'sans-serif'],
         matter: ['matter', 'sans-serif'],
+        inter: ['inter', 'sans-serif'],
       },
       boxShadow: {
         'primary-box-shadow': 'rgba(0, 0, 0, 0.08) 0px 4px 12px',

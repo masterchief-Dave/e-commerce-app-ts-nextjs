@@ -38,7 +38,7 @@ export default function Home() {
             <div className='col-span-full mx-auto grid w-full grid-cols-12'>
               <div className='col-start-2 col-end-12 space-y-12'>
                 <section>
-                  <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
+                  <h2 className='mb-8 font-inter text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
                     Product Categories
                   </h2>
                   <div className='flex flex-col items-center justify-between gap-8 lg:flex-row lg:flex-wrap'>
