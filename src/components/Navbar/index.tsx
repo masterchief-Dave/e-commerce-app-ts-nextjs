@@ -16,7 +16,7 @@ type Props = {
   isTop: boolean
 }
 
-export const Navbar = (props: Props) => {
+export const Navbar = () => {
   const { data: session } = useSession()
   console.log(session)
 

@@ -41,7 +41,7 @@ export default function Home() {
                   <h2 className='mb-8 font-matter text-[2rem] font-bold uppercase text-primary-black-200'>
                     Product Categories
                   </h2>
-                  <div className='flex items-center justify-between gap-8'>
+                  <div className='flex flex-col items-center justify-between gap-8 lg:flex-row lg:flex-wrap'>
                     <CategoryCard data={electronicsData} />
                     <CategoryCard data={computerData} />
                     <CategoryCard data={gamingData} />
