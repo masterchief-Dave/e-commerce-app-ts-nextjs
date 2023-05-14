@@ -71,28 +71,6 @@ export default function Home() {
                 </section>
               </div>
             </div>
-
-            <section className='company-component col-span-full mx-auto w-full max-w-[144rem] bg-white py-12'>
-              <section className='flex items-center justify-center gap-8 px-8 py-20'>
-                <div className='grid grid-cols-12'>
-                  <div className='col-start-2 col-end-12 flex justify-center'>
-                    {partnersData.map((data, index) => {
-                      return (
-                        <div className={styles.productContainer} key={index}>
-                          <Image
-                            src={data.img}
-                            alt='moten-image'
-                            className='h-[6rem] object-contain'
-                            width={1000}
-                            height={1000}
-                          />
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </section>
-            </section>
           </main>
           <Footer />
         </>

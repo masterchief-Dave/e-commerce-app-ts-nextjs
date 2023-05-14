@@ -28,8 +28,8 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
   }
 
   return (
-    <div className='max-w-[25rem] p-4 shadow-product-card-box-shadow'>
-      <div className='relative rounded-lg'>
+    <div className='max-w-[25rem] rounded-xl p-4 shadow-product-card-box-shadow'>
+      <div className='relative rounded-xl'>
         <Image
           src='https://images.unsplash.com/photo-1617043786394-f977fa12eddf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
           alt='product-image'
@@ -54,7 +54,7 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
         </div>
       </div>
 
-      <div className='space-y-2 font-inter'>
+      <div className='space-y-2 py-2 font-inter'>
         <h3 className='max-w-[20rem] truncate text-center text-base font-normal lg:text-[1.4rem]'>
           Apple watch series 4
         </h3>
@@ -70,7 +70,7 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
           </div>
           <span>5 reviews</span>
         </div>
-        <button className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-[25rem] bg-primary-grey-500 font-semibold hover:bg-primary-blue-400 hover:text-white'>
+        <button className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-xl bg-primary-grey-500 font-semibold hover:bg-primary-blue-400 hover:text-white hover:transition-all hover:delay-75'>
           <ShoppingBagIcon className='h-4 w-4' />
           <span className='text-base uppercase lg:text-[1.2rem]'>
             Add to cart
