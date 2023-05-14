@@ -6,7 +6,7 @@ import { descriptionData } from '@/globals/product'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const Trial = () => {
   const isAboveMediumScreen = useMediaQuery('(min-width: 1060px)')
@@ -26,12 +26,31 @@ export default Trial
 
 const MobileNavbar = () => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
+  const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
 
   const styles = {
     list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
     links: `w-full h-full block`,
   }
 
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (
+        mobileNavbarRef.current !== undefined &&
+        mobileNavbarRef.current !== null
+      ) {
+        if (!mobileNavbarRef?.current!.contains(e.target)) {
+          setShowMenu(false)
+        }
+      }
+    }
+
+    document.addEventListener('mousedown', handler)
+
+    return () => {
+      document.removeEventListener('mousedown', handler)
+    }
+  })
   // handle the case for click outside of the opened menu or when esc key is pressed on the keyboard
 
   return (
@@ -50,7 +69,10 @@ const MobileNavbar = () => {
         </li>
 
         {showMenu && (
-          <div className='absolute top-16 left-[10%] mx-auto w-[80%] rounded-xl bg-[#000] p-10 text-white'>
+          <div
+            className='absolute top-16 left-[10%] mx-auto w-[80%] rounded-xl bg-[#000] p-10 text-white'
+            ref={mobileNavbarRef}
+          >
             <ul className='space-y-4'>
               <li className={styles.list}>
                 <Link href='/profile' className={styles.links}>
