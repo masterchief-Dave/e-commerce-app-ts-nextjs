@@ -16,85 +16,25 @@ const Trial = () => {
   return (
     <div className='p-24'>
       <ShoppingFixedBag />
-
-      <MobileNavbar />
+      <VideoContainer />
     </div>
   )
 }
 
 export default Trial
 
-const MobileNavbar = () => {
-  const [showMenu, setShowMenu] = useState<Boolean>(false)
-  const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
-
-  const styles = {
-    list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
-    links: `w-full h-full block`,
-  }
-
-  useEffect(() => {
-    const handler = (e: any) => {
-      if (
-        mobileNavbarRef.current !== undefined &&
-        mobileNavbarRef.current !== null
-      ) {
-        if (!mobileNavbarRef?.current!.contains(e.target)) {
-          setShowMenu(false)
-        }
-      }
-    }
-
-    document.addEventListener('mousedown', handler)
-
-    return () => {
-      document.removeEventListener('mousedown', handler)
-    }
-  })
-  // handle the case for click outside of the opened menu or when esc key is pressed on the keyboard
-
+const VideoContainer = () => {
   return (
-    <nav className='bg-primary-blue-100 py-4'>
-      <ul className='relative flex items-center justify-between px-24'>
-        <li>
-          <h1>
-            <Link href='/' className='text-lg font-black text-white'>
-              Sage-Warehouse
-            </Link>
-          </h1>
-        </li>
-
-        <li className='cursor-pointer' onClick={() => setShowMenu(!showMenu)}>
-          <Bars3Icon className='h-10 w-10 text-white' />
-        </li>
-
-        {showMenu && (
-          <div
-            className='absolute top-16 left-[10%] mx-auto w-[80%] rounded-xl bg-[#000] p-10 text-white'
-            ref={mobileNavbarRef}
-          >
-            <ul className='space-y-4'>
-              <li className={styles.list}>
-                <Link href='/profile' className={styles.links}>
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <input
-                  type='text'
-                  placeholder='Search'
-                  className={`block w-full rounded-md p-4 font-medium text-black`}
-                />
-              </li>
-              <li className={styles.list}>
-                <Link href='/cart' className={styles.links}>
-                  Cart
-                </Link>
-              </li>
-            </ul>
-          </div>
-        )}
-      </ul>
-    </nav>
+    <div className='w-[20rem] rounded-xl border p-2'>
+      <video
+        // src='https://v-cg.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/SnapInsta_285812316_783982779704202_1254703527819543922_n_vkqghh.mp4'
+        className='h-[20rem] w-[20rem] object-cover'
+        autoPlay
+        loop
+        muted
+      >
+        <source src='https://v-cg.etsystatic.com/video/upload/ac_none,du_15,q_auto:good/SnapInsta_285812316_783982779704202_1254703527819543922_n_vkqghh.mp4' />
+      </video>
+    </div>
   )
 }
