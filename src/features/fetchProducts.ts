@@ -1,36 +1,15 @@
 import axios from 'axios'
 
-interface Product {
-  id: string
-  name: string
-  price: number
-  description: string
-  ratings: number
-  images: {
-    publicId: string
-    url: string
-  }[]
-  category: string
-  seller: string
-  stock: number
-  numOfReviews: number
-  reviews: {
-    name: string
-    rating: number
-    comment: string
-  }[]
-  user: string
-  createdAt: Date
-}
-
 const productsApi = axios.create({
-  baseURL: `http://localhost:8100`,
+  baseURL: `http://localhost:3002`,
 })
 
-export const getProducts = async () => {
-  const response = await productsApi.get('/products')
+export const fetchProducts = async () => {
+  const response = await productsApi.get('/api/products/getProducts')
 
-  return response.data
+  console.log(response.data)
+
+  // return response.data
 }
 
 export const addProduct = async (product: Product) => {
@@ -52,3 +31,20 @@ export const deleteProduct = async ({ id }: Product) => {
 }
 
 // when I fetch my data from the /api that is when I can do things like getServerSideProps or getStaticProps.
+
+/**
+ * 
+ * 
+ * export const fetchProducts = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/getProducts`
+  )
+
+  const data = await response.json()
+
+  const products: Product[] = data.products
+
+  return products
+}
+
+ */
