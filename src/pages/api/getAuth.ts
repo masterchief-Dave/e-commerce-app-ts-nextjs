@@ -18,3 +18,5 @@ export default function handler(
  * 2. do I want to use next-auth with session and store the data inside of the localstorage, stuff like that
  * 3.
  *  */
+
+// when I fetch my data from here that is when I can do things like getServerSideProps or getStaticProps.

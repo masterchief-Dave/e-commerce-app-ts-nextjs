@@ -1,52 +1,25 @@
-import axios from 'axios'
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-interface Product {
-  id: string
+type Data = {
   name: string
-  price: number
-  description: string
-  ratings: number
-  images: {
-    publicId: string
-    url: string
-  }[]
-  category: string
-  seller: string
-  stock: number
-  numOfReviews: number
-  reviews: {
-    name: string
-    rating: number
-    comment: string
-  }[]
-  user: string
-  createdAt: Date
 }
 
-const productsUrl = axios.create({
-  baseURL: `http://localhost:8100`,
-})
-
-export const getProducts = async () => {
-  const response = await productsUrl.get('/products')
-
-  return response.data
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  res.status(200).json({ name: 'John Doe' })
 }
 
-export const addProduct = async (product: Product) => {
-  const response = await productsUrl.post('/products', product)
+// when I fetch my data from here that is when I can do things like getServerSideProps or getStaticProps.
 
-  return response.data
-}
-
-export const updateProduct = async (product: Product) => {
-  const response = await productsUrl.patch(`/products/${product.id}`, product)
-
-  return response.data
-}
-
-export const deleteProduct = async ({ id }: Product) => {
-  const response = await productsUrl.patch(`/products/${id}`)
-
-  return response.data
-}
+/**
+ * Requests
+ * 1. fetch all products
+ * 2. update a single product
+ * 3. delete a single product
+ * 4. fetch a single product
+ * 5. create a single product
+ *
+ *  */

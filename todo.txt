@@ -75,3 +75,6 @@ MOBILE RESPONSIVENESS
 
 TYPOGRAPHY 
 1. change the font family to perhaps inter
+
+FETCH DATA
+In the api section when I fetch data make use of 
