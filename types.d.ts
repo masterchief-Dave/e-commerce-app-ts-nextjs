@@ -25,14 +25,15 @@ interface ICategory {
 }
 
 interface Product {
-  id: string
+  _id: string
   name: string
   price: number
   description: string
   ratings: number
   images: {
-    publicId: string
+    public_id: string
     url: string
+    id: string
   }[]
   category: string
   seller: string

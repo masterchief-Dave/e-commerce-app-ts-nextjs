@@ -9,9 +9,15 @@ type Props = {
   img: string | StaticImageData
   productName: string
   productPrice: string
+  data: Product
 }
 
-export const ProductCard = ({ img, productName, productPrice }: Props) => {
+export const ProductCard = ({
+  img,
+  productName,
+  productPrice,
+  data,
+}: Props) => {
   const [clicked, setClicked] = useState<boolean>(false)
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -29,13 +35,13 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
 
   return (
     <div className='max-w-[25rem] rounded-xl p-4 shadow-product-card-box-shadow'>
-      <div className='relative rounded-xl'>
+      <div className='relative max-h-[20rem] rounded-xl'>
         <Image
-          src='https://images.unsplash.com/photo-1617043786394-f977fa12eddf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-          alt='product-image'
           width={1000}
           height={1000}
-          className='rounded-xl'
+          src={data.images[0].url}
+          alt={data.images[0].public_id}
+          className='h-[20rem] max-h-[15rem] rounded-xl object-contain'
         />
         <div className='absolute top-5 left-5 z-10'>
           <div className='bg-primary-red-100 px-2 text-base text-white lg:text-[1.2rem]'>
@@ -56,10 +62,10 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
 
       <div className='space-y-2 py-2 font-inter'>
         <h3 className='max-w-[20rem] truncate text-center text-base font-normal lg:text-[1.4rem]'>
-          Apple watch series 4
+          {data.name}
         </h3>
         <div className='flex items-center justify-center gap-2 font-semibold'>
-          <h5>$450</h5>
+          <h5>{data.price}</h5>
           <h6 className='text-primary-grey-500 line-through'>$550</h6>
         </div>
         <div className='flex items-center justify-center gap-4 text-center'>
@@ -68,7 +74,7 @@ export const ProductCard = ({ img, productName, productPrice }: Props) => {
               return <StarIcon key={index} className='h-4 w-4' />
             })}
           </div>
-          <span>5 reviews</span>
+          <span>{data.ratings} reviews</span>
         </div>
         <button className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-xl bg-primary-grey-500 font-semibold hover:bg-primary-blue-400 hover:text-white hover:transition-all hover:delay-75'>
           <ShoppingBagIcon className='h-4 w-4' />

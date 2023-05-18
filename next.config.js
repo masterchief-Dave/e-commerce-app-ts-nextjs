@@ -6,6 +6,8 @@ const nextConfig = {
       'cdn.shopify.com',
       'images.unsplash.com',
       'lh3.googleusercontent.com',
+      'res.cloudinary.com',
+      'ucrolthr.sirv.com',
     ],
   },
 }

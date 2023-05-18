@@ -15,13 +15,15 @@ import { Layout } from '@/components/Layout'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import useSWR from 'swr'
 
-// const fetcher = (...args: any) => fetch(...args).then((res) => res.json())
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 export default function Home() {
-  // const { data, error, isLoading } = useSWR(
-  //   '/api/products/getProducts',
-  //   fetcher
-  // )
+  const { data, error, isLoading } = useSWR(
+    '/api/products/getProducts',
+    fetcher
+  )
+
+  console.log(data)
   const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
 
   const styles = {
@@ -59,23 +61,33 @@ export default function Home() {
                   <WeeklyDeals />
                 </section>
 
-                <section className='products-component bg-white py-12'>
-                  <section className='flex justify-center px-8'>
-                    <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
-                      {[0, 0, 0, 0, 0, 0, 0].map((data, index) => {
-                        return (
-                          <div className={styles.productContainer} key={index}>
-                            <ProductCard
-                              img={''}
-                              productName='Apple watch series 5'
-                              productPrice='$500'
-                            />
-                          </div>
-                        )
-                      })}
-                    </div>
+                {isLoading ? (
+                  'Loading ...'
+                ) : (
+                  <section className='products-component bg-white py-12'>
+                    <section className='flex justify-center px-8'>
+                      <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
+                        {data?.data.products.map(
+                          (product: Product, index: number) => {
+                            return (
+                              <div
+                                className={styles.productContainer}
+                                key={product._id}
+                              >
+                                <ProductCard
+                                  img={''}
+                                  productName='Apple watch series 5'
+                                  productPrice='$500'
+                                  data={product}
+                                />
+                              </div>
+                            )
+                          }
+                        )}
+                      </div>
+                    </section>
                   </section>
-                </section>
+                )}
               </div>
             </div>
           </main>
