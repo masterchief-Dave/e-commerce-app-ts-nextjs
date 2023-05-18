@@ -10,7 +10,7 @@ interface Props {
 
 export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
   return (
-    <div className='w-fit bg-white p-8 shadow-product-card-box-shadow'>
+    <div className='w-full bg-white p-8 shadow-product-card-box-shadow lg:w-fit'>
       <div>
         <div className='mb-8 flex items-center justify-between uppercase'>
           <h3 className='font-matter text-base font-bold lg:text-[1.4rem]'>
@@ -31,7 +31,7 @@ export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
                 <div
                   className={`${
                     index > 1 ? 'hidden lg:block' : ''
-                  } flex h-[15rem] max-w-[15rem] flex-col items-center justify-center bg-primary-white-500 p-8`}
+                  } flex h-[15rem] w-full flex-col items-center justify-center bg-primary-white-500 p-8 lg:max-w-[15rem]`}
                 >
                   <div className='relative mb-4 h-[10rem] w-[10rem]'>
                     <Image

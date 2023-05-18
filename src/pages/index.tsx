@@ -13,8 +13,15 @@ import { partnersData } from '@/globals/partners'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Layout } from '@/components/Layout'
 import useMediaQuery from '@/hooks/useMediaQuery'
+import useSWR from 'swr'
+
+// const fetcher = (...args: any) => fetch(...args).then((res) => res.json())
 
 export default function Home() {
+  // const { data, error, isLoading } = useSWR(
+  //   '/api/products/getProducts',
+  //   fetcher
+  // )
   const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
 
   const styles = {

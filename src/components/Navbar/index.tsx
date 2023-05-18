@@ -199,8 +199,18 @@ const MobileNavbar = () => {
           >
             <ul className='space-y-4'>
               <li className={styles.list}>
-                <Link href='/profile' className={styles.links}>
-                  Profile
+                <Link href='/' className={styles.links}>
+                  Home
+                </Link>
+              </li>
+              <li className={styles.list}>
+                <Link href='/auth/login' className={styles.links}>
+                  Login
+                </Link>
+              </li>
+              <li className={styles.list}>
+                <Link href='/cart' className={styles.links}>
+                  Cart
                 </Link>
               </li>
               <li>
@@ -209,11 +219,6 @@ const MobileNavbar = () => {
                   placeholder='Search'
                   className={`block w-full rounded-md p-4 font-medium text-black`}
                 />
-              </li>
-              <li className={styles.list}>
-                <Link href='/cart' className={styles.links}>
-                  Cart
-                </Link>
               </li>
             </ul>
           </div>

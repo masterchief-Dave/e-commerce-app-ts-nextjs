@@ -17,6 +17,25 @@ export const Header = (props: Props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          dots: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          dots: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
   // console.log(sliderRef.current)
@@ -70,7 +89,7 @@ export const Header = (props: Props) => {
                   </div>
                 </div>
               </div>
-              <div className='absolute top-0 z-50 flex h-full w-full items-center justify-between px-[5rem]'>
+              <div className='absolute top-0 z-50 hidden h-full w-full items-center justify-between px-[5rem]  lg:flex'>
                 <div
                   className='flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white ring-primary-yellow-100 hover:ring-2'
                   onClick={handleLeftSlide}
