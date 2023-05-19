@@ -5,6 +5,7 @@ import './demos/demo.scss'
 import '../components/Dropdown/dropdown.scss'
 import '@/styles/main.scss'
 import { Toaster } from 'react-hot-toast'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
@@ -16,8 +17,10 @@ export default function App({
 }: AppProps<{ session: Session }>) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
-      <Toaster />
+      <ChakraProvider> 
+        <Component {...pageProps} />
+        <Toaster />
+      </ChakraProvider>
     </SessionProvider>
   )
 }

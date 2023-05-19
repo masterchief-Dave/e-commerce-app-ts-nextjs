@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.16",
     "@types/node": "18.14.6",
     "axios": "^1.4.0",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
+    "framer-motion": "^10.12.12",
     "next": "13.2.3",
     "next-auth": "^4.22.0",
     "next-themes": "^0.2.1",

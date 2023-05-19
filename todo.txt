@@ -83,3 +83,7 @@ HOMEPAGE
 1. Add skeleton loading to the homepage products
 2. Add pagination for the products section
 
+CATEGORIES
+1. create a product category page
+2. create a filter component for ascending order, descending order, filter by price, and sorting
+3. 
