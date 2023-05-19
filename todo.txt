@@ -71,10 +71,15 @@ TODO - AUTHENTICATION
 
 MOBILE RESPONSIVENESS
 1. make the navbar responsive and put a hamburger icon when the display is in sm -md range (done)
-2. remove 2 items from the category section component when the screen is small and leave it as 4 items when the screen is large
+2. remove 2 items from the category section component when the screen is small and leave it as 4 items when the screen is large (done)
 
 TYPOGRAPHY 
 1. change the font family to perhaps inter
 
 FETCH DATA
-In the api section when I fetch data make use of 
+In the api section when I fetch data make use of swr (done)
+
+HOMEPAGE
+1. Add skeleton loading to the homepage products
+2. Add pagination for the products section
+

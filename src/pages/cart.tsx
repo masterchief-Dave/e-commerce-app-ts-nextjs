@@ -45,6 +45,10 @@ const cart = (props: Props) => {
                 <p>Total</p>
                 <p>$6000</p>
               </div>
+
+              <button className='rounded-md bg-primary-green-100 px-24 py-4 text-[1rem] font-semibold text-white lg:text-[1.4rem]'>
+                Proceed to checkout
+              </button>
             </section>
           </section>
         </main>

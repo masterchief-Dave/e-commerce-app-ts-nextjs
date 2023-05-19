@@ -45,11 +45,11 @@ const demo = (props: Props) => {
 
       {/* product card */}
       <div className='mx-auto max-w-[70rem]'>
-        <ProductCard
+        {/* <ProductCard
           img={''}
           productName='Apple watch series 5'
           productPrice='$500'
-        />
+        /> */}
       </div>
 
       <div className='my-12 px-12'>

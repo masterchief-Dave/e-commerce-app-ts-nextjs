@@ -61,6 +61,12 @@ export const Navbar = () => {
 }
 
 const Desktop = ({ session, isTop }: Props) => {
+  const [showDropdown, setShowDropdown] = useState<boolean>(false)
+
+  const styles = {
+    navDropdownLink: `inline-block w-full rounded-md px-4 py-1 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
+  }
+
   return (
     <nav
       className={`grid grid-cols-12 bg-primary-blue-100 py-4 font-poppins ${
@@ -80,7 +86,7 @@ const Desktop = ({ session, isTop }: Props) => {
             <input
               type='text'
               placeholder='search'
-              className='h-full w-[90%] border-0 bg-transparent px-4 text-[1.4rem] outline-0  focus:outline-0'
+              className='h-full w-[90%] rounded-md border-0 bg-transparent px-4 text-[1.4rem] outline-0 focus:outline-0'
             />
             <div className='flex h-full w-[10%] cursor-pointer items-center justify-center  '>
               <div className='w-fit rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
@@ -91,14 +97,42 @@ const Desktop = ({ session, isTop }: Props) => {
         </li>
         <div className='flex items-center gap-x-4'>
           {session ? (
-            <div className='h-[4rem] w-[4rem] rounded-full'>
+            <div className='relative h-[4rem] w-[4rem] rounded-full'>
               <Image
                 src={session?.user?.image!}
                 alt='profile image'
                 width={1000}
                 height={1000}
-                className='h-[4rem] w-[4rem] rounded-full'
+                className='h-[4rem] w-[4rem] cursor-pointer rounded-full'
+                onClick={() => setShowDropdown(!showDropdown)}
               />
+
+              {showDropdown && <div className='absolute top-[4.5rem] z-[999] w-[15rem] rounded-xl border bg-[#FFF] py-4 px-2'>
+                <ul className='w-full space-y-1 divide-y'>
+                  <li>
+                    <Link href='/account' className={styles.navDropdownLink}>
+                      {' '}
+                      Account{' '}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href='/account/profile'
+                      className={styles.navDropdownLink}
+                    >
+                      {' '}
+                      Profile{' '}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/wishlist' className={styles.navDropdownLink}>
+                      {' '}
+                      Wishlist{' '}
+                    </Link>
+                  </li>
+                </ul>
+              </div>}
+              
             </div>
           ) : (
             <div className='flex items-center gap-x-8'>
