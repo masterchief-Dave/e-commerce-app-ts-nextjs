@@ -1,42 +1,40 @@
 import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
-import {BillingAddress} from '@/components/Accordion/billingAddressAccordion'
-import {LockClosedIcon} from '@heroicons/react/24/solid'
+import { BillingAddress } from '@/components/Accordion/billingAddressAccordion'
+import { LockClosedIcon } from '@heroicons/react/24/solid'
 
 const Checkout = () => {
   const styles = {
     sectionHeader: `font-semibold text-[1rem] lg:text-[1.8rem]`,
     priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
-    priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`
+    priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`,
   }
 
   return (
     <div>
       <Navbar />
-      <div className='grid grid-cols-12 relative font-inter'>
+      <div className='relative grid grid-cols-12 font-inter'>
         <div className='col-start-1 col-end-8 grid grid-cols-12 py-24'>
           <div className='col-start-2 col-end-12 space-y-12 p-2'>
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
               <BillingAddress />
-            </div> 
+            </div>
 
             <div className='space-y-4'>
               <div className='flex items-center justify-between'>
-                  <h3 className='text-[1rem] font-semibold lg:text-[2rem]'>
-                    Payment methods
-                  </h3>
-                  <div className='flex items-center gap-8'>
-                    <p>Secured Connection</p>
-                    <LockClosedIcon className='h-8 w-8' />
-                  </div>
+                <h3 className='text-[1rem] font-semibold lg:text-[2rem]'>
+                  Payment methods
+                </h3>
+                <div className='flex items-center gap-8'>
+                  <p>Secured Connection</p>
+                  <LockClosedIcon className='h-8 w-8' />
                 </div>
+              </div>
 
               <div>
-                  
-                
-              <PaymentAccordion />
+                <PaymentAccordion />
               </div>
             </div>
 
@@ -65,19 +63,17 @@ const Checkout = () => {
                   and condition
                 </p>
 
-                <button className='h-[4rem] w-full bg-primary-blue-500 text-[1.4rem] font-semibold text-white'>
+                <button className='h-[4rem] w-full bg-primary-blue-500 text-[1.4rem] font-semibold text-white transition-all delay-75 hover:bg-primary-blue-300'>
                   Complete Checkout
                 </button>
 
                 <div className='flex items-center gap-x-8'>
-                  
-                <p className='text-former-price-text w-full text-center text-[1.3rem]'>
-                  30 days money back guarantee
-                </p>
+                  <p className='text-former-price-text w-full text-center text-[1.3rem]'>
+                    30 days money back guarantee
+                  </p>
 
-                <LockClosedIcon className='h-8 w-8'/>
+                  <LockClosedIcon className='h-8 w-8' />
                 </div>
-
               </article>
             </div>
           </div>
@@ -88,4 +84,3 @@ const Checkout = () => {
 }
 
 export default Checkout
-

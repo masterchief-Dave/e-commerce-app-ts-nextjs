@@ -1,15 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  ShoppingCartIcon,
-} from '@heroicons/react/24/outline'
+import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import { signIn, signOut, useSession, getSession } from 'next-auth/react'
 import Image from 'next/image'
 import { NextApiRequest } from 'next'
 import { Session } from 'next-auth'
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 
 type Props = {
   session: Session | null
@@ -19,33 +17,10 @@ type Props = {
 export const Navbar = () => {
   const { data: session } = useSession()
   console.log(session)
+  const { isTop } = useStickyNavbar()
 
   // const photo = session?.user?.photo!
   // console.log(session?.user)
-
-  const [scroll, setScroll] = useState<number | null>(null)
-  const [isTop, setIsTop] = useState<boolean>(false)
-
-  useEffect(() => {
-    setScroll(window.scrollY)
-  }, [])
-
-  const handleNavbar = () => {
-    if (window.scrollY > 0) {
-      return setIsTop(true)
-    } else {
-      return setIsTop(false)
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('scroll', handleNavbar)
-
-    return () => {
-      document.removeEventListener('scroll', handleNavbar)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scroll])
 
   return (
     <div className=''>
@@ -83,7 +58,7 @@ const Desktop = ({ session, isTop }: Props) => {
             </Link>
           </h1>
         </li>
-        <li className='w-[40%]'>
+        <li className='lg:w-[30%] xl:w-[40%]'>
           <div className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2'>
             <input
               type='text'
@@ -100,42 +75,45 @@ const Desktop = ({ session, isTop }: Props) => {
         <div className='flex items-center gap-x-4'>
           {session ? (
             <div className='relative h-[4rem] w-[4rem] rounded-full'>
-
               <Image
                 src={session?.user?.image!}
                 alt='profile image'
                 width={1000}
                 height={1000}
-                className='h-[4rem] w-[4rem] object-cover cursor-pointer rounded-full'
+                className='h-[4rem] w-[4rem] cursor-pointer rounded-full object-cover'
                 onClick={() => setShowDropdown(!showDropdown)}
               />
 
-              {showDropdown && <div className='absolute top-[4.5rem] z-[999] w-[15rem] rounded-xl border bg-[#FFF] py-4 px-2'>
-                <ul className='w-full space-y-1 divide-y'>
-                  <li>
-                    <Link href='/account/profile' className={styles.navDropdownLink}>
-                      {' '}
-                      Account{' '}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='/account/orders'
-                      className={styles.navDropdownLink}
-                    >
-                      {' '}
-                      Orders{' '}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href='/wishlist' className={styles.navDropdownLink}>
-                      {' '}
-                      Wishlist{' '}
-                    </Link>
-                  </li>
-                </ul>
-              </div>}
-              
+              {showDropdown && (
+                <div className='absolute top-[4.5rem] z-[999] w-[15rem] rounded-xl border bg-[#FFF] py-4 px-2'>
+                  <ul className='w-full space-y-1 divide-y'>
+                    <li>
+                      <Link
+                        href='/account/profile'
+                        className={styles.navDropdownLink}
+                      >
+                        {' '}
+                        Account{' '}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href='/account/orders'
+                        className={styles.navDropdownLink}
+                      >
+                        {' '}
+                        Orders{' '}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href='/wishlist' className={styles.navDropdownLink}>
+                        {' '}
+                        Wishlist{' '}
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           ) : (
             <div className='flex items-center gap-x-8'>
@@ -161,8 +139,8 @@ const Desktop = ({ session, isTop }: Props) => {
 
           <li>
             <Link href='/cart' className='relative'>
-              <ShoppingCartIcon className='h-8 w-8 text-white' />
-              <span className='absolute top-0 left-[10px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
+              <ShoppingBagIcon className='h-12 w-12 text-white' />
+              <span className='absolute top-0 left-[15px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
                 5
               </span>
             </Link>

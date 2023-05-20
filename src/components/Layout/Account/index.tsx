@@ -1,12 +1,12 @@
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import BreadCrumb from '@/components/BreadCrumb'
-import { Navbar } from '@/components/Navbar'
+import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import {
   UserCircleIcon,
   WalletIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import {useRouter} from 'next/router'
 
 type Props = {
   children: JSX.Element
@@ -15,7 +15,7 @@ type Props = {
 export const AccountLayout = ({ children }: Props) => {
   return (
     <div className='mx-auto w-full max-w-screen-2xl font-inter'>
-      <Navbar />
+      <DashboardNavbar />
       <BreadCrumb />
       <div className='relative grid grid-cols-12 py-16'>
         <section className='col-start-2 col-end-5'>
@@ -35,7 +35,7 @@ export const SideBar = () => {
   const styles = {
     header: `font-black text-[1.8rem]`,
     active: `text-primary-red-100 text-[1.3rem] font-normal`,
-    links: `text-[1.3rem] font-normal`
+    links: `text-[1.3rem] font-normal`,
   }
 
   return (
@@ -47,11 +47,29 @@ export const SideBar = () => {
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Profile</h2>
           <li>
-            <Link href='/account/profile' className={router.pathname === '/account/profile' ? styles.active : styles.links}>Account information</Link>
+            <Link
+              href='/account/profile'
+              className={
+                router.pathname === '/account/profile'
+                  ? styles.active
+                  : styles.links
+              }
+            >
+              Account information
+            </Link>
           </li>
 
           <li>
-            <Link href='/account/delivery-address' className={router.pathname === '/account/delivery-address' ? styles.active : styles.links}>Delivery address</Link>
+            <Link
+              href='/account/delivery-address'
+              className={
+                router.pathname === '/account/delivery-address'
+                  ? styles.active
+                  : styles.links
+              }
+            >
+              Delivery address
+            </Link>
           </li>
         </ul>
       </section>
@@ -63,12 +81,26 @@ export const SideBar = () => {
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Orders</h2>
           <li>
-            <Link href='/account/orders' className={router.pathname === '/account/orders' ? styles.active : styles.links}>
+            <Link
+              href='/account/orders'
+              className={
+                router.pathname === '/account/orders'
+                  ? styles.active
+                  : styles.links
+              }
+            >
               Order History
             </Link>
           </li>
           <li>
-            <Link href='/account/reviews' className={router.pathname === '/account/reviews' ? styles.active : styles.links}>
+            <Link
+              href='/account/reviews'
+              className={
+                router.pathname === '/account/reviews'
+                  ? styles.active
+                  : styles.links
+              }
+            >
               My reviews
             </Link>
           </li>
@@ -82,10 +114,28 @@ export const SideBar = () => {
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Wallet</h2>
           <li>
-            <Link href='/account/add-payment' className={router.pathname === '/account/add-payment' ? styles.active : styles.links}>Add payment method</Link>
+            <Link
+              href='/account/add-payment'
+              className={
+                router.pathname === '/account/add-payment'
+                  ? styles.active
+                  : styles.links
+              }
+            >
+              Add payment method
+            </Link>
           </li>
           <li>
-            <Link href='#' className={router.pathname === '/account/saved-card' ? styles.active : styles.links}>Saved card</Link>
+            <Link
+              href='#'
+              className={
+                router.pathname === '/account/saved-card'
+                  ? styles.active
+                  : styles.links
+              }
+            >
+              Saved card
+            </Link>
           </li>
         </ul>
       </section>

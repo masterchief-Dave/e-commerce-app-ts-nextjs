@@ -1,4 +1,5 @@
 import { SideBar } from '@/components/Layout/Account'
+import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { fetchProducts } from '@/features/fetchProducts'
 
@@ -19,6 +20,7 @@ const Trial = () => {
       <ShoppingFixedBag />
       {}
       {/* <VideoContainer /> */}
+      <DashboardNavbar />
     </div>
   )
 }
