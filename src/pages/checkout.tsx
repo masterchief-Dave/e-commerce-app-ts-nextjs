@@ -1,4 +1,7 @@
 import { Navbar } from '@/components/Navbar'
+import PaymentAccordion from '@/components/Accordion/paymentAccordion'
+import {BillingAddress} from '@/components/Accordion/billingAddressAccordion'
+import {LockClosedIcon} from '@heroicons/react/24/solid'
 
 const Checkout = () => {
   const styles = {
@@ -10,41 +13,72 @@ const Checkout = () => {
   return (
     <div>
       <Navbar />
-      <div className='grid grid-cols-12 font-inter'>
+      <div className='grid grid-cols-12 relative font-inter'>
         <div className='col-start-1 col-end-8 grid grid-cols-12 py-24'>
           <div className='col-start-2 col-end-12 space-y-12 p-2'>
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
-            <div className='space-y-12'>
+            <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
+              <BillingAddress />
+            </div> 
+
+            <div className='space-y-4'>
+              <div className='flex items-center justify-between'>
+                  <h3 className='text-[1rem] font-semibold lg:text-[2rem]'>
+                    Payment methods
+                  </h3>
+                  <div className='flex items-center gap-8'>
+                    <p>Secured Connection</p>
+                    <LockClosedIcon className='h-8 w-8' />
+                  </div>
+                </div>
+
+              <div>
+                  
+                
+              <PaymentAccordion />
+              </div>
             </div>
 
-            <div className='space-y-12'>
-              <h2 className={styles.sectionHeader}>Payment Method</h2>
+            <div className='space-y-4'>
+              <h2 className={styles.sectionHeader}>Order Details</h2>
             </div>
           </div>
         </div>
-        <div className='col-start-8 col-end-13 grid grid-cols-12 bg-[#f7f9fa] py-24'>
-          <div className='col-start-4 col-end-10 space-y-12 py-12 sticky top-0'>
-            <h1 className='hidden text-[2rem] font-bold'>Checkout</h1>
-            <h2 className={styles.sectionHeader}>Summary</h2>
-
-            <div className='space-y-8 divide-y'> 
-              <div className='space-y-8'>
-                <div className='grid grid-cols-12'>
-                  <h4 className={`col-start-1 col-end-8 ${styles.priceHeader}`}>Original price</h4>
-                  <p className={`col-start-8 col-end-13 ${styles.priceText}`}>$2000</p>
+        <div className='relative col-start-8 col-end-13 bg-[#F3F6F8] p-4'>
+          <div className='sticky top-[10rem] grid grid-cols-12 py-[5rem]'>
+            <div className=' col-start-3 col-end-11 w-[30rem] max-w-[30rem]'>
+              <h2 className='mb-8 text-[2rem] font-bold'>Summary</h2>
+              <article className='mb-[5rem] space-y-8'>
+                <div className='text-former-price-text flex justify-between border-b py-4'>
+                  <p className='text-base lg:text-[1.2rem]'>Original Price</p>
+                  <p className='text-[1.5rem] font-semibold'>NGN 230,000</p>
                 </div>
 
-                <div className='grid grid-cols-12'>
-                  <h4 className={`col-start-1 col-end-8 ${styles.priceHeader}`}>Discounts</h4>
-                  <p className={`col-start-8 col-end-13 ${styles.priceText}`}>$200</p>
+                <div className='flex justify-between'>
+                  <p className='text-base lg:text-[1.2rem]'>Total</p>
+                  <p className='text-[1.5rem] font-semibold'>NGN 230,000</p>
                 </div>
-              </div>
 
-              <div className='font-bold grid grid-cols-12 lg:text-[1.4rem] text-[1rem] py-4'>
-                <h4 className='col-start-1 col-end-8'>Total</h4>
-                <p className=''>$1800</p>
-              </div>
+                <p className='text-former-price-text font-light'>
+                  By completing your purchase you agree to these Cobraine term
+                  and condition
+                </p>
+
+                <button className='h-[4rem] w-full bg-primary-blue-500 text-[1.4rem] font-semibold text-white'>
+                  Complete Checkout
+                </button>
+
+                <div className='flex items-center gap-x-8'>
+                  
+                <p className='text-former-price-text w-full text-center text-[1.3rem]'>
+                  30 days money back guarantee
+                </p>
+
+                <LockClosedIcon className='h-8 w-8'/>
+                </div>
+
+              </article>
             </div>
           </div>
         </div>
@@ -54,3 +88,4 @@ const Checkout = () => {
 }
 
 export default Checkout
+
