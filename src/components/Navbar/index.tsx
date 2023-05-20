@@ -63,8 +63,10 @@ export const Navbar = () => {
 const Desktop = ({ session, isTop }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
+  // when I click outside close the dropdown
+
   const styles = {
-    navDropdownLink: `inline-block w-full rounded-md px-4 py-1 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
+    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
   }
 
   return (
@@ -98,30 +100,31 @@ const Desktop = ({ session, isTop }: Props) => {
         <div className='flex items-center gap-x-4'>
           {session ? (
             <div className='relative h-[4rem] w-[4rem] rounded-full'>
+
               <Image
                 src={session?.user?.image!}
                 alt='profile image'
                 width={1000}
                 height={1000}
-                className='h-[4rem] w-[4rem] cursor-pointer rounded-full'
+                className='h-[4rem] w-[4rem] object-cover cursor-pointer rounded-full'
                 onClick={() => setShowDropdown(!showDropdown)}
               />
 
               {showDropdown && <div className='absolute top-[4.5rem] z-[999] w-[15rem] rounded-xl border bg-[#FFF] py-4 px-2'>
                 <ul className='w-full space-y-1 divide-y'>
                   <li>
-                    <Link href='/account' className={styles.navDropdownLink}>
+                    <Link href='/account/profile' className={styles.navDropdownLink}>
                       {' '}
                       Account{' '}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href='/account/profile'
+                      href='/account/orders'
                       className={styles.navDropdownLink}
                     >
                       {' '}
-                      Profile{' '}
+                      Orders{' '}
                     </Link>
                   </li>
                   <li>

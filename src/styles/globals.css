@@ -5,6 +5,7 @@
 @layer base {
   html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
   }
 }
 
@@ -24,9 +25,8 @@
     outline: none;
     /* border: none; */
   }
-}
 
-select {
+  select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -36,10 +36,11 @@ select {
   background-position-x: 95%;
   background-position-y: 50%;
   /* border: 1px solid #dfdfdf; */
-  border-radius: 2px;
+/*  border-radius: 2px;*/
   margin-right: 2rem;
-  padding: 1rem;
-  padding-right: 2rem;
   outline: none;
   height: 100%;
 }
+
+}
+

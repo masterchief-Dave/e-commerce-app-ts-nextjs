@@ -121,7 +121,7 @@ const ProductSlug = (props: Props) => {
           {/* product breakdown tab */}
           <div className='col-span-full col-start-2 col-end-12 bg-primary-grey-500 py-2'>
             <section>
-              <div className='grid grid-cols-6 px-4'>
+              <div className='grid grid-cols-6 px-4 border-b py-4'>
                 <div>
                   <h2
                     id='overview'

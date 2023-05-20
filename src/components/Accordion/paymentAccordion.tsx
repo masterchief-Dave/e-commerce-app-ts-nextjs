@@ -55,6 +55,7 @@ export const PaymentAccordion = () => {
     cardInput: `h-[4rem] w-full border px-4`,
     cardImage: `h-12 w-12`,
     label: `block text-[1.3rem] font-semibold`,
+    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`
   }
 
   console.log(cardDetails)
@@ -70,7 +71,7 @@ export const PaymentAccordion = () => {
                 return (
                   <>
                     <h2>
-                      <AccordionButton className='flex justify-between bg-[#F3F6F8] text-[1rem] lg:text-[1.4rem]'>
+                      <AccordionButton className='flex justify-between bg-[#F3F6F8] text-[1.1rem] lg:text-[1.5rem]'>
                         <div className='flex items-center gap-8'>
                           <input
                             type='radio'
@@ -82,7 +83,7 @@ export const PaymentAccordion = () => {
                           <div className='rounded-md border p-2'>
                             <CreditCardIcon className='h-8 w-16' />
                           </div>
-                          <p className='font-bold'> Mastercard **** 8833</p>
+                          <p className={`${styles.accordionHeader}`}> Mastercard **** 8833</p>
                         </div>
                         <Box as='span' textAlign='left'>
                           <Image
@@ -136,7 +137,7 @@ export const PaymentAccordion = () => {
               {({ isExpanded }) => {
                 return (
                   <>
-                    <AccordionButton className='flex justify-between bg-[#F3F6F8] text-[1rem] lg:text-[1.4rem]'>
+                    <AccordionButton className='flex justify-between bg-[#F3F6F8] text-[1.1rem] lg:text-[1.5rem]'>
                       <div className='flex items-center gap-8'>
                         <input
                           type='radio'
@@ -149,7 +150,7 @@ export const PaymentAccordion = () => {
                         <div className='rounded-md border p-2'>
                           <CreditCardIcon className='h-8 w-16' />
                         </div>
-                        <p className='font-bold'>Credit/Debit Card</p>
+                        <p className={`${styles.accordionHeader}`}>Credit/Debit Card</p>
                       </div>
                       <Box as='div' className='flex items-center gap-4'>
                         <Image

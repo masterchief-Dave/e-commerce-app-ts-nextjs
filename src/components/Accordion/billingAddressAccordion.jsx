@@ -30,8 +30,9 @@ export const BillingAddress = () => {
     label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
     input: `w-full p-4 border`,
     btn: `bg-primary-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.4rem]`,
-    select: `border px-8 py-4 text-[1.2rem] w-full outline-0`,
+    select: `border px-8 text-[1.2rem] w-full outline-0`,
     option: `text-[1.2rem] font-medium text-primary-grey-300`,
+    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`
   }
 
   return (
@@ -44,7 +45,7 @@ export const BillingAddress = () => {
                 return (
                   <>
                     <h2>
-                      <AccordionButton className='flex justify-between bg-[#f7f9fa] text-base lg:text-[1.3rem]'>
+                      <AccordionButton className='flex justify-between bg-[#f7f9fa] text-base lg:text-[1.5rem]'>
                         <div className='flex items-center gap-8'>
                           <input
                             type='radio'
@@ -56,7 +57,7 @@ export const BillingAddress = () => {
                           <div className='rounded-md border p-2'>
                             <GlobeAltIcon className='h-8 w-16' />
                           </div>
-                          <p className='font-bold'> Saved Billing Address </p>
+                          <p className={`${styles.accordionHeader}`}> Saved Billing Address </p>
                         </div>
                       </AccordionButton>
                     </h2>
@@ -90,7 +91,7 @@ export const BillingAddress = () => {
               {({ isExpanded }) => {
                 return (
                   <>
-                    <AccordionButton className='flex justify-between bg-[#f7f9fa] text-base lg:text-[1.3rem]'>
+                    <AccordionButton className='flex justify-between bg-[#f7f9fa] text-[1.1rem] lg:text-[1.5rem]'>
                       <div className='flex items-center gap-8'>
                         <input
                           type='radio'
@@ -103,7 +104,7 @@ export const BillingAddress = () => {
                         <div className='rounded-md border p-2'>
                           <GlobeAltIcon className='h-8 w-16' />
                         </div>
-                        <p className='font-bold'>Billing Address</p>
+                        <p className={`${styles.accordionHeader}`}>Billing Address</p>
                       </div>
                     </AccordionButton>
                     <AccordionPanel>
@@ -156,14 +157,14 @@ export const BillingAddress = () => {
                             />
                           </div>
 
-                          <div className=''>
+                          <div className='max-h-full'>
                             <label htmlFor='country' className={styles.label}>
                               Country
                             </label>
                             <select
                               name=''
                               id='country'
-                              className={styles.select}
+                              className={`border text-[1.2rem] w-full h-[4.233rem]`}
                             >
                               <option
                                 value=''

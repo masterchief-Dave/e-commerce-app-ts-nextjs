@@ -16,7 +16,7 @@ const cart = (props: Props) => {
     <Layout>
       <div>
         <Navbar />
-        <main className='grid grid-cols-12  font-matter'>
+        <main className='grid grid-cols-12  font-inter'>
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
             <h1 className='text-[2rem] font-black uppercase'>Cart</h1>
 
@@ -46,7 +46,7 @@ const cart = (props: Props) => {
                 <p>$6000</p>
               </div>
 
-              <button className='rounded-md bg-primary-green-100 px-24 py-4 text-[1rem] font-semibold text-white lg:text-[1.4rem]'>
+              <button className='rounded-md bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white lg:text-[1.4rem]'>
                 Proceed to checkout
               </button>
             </section>
