@@ -47,3 +47,10 @@ interface Product {
   user: string
   createdAt: Date
 }
+
+interface PaymentFormInput {
+  userName: string
+  cardNumber: string
+  expiryDate: string
+  cvc: string
+}

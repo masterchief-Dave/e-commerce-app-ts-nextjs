@@ -18,7 +18,7 @@ const DeliveryAddress = (props: Props) => {
   }
 
   return (
-    <div className='font-matter'>
+    <div className='font-inter'>
       <AccountLayout>
         <div>{render()}</div>
       </AccountLayout>

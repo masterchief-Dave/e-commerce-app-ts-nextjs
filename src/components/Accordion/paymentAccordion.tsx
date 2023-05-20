@@ -1,4 +1,3 @@
-
 // payment accordion
 'use client'
 import {
@@ -17,12 +16,13 @@ import visaCard from 'public/assets/icons/visa-card.png'
 import masterCard from 'public/assets/icons/master-card.png'
 import discoverCard from 'public/assets/icons/discover-card.png'
 import americanExpress from 'public/assets/icons/american-express-card.png'
+import { AddPaymentMethodForm } from '../Form/PaymentForm/add-payment-form'
 
 export const PaymentAccordion = () => {
-  const [mounted, setMounted] = useState(false)
-  const [cardDetails, setCardDetails] = useState()
+  const [mounted, setMounted] = useState<boolean>(false)
+  const [cardDetails, setCardDetails] = useState<string>('')
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PaymentFormInput>({
     userName: '',
     cardNumber: '',
     expiryDate: '',
@@ -33,7 +33,7 @@ export const PaymentAccordion = () => {
     usePaymentInputs()
 
   // handle form
-  const handleForm = (e) => {
+  const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
 
     setFormData((prev) => {
@@ -55,14 +55,14 @@ export const PaymentAccordion = () => {
     cardInput: `h-[4rem] w-full border px-4`,
     cardImage: `h-12 w-12`,
     label: `block text-[1.3rem] font-semibold`,
-    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`
+    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
   }
 
   console.log(cardDetails)
 
   return (
     <div className='py-10 font-inter text-[1.4rem]'>
-      <div className='font-poppins border-l border-r'>
+      <div className='border-l border-r font-poppins'>
         {mounted && (
           <Accordion allowToggle>
             <AccordionItem>
@@ -83,7 +83,10 @@ export const PaymentAccordion = () => {
                           <div className='rounded-md border p-2'>
                             <CreditCardIcon className='h-8 w-16' />
                           </div>
-                          <p className={`${styles.accordionHeader}`}> Mastercard **** 8833</p>
+                          <p className={`${styles.accordionHeader}`}>
+                            {' '}
+                            Mastercard **** 8833
+                          </p>
                         </div>
                         <Box as='span' textAlign='left'>
                           <Image
@@ -150,7 +153,9 @@ export const PaymentAccordion = () => {
                         <div className='rounded-md border p-2'>
                           <CreditCardIcon className='h-8 w-16' />
                         </div>
-                        <p className={`${styles.accordionHeader}`}>Credit/Debit Card</p>
+                        <p className={`${styles.accordionHeader}`}>
+                          Credit/Debit Card
+                        </p>
                       </div>
                       <Box as='div' className='flex items-center gap-4'>
                         <Image
@@ -177,88 +182,7 @@ export const PaymentAccordion = () => {
                     </AccordionButton>
                     <AccordionPanel>
                       <div className='space-y-8 px-8 py-8'>
-                        <form className='grid grid-cols-12 gap-4 space-y-4 text-left'>
-                          <div className='col-span-full col-start-1'>
-                            <label htmlFor='username' className={styles.label}>
-                              Name on card
-                            </label>
-                            <input
-                              type='text'
-                              id='username'
-                              name='userName'
-                              className={styles.cardInput}
-                              placeholder='Name on card'
-                              onChange={handleForm}
-                              value={formData.userName}
-                            />
-                          </div>
-
-                          <div className='col-span-full col-start-1'>
-                            <label
-                              htmlFor='cardNumber'
-                              className={styles.label}
-                            >
-                              Card Number
-                            </label>
-                            <input
-                              type='text'
-                              id='cardNumber'
-                              name='cardNumber'
-                              className={styles.cardInput}
-                              placeholder='Card Number'
-                              {...getCardNumberProps({
-                                onChange: handleForm,
-                              })}
-                              value={formData.cardNumber}
-                            />
-                          </div>
-
-                          <div className='col-span-full grid grid-cols-2 gap-4'>
-                            <div className='w-full'>
-                              <label htmlFor='CVV' className={styles.label}>
-                                CVC/CVV
-                              </label>
-                              <input
-                                type='text'
-                                id='CVC'
-                                name='cvc'
-                                className={styles.cardInput}
-                                {...getCVCProps({ onChange: handleForm })}
-                                value={formData.cvc}
-                              />
-                            </div>
-                            <div className='w-full'>
-                              <label
-                                htmlFor='expiryDate'
-                                className={styles.label}
-                              >
-                                Expiry Date
-                              </label>
-                              <input
-                                type='text'
-                                id='expiryDate'
-                                name='expiryDate'
-                                placeholder='Expiry Date'
-                                className={styles.cardInput}
-                                {...getExpiryDateProps({
-                                  onChange: handleForm,
-                                })}
-                                value={formData.expiryDate}
-                              />
-                            </div>
-                          </div>
-
-                          <div className='item-center col-span-full flex w-full gap-4'>
-                            <input
-                              type='checkbox'
-                              id='saveCard'
-                              className='accent-black'
-                            />
-                            <label htmlFor='saveCard'>
-                              Securely save this card for my later purchase
-                            </label>
-                          </div>
-                        </form>
+                        <AddPaymentMethodForm />
 
                         <section>
                           <p className='font-light'>

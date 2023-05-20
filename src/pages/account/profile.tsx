@@ -6,16 +6,19 @@ type Props = {}
 const user = (props: Props) => {
   const styles = {
     label: `block text-[1.4rem] text-primary-grey-100 font-medium`,
-    input: `h-[4.5rem] w-full px-4 text-[1.4rem] border font-medium`,
+    input: `p-4 w-full px-4 text-xl lg:text-[1.4rem] border font-medium`,
+    editBtn: `px-8 py-2 lg:text-[1.4rem] bg-primary-blue-300 font-medium text-xl text-white rounded-md`,
   }
   return (
     <div>
       <AccountLayout>
         <div>
-          <header className='border-b p-8'>
+          <header className='flex items-center justify-between border-b p-8'>
             <h1 className='text-xl font-black lg:text-2xl'>
               Account Information
             </h1>
+
+            <button className={styles.editBtn}>Edit</button>
           </header>
           <form action='' className='space-y-4 p-8'>
             <div>
