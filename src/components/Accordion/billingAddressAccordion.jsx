@@ -1,4 +1,4 @@
-// billing address 
+// billing address
 
 'use client'
 import { countryCode } from '@/globals/countries'
@@ -24,20 +24,20 @@ export const BillingAddress = () => {
   // styles
   const styles = {
     cardTitle: `font-semibold`,
-    cardText: `font-light`,
+    cardText: `text-xl lg:text-[1.6rem] font-light`,
     cardInput: `h-[4rem] w-full border px-4`,
     cardImage: `h-12 w-12`,
     label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
-    input: `w-full p-4 border`,
+    input: `w-full text-[1.2rem] p-4 border`,
     btn: `bg-primary-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.4rem]`,
-    select: `border px-8 text-[1.2rem] w-full outline-0`,
+    select: `border px-4 text-[1.2rem] w-full outline-0`,
     option: `text-[1.2rem] font-medium text-primary-grey-300`,
-    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`
+    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
   }
 
   return (
     <div className='py-10 font-inter text-[1.4rem]'>
-      <div className='font-poppins border-l border-r'>
+      <div className='border-l border-r font-poppins'>
         {mounted && (
           <Accordion allowToggle>
             <AccordionItem>
@@ -57,7 +57,10 @@ export const BillingAddress = () => {
                           <div className='rounded-md border p-2'>
                             <GlobeAltIcon className='h-8 w-16' />
                           </div>
-                          <p className={`${styles.accordionHeader}`}> Saved Billing Address </p>
+                          <p className={`${styles.accordionHeader}`}>
+                            {' '}
+                            Saved Billing Address{' '}
+                          </p>
                         </div>
                       </AccordionButton>
                     </h2>
@@ -104,14 +107,16 @@ export const BillingAddress = () => {
                         <div className='rounded-md border p-2'>
                           <GlobeAltIcon className='h-8 w-16' />
                         </div>
-                        <p className={`${styles.accordionHeader}`}>Billing Address</p>
+                        <p className={`${styles.accordionHeader}`}>
+                          Billing Address
+                        </p>
                       </div>
                     </AccordionButton>
                     <AccordionPanel>
-                      <div className='space-y-8 px-8 py-8'>
+                      <div className='space-y-8 px-2 py-8 lg:px-8'>
                         <form
                           action=''
-                          className='grid grid-cols-2 gap-12 border p-8'
+                          className='grid grid-cols-2 gap-12 p-4 lg:border lg:p-8'
                         >
                           <div className='col-span-full'>
                             <label htmlFor='title' className={styles.label}>
@@ -164,7 +169,7 @@ export const BillingAddress = () => {
                             <select
                               name=''
                               id='country'
-                              className={`border text-[1.2rem] w-full h-[4.233rem]`}
+                              className={`h-[4.233rem] w-full border px-4 text-[1.2rem]`}
                             >
                               <option
                                 value=''

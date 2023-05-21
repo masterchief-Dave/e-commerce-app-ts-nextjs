@@ -5,7 +5,7 @@ import { LockClosedIcon } from '@heroicons/react/24/solid'
 
 const Checkout = () => {
   const styles = {
-    sectionHeader: `font-semibold text-[1rem] lg:text-[1.8rem]`,
+    sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
     priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
     priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`,
   }
@@ -14,7 +14,7 @@ const Checkout = () => {
     <div>
       <Navbar />
       <div className='relative grid grid-cols-12 font-inter'>
-        <div className='col-start-1 col-end-8 grid grid-cols-12 py-24'>
+        <div className='col-start-1 col-end-13 grid grid-cols-12 py-24 lg:col-start-1 lg:col-end-8'>
           <div className='col-start-2 col-end-12 space-y-12 p-2'>
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
@@ -24,9 +24,7 @@ const Checkout = () => {
 
             <div className='space-y-4'>
               <div className='flex items-center justify-between'>
-                <h3 className='text-[1rem] font-semibold lg:text-[2rem]'>
-                  Payment methods
-                </h3>
+                <h3 className={styles.sectionHeader}>Payment methods</h3>
                 <div className='flex items-center gap-8'>
                   <p>Secured Connection</p>
                   <LockClosedIcon className='h-8 w-8' />
@@ -43,9 +41,9 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        <div className='relative col-start-8 col-end-13 bg-[#F3F6F8] p-4'>
+        <div className='relative col-start-1 col-end-13 bg-[#F3F6F8] p-4 lg:col-start-8 lg:col-end-13'>
           <div className='sticky top-[10rem] grid grid-cols-12 py-[5rem]'>
-            <div className=' col-start-3 col-end-11 w-[30rem] max-w-[30rem]'>
+            <div className=' col-start-3 col-end-11 lg:w-[30rem] lg:max-w-[30rem]'>
               <h2 className='mb-8 text-[2rem] font-bold'>Summary</h2>
               <article className='mb-[5rem] space-y-8'>
                 <div className='text-former-price-text flex justify-between border-b py-4'>

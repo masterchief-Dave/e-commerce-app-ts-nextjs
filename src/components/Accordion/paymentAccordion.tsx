@@ -51,8 +51,8 @@ export const PaymentAccordion = () => {
   // styles
   const styles = {
     cardTitle: `font-semibold`,
-    cardText: `font-light`,
-    cardInput: `h-[4rem] w-full border px-4`,
+    cardText: `text-xl lg:text-[1.6rem] font-light`,
+    cardInput: `h-[4rem] text-[1.2rem] w-full border px-4`,
     cardImage: `h-12 w-12`,
     label: `block text-[1.3rem] font-semibold`,
     accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
@@ -106,11 +106,11 @@ export const PaymentAccordion = () => {
                               Bodunrin Esther Jolayemi
                             </p>
                           </div>
-                          <div className='col-start-7 col-end-10'>
+                          <div className='col-start-8 col-end-13 lg:col-start-7 lg:col-end-10'>
                             <h5 className={styles.cardTitle}>Card Number</h5>
                             <p className={styles.cardText}>**** 5685</p>
                           </div>
-                          <div className='col-start-10 col-end-13'>
+                          <div className='col-span-5 lg:col-start-10 lg:col-end-13'>
                             <h5 className={styles.cardTitle}>Expiry Date</h5>
                             <p className={styles.cardText}>12/2024</p>
                           </div>
