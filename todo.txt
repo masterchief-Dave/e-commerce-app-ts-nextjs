@@ -87,3 +87,8 @@ CATEGORIES
 1. create a product category page
 2. create a filter component for ascending order, descending order, filter by price, and sorting
 3. 
+
+USE
+use formik for form validation in the frontend
+usw next swr for data fetching
+redux toolkit for global state management

@@ -70,7 +70,7 @@ export const WeeklyDeals = (props: Props) => {
     <div className='py-2 font-matter'>
       <header className='flex items-end justify-between border-b px-4 py-3 lg:items-center'>
         <div className='flex flex-col items-center gap-4 lg:flex-row'>
-          <h2 className='text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
+          <h2 className='w-full text-left text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
             Flash Sales
           </h2>
           <div className='flex gap-x-4'>
