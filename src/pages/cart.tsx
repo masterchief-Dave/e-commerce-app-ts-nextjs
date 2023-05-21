@@ -1,11 +1,16 @@
+import { RootState } from '@/app/store'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
+import { useAppSelector } from '@/hooks/reduxhooks'
 import { useRouter } from 'next/router'
 
 type Props = {}
 
-const cart = (props: Props) => {
+const Cart = (props: Props) => {
+  const cartArr = useAppSelector((state) => state)
+  console.log(cartArr)
+
   const cart = [1]
 
   if (cart.length < 1) {
@@ -46,7 +51,7 @@ const cart = (props: Props) => {
                 <p>$6000</p>
               </div>
 
-              <button className='rounded-md bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white lg:text-[1.4rem]'>
+              <button className='rounded-md bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.4rem]'>
                 Proceed to checkout
               </button>
             </section>
@@ -57,7 +62,7 @@ const cart = (props: Props) => {
   )
 }
 
-export default cart
+export default Cart
 
 const NoItemInCart = () => {
   const router = useRouter()

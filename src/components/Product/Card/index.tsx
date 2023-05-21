@@ -4,23 +4,18 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { StarIcon } from '@heroicons/react/24/outline'
+import { addToCart } from '@/features/cart/cartSlice'
+import { useAppDispatch } from '@/hooks/reduxhooks'
 
 type Props = {
-  img: string | StaticImageData
-  productName: string
-  productPrice: string
   data: Product
 }
 
-export const ProductCard = ({
-  img,
-  productName,
-  productPrice,
-  data,
-}: Props) => {
+export const ProductCard = ({ data }: Props) => {
+  const dispatch = useAppDispatch()
   const [clicked, setClicked] = useState<boolean>(false)
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleFavourite = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
     e.preventDefault()
 
@@ -31,6 +26,15 @@ export const ProductCard = ({
     } else if (clicked === false) {
       return toast('Item added to cart')
     }
+  }
+
+  // cart
+  const handleAddToCart = () => {
+    if (!data) return
+
+    console.log('the code is here')
+
+    dispatch(addToCart(data))
   }
 
   return (
@@ -51,7 +55,7 @@ export const ProductCard = ({
 
         <div
           className='absolute top-5 right-5  cursor-pointer rounded-md bg-[#fff] p-2'
-          onClick={handleClick}
+          onClick={handleFavourite}
         >
           <HeartIcon
             className='h-8 w-8 text-black'
@@ -76,7 +80,10 @@ export const ProductCard = ({
           </div>
           <span>{data.ratings} reviews</span>
         </div>
-        <button className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-xl bg-primary-grey-500 font-semibold hover:bg-primary-blue-400 hover:text-white hover:transition-all hover:delay-75'>
+        <button
+          className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-xl bg-primary-grey-500 font-semibold hover:bg-primary-blue-300 hover:text-white hover:transition-all hover:delay-75'
+          onClick={handleAddToCart}
+        >
           <ShoppingBagIcon className='h-4 w-4' />
           <span className='text-base uppercase lg:text-[1.2rem]'>
             Add to cart

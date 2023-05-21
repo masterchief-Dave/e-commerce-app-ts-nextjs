@@ -74,12 +74,7 @@ export default function Home() {
                                 className={styles.productContainer}
                                 key={product._id}
                               >
-                                <ProductCard
-                                  img={''}
-                                  productName='Apple watch series 5'
-                                  productPrice='$500'
-                                  data={product}
-                                />
+                                <ProductCard data={product} />
                               </div>
                             )
                           }

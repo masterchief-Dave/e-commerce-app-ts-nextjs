@@ -48,6 +48,10 @@ interface Product {
   createdAt: Date
 }
 
+interface Cart extends Product {
+  cartQuantity?: number
+}
+
 interface PaymentFormInput {
   userName: string
   cardNumber: string
