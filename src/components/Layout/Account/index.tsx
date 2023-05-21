@@ -7,24 +7,38 @@ import {
   WalletIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 type Props = {
   children: JSX.Element
 }
 
 export const AccountLayout = ({ children }: Props) => {
+  // console.log(data)
+  const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
+
   return (
     <div className='mx-auto w-full max-w-screen-2xl font-inter'>
       <DashboardNavbar />
       <BreadCrumb />
-      <div className='relative grid grid-cols-12 py-16'>
-        <section className='col-start-2 col-end-5'>
-          <SideBar />
-        </section>
-        <section className='col-start-6 col-end-12 rounded-[1rem] border'>
-          {children}
-        </section>
-      </div>
+
+      {isAboveMediaQuery ? (
+        <div className='relative grid grid-cols-12 py-16'>
+          <section className='col-start-2 col-end-5'>
+            <SideBar />
+          </section>
+
+          <section className='col-start-6 col-end-12 rounded-[1rem] border'>
+            {children}
+          </section>
+        </div>
+      ) : (
+        <div className='relative grid grid-cols-12 py-24'>
+          <section className='col-start-2 col-end-12 mx-auto w-full rounded-[1rem] border'>
+            {children}
+          </section>
+        </div>
+      )}
     </div>
   )
 }
@@ -35,7 +49,7 @@ export const SideBar = () => {
   const styles = {
     header: `font-black text-[1.8rem]`,
     active: `text-primary-red-100 text-[1.3rem] font-normal`,
-    links: `text-[1.3rem] font-normal`,
+    link: `text-[1.3rem] font-normal`,
   }
 
   return (
@@ -52,7 +66,7 @@ export const SideBar = () => {
               className={
                 router.pathname === '/account/profile'
                   ? styles.active
-                  : styles.links
+                  : styles.link
               }
             >
               Account information
@@ -65,7 +79,7 @@ export const SideBar = () => {
               className={
                 router.pathname === '/account/delivery-address'
                   ? styles.active
-                  : styles.links
+                  : styles.link
               }
             >
               Delivery address
@@ -86,7 +100,7 @@ export const SideBar = () => {
               className={
                 router.pathname === '/account/orders'
                   ? styles.active
-                  : styles.links
+                  : styles.link
               }
             >
               Order History
@@ -98,7 +112,7 @@ export const SideBar = () => {
               className={
                 router.pathname === '/account/reviews'
                   ? styles.active
-                  : styles.links
+                  : styles.link
               }
             >
               My reviews
@@ -119,7 +133,7 @@ export const SideBar = () => {
               className={
                 router.pathname === '/account/add-payment'
                   ? styles.active
-                  : styles.links
+                  : styles.link
               }
             >
               Add payment method
@@ -131,7 +145,7 @@ export const SideBar = () => {
               className={
                 router.pathname === '/account/saved-card'
                   ? styles.active
-                  : styles.links
+                  : styles.link
               }
             >
               Saved card
@@ -143,8 +157,16 @@ export const SideBar = () => {
   )
 }
 
-// my profile - account information, delivery address
+const MobileSidebar = () => {
+  return <div>some code</div>
+}
 
-// my orders - order history, my reviews
+/**
+ *   <p className='text-[1.1rem] font-semibold lg:text-[1.4rem]'>
+            Welcome, <span className='text-[1.5rem] lg:text-[2rem]'>David</span>
+          </p>
+ */
 
-// my wallet - add card, view saved card
+// when the screen is below 900 px show the hamburger icon
+// when the hamburger icon is clicked then the sidebar for dashboard should show
+// when the screen is above 900px then the hamburger icon shhould not show

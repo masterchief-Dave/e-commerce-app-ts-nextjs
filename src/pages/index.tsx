@@ -23,7 +23,7 @@ export default function Home() {
     fetcher
   )
 
-  console.log(data)
+  // console.log(data)
   const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
 
   const styles = {

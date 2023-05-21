@@ -16,7 +16,7 @@ type Props = {
 
 export const Navbar = () => {
   const { data: session } = useSession()
-  console.log(session)
+  // console.log(session)
   const { isTop } = useStickyNavbar()
 
   // const photo = session?.user?.photo!
