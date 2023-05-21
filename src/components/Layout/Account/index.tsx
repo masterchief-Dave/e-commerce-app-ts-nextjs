@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import BreadCrumb from '@/components/BreadCrumb'
 import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
@@ -8,18 +9,23 @@ import {
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
 import useMediaQuery from '@/hooks/useMediaQuery'
+import { MobileSideBar } from './sidebar'
 
 type Props = {
   children: JSX.Element
 }
 
 export const AccountLayout = ({ children }: Props) => {
+  const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false)
   // console.log(data)
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
 
   return (
     <div className='mx-auto w-full max-w-screen-2xl font-inter'>
-      <DashboardNavbar />
+      <DashboardNavbar
+        setShowMobileSidebar={setShowMobileSidebar}
+        showMobileSidebar={showMobileSidebar}
+      />
       <BreadCrumb />
 
       {isAboveMediaQuery ? (
@@ -33,10 +39,18 @@ export const AccountLayout = ({ children }: Props) => {
           </section>
         </div>
       ) : (
-        <div className='relative grid grid-cols-12 py-24'>
+        <div className='grid grid-cols-12 py-24'>
           <section className='col-start-2 col-end-12 mx-auto w-full rounded-[1rem] border'>
             {children}
           </section>
+          {showMobileSidebar ? (
+            <MobileSideBar
+              setShowMobileSidebar={setShowMobileSidebar}
+              showMobileSidebar={showMobileSidebar}
+            />
+          ) : (
+            ''
+          )}
         </div>
       )}
     </div>
