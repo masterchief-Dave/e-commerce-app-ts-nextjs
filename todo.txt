@@ -25,20 +25,20 @@ TODO
 
 4. create a wish list page 
 5. create a cart page (done)
-6. Add github workflow
+6. Add github workflow (started)
 7. Add test for my react code
-8. work on the responsiveness
+8. work on the responsiveness (started)
 9. create a product description page (done)
-10. create the user account section, where the user can setup card for payment edit thier username etc
+10. create the user account section, where the user can setup card for payment edit thier username etc (done) remains (reviews page)
 11. create a product page (done)
 12. add formik for form validation
 13. 
 
 WORKING ON THE RESPONSIVENESS
-1. CREATE THE MOBILE NAVBAR
-2. CREATE THE MOBILE DROPDOWN NAVBAR
-3. REGISTER A NEW USER
-4. GET ALL THE PRODUCTS
+1. CREATE THE MOBILE NAVBAR (done)
+2. CREATE THE MOBILE DROPDOWN NAVBAR (done)
+3. REGISTER A NEW USER (done)
+4. GET ALL THE PRODUCTS (done)
 5. CREATE A CATEGORY IN MY BACKEND FOR FLASH SALES 
 6. HOOK UP CREATING AN ORDER
 
@@ -74,7 +74,7 @@ MOBILE RESPONSIVENESS
 2. remove 2 items from the category section component when the screen is small and leave it as 4 items when the screen is large (done)
 
 TYPOGRAPHY 
-1. change the font family to perhaps inter
+1. change the font family to perhaps inter (done)
 
 FETCH DATA
 In the api section when I fetch data make use of swr (done)
@@ -92,3 +92,4 @@ USE
 use formik for form validation in the frontend
 usw next swr for data fetching
 redux toolkit for global state management
+

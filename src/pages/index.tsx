@@ -18,24 +18,14 @@ import { fetchProducts } from '@/features/fetchProducts'
 import { ProductCardSkeleton } from '@/components/SkeletonLoading'
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR(
-    '/api/products/getProducts',
-    fetchProducts
-  )
+  const {
+    data,
+    error: productError,
+    isLoading,
+  } = useSWR('/api/products/getProducts', fetchProducts)
 
   console.log(data)
   console.log({ isLoading })
-
-  function render() {
-    if (error) {
-      // some code
-    } else {
-      //
-    }
-  }
-
-  // console.log(error.response.status)
-  // const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
 
   const styles = {
     productContainer: `flex justify-center`,
@@ -73,26 +63,32 @@ export default function Home() {
                 </section>
 
                 <section className='products-component bg-white py-12'>
-                  <section className='flex justify-center px-8'>
-                    <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
-                      {isLoading
-                        ? new Array(8).fill(2).map((_, index) => {
-                            return <ProductCardSkeleton key={index} />
-                          })
-                        : data?.data.products.map(
-                            (product: Product, index: number) => {
-                              return (
-                                <div
-                                  key={product._id}
-                                  className={styles.productContainer}
-                                >
-                                  <ProductCard data={product} />
-                                </div>
-                              )
-                            }
-                          )}
-                    </div>
-                  </section>
+                  {productError ? (
+                    <p className='px-8 font-inter text-2xl font-medium text-primary-grey-300'>
+                      Error fetching products at this time try again later 😞
+                    </p>
+                  ) : (
+                    <section className='flex justify-center px-8'>
+                      <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
+                        {isLoading
+                          ? new Array(8).fill(2).map((_, index) => {
+                              return <ProductCardSkeleton key={index} />
+                            })
+                          : data?.data.products.map(
+                              (product: Product, index: number) => {
+                                return (
+                                  <div
+                                    key={product._id}
+                                    className={styles.productContainer}
+                                  >
+                                    <ProductCard data={product} />
+                                  </div>
+                                )
+                              }
+                            )}
+                      </div>
+                    </section>
+                  )}
                 </section>
               </div>
             </div>

@@ -1,5 +1,4 @@
 import { Skeleton, SkeletonText } from '@chakra-ui/react'
-import { JsxElement } from 'typescript'
 
 type Props = {
   isLoading: boolean
