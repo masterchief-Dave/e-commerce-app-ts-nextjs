@@ -15,6 +15,7 @@ import { Layout } from '@/components/Layout'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import useSWR from 'swr'
 import { fetchProducts } from '@/features/fetchProducts'
+import { ProductCardSkeleton } from '@/components/SkeletonLoading'
 
 export default function Home() {
   const { data, error, isLoading } = useSWR(
@@ -23,6 +24,7 @@ export default function Home() {
   )
 
   console.log(data)
+  console.log({ isLoading })
 
   function render() {
     if (error) {
@@ -70,28 +72,28 @@ export default function Home() {
                   <WeeklyDeals />
                 </section>
 
-                {error?.response?.status === 400 ? (
-                  'Error loading data, try refreshing the page ...'
-                ) : (
-                  <section className='products-component bg-white py-12'>
-                    <section className='flex justify-center px-8'>
-                      <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
-                        {data?.data.products.map(
-                          (product: Product, index: number) => {
-                            return (
-                              <div
-                                className={styles.productContainer}
-                                key={product._id}
-                              >
-                                <ProductCard data={product} />
-                              </div>
-                            )
-                          }
-                        )}
-                      </div>
-                    </section>
+                <section className='products-component bg-white py-12'>
+                  <section className='flex justify-center px-8'>
+                    <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
+                      {isLoading
+                        ? new Array(8).fill(2).map((_, index) => {
+                            return <ProductCardSkeleton key={index} />
+                          })
+                        : data?.data.products.map(
+                            (product: Product, index: number) => {
+                              return (
+                                <div
+                                  key={product._id}
+                                  className={styles.productContainer}
+                                >
+                                  <ProductCard data={product} />
+                                </div>
+                              )
+                            }
+                          )}
+                    </div>
                   </section>
-                )}
+                </section>
               </div>
             </div>
           </main>

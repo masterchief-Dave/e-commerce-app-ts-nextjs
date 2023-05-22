@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { HeartIcon } from '@/globals/icons'
 import { useState } from 'react'
 import toast from 'react-hot-toast'

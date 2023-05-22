@@ -1,15 +1,17 @@
-import './skeleton.css'
+import { Skeleton, SkeletonText } from '@chakra-ui/react'
+import { JsxElement } from 'typescript'
 
 type Props = {
-  classes: string
+  isLoading: boolean
+  children: JSX.Element
+  className: string
 }
 
-export const Skeleton = ({ classes }: Props) => {
-  const classNames = `skeleton ${classes} animate-pulse`
-
+export const ProductCardSkeleton = () => {
   return (
-    <div className={classNames}>
-      {/* <div className='skeleton.text skeleton.width-20'></div> */}
+    <div className='mb-24 h-[20rem] min-h-[20rem] max-w-[25rem]'>
+      <Skeleton height={'20rem'} />
+      <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
     </div>
   )
 }
