@@ -1,7 +1,7 @@
-// billing address 
+// billing address
 
 'use client'
-import { countryCode } from '@/globals/countryCode'
+import { countryCode } from '@/globals/countries'
 import {
   Accordion,
   AccordionButton,
@@ -12,8 +12,8 @@ import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
 
 export const BillingAddress = () => {
-  const [mounted, setMounted] = useState(false)
-  const [billingAddress, setBillingAddress] = useState()
+  const [mounted, setMounted] = useState<boolean>(false)
+  const [billingAddress, setBillingAddress] = useState<string>('')
 
   console.log({ billingAddress })
 
@@ -36,7 +36,7 @@ export const BillingAddress = () => {
 
   return (
     <div className='py-10 font-inter text-[1.4rem]'>
-      <div className='font-poppins border-l border-r'>
+      <div className='border-l border-r font-poppins'>
         {mounted && (
           <Accordion allowToggle>
             <AccordionItem>

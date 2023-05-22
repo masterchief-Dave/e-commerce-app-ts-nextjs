@@ -1,4 +1,10 @@
-export const countryCode = [
+type CountryType = {
+  country: string
+  code: string
+  iso: string
+}
+
+export const countryCode: CountryType[] = [
   { country: 'Afghanistan', code: '93', iso: 'AF' },
   { country: 'Albania', code: '355', iso: 'AL' },
   { country: 'Algeria', code: '213', iso: 'DZ' },

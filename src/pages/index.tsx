@@ -24,8 +24,12 @@ export default function Home() {
 
   console.log(data)
 
-  if (error) {
-    // some code
+  function render() {
+    if (error) {
+      // some code
+    } else {
+      //
+    }
   }
 
   // console.log(error.response.status)
