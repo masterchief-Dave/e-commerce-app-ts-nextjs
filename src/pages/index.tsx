@@ -9,22 +9,27 @@ import { Footer } from '@/components/Footer'
 import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { CategoryCard } from '@/components/Category/Card'
 import { ProductCard } from '@/components/Product/Card'
-import { partnersData } from '@/globals/partners'
+
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Layout } from '@/components/Layout'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import useSWR from 'swr'
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+import { fetchProducts } from '@/features/fetchProducts'
 
 export default function Home() {
   const { data, error, isLoading } = useSWR(
     '/api/products/getProducts',
-    fetcher
+    fetchProducts
   )
 
-  // console.log(data)
-  const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
+  console.log(data)
+
+  if (error) {
+    // some code
+  }
+
+  // console.log(error.response.status)
+  // const isAboveMediaQuery = useMediaQuery('(min-width: 1060px)')
 
   const styles = {
     productContainer: `flex justify-center`,
@@ -61,8 +66,8 @@ export default function Home() {
                   <WeeklyDeals />
                 </section>
 
-                {isLoading ? (
-                  'Loading ...'
+                {error?.response?.status === 400 ? (
+                  'Error loading data, try refreshing the page ...'
                 ) : (
                   <section className='products-component bg-white py-12'>
                     <section className='flex justify-center px-8'>

@@ -21,7 +21,7 @@ const Login = (props: Props) => {
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
     input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-100  font-medium text-[1.4rem] rounded-md`,
+    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300  font-medium text-[1.4rem] rounded-md`,
   }
 
   const handleSubmit = async (e: any) => {
@@ -45,7 +45,7 @@ const Login = (props: Props) => {
   const handleGoogleAuth = async (e: any) => {
     e.preventDefault()
     // create a post request with the user email as a means of identification and then send a callback url: to my server with the data to get the user id and stuff like that
-    signIn('google', { callbackUrl: 'http://localhost:3000' })
+    signIn('google', { callbackUrl: 'http://localhost:3002' })
   }
 
   return (
@@ -102,7 +102,7 @@ const Login = (props: Props) => {
 
             <div className='mb-8 flex justify-end'>
               <Link
-                href='/forgot-password'
+                href='/auth/forgot-password'
                 className='text-[1.2srem] text-primary-yellow-200'
               >
                 Forgot password

@@ -4,11 +4,13 @@ import axios from 'axios'
 
 type Data = {
   status: string
-  data: {
+  message?: string
+  data?: {
     count: number
     length: number
     products: Product[]
   }
+  err?: unknown
 }
 
 const baseUrl = `http://localhost:8100/api/v1`
@@ -17,12 +19,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const products = await (
-    await axios.get(`http://localhost:8100/api/v1/products`)
-  ).data
-
-  // console.log({ products })
   try {
+    const products = await (
+      await axios.get(`http://localhost:8100/api/v1/products`)
+    ).data
+
+    // console.log({ products })
     res.status(200).json({
       status: 'success',
       data: {
@@ -32,7 +34,18 @@ export default async function handler(
       },
     })
   } catch (err: any) {
-    console.log(err.message)
+    // console.log('the code is in the catch block')
+    // console.log(err.message)
+    res.status(400).json({
+      status: 'Error',
+      message: 'Error',
+      err: err,
+      data: {
+        count: 0,
+        length: 0,
+        products: [],
+      },
+    })
   }
 }
 

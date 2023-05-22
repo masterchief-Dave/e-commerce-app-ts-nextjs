@@ -111,6 +111,16 @@ const Desktop = ({ session, isTop }: Props) => {
                         Wishlist{' '}
                       </Link>
                     </li>
+                    <li>
+                      <button
+                        onClick={() =>
+                          signOut({ callbackUrl: 'http://localhost:3002' })
+                        }
+                        className={`${styles.navDropdownLink} text-left`}
+                      >
+                        Sign out
+                      </button>
+                    </li>
                   </ul>
                 </div>
               )}

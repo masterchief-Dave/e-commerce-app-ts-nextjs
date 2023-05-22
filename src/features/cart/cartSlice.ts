@@ -12,13 +12,10 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state: CartState, action: PayloadAction<Product>) => {
-      // console.log(action.payload)
-
       const findIndex = state.value.findIndex((product) => {
         return product._id === action.payload._id
       })
 
-      // console.log(findIndex)
       if (findIndex >= 0) {
         state.value[findIndex] = {
           ...state.value[findIndex],

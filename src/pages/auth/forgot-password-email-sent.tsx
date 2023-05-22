@@ -20,7 +20,7 @@ const ForgotPasswordEmailSent = (props: Props) => {
             </p>
 
             <button
-              className='h-[3.5rem] w-full rounded-md bg-primary-blue-100 text-[1.4rem] text-white'
+              className='h-[3.5rem] w-full rounded-md bg-primary-blue-500 text-[1.4rem] text-white hover:bg-primary-blue-300'
               onClick={() => router.push('/auth/login')}
             >
               Return to Sign in

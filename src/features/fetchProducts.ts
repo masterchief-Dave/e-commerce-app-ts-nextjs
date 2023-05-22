@@ -1,15 +1,26 @@
 import axios from 'axios'
 
+type Data = {
+  status: string
+  message?: string
+  data: {
+    count: number
+    length: number
+    products: Product[]
+  }
+  err?: unknown
+}
+
 const productsApi = axios.create({
   baseURL: `http://localhost:3002`,
 })
 
-export const fetchProducts = async () => {
+export const fetchProducts = async (): Promise<Data> => {
   const response = await productsApi.get('/api/products/getProducts')
 
   console.log(response.data)
 
-  // return response.data
+  return response.data
 }
 
 export const addProduct = async (product: Product) => {
@@ -19,13 +30,13 @@ export const addProduct = async (product: Product) => {
 }
 
 export const updateProduct = async (product: Product) => {
-  const response = await productsApi.patch(`/products/${product.id}`, product)
+  const response = await productsApi.patch(`/products/${product._id}`, product)
 
   return response.data
 }
 
-export const deleteProduct = async ({ id }: Product) => {
-  const response = await productsApi.patch(`/products/${id}`)
+export const deleteProduct = async ({ _id }: Product) => {
+  const response = await productsApi.patch(`/products/${_id}`)
 
   return response.data
 }

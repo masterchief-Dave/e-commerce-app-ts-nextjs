@@ -17,7 +17,7 @@ const ForgotPassword = (props: Props) => {
       <div className='space-y-24 py-16 font-poppins'>
         <div className='px-12'>
           <p className='text-[1.4rem]'>
-            Retun to{' '}
+            Return to{' '}
             <span className='text-text-primary-link'>
               <Link href='/auth/login'>Sign in</Link>
             </span>
@@ -46,7 +46,7 @@ const ForgotPassword = (props: Props) => {
               />
 
               <button
-                className='h-[3.5rem] w-full rounded-md bg-primary-blue-100 text-white'
+                className='h-[3.5rem] w-full rounded-md bg-primary-blue-500 text-white hover:bg-primary-blue-300'
                 onClick={handleAuthClick}
               >
                 Sign in
