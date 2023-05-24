@@ -20,6 +20,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   try {
+    // //{{url}}/products?page=1
     const products = await (
       await axios.get(`http://localhost:8100/api/v1/products`)
     ).data

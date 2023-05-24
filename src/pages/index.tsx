@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -18,14 +19,15 @@ import { fetchProducts } from '@/features/fetchProducts'
 import { ProductCardSkeleton } from '@/components/SkeletonLoading'
 
 export default function Home() {
+  const [pageIndex, setPageIndex] = useState<number>(1)
+
+  //{{url}}/products?page=1
+
   const {
     data,
     error: productError,
     isLoading,
   } = useSWR('/api/products/getProducts', fetchProducts)
-
-  console.log(data)
-  console.log({ isLoading })
 
   const styles = {
     productContainer: `flex justify-center`,
@@ -62,7 +64,7 @@ export default function Home() {
                   <WeeklyDeals />
                 </section>
 
-                <section className='products-component bg-white py-12'>
+                <section className='products-component space-y-12 bg-white py-12'>
                   {productError ? (
                     <p className='px-8 font-inter text-2xl font-medium text-primary-grey-300'>
                       Error fetching products at this time try again later 😞
@@ -89,6 +91,25 @@ export default function Home() {
                       </div>
                     </section>
                   )}
+
+                  <div className='flex items-center justify-end gap-x-4 px-8'>
+                    <button className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'>
+                      Prev
+                    </button>
+                    <button className='text-xl font-medium lg:text-[1.4rem]'>
+                      {pageIndex}
+                    </button>
+                    <button className='text-xl font-medium lg:text-[1.4rem]'>
+                      {pageIndex + 1}
+                    </button>
+                    <p>...</p>
+                    <button className='text-xl font-medium lg:text-[1.4rem]'>
+                      10
+                    </button>
+                    <button className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'>
+                      Next
+                    </button>
+                  </div>
                 </section>
               </div>
             </div>

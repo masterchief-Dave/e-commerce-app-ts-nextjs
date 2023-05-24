@@ -23,9 +23,9 @@ function Card() {
 
   return (
     <Box>
-      <Skeleton height='40px' isLoaded={isLoading}>
+      {/* <Skeleton height='40px' isLoaded={isLoading}>
         <Heading>{data.data.products[0].name}</Heading>
-      </Skeleton>
+      </Skeleton> */}
     </Box>
   )
 }
