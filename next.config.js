@@ -8,7 +8,14 @@ const nextConfig = {
       'lh3.googleusercontent.com',
       'res.cloudinary.com',
       'ucrolthr.sirv.com',
+      'images-na.ssl-images-amazon.com'
     ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**'
+      }
+    ]
   },
 }
 

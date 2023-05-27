@@ -21,8 +21,10 @@ export default async function handler(
 ) {
   try {
     // //{{url}}/products?page=1
-    const products = await (
-      await axios.get(`http://localhost:8100/api/v1/products`)
+    // console.log(req.query)
+    const { page } = req.query
+    const products = await(
+      await axios.get(`http://localhost:8100/api/v1/products?page=${page}`)
     ).data
 
     // console.log({ products })

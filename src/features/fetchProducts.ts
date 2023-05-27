@@ -15,10 +15,13 @@ const productsApi = axios.create({
   baseURL: `http://localhost:3002`,
 })
 
-export const fetchProducts = async (): Promise<Data> => {
-  const response = await productsApi.get('/api/products/getProducts')
+export const fetchProducts = async (pageIndex: number): Promise<Data> => {
+  // console.log(pageIndex)
+  const response = await productsApi.get(
+    `/api/products/getProducts?page=${pageIndex}`
+  )
 
-  console.log(response.data)
+  // console.log(response.data)
 
   return response.data
 }

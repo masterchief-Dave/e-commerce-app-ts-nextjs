@@ -81,7 +81,7 @@ In the api section when I fetch data make use of swr (done)
 
 HOMEPAGE
 1. Add skeleton loading to the homepage products
-2. Add pagination for the products section
+2. Add pagination for the products section (done)
 
 CATEGORIES
 1. create a product category page

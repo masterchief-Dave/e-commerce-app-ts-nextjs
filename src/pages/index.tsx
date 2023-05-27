@@ -23,15 +23,36 @@ export default function Home() {
 
   //{{url}}/products?page=1
 
+  //const { data: user } = useSWR(['/api/user', token], ([url, token]) => fetchWithToken(url, token))
+
   const {
     data,
     error: productError,
     isLoading,
-  } = useSWR('/api/products/getProducts', fetchProducts)
+  } = useSWR([`/api/products/getProducts`, pageIndex], ([url, pageIndex]) =>
+    fetchProducts(pageIndex)
+  )
 
   const styles = {
     productContainer: `flex justify-center`,
   }
+
+  const handlePrevButton = () => {
+    if (pageIndex === 1) {
+      return
+    }
+    setPageIndex((prev) => prev - 1)
+  }
+
+  const handleNextButton = () => {
+    if (pageIndex === 5) {
+      return
+    }
+
+    setPageIndex((prev) => prev + 1)
+  }
+
+  // console.log({ pageIndex })
 
   return (
     <>
@@ -93,7 +114,10 @@ export default function Home() {
                   )}
 
                   <div className='flex items-center justify-end gap-x-4 px-8'>
-                    <button className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'>
+                    <button
+                      className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'
+                      onClick={() => handlePrevButton()}
+                    >
                       Prev
                     </button>
                     <button className='text-xl font-medium lg:text-[1.4rem]'>
@@ -106,7 +130,10 @@ export default function Home() {
                     <button className='text-xl font-medium lg:text-[1.4rem]'>
                       10
                     </button>
-                    <button className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'>
+                    <button
+                      className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'
+                      onClick={() => handleNextButton()}
+                    >
                       Next
                     </button>
                   </div>

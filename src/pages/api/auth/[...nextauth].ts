@@ -33,7 +33,7 @@ export default NextAuth({
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const res = await fetch('http://localhost:8000/api/v1/auth/login', {
+        const res = await fetch('http://localhost:8100/api/v1/auth/login', {
           method: 'POST',
           body: JSON.stringify({
             email: credentials?.email,
@@ -72,6 +72,7 @@ export default NextAuth({
   ],
   pages: {
     signIn: '/auth/login',
+    newUser: '/auth/register'
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -80,6 +81,7 @@ export default NextAuth({
     },
     async session({ session, token, user }) {
       session.user = token as any
+      // session.expires = token. 
       return session
     },
   },

@@ -6,6 +6,7 @@ import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 
 import { signIn, getSession, useSession } from 'next-auth/react'
+import { redirect } from 'next/dist/server/api-utils'
 
 type Props = {}
 
@@ -31,12 +32,12 @@ const Login = (props: Props) => {
       email,
       password,
       redirect: false,
-      callbackUrl: '/',
+      // callbackUrl: 'http://localhost:3002',
     })
 
-    // if (status?.ok === true) {
-    //   router.push('/')
-    // }
+    if (status?.ok === true) {
+      router.push('/')
+    }
 
     console.log(status)
   }
@@ -45,7 +46,7 @@ const Login = (props: Props) => {
   const handleGoogleAuth = async (e: any) => {
     e.preventDefault()
     // create a post request with the user email as a means of identification and then send a callback url: to my server with the data to get the user id and stuff like that
-    signIn('google', { callbackUrl: 'http://localhost:3002' })
+    signIn('google', { callbackUrl: 'http://localhost:3002', redirect: true })
   }
 
   return (

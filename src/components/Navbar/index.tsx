@@ -14,6 +14,10 @@ type Props = {
   isTop: boolean
 }
 
+const styles = {
+  navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
+}
+
 export const Navbar = () => {
   const { data: session } = useSession()
   // console.log(session)
@@ -39,10 +43,6 @@ const Desktop = ({ session, isTop }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
-
-  const styles = {
-    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
-  }
 
   return (
     <nav
@@ -114,7 +114,10 @@ const Desktop = ({ session, isTop }: Props) => {
                     <li>
                       <button
                         onClick={() =>
-                          signOut({ callbackUrl: 'http://localhost:3002' })
+                          signOut({
+                            callbackUrl: 'http://localhost:3002',
+                            redirect: false,
+                          })
                         }
                         className={`${styles.navDropdownLink} text-left`}
                       >
@@ -128,16 +131,16 @@ const Desktop = ({ session, isTop }: Props) => {
           ) : (
             <div className='flex items-center gap-x-8'>
               <li>
-                <Link href='/auth/login'>
-                  <button
-                    className='auth-btn bg-white text-primary-blue-100'
-                    onClick={() => signIn()}
-                  >
-                    Login
-                  </button>
-                </Link>
+                {/* <Link href='/auth/login'> */}
+                <button
+                  className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'
+                  onClick={() => signIn()}
+                >
+                  Login
+                </button>
+                {/* </Link> */}
               </li>
-              <li>
+              <li className='hidden'>
                 <Link href='/auth/register'>
                   <button className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
                     Sign up
@@ -169,6 +172,7 @@ const MobileNavbar = () => {
   const styles = {
     list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
     links: `w-full h-full block`,
+    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
   }
 
   useEffect(() => {
@@ -244,6 +248,16 @@ const MobileNavbar = () => {
                   placeholder='Search'
                   className={`block w-full rounded-md p-4 font-medium text-black`}
                 />
+              </li>
+              <li>
+                <button
+                  onClick={() =>
+                    signOut({ callbackUrl: 'http://localhost:3002' })
+                  }
+                  className={`${styles.navDropdownLink} text-left`}
+                >
+                  Sign out
+                </button>
               </li>
             </ul>
           </div>
