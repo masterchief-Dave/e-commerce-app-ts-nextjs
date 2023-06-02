@@ -25,12 +25,26 @@ export default function Home() {
 
   //const { data: user } = useSWR(['/api/user', token], ([url, token]) => fetchWithToken(url, token))
 
+  // https://sage-warehouse-backend.onrender.com/api/v1/products?page=${page}
+
+  // const {
+  //   data,
+  //   error: productError,
+  //   isLoading,
+  // } = useSWR([`/api/products/getProducts`, pageIndex], ([url, pageIndex]) =>
+  //   fetchProducts(pageIndex)
+  // )
+
   const {
     data,
     error: productError,
     isLoading,
-  } = useSWR([`/api/products/getProducts`, pageIndex], ([url, pageIndex]) =>
-    fetchProducts(pageIndex)
+  } = useSWR(
+    [
+      `https://sage-warehouse-backend.onrender.com/api/v1/products?page=${pageIndex}`,
+      pageIndex,
+    ],
+    ([url, pageIndex]) => fetchProducts(pageIndex)
   )
 
   const styles = {
