@@ -120,7 +120,7 @@ export default function Home() {
                     >
                       Prev
                     </button>
-                    <button className='text-xl font-medium lg:text-[1.4rem]'>
+                    <button className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-blue-300 text-xl font-medium text-white lg:text-[1.4rem]'>
                       {pageIndex}
                     </button>
                     <button className='text-xl font-medium lg:text-[1.4rem]'>

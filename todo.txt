@@ -80,7 +80,7 @@ FETCH DATA
 In the api section when I fetch data make use of swr (done)
 
 HOMEPAGE
-1. Add skeleton loading to the homepage products
+1. Add skeleton loading to the homepage products (done)
 2. Add pagination for the products section (done)
 
 CATEGORIES
@@ -93,3 +93,5 @@ use formik for form validation in the frontend
 usw next swr for data fetching
 redux toolkit for global state management
 
+WHEN HANDLING ERROR PAGE / 404 PAGE - USE THIS APPROACH
+https://techcrunch.com/nigeria --> just check this link
