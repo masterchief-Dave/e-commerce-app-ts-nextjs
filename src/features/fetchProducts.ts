@@ -12,7 +12,8 @@ type Data = {
 }
 
 const productsApi = axios.create({
-  baseURL: `http://localhost:3002`,
+  // baseURL: `http://localhost:3002`,
+  baseURL: `https://e-commerce-app-ts-nextjs.vercel.app`,
 })
 
 // https://sage-warehouse-backend.onrender.com/api/v1/products
