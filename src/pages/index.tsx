@@ -35,6 +35,10 @@ export default function Home() {
   //   fetchProducts(pageIndex)
   // )
 
+  // const fetcher = (...args: any) => fetch(...args).then((res) => res.json())
+  // @ts-ignore
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
   const {
     data,
     error: productError,
@@ -44,7 +48,7 @@ export default function Home() {
       `https://sage-warehouse-backend.onrender.com/api/v1/products?page=${pageIndex}`,
       pageIndex,
     ],
-    ([url, pageIndex]) => fetchProducts(pageIndex)
+    ([url, pageIndex]) => fetcher(url)
   )
 
   const styles = {
