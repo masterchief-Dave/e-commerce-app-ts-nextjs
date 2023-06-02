@@ -14,6 +14,7 @@ type Data = {
 }
 
 const baseUrl = `http://localhost:8100/api/v1`
+// https://sage-warehouse-backend.onrender.com/api/v1/products
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,7 +25,10 @@ export default async function handler(
     // console.log(req.query)
     const { page } = req.query
     const products = await(
-      await axios.get(`http://localhost:8100/api/v1/products?page=${page}`)
+      // await axios.get(`http://localhost:8100/api/v1/products?page=${page}`)
+      await axios.get(
+        `https://sage-warehouse-backend.onrender.com/api/v1/products?page=${page}`
+      )
     ).data
 
     // console.log({ products })
