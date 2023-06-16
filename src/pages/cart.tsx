@@ -2,7 +2,6 @@ import { RootState } from '@/app/store'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
-import { useAppSelector } from '@/hooks/reduxhooks'
 import { useCart } from '@/hooks/useCart'
 import { useRouter } from 'next/router'
 

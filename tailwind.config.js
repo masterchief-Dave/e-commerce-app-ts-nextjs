@@ -63,6 +63,9 @@ module.exports = {
         'primary-box-shadow': 'rgba(0, 0, 0, 0.08) 0px 4px 12px',
         'product-card-box-shadow': 'rgba(0, 0, 0, 0.05) 0px 0px 0px 1px',
       },
+      gridTemplateColumns: {
+        productSlug: '250px 1fr'
+      }
     },
   },
   plugins: [],

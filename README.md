@@ -45,3 +45,8 @@ npm run dev
 - []
 
 
+
+### problems I have encountered
+- [] authentication from google using nextauth
+- [] registering a user that is maing use of google sign up option
+- [] should I persist my cart, wishlist, if yes where should I persist data - database or localstorage

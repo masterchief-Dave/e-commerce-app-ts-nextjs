@@ -31,3 +31,8 @@ export const cartSlice = createSlice({
 
 export const { addToCart } = cartSlice.actions
 export default cartSlice.reducer
+
+
+// remove item from the cart
+// reduce a particular item in the cart
+// increase a particular item in the cart
