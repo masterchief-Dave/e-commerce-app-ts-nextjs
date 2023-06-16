@@ -27,7 +27,17 @@ const Cart = (props: Props) => {
 
             {/* cart product design layout and design*/}
             <div className='px-12'>
-              <CheckoutProduct />
+              {cartArr.cart.value.map((item) => {
+                return (
+                  <CheckoutProduct
+                    key={item._id}
+                    img={item.images[0].url}
+                    name={item.name}
+                    price={item.price}
+                    cartQuantity={item.cartQuantity}
+                  />)
+              })}
+
             </div>
 
             <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>

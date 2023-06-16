@@ -49,7 +49,7 @@ interface Product {
 }
 
 interface Cart extends Product {
-  cartQuantity?: number
+  cartQuantity: number
 }
 
 interface PaymentFormInput {

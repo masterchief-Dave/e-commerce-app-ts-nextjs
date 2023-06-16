@@ -1,22 +1,21 @@
 import { useState } from 'react'
+import useSWR from 'swr'
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+
+import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { DropdownNav } from '@/components/Dropdown'
 import { Header } from '@/components/Header'
 import { WeeklyDeals } from '@/components/Deals'
 import { Footer } from '@/components/Footer'
-import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { CategoryCard } from '@/components/Category/Card'
 import { ProductCard } from '@/components/Product/Card'
-
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
-import { Layout } from '@/components/Layout'
-import useMediaQuery from '@/hooks/useMediaQuery'
-import useSWR from 'swr'
-import { fetchProducts } from '@/features/fetchProducts'
 import { ProductCardSkeleton } from '@/components/SkeletonLoading'
+
+import { electronicsData, gamingData, computerData } from '@/globals/category'
+
+
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
