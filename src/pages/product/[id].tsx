@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
 
 import { Layout } from '@/components/Layout'
-import BreadCrumb from '@/components/BreadCrumb'
+// import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Overview } from '@/components/Product/Tabs/overview'
@@ -14,40 +16,55 @@ import { Shipping } from '@/components/Product/Tabs/shipping'
 import { Warranty } from '@/components/Product/Tabs/warranty'
 import { Footer } from '@/components/Footer'
 
-import { HeartIcon } from '@heroicons/react/24/outline'
+import { HeartIcon, StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
 import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
 
 type Props = {}
+interface ISwr {
+  success: string
+  data: {
+    product: Product
+  }
+}
+
+const styles = {
+  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer`,
+  productDetails: {
+    title: `font-semibold`,
+    description: `font-medium`
+  }
+}
 
 const ProductSlug = (props: Props) => {
+  const router = useRouter()
+  const { id } = router.query
   const [selectedTab, setSelectedTab] = useState('overview')
 
-  const styles = {
-    tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer`,
-    productDetails: {
-      title: `font-semibold`,
-      description: `font-medium`
-    }
+  console.log(router.query)
+
+
+  // @ts-ignore
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+  const { data, error, isLoading } = useSWR<ISwr>(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`, fetcher)
+
+  if (!data) {
+    return 'Error'
   }
 
-  const renderRating = (value: number, color = '#eeb012') => {
-    return (
-      <div className='flex items-center gap-x-1'>
-        {new Array(Math.floor(value)).fill(1).map((el: any, index: number) => {
-          return <StarIcon
-            className={`h-8 w-8`}
-            fill={color ? color : '#EEB012'}
-          />
-        })}
-      </div>
-    )
+  if (error) {
+    return 'Error'
+  }
+
+  if (isLoading) {
+    return 'Loading...'
   }
 
   const render = () => {
     if (selectedTab === 'overview') {
       return <Overview />
     } else if (selectedTab === 'description') {
-      return <Description />
+      return <Description data={data.data.product.description} />
     } else if (selectedTab === 'returnPolicy') {
       return <ReturnPolicy />
     } else if (selectedTab === 'reviews') {
@@ -80,8 +97,8 @@ const ProductSlug = (props: Props) => {
             <section className='grid grid-cols-12'>
               <div className='col-start-1 col-end-6 border'>
                 <Image
-                  src='/assets/img/ps4-1.png'
-                  alt='play station 4'
+                  src={data.data?.product.images[0].url!}
+                  alt={data?.data.product.name}
                   width={1000}
                   height={1000}
                   className='object-cover w-full h-full'
@@ -89,13 +106,27 @@ const ProductSlug = (props: Props) => {
               </div>
 
               <article className='col-start-7 col-end-13 space-y-4'>
-                <h1 className='text-[1.6rem] font-bold leading-[1rem] capitalize lg:text-[2rem] mb-12'>
-                  Sony Playstation 4 console
+                <h1 className='text-[1.6rem] font-bold leading-relaxed capitalize lg:text-[2rem] mb-12'>
+                  {data.data.product.name}
                 </h1>
 
                 <div className='uppercase space-y-8'>
                   <div className='grid grid-cols-productSlug items-center justify-between'>
-                    {renderRating(5)}
+
+                    <div className='flex items-center gap-x-1'>
+                      {/* {renderRating(data.data.product.ratings, '#EEB012')}
+                      {renderRating(5 - data.data.product.ratings, '')} */}
+
+                      <p className="flex items-center gap-x-1">
+                        {new Array(Math.floor(data.data.product.ratings)).fill(0).map((_, index) => {
+                          return <StarIcon key={index} className="h-8 w-8 #EEB012" fill='#EEB012' />
+                        })}
+
+                        {new Array(5 - Math.floor(data.data.product.ratings)).fill(0).map((_, index) => {
+                          return <StarIconOutline key={index} className="h-8 w-8 #EEB012" />
+                        })}
+                      </p>
+                    </div>
 
                     <p className='text-[1.4rem] text-primary-grey-300'> 4 Reviews
                     </p>
@@ -116,7 +147,8 @@ const ProductSlug = (props: Props) => {
                   {/* product category */}
                   <div className='grid grid-cols-productSlug'>
                     <h5 className={`${styles.productDetails.title}`}>Categories:</h5>
-                    <p>console, games, game</p>
+
+                    <p>{data.data.product.category}</p>
                   </div>
 
                   {/* product brand */}
@@ -129,7 +161,7 @@ const ProductSlug = (props: Props) => {
                       Brand:{' '}
                       <span>
                         <Link href='#' className='text-text-primary-link'>
-                          Sony
+                          {data.data.product.seller}
                         </Link>
                       </span>
                     </p>
@@ -139,10 +171,10 @@ const ProductSlug = (props: Props) => {
 
 
                 <div className='flex items-center gap-x-8'>
-                  <p className='text-[2rem] font-bold lg:text-[3rem] '>NGN 140,000</p>
+                  <p className='text-[2rem] font-bold lg:text-[3rem] '>${data.data.product.price}</p>
 
                   <p className='text-[1.8rem] text-[#e0e0e0] font-medium line-through'>
-                    NGN 200,000
+                    $900
                   </p>
                 </div>
 

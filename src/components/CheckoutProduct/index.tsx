@@ -5,13 +5,14 @@ import { useRouter } from 'next/router'
 // import AppleImage from 'public/assets/img/apple-macbook-with-chip.png'
 
 type Props = {
+  id: string
   img: string
   name: string
   price: number
   cartQuantity: number
 }
 
-const CheckoutProduct = ({ img, name, price, cartQuantity }: Props) => {
+const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
   const router = useRouter()
 
   return (
@@ -32,12 +33,16 @@ const CheckoutProduct = ({ img, name, price, cartQuantity }: Props) => {
             <button
               className='text-xl font-medium lg:text-2xl'
               onClick={() => {
-                router.push('/product/1')
+                router.push(`/product/${id}`)
               }}
             >
               {' '}
-             <span className='lg:block hidden'> Show product details </span>
-             <span className='lg:hidden block'> Show details </span>
+              <span className='lg:block hidden'>
+                Show product details
+              </span>
+              <span className='lg:hidden block'>
+                Show details
+              </span>
             </button>
             <span>
               <ChevronRightIcon className='h-6 w-6' />

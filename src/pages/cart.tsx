@@ -29,6 +29,7 @@ const Cart = (props: Props) => {
                 return (
                   <CheckoutProduct
                     key={item._id}
+                    id={item._id}
                     img={item.images[0].url}
                     name={item.name}
                     price={item.price}
