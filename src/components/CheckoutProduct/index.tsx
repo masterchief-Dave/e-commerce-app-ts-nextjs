@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { ChevronDownIcon, ChevronUpIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
+import { useAppDispatch } from '@/hooks/reduxhooks'
+import { increaseCartItem, decreaseCartItem, removeItem } from '@/features/cart/cartSlice'
 
 // import AppleImage from 'public/assets/img/apple-macbook-with-chip.png'
 
@@ -14,6 +16,7 @@ type Props = {
 
 const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
   return (
     <div className='flex items-center justify-between gap-x-4 lg:gap-x-12 border-b py-8'>
@@ -52,18 +55,25 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
         <div className='flex grow items-center gap-x-2 lg:gap-x-4 text-xl font-semibold lg:text-2xl'>
           <p>{cartQuantity}</p>
           <div className='flex flex-col items-center justify-center gap-2 lg:gap-4 text-text-primary-link'>
-            <span>
+            {/* when the quanity is 1 then disable the button from going lower */}
+            <span onClick={() => {
+              dispatch(increaseCartItem({ id }))
+            }}>
               <ChevronUpIcon className='h-8 w-8 cursor-pointer' />
             </span>
-            <span>
+            <span onClick={() => {
+              dispatch(decreaseCartItem({ id }))
+            }}>
               <ChevronDownIcon className='h-8 w-8 cursor-pointer' />
             </span>
           </div>
         </div>
 
         <section className='space-y-4 text-xl lg:text-2xl'>
-          <p className='text-xl lg:text-[2.5rem] font-black'>${price}</p>
-          <p className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4'>
+          <p className='text-xl lg:text-[2.5rem] font-black mb-4'>${price}</p>
+          <p className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4' onClick={() => {
+            dispatch(removeItem({ id }))
+          }}>
             Remove
           </p>
         </section>

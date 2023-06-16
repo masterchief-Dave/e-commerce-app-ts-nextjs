@@ -36,7 +36,6 @@ const Cart = (props: Props) => {
                     cartQuantity={item.cartQuantity}
                   />)
               })}
-
             </div>
 
             <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>

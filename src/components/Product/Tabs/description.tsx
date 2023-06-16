@@ -1,9 +1,7 @@
-import { descriptionData } from '@/globals/product'
 
 type Props = {
   data: string
 }
-
 
 export const Description = (props: Props) => {
   return (
