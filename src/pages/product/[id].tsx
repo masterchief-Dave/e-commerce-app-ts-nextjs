@@ -24,13 +24,20 @@ const ProductSlug = (props: Props) => {
 
   const styles = {
     tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer`,
+    productDetails: {
+      title: `font-semibold`,
+      description: `font-medium`
+    }
   }
 
   const renderRating = (value: number, color = '#eeb012') => {
     return (
       <div className='flex items-center gap-x-1'>
         {new Array(Math.floor(value)).fill(1).map((el: any, index: number) => {
-          return <StarIcon className={`h-8 w-8`} fill={color ? color : '#EEB012'} />
+          return <StarIcon
+            className={`h-8 w-8`}
+            fill={color ? color : '#EEB012'}
+          />
         })}
       </div>
     )
@@ -102,19 +109,19 @@ const ProductSlug = (props: Props) => {
 
                   {/* product weight */}
                   <div className='grid grid-cols-productSlug'>
-                    <h5>Sku: </h5>
+                    <h5 className={`${styles.productDetails.title}`}>Sku: </h5>
                     <p></p>
                   </div>
 
                   {/* product category */}
                   <div className='grid grid-cols-productSlug'>
-                    <h5>Categories:</h5>
+                    <h5 className={`${styles.productDetails.title}`}>Categories:</h5>
                     <p>console, games, game</p>
                   </div>
 
                   {/* product brand */}
                   <div className='grid grid-cols-productSlug'>
-                    <h5>
+                    <h5 className={`${styles.productDetails.title}`}>
                       Product Code:{' '}
                       <span className='text-primary-grey-100'>524162</span>
                     </h5>
@@ -131,42 +138,53 @@ const ProductSlug = (props: Props) => {
 
 
 
-                <div className='py-4'>
+                <div className='flex items-center gap-x-8'>
                   <p className='text-[2rem] font-bold lg:text-[3rem] '>NGN 140,000</p>
+
+                  <p className='text-[1.8rem] text-[#e0e0e0] font-medium line-through'>
+                    NGN 200,000
+                  </p>
                 </div>
 
-                <div className='flex items-center gap-x-2 py-4'>
-                  <span className='text-lg font-medium'>Quantity</span>
-                  <div className='flex items-center text-[1.4rem]'>
-                    <button className='border py-2 px-4'>+</button>
-                    <p className='border-t border-b py-2 px-4'>1</p>
-                    <button className='border py-2 px-4'>-</button>
+                <div className='py-4'>
+                  <h4 className='mb-4 text-lg font-medium'>Quantity</h4>
+                  <div className='flex items-center gap-x-8'>
+                    <div className='flex items-center h-[4rem] text-[1.4rem]'>
+                      <button className='border h-full px-6'>+</button>
+                      <p className='border-t h-[4rem] flex-grow w-[5rem] flex items-center justify-center font-medium bg-[#f6f6f6] border-b py-2 px-4'>1</p>
+                      <button className='border h-[4rem] px-6'>-</button>
+                    </div>
+
+                    <button className='flex h-[4rem] gap-x-4 items-center justify-center px-6 bg-[#f6f6f6] text-[1.2rem]'>
+                      <HeartIcon className='h-8 w-8' />
+                      <p>Add to Cart</p>
+                    </button>
                   </div>
                 </div>
 
                 <div className='flex items-center gap-x-8 py-4'>
-                  <button className='h-fit w-fit rounded-md bg-primary-blue-300 px-4 py-2 font-semibold text-white'>
+                  <button className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-primary-blue-300 font-semibold text-white'>
                     Buy now
                   </button>
 
-                  <div className='flex h-12 w-12 items-center justify-center rounded-full bg-[#D1D5DB]'>
-                    <HeartIcon className='h-8 w-8' />
-                  </div>
+                  <button className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-black font-semibold text-white'>
+                    Add to Cart
+                  </button>
+
                 </div>
               </article>
             </section>
           </div>
 
           {/* product breakdown tab */}
-          <div className='col-span-full col-start-2 col-end-12 bg-primary-grey-500 py-2'>
+          <div className='col-span-full col-start-2 col-end-12 bg-[#f6f6f6] py-2'>
             <section>
               <div className='grid grid-cols-6 px-4 border-b py-4'>
                 <div>
                   <h2
                     id='overview'
-                    className={`${styles.tabHeader} ${
-                      selectedTab === 'overview' ? 'text-primary-link' : ''
-                    }`}
+                    className={`${styles.tabHeader} ${selectedTab === 'overview' ? 'text-primary-link' : ''
+                      }`}
                     onClick={handleSelectedTab}
                   >
                     Overview
@@ -175,9 +193,8 @@ const ProductSlug = (props: Props) => {
                 <div>
                   <h2
                     id='description'
-                    className={`${styles.tabHeader} ${
-                      selectedTab === 'description' ? 'text-primary-link' : ''
-                    }`}
+                    className={`${styles.tabHeader} ${selectedTab === 'description' ? 'text-primary-link' : ''
+                      }`}
                     onClick={handleSelectedTab}
                   >
                     Description
@@ -186,9 +203,8 @@ const ProductSlug = (props: Props) => {
                 <div>
                   <h2
                     id='shipping'
-                    className={`${styles.tabHeader} ${
-                      selectedTab === 'shipping' ? 'text-primary-link' : ''
-                    }`}
+                    className={`${styles.tabHeader} ${selectedTab === 'shipping' ? 'text-primary-link' : ''
+                      }`}
                     onClick={handleSelectedTab}
                   >
                     Shipping
@@ -197,9 +213,8 @@ const ProductSlug = (props: Props) => {
                 <div>
                   <h2
                     id='warranty'
-                    className={`${styles.tabHeader} ${
-                      selectedTab === 'warranty' ? 'text-primary-link' : ''
-                    }`}
+                    className={`${styles.tabHeader} ${selectedTab === 'warranty' ? 'text-primary-link' : ''
+                      }`}
                     onClick={handleSelectedTab}
                   >
                     Warranty
@@ -208,9 +223,8 @@ const ProductSlug = (props: Props) => {
                 <div>
                   <h2
                     id='returnPolicy'
-                    className={`${styles.tabHeader} ${
-                      selectedTab === 'returnPolicy' ? 'text-primary-link' : ''
-                    }`}
+                    className={`${styles.tabHeader} ${selectedTab === 'returnPolicy' ? 'text-primary-link' : ''
+                      }`}
                     onClick={handleSelectedTab}
                   >
                     Return policy
@@ -219,9 +233,8 @@ const ProductSlug = (props: Props) => {
                 <div>
                   <h2
                     id='reviews'
-                    className={`${styles.tabHeader} ${
-                      selectedTab === 'reviews' ? 'text-primary-link' : ''
-                    }`}
+                    className={`${styles.tabHeader} ${selectedTab === 'reviews' ? 'text-primary-link' : ''
+                      }`}
                     onClick={handleSelectedTab}
                   >
                     Reviews
