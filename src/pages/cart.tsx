@@ -3,15 +3,14 @@ import CheckoutProduct from '@/components/CheckoutProduct'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { useAppSelector } from '@/hooks/reduxhooks'
+import { useCart } from '@/hooks/useCart'
 import { useRouter } from 'next/router'
 
 type Props = {}
 
 const Cart = (props: Props) => {
-  const cartArr = useAppSelector((state) => state)
-  console.log(cartArr)
+  const { cart } = useCart()
 
-  const cart = [1]
 
   if (cart.length < 1) {
     return <NoItemInCart />
@@ -27,7 +26,7 @@ const Cart = (props: Props) => {
 
             {/* cart product design layout and design*/}
             <div className='px-12'>
-              {cartArr.cart.value.map((item) => {
+              {cart.map((item) => {
                 return (
                   <CheckoutProduct
                     key={item._id}

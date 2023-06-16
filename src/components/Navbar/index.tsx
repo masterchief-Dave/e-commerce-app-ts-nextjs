@@ -8,10 +8,12 @@ import { NextApiRequest } from 'next'
 import { Session } from 'next-auth'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
+import { useCart } from '@/hooks/useCart'
 
 type Props = {
   session: Session | null
   isTop: boolean
+  cartItems: Cart[]
 }
 
 const styles = {
@@ -23,6 +25,8 @@ export const Navbar = () => {
   // console.log(session)
   const { isTop } = useStickyNavbar()
 
+  const { cart } = useCart()
+
   // const photo = session?.user?.photo!
   // console.log(session?.user)
 
@@ -33,13 +37,13 @@ export const Navbar = () => {
       </div>
 
       <div className='hidden lg:block'>
-        <Desktop session={session} isTop={isTop} />
+        <Desktop session={session} isTop={isTop} cartItems={cart} />
       </div>
     </div>
   )
 }
 
-const Desktop = ({ session, isTop }: Props) => {
+const Desktop = ({ session, isTop, cartItems }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
@@ -154,7 +158,7 @@ const Desktop = ({ session, isTop }: Props) => {
             <Link href='/cart' className='relative'>
               <ShoppingBagIcon className='h-12 w-12 text-white' />
               <span className='absolute top-0 left-[15px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
-                5
+                {cartItems.length}
               </span>
             </Link>
           </li>

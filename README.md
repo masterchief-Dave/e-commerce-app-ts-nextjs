@@ -28,3 +28,20 @@ npm run dev
 - [] user registration
 - [] order logic
 - [] unit testing for my components
+- [] add formik for form validation
+- [] add leave a review page 
+- []
+- []
+- []
+- []
+
+
+### Project Roadmap 
+- [] create the react native application for the logistics part where I have a rider that does the logistics part
+- [] add dashboard where a vendor can upload products
+- []
+- []
+- []
+- []
+
+
