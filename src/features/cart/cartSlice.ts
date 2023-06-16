@@ -74,6 +74,9 @@ export const cartSlice = createSlice({
       state.value = state.value.filter((item) => {
         return item._id !== action.payload.id
       })
+    },
+    addManyToCart: (state: CartState, action: PayloadAction<Cart>) => {
+    // some code
     }
   },
 })

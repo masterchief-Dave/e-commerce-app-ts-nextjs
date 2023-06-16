@@ -52,6 +52,10 @@ interface Cart extends Product {
   cartQuantity: number
 }
 
+interface Wishlist extends Product {
+  cartQuantity: number
+}
+
 interface PaymentFormInput {
   userName: string
   cardNumber: string

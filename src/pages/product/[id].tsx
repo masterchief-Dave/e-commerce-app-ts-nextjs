@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import useSWR from 'swr'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
+import { useAppDispatch } from '@/hooks/reduxhooks'
 
 import { Layout } from '@/components/Layout'
 // import BreadCrumb from '@/components/BreadCrumb'
@@ -37,10 +38,11 @@ const styles = {
 
 const ProductSlug = (props: Props) => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
+
   const { id } = router.query
   const [selectedTab, setSelectedTab] = useState('overview')
-
-  console.log(router.query)
+  const [productQuantity, setProductQuantity] = useState<number>(1)
 
 
   // @ts-ignore
@@ -168,10 +170,8 @@ const ProductSlug = (props: Props) => {
                   </div>
                 </div>
 
-
-
                 <div className='flex items-center gap-x-8'>
-                  <p className='text-[2rem] font-bold lg:text-[3rem] '>${data.data.product.price}</p>
+                  <p className='text-[2rem] font-bold lg:text-[3rem]'>${data.data.product.price}</p>
 
                   <p className='text-[1.8rem] text-[#e0e0e0] font-medium line-through'>
                     $900
@@ -182,27 +182,45 @@ const ProductSlug = (props: Props) => {
                   <h4 className='mb-4 text-lg font-medium'>Quantity</h4>
                   <div className='flex items-center gap-x-8'>
                     <div className='flex items-center h-[4rem] text-[1.4rem]'>
-                      <button className='border h-full px-6'>+</button>
-                      <p className='border-t h-[4rem] flex-grow w-[5rem] flex items-center justify-center font-medium bg-[#f6f6f6] border-b py-2 px-4'>1</p>
-                      <button className='border h-[4rem] px-6'>-</button>
+                      <button
+                        className='border h-full px-6'
+                        onClick={() => {
+                          setProductQuantity(prev => prev + 1)
+                        }}
+                      >
+                        +
+                      </button>
+                      <p className='border-t h-[4rem] flex-grow w-[5rem] flex items-center justify-center font-medium bg-[#f6f6f6] border-b py-2 px-4'>{productQuantity}
+                      </p>
+                      <button
+                        className='border h-[4rem] px-6'
+                        onClick={() => {
+                          if (productQuantity === 1) return
+                          setProductQuantity(prev => prev - 1)
+                        }}
+                      >
+                        -
+                      </button>
                     </div>
 
+                    {/* add to wishlist  */}
                     <button className='flex h-[4rem] gap-x-4 items-center justify-center px-6 bg-[#f6f6f6] text-[1.2rem]'>
                       <HeartIcon className='h-8 w-8' />
-                      <p>Add to Cart</p>
+                      <p>Add to Wishlist</p>
                     </button>
                   </div>
                 </div>
 
                 <div className='flex items-center gap-x-8 py-4'>
+                  {/* move to checkout */}
                   <button className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-primary-blue-300 font-semibold text-white'>
                     Buy now
                   </button>
 
+                  {/* add to cart  */}
                   <button className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-black font-semibold text-white'>
                     Add to Cart
                   </button>
-
                 </div>
               </article>
             </section>

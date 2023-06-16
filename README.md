@@ -30,7 +30,7 @@ npm run dev
 - [] unit testing for my components
 - [] add formik for form validation
 - [] add leave a review page 
-- []
+- [] in the product card, when I click on the image it should lead to /product/:id
 - []
 - []
 - []
