@@ -9,6 +9,7 @@ import { signIn, getSession, useSession } from 'next-auth/react'
 import { redirect } from 'next/dist/server/api-utils'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
+import Cookies from 'js-cookie'
 
 type Props = {}
 
@@ -30,16 +31,7 @@ const Login = (props: Props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    /***
-     *  dispatch(loginStart());
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-     */
+
     try {
       dispatch(loginStart())
 
@@ -51,11 +43,17 @@ const Login = (props: Props) => {
         }
       })
 
-      console.log({ response })
-
       if (response.ok) {
         const user: User = await response.json()
-        // console.log({ user })
+        Cookies.set('authLoginToken', user?.token!, { expires: 1, secure: true })
+        // Save user data to local storage
+        const userData = {
+          name: user.user.name,
+          email: user.user.email,
+          photo: user.user.avatar.url,
+          id: user.user._id
+        }
+        localStorage.setItem('user', JSON.stringify(userData));
         dispatch(loginSuccess({
           success: user.success,
           token: user.token,
@@ -63,7 +61,6 @@ const Login = (props: Props) => {
         }))
       } else {
         const error = response.statusText
-        console.log(error)
         dispatch(loginFailure(error))
       }
     } catch (err: any) {

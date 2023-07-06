@@ -2,6 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import cartReducer from '@/features/cart/cartSlice'
 import wishListReducer from '@/features/wishlist/wishlistSlice'
 import loginReducer from '@/features/login/loginSlice'
+import Cookies from 'js-cookie'
+
+const authToken = Cookies.get('authLoginToken');
 
 export const store = configureStore({
   reducer: {
