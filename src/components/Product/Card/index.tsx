@@ -16,7 +16,7 @@ export const ProductCard = ({ data }: Props) => {
   const dispatch = useAppDispatch()
   const [clicked, setClicked] = useState<boolean>(false)
 
-  console.log({ clicked })
+  // console.log({ clicked })
 
   const handleFavourite = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()

@@ -7,17 +7,20 @@ import { AuthNavbar } from '@/components/Navbar/authNavbar'
 
 import { signIn, getSession, useSession } from 'next-auth/react'
 import { redirect } from 'next/dist/server/api-utils'
+import { useAppDispatch } from '@/hooks/reduxhooks'
+import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
 
 type Props = {}
 
 const Login = (props: Props) => {
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const { data: session } = useSession()
-  console.log({ session })
+  // console.log({ session })
 
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
@@ -27,25 +30,47 @@ const Login = (props: Props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const formData = {
-      email: email,
-      password: password
+    /***
+     *  dispatch(loginStart());
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+     */
+    try {
+      dispatch(loginStart())
+
+      const response = await fetch('http://localhost:8100/api/v1/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log({ response })
+
+      if (response.ok) {
+        const user: User = await response.json()
+        // console.log({ user })
+        dispatch(loginSuccess({
+          success: user.success,
+          token: user.token,
+          user: user.user
+        }))
+      } else {
+        const error = response.statusText
+        console.log(error)
+        dispatch(loginFailure(error))
+      }
+    } catch (err: any) {
+      console.log(err)
+      dispatch(loginFailure(err.message))
     }
 
-    console.log({ formData })
-
-    // const status = await signIn('credentials-login', {
-    //   email,
-    //   password,
-    //   redirect: false,
-    //   // callbackUrl: 'http://localhost:3002',
-    // })
-
-    // if (status?.ok === true) {
-    //   router.push('/')
-    // }
-
-    // console.log(status)
   }
 
   // handle google auth

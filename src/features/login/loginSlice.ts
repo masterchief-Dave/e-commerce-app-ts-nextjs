@@ -16,7 +16,7 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState: initialStates,
   reducers: {
-    loginStart: (state: LoginState, action) => {
+    loginStart: (state: LoginState) => {
       state.loading = true
       state.error = null
       state.user = null
