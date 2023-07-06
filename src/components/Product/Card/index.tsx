@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { StarIcon } from '@heroicons/react/24/outline'
 import { addToCart } from '@/features/cart/cartSlice'
+import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 
 type Props = {
@@ -15,16 +16,28 @@ export const ProductCard = ({ data }: Props) => {
   const dispatch = useAppDispatch()
   const [clicked, setClicked] = useState<boolean>(false)
 
+  console.log({ clicked })
+
   const handleFavourite = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
     e.preventDefault()
 
     setClicked(!clicked)
 
-    if (clicked === true) {
-      return toast('Item removed from cart')
-    } else if (clicked === false) {
-      return toast('Item added to cart')
+    if (clicked) {
+      handleAddToWishlist()
+    } else {
+      // remove from wishlist
+      dispatch(removeFromWishlist({
+        id: data._id
+      }))
+    }
+
+
+    if (clicked === false) {
+      return toast('Item removed from wishlist')
+    } else if (clicked === true) {
+      return toast('Item added to wishlist')
     }
   }
 
@@ -32,9 +45,13 @@ export const ProductCard = ({ data }: Props) => {
   const handleAddToCart = () => {
     if (!data) return
 
-    console.log('the code is here')
-
     dispatch(addToCart(data))
+  }
+
+  // wishlist
+  const handleAddToWishlist = () => {
+    if (!data) return
+    dispatch(addToWishList(data))
   }
 
   return (
@@ -58,8 +75,8 @@ export const ProductCard = ({ data }: Props) => {
           onClick={handleFavourite}
         >
           <HeartIcon
-            className='h-8 w-8 text-black'
-            fill={clicked === true ? '#105caa' : 'none'}
+            className='h-8 w-8'
+            fill={clicked === false ? 'none' : '#105caa'}
           />
         </div>
       </div>

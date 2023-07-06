@@ -27,19 +27,25 @@ const Login = (props: Props) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-
-    const status = await signIn('credentials-login', {
-      email,
-      password,
-      redirect: false,
-      // callbackUrl: 'http://localhost:3002',
-    })
-
-    if (status?.ok === true) {
-      router.push('/')
+    const formData = {
+      email: email,
+      password: password
     }
 
-    console.log(status)
+    console.log({ formData })
+
+    // const status = await signIn('credentials-login', {
+    //   email,
+    //   password,
+    //   redirect: false,
+    //   // callbackUrl: 'http://localhost:3002',
+    // })
+
+    // if (status?.ok === true) {
+    //   router.push('/')
+    // }
+
+    // console.log(status)
   }
 
   // handle google auth

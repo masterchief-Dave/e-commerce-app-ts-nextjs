@@ -41,13 +41,13 @@ export const Header = (props: Props) => {
   // console.log(sliderRef.current)
   const handleLeftSlide = () => {
     if (sliderRef.current) {
-      sliderRef.current.slickNext()
+      sliderRef.current.slickPrev()
     }
   }
 
   const handleRightSlide = () => {
     if (sliderRef.current) {
-      sliderRef.current.slickPrev()
+      sliderRef.current.slickNext()
     }
   }
 
