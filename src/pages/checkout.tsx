@@ -14,7 +14,7 @@ const Checkout = () => {
     <div>
       <Navbar />
       <div className='relative grid grid-cols-12 font-inter'>
-        <div className='col-start-1 col-end-13 grid grid-cols-12 py-24 lg:col-start-1 lg:col-end-8'>
+        <div className='col-start-1 col-end-13 grid grid-cols-12 py-24 md:col-start-1 md:col-end-8'>
           <div className='col-start-2 col-end-12 space-y-12 p-2'>
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
@@ -41,7 +41,7 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        <div className='relative col-start-1 col-end-13 bg-[#F3F6F8] p-4 lg:col-start-8 lg:col-end-13'>
+        <div className='relative col-start-1 col-end-13 bg-[#F3F6F8] p-4 md:col-start-8 md:col-end-13'>
           <div className='sticky top-[10rem] grid grid-cols-12 py-[5rem]'>
             <div className=' col-start-3 col-end-11 lg:w-[30rem] lg:max-w-[30rem]'>
               <h2 className='mb-8 text-[2rem] font-bold'>Summary</h2>
