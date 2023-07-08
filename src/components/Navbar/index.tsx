@@ -15,7 +15,7 @@ type Props = {
   session: UserLoginSession | null
   isTop: boolean
   cartItems: Cart[]
-  handleSignIn: () => void
+  handleSignOut: () => void
   isLoggedIn: boolean
   user: UserSession | null
 }
@@ -33,32 +33,26 @@ export const Navbar = () => {
 
   //my api auth
   const { isLoggedIn, user } = useAuth()
-  console.log(user)
-
 
   const { cart } = useCart()
 
-  // const photo = session?.user?.photo!
-  // console.log(session?.user)
+  const handleSignOut = () => { }
 
-  const handleSignIn = () => {
-    // some code
-  }
 
   return (
     <div className=''>
       <div className='block lg:hidden'>
-        <MobileNavbar handleSignIn={handleSignIn} session={user} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
+        <MobileNavbar handleSignOut={handleSignOut} session={user} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
       </div>
 
       <div className='hidden lg:block'>
-        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignIn={handleSignIn} isLoggedIn={isLoggedIn} user={user} />
+        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignOut={handleSignOut} isLoggedIn={isLoggedIn} user={user} />
       </div>
     </div>
   )
 }
 
-const Desktop = ({ session, isTop, cartItems, handleSignIn, isLoggedIn, user }: Props) => {
+const Desktop = ({ session, isTop, cartItems, handleSignOut: handleSignIn, isLoggedIn, user }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
@@ -180,7 +174,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignIn, isLoggedIn, user }: 
   )
 }
 
-const MobileNavbar = ({ handleSignIn, cartItems }: MobileProps) => {
+const MobileNavbar = ({ handleSignOut: handleSignIn, cartItems }: MobileProps) => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
   const barIconRef = useRef<HTMLLIElement | null>(null)

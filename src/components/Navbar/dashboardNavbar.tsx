@@ -3,6 +3,7 @@ import React from 'react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
+import { useAuth } from '@/hooks/useAuth'
 
 type Props = {
   showMobileSidebar: boolean
@@ -16,6 +17,8 @@ export const DashboardNavbar = ({
   const { isTop } = useStickyNavbar()
   // console.log(data)
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
+
+  const { user } = useAuth()
 
   return (
     <nav
@@ -33,7 +36,7 @@ export const DashboardNavbar = ({
         {isAboveMediaQuery ? (
           <p className='text-[1.1rem] font-semibold text-white lg:text-[1.4rem]'>
             Hello 👋,{' '}
-            <span className='text-[1.5rem] lg:text-[2rem]'>David</span>
+            <span className='text-[1.5rem] lg:text-[2rem]'>{user?.name}</span>
           </p>
         ) : (
           <li

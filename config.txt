@@ -1,1 +1,41 @@
 url endpoint = http://localhost:8000
+
+import { useDispatch } from 'react-redux';
+import { logout } from './loginSlice';
+
+const LogoutButton = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Remove user data from local storage
+    localStorage.removeItem('user');
+
+    // Dispatch logout action
+    dispatch(logout());
+  };
+
+  return (
+    <button onClick={handleLogout}>Logout</button>
+  );
+};
+
+
+import { useDispatch } from 'react-redux';
+import { logout } from './loginSlice';
+import Cookies from 'js-cookie';
+
+const LogoutButton = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Remove the authentication cookie
+    Cookies.remove('authToken');
+
+    // Dispatch logout action
+    dispatch(logout());
+  };
+
+  return (
+    <button onClick={handleLogout}>Logout</button>
+  );
+};

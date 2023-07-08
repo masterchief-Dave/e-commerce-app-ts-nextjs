@@ -83,15 +83,24 @@ interface User {
 }
 
 type UserLoginSession = {
-  success: boolean
-  token: string | null
   id: string
   photo: string
   name: string
   email: string
+  success: boolean
+  token: string | null
 }
 
 type UserSession = {
+  id: string
+  photo: string
+  name: string
+  email: string
+  success: boolean
+  token: string | null
+}
+
+type RegisterSession = {
   id: string
   photo: string
   name: string
@@ -118,5 +127,20 @@ type UserSession = {
         "createdAt": "2022-11-21T07:19:15.151Z",
         "__v": 0
     }
+}
+ */
+
+interface Register {
+  name: string
+  email: string
+  password: string
+}
+
+/**
+ * {
+    "name":"David",
+    "email": "bodunrindavidbond@gmail.com",
+    "password":"12345",
+    "passwordChangedAt": "2022/11/20"
 }
  */
