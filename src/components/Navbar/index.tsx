@@ -10,6 +10,7 @@ import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import { useCart } from '@/hooks/useCart'
 import { useAuth } from '@/hooks/useAuth'
+import { useLogout } from '@/hooks/useLogout'
 
 type Props = {
   session: UserLoginSession | null
@@ -28,7 +29,7 @@ const styles = {
 }
 
 export const Navbar = () => {
-
+  const { handleLogout } = useLogout()
   const { isTop } = useStickyNavbar()
 
   //my api auth
@@ -42,17 +43,17 @@ export const Navbar = () => {
   return (
     <div className=''>
       <div className='block lg:hidden'>
-        <MobileNavbar handleSignOut={handleSignOut} session={user} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
+        <MobileNavbar handleSignOut={handleLogout} session={user} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
       </div>
 
       <div className='hidden lg:block'>
-        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignOut={handleSignOut} isLoggedIn={isLoggedIn} user={user} />
+        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignOut={handleLogout} isLoggedIn={isLoggedIn} user={user} />
       </div>
     </div>
   )
 }
 
-const Desktop = ({ session, isTop, cartItems, handleSignOut: handleSignIn, isLoggedIn, user }: Props) => {
+const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
@@ -127,7 +128,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut: handleSignIn, isLog
                     <li>
                       <button
                         onClick={() =>
-                          console.log('some code in the navbar for signout')
+                          handleSignOut()
                         }
                         className={`${styles.navDropdownLink} text-left`}
                       >
@@ -141,14 +142,13 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut: handleSignIn, isLog
           ) : (
             <div className='flex items-center gap-x-8'>
               <li>
-                {/* <Link href='/auth/login'> */}
-                <button
-                  className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'
-                    onClick={handleSignIn}
-                >
-                  Login
-                </button>
-                {/* </Link> */}
+                  <Link href='/auth/login'>
+                    <button
+                      className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'
+                    >
+                      Login
+                    </button>
+                  </Link>
               </li>
               <li className='hidden'>
                 <Link href='/auth/register'>
@@ -174,7 +174,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut: handleSignIn, isLog
   )
 }
 
-const MobileNavbar = ({ handleSignOut: handleSignIn, cartItems }: MobileProps) => {
+const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
   const barIconRef = useRef<HTMLLIElement | null>(null)
@@ -262,7 +262,7 @@ const MobileNavbar = ({ handleSignOut: handleSignIn, cartItems }: MobileProps) =
               <li>
                 <button
                   onClick={() =>
-                    console.log('some code in the navbar for signout')
+                    handleSignOut()
                   }
                   className={`${styles.navDropdownLink} text-left`}
                 >
