@@ -82,6 +82,24 @@ interface User {
   }
 }
 
+type UserLoginSession = {
+  success: boolean
+  token: string | null
+  id: string
+  photo: string
+  name: string
+  email: string
+}
+
+type UserSession = {
+  id: string
+  photo: string
+  name: string
+  email: string
+  success: boolean
+  token: string | null
+}
+
 /**
  * {
     "success": true,

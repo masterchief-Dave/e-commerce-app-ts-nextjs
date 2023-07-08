@@ -7,9 +7,8 @@ export const AuthNavbar = (props: Props) => {
   const router = useRouter()
   const pathname = router.pathname.split('/')[2]
 
+
   const handleAuthClick = () => {
-    console.log('auth link clicked')
-    console.log(pathname)
     if (pathname === 'login') {
       router.push('/auth/register')
     } else {

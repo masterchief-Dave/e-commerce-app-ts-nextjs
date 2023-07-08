@@ -5,6 +5,7 @@ import wishListReducer from '@/features/wishlist/wishlistSlice'
 import loginReducer from '@/features/login/loginSlice'
 import Cookies from 'js-cookie'
 
+// get toen from here when I want to access a protected route
 const authToken = Cookies.get('authLoginToken');
 // chec if the user is in the localstorage
 let savedUser
@@ -35,12 +36,3 @@ export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
 
-/**
- * const initialState = {
-  isLoggedIn: !!savedUser, // Set isLoggedIn to true if user data exists
-  user: savedUser ? JSON.parse(savedUser) : null,
-  error: null,
-};
-
- preloadedState: { login: initialState }, // Set the initial state
- */

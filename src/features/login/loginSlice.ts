@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 type LoginState = {
   isLoggedIn: boolean
-  user: User | null
+  // user: User | null 
+  user: UserSession | null
   loading: boolean
   error: string | null
 }
@@ -24,7 +25,7 @@ export const loginSlice = createSlice({
       state.error = null
       state.user = null
     },
-    loginSuccess: (state: LoginState, action: PayloadAction<User>) => {
+    loginSuccess: (state: LoginState, action: PayloadAction<UserLoginSession>) => {
       state.isLoggedIn = true
       state.loading = false
       state.user = action.payload

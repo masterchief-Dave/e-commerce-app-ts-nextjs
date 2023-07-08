@@ -1,54 +1,69 @@
+'use client'
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
-import { signIn, signOut, useSession, getSession } from 'next-auth/react'
+
 import Image from 'next/image'
-import { NextApiRequest } from 'next'
-import { Session } from 'next-auth'
+
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import { useCart } from '@/hooks/useCart'
+import { useAuth } from '@/hooks/useAuth'
 
 type Props = {
-  session: Session | null
+  session: UserLoginSession | null
   isTop: boolean
   cartItems: Cart[]
+  handleSignIn: () => void
+  isLoggedIn: boolean
+  user: UserSession | null
 }
+
+
+type MobileProps = Omit<Props, 'isTop'>
 
 const styles = {
   navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
 }
 
 export const Navbar = () => {
-  const { data: session } = useSession()
-  // console.log(session)
+
   const { isTop } = useStickyNavbar()
+
+  //my api auth
+  const { isLoggedIn, user } = useAuth()
+  console.log(user)
+
 
   const { cart } = useCart()
 
   // const photo = session?.user?.photo!
   // console.log(session?.user)
 
+  const handleSignIn = () => {
+    // some code
+  }
+
   return (
     <div className=''>
       <div className='block lg:hidden'>
-        <MobileNavbar />
+        <MobileNavbar handleSignIn={handleSignIn} session={user} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
       </div>
 
       <div className='hidden lg:block'>
-        <Desktop session={session} isTop={isTop} cartItems={cart} />
+        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignIn={handleSignIn} isLoggedIn={isLoggedIn} user={user} />
       </div>
     </div>
   )
 }
 
-const Desktop = ({ session, isTop, cartItems }: Props) => {
+const Desktop = ({ session, isTop, cartItems, handleSignIn, isLoggedIn, user }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
 
-  return (
+  return ( 
     <nav
       className={`grid grid-cols-12 bg-primary-blue-100 py-4 font-poppins ${
         isTop ? 'fixed top-0 right-0 z-[9999] w-full' : ''
@@ -77,10 +92,10 @@ const Desktop = ({ session, isTop, cartItems }: Props) => {
           </div>
         </li>
         <div className='flex items-center gap-x-4'>
-          {session ? (
+          {isLoggedIn ? (
             <div className='relative h-[4rem] w-[4rem] rounded-full'>
               <Image
-                src={session?.user?.image!}
+                src={user?.photo!}
                 alt='profile image'
                 width={1000}
                 height={1000}
@@ -118,10 +133,7 @@ const Desktop = ({ session, isTop, cartItems }: Props) => {
                     <li>
                       <button
                         onClick={() =>
-                          signOut({
-                            callbackUrl: 'http://localhost:3002',
-                            redirect: false,
-                          })
+                          console.log('some code in the navbar for signout')
                         }
                         className={`${styles.navDropdownLink} text-left`}
                       >
@@ -138,7 +150,7 @@ const Desktop = ({ session, isTop, cartItems }: Props) => {
                 {/* <Link href='/auth/login'> */}
                 <button
                   className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'
-                  onClick={() => signIn()}
+                    onClick={handleSignIn}
                 >
                   Login
                 </button>
@@ -168,7 +180,7 @@ const Desktop = ({ session, isTop, cartItems }: Props) => {
   )
 }
 
-const MobileNavbar = () => {
+const MobileNavbar = ({ handleSignIn, cartItems }: MobileProps) => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
   const barIconRef = useRef<HTMLLIElement | null>(null)
@@ -256,7 +268,7 @@ const MobileNavbar = () => {
               <li>
                 <button
                   onClick={() =>
-                    signOut({ callbackUrl: 'http://localhost:3002' })
+                    console.log('some code in the navbar for signout')
                   }
                   className={`${styles.navDropdownLink} text-left`}
                 >

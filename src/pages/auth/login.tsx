@@ -57,7 +57,11 @@ const Login = (props: Props) => {
         dispatch(loginSuccess({
           success: user.success,
           token: user.token,
-          user: user.user
+          id: user.user._id,
+          email: user.user.email,
+          photo: user.user.avatar.url,
+          name: user.user.name
+          // user: user.user
         }))
       } else {
         const error = response.statusText
