@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/router'
-import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import Link from 'next/link'
+import Image from 'next/image'
+import Cookies from 'js-cookie'
+import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { useAppDispatch } from '@/hooks/reduxhooks'
@@ -20,9 +19,6 @@ interface FormData {
 const Login = (props: Props) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
-
-  // const [email, setEmail] = useState<string>('')
-  // const [password, setPassword] = useState<string>('')
 
   const formik = useFormik<FormData>({
     initialValues: {
@@ -69,7 +65,7 @@ const Login = (props: Props) => {
           photo: user.user.avatar.url,
           id: user.user._id
         }
-        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('user', JSON.stringify(userData))
         dispatch(loginSuccess({
           success: user.success,
           token: user.token,

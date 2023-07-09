@@ -26,3 +26,6 @@ types of card
 2. feature card
 3. normal product card on the home pages
 4. 
+
+// problems
+1. How do I register a user and the user is automatically logged in and then the page navigates to the homepage

@@ -25,7 +25,7 @@ type Props = {
 type MobileProps = Omit<Props, 'isTop'>
 
 const styles = {
-  navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
+  navDropdownLink: `block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
 }
 
 export const Navbar = () => {
@@ -34,6 +34,7 @@ export const Navbar = () => {
 
   //my api auth
   const { isLoggedIn, user } = useAuth()
+  console.log(isLoggedIn)
 
   const { cart } = useCart()
 

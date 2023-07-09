@@ -1,41 +1,20 @@
 url endpoint = http://localhost:8000
 
-import { useDispatch } from 'react-redux';
-import { logout } from './loginSlice';
-
-const LogoutButton = () => {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    // Remove user data from local storage
-    localStorage.removeItem('user');
-
-    // Dispatch logout action
-    dispatch(logout());
-  };
-
-  return (
-    <button onClick={handleLogout}>Logout</button>
-  );
-};
-
-
-import { useDispatch } from 'react-redux';
-import { logout } from './loginSlice';
-import Cookies from 'js-cookie';
-
-const LogoutButton = () => {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    // Remove the authentication cookie
-    Cookies.remove('authToken');
-
-    // Dispatch logout action
-    dispatch(logout());
-  };
-
-  return (
-    <button onClick={handleLogout}>Logout</button>
-  );
-};
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+ 
+// Here you would fetch and return the user
+const useUser = () => ({ user: null, loading: false })
+ 
+export default function Page() {
+  const { user, loading } = useUser()
+  const router = useRouter()
+ 
+  useEffect(() => {
+    if (!(user || loading)) {
+      router.push('/login')
+    }
+  }, [user, loading])
+ 
+  return <p>Redirecting...</p>
+}

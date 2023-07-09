@@ -25,6 +25,7 @@ const registerSlice = createSlice({
       state.user = null
     },
     registerSuccess: (state: RegisterState, action: PayloadAction<RegisterSession>) => {
+      console.log(action.payload)
       state.isRegistered = true
       state.loading = false
       state.error = null
@@ -39,5 +40,5 @@ const registerSlice = createSlice({
   }
 })
 
-export const { registerStart, registerSuccess } = registerSlice.actions
+export const { registerStart, registerSuccess, registerFailure } = registerSlice.actions
 export default registerSlice.reducer

@@ -1,36 +1,43 @@
+import * as Yup from 'yup'
 import Link from 'next/link'
-import { useState } from 'react'
+import Cookies from 'js-cookie'
+import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
+import { registerStart, registerSuccess, registerFailure } from '@/features/register/registerSlice'
+import { loginSuccess } from '@/features/login/loginSlice'
 
 type Props = {}
 
 interface FormData {
-  fullName: string
+  name: string
   password: string
   email: string
   confirmPassword: string
 }
 
 const Register = (props: Props) => {
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   const formik = useFormik<FormData>({
     initialValues: {
-      fullName: "",
+      name: "",
       password: "",
       email: "",
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      fullName: Yup.string().max(100, "Must be less than 100 Characters").required('Required'),
+      name: Yup.string().max(100, "Must be less than 100 Characters").required('Required'),
       password: Yup.string().min(5, "Must be more than 5 Characters").required('Required'),
       email: Yup.string().email().required('Must be a valid email'),
       confirmPassword: Yup.string().required('Confirm your password').oneOf([Yup.ref('password')], 'Passwords must be the same')
     }),
     onSubmit(values, formikHelpers) {
-      console.log(values)
+      console.log('the code is here')
+      handleSubmit(values)
     },
   })
 
@@ -40,7 +47,49 @@ const Register = (props: Props) => {
     btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.4rem] rounded-md`,
   }
 
-  console.log(formik.touched)
+  const handleSubmit = async ({ name, email, password, confirmPassword }: FormData) => {
+    try {
+      dispatch(registerStart())
+
+      const response = await fetch('http://localhost:8100/api/v1/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, password, confirmPassword }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (response.ok) {
+        const user: User = await response.json()
+        Cookies.set('authLoginToken', user?.token!, { expires: 1, secure: true })
+
+        const userData = {
+          name: user.user.name,
+          email: user.user.email,
+          photo: user.user.avatar.url,
+          id: user.user._id
+        }
+
+        localStorage.setItem('user', JSON.stringify(userData))
+        dispatch(loginSuccess({
+          success: user.success,
+          token: user.token,
+          id: user.user._id,
+          email: user.user.email,
+          photo: user.user.avatar.url,
+          name: user.user.name
+        }))
+        router.push('/')
+      } else {
+        const error = response.statusText
+        dispatch(registerFailure(error))
+      }
+
+    } catch (err: any) {
+      console.log(err)
+      dispatch(registerFailure(err.message))
+    }
+  }
 
   return (
     <Layout>
@@ -64,13 +113,13 @@ const Register = (props: Props) => {
                 type='text'
                 placeholder='Firstname Lastname'
                 id='fullName'
-                name='fullName'
+                name='name'
                 className={styles.input}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.fullName}
+                value={formik.values.name}
               />
-              {formik.touched.fullName && formik.errors.fullName ? <p className='text-red-500'>{formik.errors.fullName}</p> : null}
+              {formik.touched.name && formik.errors.name ? <p className='text-red-500'>{formik.errors.name}</p> : null}
             </div>
 
             <div>
@@ -125,7 +174,7 @@ const Register = (props: Props) => {
               {formik.touched.confirmPassword && formik.errors.confirmPassword ? <p className='text-red-500'>{formik.errors.confirmPassword}</p> : null}
             </div>
 
-            <button className={styles.btn}>Submit</button>
+            <button type='submit' className={styles.btn}>Submit</button>
 
             <div>
               <p>
