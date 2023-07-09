@@ -1,27 +1,44 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
-
-import { signIn, getSession, useSession } from 'next-auth/react'
-import { redirect } from 'next/dist/server/api-utils'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
-import Cookies from 'js-cookie'
 
 type Props = {}
+
+interface FormData {
+  email: string
+  password: string
+}
 
 const Login = (props: Props) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  // const [email, setEmail] = useState<string>('')
+  // const [password, setPassword] = useState<string>('')
 
-  const { data: session } = useSession()
-  // console.log({ session })
+  const formik = useFormik<FormData>({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email().required('Must be a valid email'),
+      password: Yup.string().required()
+    }),
+    onSubmit: (values, formikHelpers) => {
+      // console.log(values)
+      handleSubmit(values)
+    }
+  })
+
 
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
@@ -29,8 +46,7 @@ const Login = (props: Props) => {
     btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300  font-medium text-[1.4rem] rounded-md`,
   }
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
+  const handleSubmit = async ({ email, password }: FormData) => {
 
     try {
       dispatch(loginStart())
@@ -63,6 +79,7 @@ const Login = (props: Props) => {
           name: user.user.name
           // user: user.user
         }))
+        router.push('/')
       } else {
         const error = response.statusText
         dispatch(loginFailure(error))
@@ -71,22 +88,15 @@ const Login = (props: Props) => {
       console.log(err)
       dispatch(loginFailure(err.message))
     }
-
   }
 
-  // handle google auth
-  const handleGoogleAuth = async (e: any) => {
-    e.preventDefault()
-    // create a post request with the user email as a means of identification and then send a callback url: to my server with the data to get the user id and stuff like that
-    signIn('google', { callbackUrl: 'http://localhost:3002', redirect: true })
-  }
 
   return (
     <Layout>
       <div className='font-poppins'>
         <AuthNavbar />
         <section className='flex h-full w-full items-center justify-center py-16'>
-          <form className='w-[35rem] max-w-[40rem] space-y-4 rounded-xl border py-4 px-6'>
+          <form className='w-[35rem] max-w-[40rem] space-y-4 rounded-xl border py-4 px-6' onSubmit={formik.handleSubmit}>
             <header>
               <h1 className='text-center text-[2rem] font-normal'>Login</h1>
             </header>
@@ -99,12 +109,12 @@ const Login = (props: Props) => {
                 placeholder='Email Address'
                 id='email'
                 name='email'
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
                 className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
               />
+              {formik.touched.email && formik.errors.email ? <p className='text-red-500'>{formik.errors.email}</p> : null}
             </div>
 
             <div>
@@ -117,17 +127,16 @@ const Login = (props: Props) => {
                 placeholder='Password'
                 id='password'
                 name='password'
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value)
-                }}
                 className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
               />
+              {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
             </div>
 
             <button
               className={`${styles.btn} text-white`}
-              onClick={handleSubmit}
               type='submit'
             >
               Submit
@@ -164,7 +173,6 @@ const Login = (props: Props) => {
             <div className='space-y-4'>
               <button
                 className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100`}
-                onClick={handleGoogleAuth}
               >
                 <p>Sign In with Google</p>
                 <Image
