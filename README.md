@@ -17,36 +17,3 @@ npm run dev
   npm install ts-node
 ```
 
-### Things to do and implement 📓
-- [] persist cart database in the server
-- [] Do wishlist implementation
-- [] persist wishlist in the database
-- [] from the cart to the checkout page
-- [] from checkout to payment
-- [] user login
-- [] user details and dashboard data
-- [] user registration
-- [] order logic
-- [] unit testing for my components
-- [] add formik for form validation
-- [] add leave a review page 
-- [] in the product card, when I click on the image it should lead to /product/:id
-- []
-- []
-- []
-
-
-### Project Roadmap 
-- [] create the react native application for the logistics part where I have a rider that does the logistics part
-- [] add dashboard where a vendor can upload products
-- []
-- []
-- []
-- []
-
-
-
-### problems I have encountered
-- [] authentication from google using nextauth
-- [] registering a user that is maing use of google sign up option
-- [] should I persist my cart, wishlist, if yes where should I persist data - database or localstorage
