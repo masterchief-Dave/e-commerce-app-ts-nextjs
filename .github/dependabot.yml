@@ -9,3 +9,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    assignees: 
+      - "davieoba"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "davieoba"
