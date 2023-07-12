@@ -51,7 +51,7 @@ const Register = (props: Props) => {
     try {
       dispatch(registerStart())
 
-      const response = await fetch('http://localhost:8100/api/v1/auth/register', {
+      const response = await fetch('https://sage-warehouse-backend.onrender.com/api/v1/auth/register', {
         method: 'POST',
         body: JSON.stringify({ name, email, password, confirmPassword }),
         headers: {

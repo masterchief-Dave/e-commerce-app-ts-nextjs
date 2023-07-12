@@ -47,7 +47,17 @@ const Login = (props: Props) => {
     try {
       dispatch(loginStart())
 
-      const response = await fetch('http://localhost:8100/api/v1/auth/login', {
+      // https://sage-warehouse-backend.onrender.com/
+
+      // const response = await fetch('http://localhost:8100/api/v1/auth/login', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ email, password }),
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // })
+
+      const response = await fetch('https://sage-warehouse-backend.onrender.com/api/v1/auth/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: {
