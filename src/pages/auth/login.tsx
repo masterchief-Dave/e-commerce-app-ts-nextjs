@@ -96,13 +96,31 @@ const Login = (props: Props) => {
     }
   }
 
+  const handleGoogleAuth = async () => {
+    //  router.push('http://localhost:8100/api/v1/auth/google')
+    const response = await fetch('http://localhost:8100/api/v1/auth/google', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      method: 'GET',
+      mode: 'no-cors'
+    }).then((data) => {
+      console.log(data?.body!)
+    })
+    // const user = await response.json()
+    // console.log({ user })
+  }
+
 
   return (
     <Layout>
       <div className='font-poppins'>
         <AuthNavbar />
         <section className='flex h-full w-full items-center justify-center py-16'>
-          <form className='w-[35rem] max-w-[40rem] space-y-4 rounded-xl border py-4 px-6' onSubmit={formik.handleSubmit}>
+          <div className='rounded-xl border py-4 px-6 space-y-8'>
+
+            <form className='w-[35rem] max-w-[40rem] space-y-4' onSubmit={formik.handleSubmit}>
             <header>
               <h1 className='text-center text-[2rem] font-normal'>Login</h1>
             </header>
@@ -176,9 +194,18 @@ const Login = (props: Props) => {
               <p className='font-bold'>OR</p>
             </div>
 
+
+            </form>
+
             <div className='space-y-4'>
               <button
                 className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100`}
+                type='submit'
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleGoogleAuth()
+                }
+                }
               >
                 <p>Sign In with Google</p>
                 <Image
@@ -190,7 +217,7 @@ const Login = (props: Props) => {
                 />
               </button>
             </div>
-          </form>
+          </div>
         </section>
       </div>
     </Layout>
