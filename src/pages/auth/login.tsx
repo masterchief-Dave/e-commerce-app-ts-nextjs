@@ -8,6 +8,7 @@ import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
+import axios from 'axios'
 
 type Props = {}
 
@@ -97,19 +98,30 @@ const Login = (props: Props) => {
   }
 
   const handleGoogleAuth = async () => {
-    //  router.push('http://localhost:8100/api/v1/auth/google')
-    const response = await fetch('http://localhost:8100/api/v1/auth/google', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      method: 'GET',
-      mode: 'no-cors'
-    }).then((data) => {
-      console.log(data?.body!)
+
+    console.log('the code is here')
+
+    // const response = await fetch('http://localhost:8100/api/v1/auth/google/redirect', {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Access-Control-Allow-Origin': '*'
+    //   },
+    //   method: 'GET',
+    //   mode: 'no-cors'
+    // }).then((data) => {
+    //   return data
+    // }).then((data) => {
+    //   console.log(data)
+    // })
+
+    axios.get('http://localhost:8100/api/v1/auth/google')
+      .then((response) => {
+        console.log(response.data)
+        const token = response.data
+      }).catch((err) => {
+        console.log(err)
     })
-    // const user = await response.json()
-    // console.log({ user })
+
   }
 
 
@@ -203,6 +215,7 @@ const Login = (props: Props) => {
                 type='submit'
                 onClick={(e) => {
                   e.preventDefault()
+                  // router.push('http://localhost:8100/api/v1/auth/google')
                   handleGoogleAuth()
                 }
                 }
