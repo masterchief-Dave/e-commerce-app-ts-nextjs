@@ -114,7 +114,7 @@ const Login = (props: Props) => {
     //   console.log(data)
     // })
 
-    axios.get('http://localhost:8100/api/v1/auth/google')
+    axios.get('https://sage-warehouse-backend.onrender.com/api/v1/auth/google')
       .then((response) => {
         console.log(response.data)
         const token = response.data
