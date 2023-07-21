@@ -21,6 +21,8 @@ const Login = (props: Props) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
+  console.log(process.env.NEXT_PUBLIC_production_server)
+
   const formik = useFormik<FormData>({
     initialValues: {
       email: "",
@@ -57,8 +59,9 @@ const Login = (props: Props) => {
       //     'Content-Type': 'application/json'
       //   }
       // })
+      let baseUrl = process.env.NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_development_server : process.env.NEXT_PUBLIC_production_server
 
-      const response = await fetch('https://sage-warehouse-backend.onrender.com/api/v1/auth/login', {
+      const response = await fetch(`https://sage-warehouse-backend.onrender.com/api/v1/auth/login`, {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: {
@@ -97,32 +100,17 @@ const Login = (props: Props) => {
     }
   }
 
-  const handleGoogleAuth = async () => {
+  // const handleGoogleAuth = async () => {
 
-    console.log('the code is here')
+  //   await axios.get('http://localhost:8100/api/v1/auth/google-auth')
+  //     .then((response) => {
+  //       console.log(response.data)
+  //       const token = response.data
+  //     }).catch((err) => {
+  //       console.log(err)
+  //     })
 
-    // const response = await fetch('http://localhost:8100/api/v1/auth/google/redirect', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Access-Control-Allow-Origin': '*'
-    //   },
-    //   method: 'GET',
-    //   mode: 'no-cors'
-    // }).then((data) => {
-    //   return data
-    // }).then((data) => {
-    //   console.log(data)
-    // })
-
-    axios.get('https://sage-warehouse-backend.onrender.com/api/v1/auth/google')
-      .then((response) => {
-        console.log(response.data)
-        const token = response.data
-      }).catch((err) => {
-        console.log(err)
-    })
-
-  }
+  // }
 
 
   return (
@@ -215,8 +203,8 @@ const Login = (props: Props) => {
                 type='submit'
                 onClick={(e) => {
                   e.preventDefault()
-                  // router.push('http://localhost:8100/api/v1/auth/google')
-                  handleGoogleAuth()
+                  router.push('http://localhost:8100/api/v1/auth/google')
+                  // handleGoogleAuth()
                 }
                 }
               >
