@@ -34,7 +34,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+,
+"src/lib/mongodb.mjs"
+],
   "exclude": [
     "node_modules"
   ]
