@@ -258,3 +258,13 @@ const DropdownMenu = () => {
     </nav>
   )
 }
+
+const Code = () => {
+  return (
+    <>
+      <p className='text'>some code will show up in this place and</p>
+      <h1>some code</h1>
+      <h3></h3>
+    </>
+  )
+}

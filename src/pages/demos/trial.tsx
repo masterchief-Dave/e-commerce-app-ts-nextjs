@@ -5,9 +5,21 @@ import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import useSWR from 'swr'
 
 const Trial = () => {
+  const handleClick = async () => {
+    const response = await fetch(`http://localhost:8100/api/v1/auth/updatepassword`, {
+      method: 'PATCH'
+
+    })
+
+    const data = response.json()
+
+    console.log(data)
+  }
+
   return (
-    <div className=''>
-      <Card />
+    <div className='p-24'>
+      {/* <Card /> */}
+      <button className='border rounded-md p-4' onClick={handleClick}>update password</button>
     </div>
   )
 }

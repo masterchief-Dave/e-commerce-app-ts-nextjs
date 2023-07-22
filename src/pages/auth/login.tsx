@@ -9,19 +9,22 @@ import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
 import axios from 'axios'
+import { fetchLogin } from '@/utils/fetchLogin'
 
-type Props = {}
+type Props = {
+  myCookieValue: string,
+  data: string
+}
 
 interface FormData {
   email: string
   password: string
 }
 
-const Login = (props: Props) => {
+const Login = ({ myCookieValue, data }: Props) => {
+  console.log({ myCookieValue })
   const router = useRouter()
   const dispatch = useAppDispatch()
-
-  console.log(process.env.NEXT_PUBLIC_production_server)
 
   const formik = useFormik<FormData>({
     initialValues: {
@@ -61,7 +64,7 @@ const Login = (props: Props) => {
       // })
       let baseUrl = process.env.NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_development_server : process.env.NEXT_PUBLIC_production_server
 
-      const response = await fetch(`https://sage-warehouse-backend.onrender.com/api/v1/auth/login`, {
+      const response = await fetch(`${baseUrl}/auth/login`, {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: {
@@ -71,6 +74,7 @@ const Login = (props: Props) => {
 
       if (response.ok) {
         const user: User = await response.json()
+        console.log({ user })
         Cookies.set('authLoginToken', user?.token!, { expires: 1, secure: true })
         // Save user data to local storage
         const userData = {
@@ -224,5 +228,17 @@ const Login = (props: Props) => {
     </Layout>
   )
 }
+
+// export async function getServerSideProps({ req }: any) {
+//   const response = await fetchLogin()
+//   console.log(response)
+//   const myCookieValue = req.cookies.e_commerce_token || 'No cookie found'
+//   return {
+//     props: {
+//       myCookieValue,
+//       // data
+//     },
+//   }
+// }
 
 export default Login

@@ -9,6 +9,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.setHeader('Set-Cookie', 'myCookie=exampleValue; Path=/; HttpOnly')
+  console.log('endpoint hit')
+  res.setHeader('Set-Cookie', 'myCookie=exampleValue; Path=/;')
   res.status(200).json({ name: 'John Doe' })
 }
