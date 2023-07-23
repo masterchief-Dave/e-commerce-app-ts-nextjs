@@ -7,7 +7,7 @@ import { AddressSchema } from './address'
 import { CardSchema } from './card'
 import { JWT_SECRET, JWT_EXPIRES } from '@/utils/config'
 
-export const UserSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema<IUser>({
   name: {
     type: String,
     required: [true, 'Please enter your name'],
@@ -138,4 +138,4 @@ UserSchema.methods.generatePasswordResetToken = function () {
 }
 
 
-export const User = mongoose.models.User ? mongoose.models.User : mongoose.model('User', UserSchema)
+export const User = mongoose.models.User ? mongoose.models.User : mongoose.model<IUser>('User', UserSchema)

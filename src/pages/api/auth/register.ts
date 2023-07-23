@@ -12,16 +12,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { name, email, password, passwordChangedAt } = req.body
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-      passwordChangedAt,
-      avatar: {
-        public_id: 'avataaars_rkyikx',
-        url: 'https://res.cloudinary.com/diggungrj/image/upload/v1668579345/avataaars_rkyikx.svg'
-      }
-    }) 
+    const user = new User()
+    user.name = name
+    user.email = email
+    user.password = password
+    user.passwordChangedAt = passwordChangedAt
+    user.avatar = {
+      public_id: 'avataaars_rkyikx',
+      url: 'https://res.cloudinary.com/diggungrj/image/upload/v1668579345/avataaars_rkyikx.svg'
+    }
+    await user.save()
 
     if (!user) {
       res.status(409).json({
