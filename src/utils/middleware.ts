@@ -20,7 +20,12 @@ export const sendToken = (user: any, statusCode: number, res: NextApiResponse) =
 
   res.json({
     success: true,
-    token
+    token,
+    data: {
+      name: user.name,
+      email: user.email,
+      photo: user.avatar.url
+    }
   })
 }
 

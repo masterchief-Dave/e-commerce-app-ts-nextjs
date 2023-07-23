@@ -63,9 +63,38 @@ interface PaymentFormInput {
   cvc: string
 }
 
+interface IDelivery {
+  street: string
+  zip: string
+  city: string
+  state: string
+}
+
+interface ICard {
+  name: string
+  cardNumber: string
+  cvc: string
+  expiryDate: Date
+}
+
 interface IUser {
   name: string
+  googleId: string
   email: string
+  password: string
+  avatar: {
+    public_id: string,
+    url: string
+  },
+  role: string
+  createdAt: Date
+  resetPasswordToken: string
+  resetPasswordExpire: Date
+  passwordChangedAt: Date
+  active: boolean
+  refreshToken: string
+  deliveryAddress: IDelivery[]
+  creditCards: ICard[]
 }
 
 interface User {
