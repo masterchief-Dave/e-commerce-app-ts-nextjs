@@ -1,88 +1,103 @@
-import NextAuth from 'next-auth'
+import { connectToMongoDB } from '@/lib/mongodb'
+import { User } from '@/models/user'
+import { compare } from 'bcryptjs'
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
-interface User {
-  avatar: {
-    public_id: string
-    url: string
-  }
-  _id: string
-  name: string
-  email: string
-  password: string
-  role: string
-  passwordChangedAt: string
-  createdAt: string
-  __v: number
-}
+// interface User {
+//   avatar: {
+//     public_id: string
+//     url: string
+//   }
+//   _id: string
+//   name: string
+//   email: string
+//   password: string
+//   role: string
+//   passwordChangedAt: string
+//   createdAt: string
+//   __v: number
+// }
 
-export default NextAuth({
-  providers: [
-    // google provider
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    CredentialsProvider({
-      name: 'Credentials',
-      id: 'credentials-login',
+const options: NextAuthOptions = {
+  providers: [CredentialsProvider({
+    id: 'credentials',
+    name: 'credentials-login',
+    credentials: {
+      email: { label: 'Email', type: 'text' },
+      password: { label: 'Password', type: 'password' }
+    },
+    async authorize(credentials, req) {
+      await connectToMongoDB().catch(err => { throw new Error(err) })
 
-      credentials: {
-        email: { label: 'email', type: 'text', placeholder: 'email' },
-        password: { label: 'password', type: 'password' },
-      },
-      async authorize(credentials, req) {
-        const res = await fetch('http://localhost:8100/api/v1/auth/login', {
-          method: 'POST',
-          body: JSON.stringify({
-            email: credentials?.email,
-            password: credentials?.password,
-          }),
-          headers: { 'Content-Type': 'application/json' },
-        })
-        // console.log(await res.json())
+      // @ts-ignore
+      const user = await User.findOne({
+        email: credentials?.email
+      }).select('+password')
 
-        const { user, role, token, success } = await res.json()
-        // console.log({ user }, { role }, { token }, { success })
-        // user.role = role
+      if (!user) {
+        throw new Error('Invalid credentials')
+      }
 
-        // create the new user object in this place
-        const newUser = {
-          user: user.name,
-          email: user.email,
-          role: user.role,
-          image: user.avatar.url,
-          token: token,
-          success: success,
-          password: user.password,
-          id: user._id,
-        }
+      const isPasswordCorrect = await compare(credentials?.password!, user.password)
 
-        // console.log({ newUser })
+      if (!isPasswordCorrect) {
+        throw new Error('Invalid credentials')
+      }
 
-        if (res.ok && user) {
-          // console.log(res.body)
-          return newUser
-        }
-
-        return null
-      },
-    }),
-  ],
+      return user
+    },
+  })],
   pages: {
-    signIn: '/auth/login',
-    newUser: '/auth/register'
+    newUser: '/auth/register',
+    signIn: '/auth/login'
+  },
+  session: {
+    strategy: 'jwt'
   },
   callbacks: {
-    async jwt({ token, user }) {
-      // console.log({ user })
-      return { ...token, ...user }
+    jwt: async ({ token, user, session, account, profile }) => {
+      user && (token.user = user)
+
+      if (account) {
+        token.accessToken = account!?.access_token
+        // token.id = profile.id
+      }
+
+
+      return token
     },
-    async session({ session, token, user }) {
-      session.user = token as any
-      // session.expires = token. 
+    session: async ({ session, token }) => {
+      // console.log({ session, token })
+      console.log({ token })
+      const user = token.user as IUser
+
+      // session.user = user
+      session.expires = ''
+      // session.token = token
+      session.role = user.role
+      session.photo = user.avatar.url
       return session
-    },
-  },
-})
+    }
+  }
+}
+
+/**
+ * address: string;
+    image: string;
+    email: string;
+    iat: number;
+    exp: number;
+    jti: string;
+    password: string;
+    picture: string;
+    role: string;
+    sub: string;
+    success: boolean;
+    token: string;
+    user: string;
+ */
+
+export default NextAuth(options)

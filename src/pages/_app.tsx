@@ -24,7 +24,7 @@ export default function App({
           <Component {...pageProps} />
           <Toaster />
         </ChakraProvider>
-      </SessionProvider>
+      </SessionProvider> 
     </Provider>
   )
 }

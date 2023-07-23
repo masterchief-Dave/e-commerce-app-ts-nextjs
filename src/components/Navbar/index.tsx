@@ -1,16 +1,15 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
-import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
-
 import Image from 'next/image'
-
+import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import { useCart } from '@/hooks/useCart'
 import { useAuth } from '@/hooks/useAuth'
 import { useLogout } from '@/hooks/useLogout'
+import { useSession, signOut } from 'next-auth/react'
+import { Session } from 'next-auth'
 
 type Props = {
   session: UserLoginSession | null
@@ -19,6 +18,7 @@ type Props = {
   handleSignOut: () => void
   isLoggedIn: boolean
   user: UserSession | null
+  data: Session | null
 }
 
 
@@ -31,10 +31,11 @@ const styles = {
 export const Navbar = () => {
   const { handleLogout } = useLogout()
   const { isTop } = useStickyNavbar()
+  const { data } = useSession()
 
   //my api auth
   const { isLoggedIn, user } = useAuth()
-  console.log(isLoggedIn)
+  console.log(data)
 
   const { cart } = useCart()
 
@@ -44,17 +45,17 @@ export const Navbar = () => {
   return (
     <div className=''>
       <div className='block lg:hidden'>
-        <MobileNavbar handleSignOut={handleLogout} session={user} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
+        <MobileNavbar handleSignOut={handleLogout} session={user} data={data} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
       </div>
 
       <div className='hidden lg:block'>
-        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignOut={handleLogout} isLoggedIn={isLoggedIn} user={user} />
+        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignOut={handleLogout} isLoggedIn={isLoggedIn} user={user} data={data} />
       </div>
     </div>
   )
 }
 
-const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user }: Props) => {
+const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
@@ -88,10 +89,10 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user }:
           </div>
         </li>
         <div className='flex items-center gap-x-4'>
-          {isLoggedIn ? (
+          {data?.user ? (
             <div className='relative h-[4rem] w-[4rem] rounded-full'>
               <Image
-                src={user?.photo!}
+                src={data?.photo!}
                 alt='profile image'
                 width={1000}
                 height={1000}
@@ -129,7 +130,10 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user }:
                     <li>
                       <button
                         onClick={() =>
-                          handleSignOut()
+                          signOut({
+                            redirect: false
+                          })
+                          // handleSignOut()
                         }
                         className={`${styles.navDropdownLink} text-left`}
                       >
@@ -263,7 +267,8 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
               <li>
                 <button
                   onClick={() =>
-                    handleSignOut()
+                    signOut()
+                    // handleSignOut()
                   }
                   className={`${styles.navDropdownLink} text-left`}
                 >

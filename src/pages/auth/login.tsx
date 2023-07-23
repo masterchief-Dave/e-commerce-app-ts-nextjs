@@ -10,6 +10,7 @@ import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
 import axios from 'axios'
 import { fetchLogin } from '@/utils/fetchLogin'
+import { loginUser } from '@/helpers'
 
 type Props = {
   myCookieValue: string,
@@ -62,6 +63,9 @@ const Login = ({ myCookieValue, data }: Props) => {
       //     'Content-Type': 'application/json'
       //   }
       // })
+      /**
+       * 
+       
       let baseUrl = process.env.NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_development_server : process.env.NEXT_PUBLIC_production_server
 
       const response = await fetch(`${baseUrl}/auth/login`, {
@@ -93,11 +97,25 @@ const Login = ({ myCookieValue, data }: Props) => {
           name: user.user.name
           // user: user.user
         }))
+        
+
+
         router.push('/')
       } else {
         const error = response.statusText
         dispatch(loginFailure(error))
       }
+      */
+
+      // ## new code
+      const loginResponse = await loginUser({ email, password })
+
+      if (loginResponse && !loginResponse.ok) {
+        console.log(loginResponse.error)
+      } else {
+        router.push('/')
+      }
+
     } catch (err: any) {
       console.log(err)
       dispatch(loginFailure(err.message))

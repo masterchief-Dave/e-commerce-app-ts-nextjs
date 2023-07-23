@@ -1,5 +1,6 @@
 import * as Yup from 'yup'
 import Link from 'next/link'
+
 import Cookies from 'js-cookie'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
@@ -8,6 +9,9 @@ import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { registerStart, registerSuccess, registerFailure } from '@/features/register/registerSlice'
 import { loginSuccess } from '@/features/login/loginSlice'
+import { BASE_URL } from '@/utils/config'
+import axios from 'axios'
+import { loginUser } from '@/helpers'
 
 type Props = {}
 
@@ -21,6 +25,7 @@ interface FormData {
 const Register = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter()
+  // const [loading, setLoading] = useState(false)
 
   const formik = useFormik<FormData>({
     initialValues: {
@@ -51,14 +56,33 @@ const Register = (props: Props) => {
     try {
       dispatch(registerStart())
 
-      const response = await fetch('https://sage-warehouse-backend.onrender.com/api/v1/auth/register', {
+      const response = await axios.post('http://localhost:3002/api/auth/register', { name, email, password, confirmPassword })
+
+      if (response.data.success) {
+        // save user in session
+        const loginResponse = await loginUser({ email, password })
+
+        if (loginResponse && !loginResponse.ok) {
+          console.log(loginResponse.error)
+          throw new Error(loginResponse.error)
+        } else {
+          router.push('/')
+        }
+
+      }
+
+      /**
+       * this code works well, this is the method I was using before, fingers crossed 🤞
+       * 
+       * 
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         body: JSON.stringify({ name, email, password, confirmPassword }),
         headers: {
           'Content-Type': 'application/json'
         }
       })
-
+      
       if (response.ok) {
         const user: User = await response.json()
         Cookies.set('authLoginToken', user?.token!, { expires: 1, secure: true })
@@ -84,6 +108,8 @@ const Register = (props: Props) => {
         const error = response.statusText
         dispatch(registerFailure(error))
       }
+
+      */
 
     } catch (err: any) {
       console.log(err)

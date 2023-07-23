@@ -77,11 +77,13 @@ interface ICard {
   expiryDate: Date
 }
 
+
 interface IUser {
+  id: string
   name: string
   googleId: string
   email: string
-  password: string
+  // password: string
   avatar: {
     public_id: string,
     url: string
@@ -95,6 +97,20 @@ interface IUser {
   refreshToken: string
   deliveryAddress: IDelivery[]
   creditCards: ICard[]
+
+  address: string
+  image: string
+  email: string
+  iat: number
+  exp: number
+  jti: string
+  // password: string
+  picture: string
+  role: string
+  sub: string
+  success: boolean
+  token: string
+  user: string
 }
 
 interface User {
