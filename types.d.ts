@@ -63,6 +63,11 @@ interface PaymentFormInput {
   cvc: string
 }
 
+interface IUser {
+  name: string
+  email: string
+}
+
 interface User {
   success: boolean
   token: string | null

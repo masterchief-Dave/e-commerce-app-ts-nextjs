@@ -4,12 +4,8 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto"
 import { AddressSchema } from './address'
-import { CreditCardSchema } from './card'
-
+import { Card, CardSchema } from './card'
 import { JWT_SECRET, JWT_EXPIRES } from '@/utils/config'
-
-
-// @ts-ignore
 
 export const UserSchema = new mongoose.Schema({
   name: {
@@ -62,7 +58,7 @@ export const UserSchema = new mongoose.Schema({
     type: String
   },
   deliveryAddress: [AddressSchema],
-  creditCards: [CreditCardSchema]
+  creditCards: [CardSchema]
 })
 
 
@@ -142,4 +138,4 @@ UserSchema.methods.generatePasswordResetToken = function () {
 }
 
 
-export const User = mongoose.model('User', UserSchema)
+export const User = mongoose.models.User ? mongoose.models.User : mongoose.model('User', UserSchema)

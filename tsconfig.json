@@ -36,6 +36,8 @@
     ".next/types/**/*.ts"
 ,
 "src/lib/mongodb.mjs"
+,
+"src/lib/mongodb.js"
 ],
   "exclude": [
     "node_modules"

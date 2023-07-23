@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export const CreditCardSchema = new mongoose.Schema({
+export const CardSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -19,5 +19,6 @@ export const CreditCardSchema = new mongoose.Schema({
   }
 })
 
-export const CreditCard = mongoose.model('CreditCard', CreditCardSchema)
+
+export const Card = mongoose.models.Card ? mongoose.models.Card : mongoose.model('Card', CardSchema)
 

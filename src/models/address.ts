@@ -18,6 +18,6 @@ export const AddressSchema = new mongoose.Schema({
   }
 })
 
-export const Address = mongoose.model('Address', AddressSchema)
+export const Address = mongoose.models.Address ? mongoose.models.Address : mongoose.model('Address', AddressSchema)
 
 
