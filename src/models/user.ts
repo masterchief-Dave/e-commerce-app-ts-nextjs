@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto"
 import { AddressSchema } from './address'
-import { Card, CardSchema } from './card'
+import { CardSchema } from './card'
 import { JWT_SECRET, JWT_EXPIRES } from '@/utils/config'
 
 export const UserSchema = new mongoose.Schema({
