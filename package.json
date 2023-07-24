@@ -23,7 +23,7 @@
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "formik": "^2.4.2",
-    "framer-motion": "^10.12.12",
+    "framer-motion": "^10.13.1",
     "jest": "^29.6.1",
     "jest-environment-jsdom": "^29.6.1",
     "js-cookie": "^3.0.5",
