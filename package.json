@@ -24,7 +24,7 @@
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "eslint": "8.44.0",
+    "eslint": "8.46.0",
     "eslint-config-next": "13.4.9",
     "formik": "^2.4.2",
     "framer-motion": "^10.12.12",
