@@ -109,6 +109,7 @@ const Login = ({ myCookieValue, data }: Props) => {
 
       // ## new code
       const loginResponse = await loginUser({ email, password })
+      console.log({ loginResponse })
 
       if (loginResponse && !loginResponse.ok) {
         console.log(loginResponse.error)

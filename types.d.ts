@@ -104,7 +104,7 @@ interface IUser {
   iat: number
   exp: number
   jti: string
-  // password: string
+  password: string
   picture: string
   role: string
   sub: string

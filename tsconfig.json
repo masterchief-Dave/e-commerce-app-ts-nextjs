@@ -38,6 +38,8 @@
 "src/lib/mongodb.mjs"
 ,
 "src/lib/mongodb.js"
+,
+"src/pages/demos/demo.jsx"
 ],
   "exclude": [
     "node_modules"

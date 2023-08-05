@@ -6,20 +6,6 @@ import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
-// interface User {
-//   avatar: {
-//     public_id: string
-//     url: string
-//   }
-//   _id: string
-//   name: string
-//   email: string
-//   password: string
-//   role: string
-//   passwordChangedAt: string
-//   createdAt: string
-//   __v: number
-// }
 
 const options: NextAuthOptions = {
   providers: [CredentialsProvider({
@@ -55,7 +41,8 @@ const options: NextAuthOptions = {
     signIn: '/auth/login'
   },
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
+    maxAge: 60 * 60 * 24
   },
   callbacks: {
     jwt: async ({ token, user, session, account, profile }) => {
@@ -75,10 +62,11 @@ const options: NextAuthOptions = {
       const user = token.user as IUser
 
       // session.user = user
-      session.expires = ''
+      // session.expires = ''
       // session.token = token
       session.role = user.role
       session.photo = user.avatar.url
+      // session.expires = 30 * 1000
       return session
     }
   }

@@ -25,7 +25,7 @@ export const UserSchema = new mongoose.Schema<IUser>({
     type: String,
     required: [true, 'Please enter your password'],
     minLength: [5, 'Password cannot be less than 5 characters'],
-    select: false,
+    select: false
   },
   avatar: {
     public_id: {

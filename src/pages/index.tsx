@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
-import { DropdownNav } from '@/components/Dropdown'
+
 import { Header } from '@/components/Header'
 import { WeeklyDeals } from '@/components/Deals'
 import { Footer } from '@/components/Footer'
@@ -14,6 +14,7 @@ import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { ProductCardSkeleton } from '@/components/SkeletonLoading'
 
 import { electronicsData, gamingData, computerData } from '@/globals/category'
+import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
 
 
 
@@ -82,7 +83,9 @@ export default function Home() {
       <Layout>
         <>
           <Navbar />
-          <DropdownNav />
+          <div className='w-full flex items-center justify-center'>
+            <NavigationMenuDemo />
+          </div>
           <Header />
           <main className='grid grid-cols-12 space-y-12 bg-primary-white py-12'>
             <div className='col-span-full mx-auto grid w-full grid-cols-12'>

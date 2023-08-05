@@ -17,3 +17,14 @@ npm run dev
   npm install ts-node
 ```
 
+## Email
+mailtrap
+nodemailer
+React-email
+resend
+
+things to do
+1. move the backend code into my api
+2. send activation email after a user registers
+3. do reset password and forgot password
+4. 
