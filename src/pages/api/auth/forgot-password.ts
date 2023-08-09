@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { User } from '@/models/user'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import * as crypto from 'crypto'
 
 type Data = {
   message?: string
@@ -25,6 +26,21 @@ export default async function handler(
   const user = await User.findOne({ email: email })
 
   if (!user) res.status(404).json({ message: 'invalid user, create an account with sage-warehouse' })
+
+  const resetToken = crypto.randomBytes(32).toString('hex')
+  const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+
+  const expiryDate = new Date()
+  expiryDate.setMinutes(expiryDate.getMinutes() + 10)
+
+  user.resetToken = hashedToken
+  user.passwordResetExpires = expiryDate
+  await user.save({ validateBeforeSave: false })
+
+  // const resetLink = `${req.protocol}://${req.get('host')}/auth/reset-password/${resetToken}`
+  const resetLink = `http://localhost:3002/auth/reset-password/${resetToken}`
+
+  // confiure the email sender
 
   res.status(200).json({ name: 'John Doe' })
 }
