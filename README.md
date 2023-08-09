@@ -30,7 +30,17 @@ things to do
 4. 
 
 the flow for the login
-1. install next-auth
+1. install next-auth 
 2. confiure my next-auth app to make use of credentials
 3. connect to mongodb
 4. create a helper function called 
+
+next-auth
+1. can register with credentials (done)
+2. the user is logged in and session is created after the user is successfully signedin (done)
+3. the user can login with correct credentials (done)
+4. the user is redirected to the homepage after successfully login (done)
+4. user session is created (done)
+5. the user can register with oauth provider like google (done)
+6. clear the cookie after a user signs out
+7. 

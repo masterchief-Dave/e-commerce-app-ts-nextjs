@@ -24,7 +24,6 @@ interface FormData {
 }
 
 const Login = ({ myCookieValue, data }: Props) => {
-  console.log({ myCookieValue })
   const router = useRouter()
   const dispatch = useAppDispatch()
 
@@ -71,7 +70,9 @@ const Login = ({ myCookieValue, data }: Props) => {
   }
 
   const handleGoogleAuth = async () => {
-    await signIn('google')
+    await signIn('google', {
+      redirect: true
+    })
   }
 
   return (

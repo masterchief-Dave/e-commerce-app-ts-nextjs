@@ -8,11 +8,7 @@ declare module 'next-auth' {
 
   interface User extends DefaultUser {
     role: string
-    avatar: {
-      public_id: string,
-      url: string
-    }
-
+    avatar: string
   }
 
   interface Session {
