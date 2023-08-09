@@ -71,7 +71,7 @@ const Login = ({ myCookieValue, data }: Props) => {
 
   const handleGoogleAuth = async () => {
     await signIn('google', {
-      redirect: true
+      callbackUrl: '/'
     })
   }
 
