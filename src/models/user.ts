@@ -28,14 +28,8 @@ export const UserSchema = new mongoose.Schema<IUser>({
     select: false
   },
   avatar: {
-    public_id: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-      required: true,
-    },
+    type: String,
+    default: 'https://res.cloudinary.com/diggungrj/image/upload/v1668579345/avataaars_rkyikx.svg'
   },
   role: {
     type: String,
@@ -126,7 +120,6 @@ UserSchema.methods.changedPasswordAfter = function (JwtTimestamp: number) {
 // generate password reset token
 UserSchema.methods.generatePasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString('hex')
-
   this.resetPasswordToken = crypto
     .createHash('sha256')
     .update(resetToken)
@@ -136,6 +129,5 @@ UserSchema.methods.generatePasswordResetToken = function () {
 
   return resetToken
 }
-
 
 export const User = mongoose.models.User ? mongoose.models.User : mongoose.model<IUser>('User', UserSchema)

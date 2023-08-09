@@ -66,7 +66,6 @@ export default function Home() {
     if (pageIndex === 5) {
       return
     }
-
     setPageIndex((prev) => prev + 1)
   }
 

@@ -28,3 +28,9 @@ things to do
 2. send activation email after a user registers
 3. do reset password and forgot password
 4. 
+
+the flow for the login
+1. install next-auth
+2. confiure my next-auth app to make use of credentials
+3. connect to mongodb
+4. create a helper function called 

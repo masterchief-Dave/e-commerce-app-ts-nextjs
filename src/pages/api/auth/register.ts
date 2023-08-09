@@ -10,17 +10,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     if (!req.body) return res.status(400).json({ error: 'Data is missing' })
 
-    const { name, email, password, passwordChangedAt } = req.body
+    // const { name, email, password, passwordChangedAt } = req.body
+    const { name, email, password } = req.body
 
     const user = new User()
     user.name = name
     user.email = email
     user.password = password
-    user.passwordChangedAt = passwordChangedAt
-    user.avatar = {
-      public_id: 'avataaars_rkyikx',
-      url: 'https://res.cloudinary.com/diggungrj/image/upload/v1668579345/avataaars_rkyikx.svg'
-    }
+    // user.passwordChangedAt = passwordChangedAt
+    user.avatar = 'https://res.cloudinary.com/diggungrj/image/upload/v1668579345/avataaars_rkyikx.svg'
     await user.save()
 
     if (!user) {

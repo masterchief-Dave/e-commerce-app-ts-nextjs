@@ -84,10 +84,7 @@ interface IUser {
   googleId: string
   email: string
   // password: string
-  avatar: {
-    public_id: string,
-    url: string
-  },
+  avatar: string,
   role: string
   createdAt: Date
   resetPasswordToken: string

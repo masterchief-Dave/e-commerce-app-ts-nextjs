@@ -71,46 +71,6 @@ const Register = (props: Props) => {
 
       }
 
-      /**
-       * this code works well, this is the method I was using before, fingers crossed 🤞
-       * 
-       * 
-      const response = await fetch(`${BASE_URL}/auth/register`, {
-        method: 'POST',
-        body: JSON.stringify({ name, email, password, confirmPassword }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      
-      if (response.ok) {
-        const user: User = await response.json()
-        Cookies.set('authLoginToken', user?.token!, { expires: 1, secure: true })
-
-        const userData = {
-          name: user.user.name,
-          email: user.user.email,
-          photo: user.user.avatar.url,
-          id: user.user._id
-        }
-
-        localStorage.setItem('user', JSON.stringify(userData))
-        dispatch(loginSuccess({
-          success: user.success,
-          token: user.token,
-          id: user.user._id,
-          email: user.user.email,
-          photo: user.user.avatar.url,
-          name: user.user.name
-        }))
-        router.push('/')
-      } else {
-        const error = response.statusText
-        dispatch(registerFailure(error))
-      }
-
-      */
-
     } catch (err: any) {
       console.log(err)
       dispatch(registerFailure(err.message))

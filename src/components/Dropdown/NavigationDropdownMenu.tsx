@@ -108,7 +108,7 @@ export function NavigationMenuDemo() {
         <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
             <NavigationMenuLink className={`${navigationMenuTriggerStyle()} h-full text-[1.4rem]`}>
-              Documentation
+              Blog
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

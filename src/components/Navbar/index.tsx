@@ -35,7 +35,7 @@ export const Navbar = () => {
 
   //my api auth
   const { isLoggedIn, user } = useAuth()
-  console.log(data)
+  console.log('user session data', { data })
 
   const { cart } = useCart()
 
@@ -92,7 +92,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           {data?.user ? (
             <div className='relative h-[4rem] w-[4rem] rounded-full'>
               <Image
-                src={data?.photo!}
+                src={data?.photo ? data?.photo : data?.user?.image!}
                 alt='profile image'
                 width={1000}
                 height={1000}
