@@ -40,3 +40,7 @@ next-env.d.ts
 
 dave.txt
 todo.txt
+
+.react-email
+.react-email/.next
+.react-email/node_modules

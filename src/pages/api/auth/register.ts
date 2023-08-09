@@ -28,12 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       })
     }
 
-    // const newUser = {
-    //   email: user.email,
-    //   name: user.name,
-    //   id: user._id,
-
-    // }
+    // send email to the user to activate thier account and then sign in
 
     sendToken(user, 201, res)
   } else {

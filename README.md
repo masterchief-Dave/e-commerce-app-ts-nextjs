@@ -44,3 +44,7 @@ next-auth
 5. the user can register with oauth provider like google (done)
 6. clear the cookie after a user signs out
 7. 
+
+### emails
+1. send email when a user registers to activate thier account this method should only be for credentials
+2. send email for reset-password 
