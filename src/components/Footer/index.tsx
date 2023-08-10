@@ -7,7 +7,6 @@ import americanExpressCard from 'public/assets/icons/american-express-card.png'
 import discoverCard from 'public/assets/icons/discover-card.png'
 import paypalCard from 'public/assets/icons/paypal-card.png'
 import masterCard from 'public/assets/icons/master-card.png'
-
 import instagram from 'public/assets/icons/instagram.svg'
 import linkedin from 'public/assets/icons/linkedin.svg'
 import twitter from 'public/assets/icons/twitter.svg'

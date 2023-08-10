@@ -2,11 +2,18 @@
 import { User } from '@/models/user'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as crypto from 'crypto'
+import { Resend } from 'resend'
+import { NEXT_PUBLIC_RESEND_API } from '@/utils/config'
+
+import SageWarehouseResetPasswordEmail from '@/emails/Resetpassword'
+import { connectToMongoDB } from '@/lib/mongodb'
 
 type Data = {
   message?: string
   name?: string
 }
+
+const resend = new Resend(NEXT_PUBLIC_RESEND_API)
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,6 +26,7 @@ export default async function handler(
   // 5. hash the token and save it on my database
   // 6. send the email reset link to the user
   // 7. 
+  await connectToMongoDB()
 
   const { email } = req.body
 
@@ -33,14 +41,20 @@ export default async function handler(
   const expiryDate = new Date()
   expiryDate.setMinutes(expiryDate.getMinutes() + 10)
 
-  user.resetToken = hashedToken
-  user.passwordResetExpires = expiryDate
+  user.resetPasswordToken = hashedToken
+  user.resetPasswordExpire = expiryDate
   await user.save({ validateBeforeSave: false })
 
   // const resetLink = `${req.protocol}://${req.get('host')}/auth/reset-password/${resetToken}`
-  const resetLink = `http://localhost:3002/auth/reset-password/${resetToken}`
+  const resetLink = `http://localhost:3002/api/auth/reset-password/${resetToken}`
 
   // confiure the email sender
+  resend.sendEmail({
+    from: 'sage-warehouse@resend.dev',
+    to: user.email,
+    subject: 'Reset Password,password expiry link will expire after 10 minutes.',
+    react: <SageWarehouseResetPasswordEmail name={user.name} product="Sage-Warehouse" resetPasswordLink={resetLink} />,
+  })
 
-  res.status(200).json({ name: 'John Doe' })
+  res.status(200).json({ message: 'Email sent successfully' })
 }

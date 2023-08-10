@@ -12,19 +12,20 @@ import {
 } from '@react-email/components'
 import * as React from 'react'
 
-interface DropboxResetPasswordEmailProps {
-  userFirstname?: string
+interface SageWarehouseResetPasswordEmailProps {
+  name?: string
   resetPasswordLink?: string
+  product?: string
 }
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : ''
 
-export const DropboxResetPasswordEmail = ({
-  userFirstname = 'Zeno',
-  resetPasswordLink = 'https://dropbox.com',
-}: DropboxResetPasswordEmailProps) => {
+export const SageWarehouseResetPasswordEmail = ({
+  name = 'Sage',
+  resetPasswordLink = 'https://sage',
+}: SageWarehouseResetPasswordEmailProps) => {
   return (
     <Html>
       <Head />
@@ -35,7 +36,7 @@ export const DropboxResetPasswordEmail = ({
             Sage-warehouse
           </Text>
           <Section>
-            <Text style={text}>Hi {userFirstname},</Text>
+            <Text style={text}>Hi {name},</Text>
             <Text style={text}>
               Someone recently requested a password change for your Sage
               account. If this was you, you can set a new password here:
@@ -62,7 +63,7 @@ export const DropboxResetPasswordEmail = ({
   )
 }
 
-export default DropboxResetPasswordEmail
+export default SageWarehouseResetPasswordEmail
 
 const Header = {
   fontWeight: 700,
