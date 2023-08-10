@@ -1,81 +1,122 @@
+import { useState } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 
 import { Layout } from '@/components/Layout'
+import ResetEmailSentModal from '@/components/Modal/ResetEmailSent'
 
 type Props = {}
 
 const ForgotPassword = (props: Props) => {
   const router = useRouter()
-  const [loading, setLoading] = useState<boolean>(false)
+  let [isOpen, setIsOpen] = useState(true)
+  const [showModal, setShowModal] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
+  const [notification, setNotification] = useState<null | string>('')
 
   const handleAuthClick = async (e: React.MouseEvent) => {
     e.preventDefault()
-    setLoading(true)
-    const response = await axios.post('/api/auth/forgot-password', {
-      email: email
-    })
+    setShowModal(false)
 
-    if (response.status === 200) {
-      setLoading(false)
-    } else {
-      setLoading(false)
+    try {
+      const response = await axios.post('/api/auth/forgot-password', {
+        email: email
+      })
+
+      if (response.status === 200) {
+        return setShowModal(true)
+
+      } else {
+        setShowModal(false)
+        setNotification('Error encountered sending mail Try again!')
+
+        setTimeout(() => {
+          setNotification(null)
+        }, 3000)
+      }
+      // console.log({ response })
+    } catch (err) {
+      setShowModal(false)
+      setNotification('Error encountered sending mail Try again!')
+      setTimeout(() => {
+        setNotification(null)
+      }, 3000)
     }
-
-    console.log({ response })
-    // router.push('/auth/forgot-password-email-sent')
   }
 
   return (
     <Layout>
-      <div className='space-y-24 py-16 font-poppins'>
-        <div className='px-12'>
-          <p className='text-[1.4rem]'>
-            Return to{' '}
-            <span className='text-text-primary-link'>
-              <Link href='/auth/login'>Sign in</Link>
-            </span>
-          </p>
-        </div>
-
-        <div className='flex items-center justify-center'>
-          <section className='w-[35rem] max-w-[40rem] space-y-8 rounded-xl border px-8 py-4'>
-            <h1 className='text-center text-[1.8rem] font-semibold'>
-              Trouble Signin in ?
-            </h1>
-            <p className='text-[1.4rem] text-primary-grey-300'>
-              We&#39;ve got your back! Just enter your email address and
-              we&#39;ll send you a link with which you can reset your password
+      <>
+        {showModal && <ResetEmailSentModal email={email} setEmail={setEmail} isOpen={isOpen} setIsOpen={setIsOpen} />}
+        <div className='space-y-24 py-16 font-poppins'>
+          {notification && (
+            <div className='fixed left-0 right-0 text-center top-[1rem] flex items-center justify-center'>
+              <div className='border border-dashed text-red-500 bg-white p-8 space-y-4'>
+                <header className='flex justify-end'>
+                  <div onClick={() => setNotification(null)}>
+                    <XMarkIcon className='h-10 w-10' />
+                  </div>
+                </header>
+                <p className='text-[1.4rem] font-medium'>{notification}</p>
+              </div>
+            </div>
+          )
+          }
+          <div className='px-12'>
+            <p className='text-[1.4rem]'>
+              Return to{' '}
+              <span className='text-text-primary-link'>
+                <Link href='/auth/login'>Sign in</Link>
+              </span>
             </p>
+          </div>
 
-            <form className='text-[1.4rem] mt-8'>
-              <label htmlFor='email' className='block font-medium mb-2'>
-                Email
-              </label>
-              <input
-                type='text'
-                placeholder='email'
-                className='mb-4 h-[3.5rem] w-full rounded-md border px-4 font-normal focus:ring-1'
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
+          <div className='flex items-center justify-center'>
+            <section className='w-[35rem] max-w-[40rem] space-y-8 rounded-xl border px-8 py-4'>
+              <h1 className='text-center text-[1.8rem] font-semibold'>
+                Trouble Signin in ?
+              </h1>
+              <p className='text-[1.4rem] text-primary-grey-300'>
+                We&#39;ve got your back! Just enter your email address and
+                we&#39;ll send you a link with which you can reset your password
+              </p>
 
-              <button
-                type='submit'
-                className='h-[3.5rem] w-full rounded-md bg-blue-500 text-white hover:bg-primary-blue-300'
-                onClick={handleAuthClick}
-              >
-                Submit
-              </button>
-            </form>
-          </section>
+              <form className='text-[1.4rem] mt-8'>
+                <label htmlFor='email' className='block font-medium mb-2'>
+                  Email
+                </label>
+                <input
+                  type='text'
+                  placeholder='email'
+                  className='mb-4 h-[3.5rem] w-full rounded-md border px-4 font-normal focus:ring-1'
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+
+                <button
+                  type='submit'
+                  className='h-[3.5rem] w-full rounded-md bg-blue-500 text-white hover:bg-primary-blue-300'
+                  onClick={handleAuthClick}
+                >
+                  Submit
+                </button>
+              </form>
+            </section>
+          </div>
         </div>
-      </div>
+      </>
     </Layout>
   )
 }
 
 export default ForgotPassword
+
+const ShowModal = () => {
+  return (
+    <div>
+      Daddy wan !!!
+    </div>
+  )
+}

@@ -11,6 +11,7 @@ import { connectToMongoDB } from '@/lib/mongodb'
 type Data = {
   message?: string
   name?: string
+  status?: Number
 }
 
 const resend = new Resend(NEXT_PUBLIC_RESEND_API)
@@ -26,14 +27,16 @@ export default async function handler(
   // 5. hash the token and save it on my database
   // 6. send the email reset link to the user
   // 7. 
+  try {
   await connectToMongoDB()
 
-  const { email } = req.body
-
+    const { email } = req.body
   // @ts-ignore
   const user = await User.findOne({ email: email })
 
-  if (!user) res.status(404).json({ message: 'invalid user, create an account with sage-warehouse' })
+    if (!user || user === null) {
+      return res.status(404).json({ message: 'invalid user, create an account with sage-warehouse' })
+    }
 
   const resetToken = crypto.randomBytes(32).toString('hex')
   const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex')
@@ -57,4 +60,12 @@ export default async function handler(
   })
 
   res.status(200).json({ message: 'Email sent successfully' })
+  } catch (err) {
+    res.status(400).json(
+      {
+        message: 'Error encountered sending mail Try again!',
+        status: 400
+      }
+    )
+  }
 }
