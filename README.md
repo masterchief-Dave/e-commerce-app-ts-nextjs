@@ -24,9 +24,9 @@ React-email
 resend
 
 things to do
-1. move the backend code into my api
+1. move the backend code into my api (in progress)
 2. send activation email after a user registers
-3. do reset password and forgot password
+3. do reset password and forgot password (done)
 4. 
 
 the flow for the login
@@ -47,4 +47,13 @@ next-auth
 
 ### emails
 1. send email when a user registers to activate thier account this method should only be for credentials
-2. send email for reset-password 
+2. send email for reset-password (done)
+3. handle errors in case the password does not change ()
+4. handle success with modal after the password has been changed (in progress)
+[get-query-params-next-js](https://www.slingacademy.com/article/next-js-api-routes-how-to-get-parameters-query-string/)
+
+### moving the express app into next.js
+- starting with the order
+  - move the model (done)
+  - move the controller
+  - 
