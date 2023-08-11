@@ -17,7 +17,7 @@ export default async function handler(
 ) {
   const password = req.body.password
   const token = req.query.token as string
-  await connectToMongoDB()
+  // await connectToMongoDB()
 
   const hashedToken = crypto.createHash('sha256').update(token).digest('hex')
 
@@ -26,8 +26,6 @@ export default async function handler(
     resetPasswordToken: hashedToken,
     resetPasswordExpire: { $gt: new Date() }
   })
-
-  console.log({ user })
 
   if (!user) return res.status(400).json({ status: 'fail', message: 'invalid or expired token' })
 
