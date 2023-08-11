@@ -49,7 +49,7 @@ export default async function handler(
   await user.save({ validateBeforeSave: false })
 
   // const resetLink = `${req.protocol}://${req.get('host')}/auth/reset-password/${resetToken}`
-  const resetLink = `http://localhost:3002/api/auth/reset-password/${resetToken}`
+    const resetLink = `http://localhost:3002/auth/reset-password/${resetToken}`
 
   // confiure the email sender
   resend.sendEmail({

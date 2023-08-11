@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 
 type Props = {
   email: string
@@ -23,10 +23,7 @@ export default function ResetEmailSentModal({ email = 'bodunrindavidbond@gmail.c
 
   return (
     <div className='z-[99999999]'>
-      <div className="fixed inset-0 flex items-center justify-center">
-
-      </div>
-
+      <div className="fixed inset-0 flex items-center justify-center" />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child

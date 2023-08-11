@@ -4,6 +4,7 @@ import * as crypto from 'crypto'
 import bcrypt from 'bcryptjs'
 
 import { User } from '@/models/user'
+import { connectToMongoDB } from '@/lib/mongodb'
 
 type Data = {
   message?: string,
@@ -16,17 +17,24 @@ export default async function handler(
 ) {
   const password = req.body.password
   const token = req.query.token as string
+  await connectToMongoDB()
 
   const hashedToken = crypto.createHash('sha256').update(token).digest('hex')
+
   // @ts-ignore
   const user = await User.findOne({
-    resetToken: hashedToken,
-    passwordResetExpire: { $gt: new Date() }
+    resetPasswordToken: hashedToken,
+    resetPasswordExpire: { $gt: new Date() }
   })
+
+  console.log({ user })
 
   if (!user) return res.status(400).json({ status: 'fail', message: 'invalid or expired token' })
 
-  user.password = await bcrypt.hash(password, 10)
+  // console.log({ password })
+  // const hashedPassword = await bcrypt.hash(password, 10)
+  // console.log({ hashedPassword })
+  user.password = password
   user.resetToken = undefined
   user.passwordResetExpire = undefined
   await user.save()
