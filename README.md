@@ -57,3 +57,9 @@ next-auth
   - move the model (done)
   - move the controller
   - 
+- create the error controller
+- create the catch-async hook
+- create the global error controller
+- create the seeder file
+- create the middleware file
+- create the logger file for the backend api
