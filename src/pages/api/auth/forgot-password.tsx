@@ -27,45 +27,53 @@ export default async function handler(
   // 5. hash the token and save it on my database
   // 6. send the email reset link to the user
   // 7. 
-  try {
-  await connectToMongoDB()
+  if (req.method === 'POST') {
 
-    const { email } = req.body
-  // @ts-ignore
-  const user = await User.findOne({ email: email })
+    try {
+      await connectToMongoDB()
 
-    if (!user || user === null) {
-      return res.status(404).json({ message: 'invalid user, create an account with sage-warehouse' })
-    }
+      const { email } = req.body
+      // @ts-ignore
+      const user = await User.findOne({ email: email })
 
-  const resetToken = crypto.randomBytes(32).toString('hex')
-  const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex')
-
-  const expiryDate = new Date()
-  expiryDate.setMinutes(expiryDate.getMinutes() + 10)
-
-  user.resetPasswordToken = hashedToken
-  user.resetPasswordExpire = expiryDate
-  await user.save({ validateBeforeSave: false })
-
-  // const resetLink = `${req.protocol}://${req.get('host')}/auth/reset-password/${resetToken}`
-    const resetLink = `http://localhost:3002/auth/reset-password/${resetToken}`
-
-  // confiure the email sender
-  resend.sendEmail({
-    from: 'sage-warehouse@resend.dev',
-    to: user.email,
-    subject: 'Reset Password,password expiry link will expire after 10 minutes.',
-    react: <SageWarehouseResetPasswordEmail name={user.name} product="Sage-Warehouse" resetPasswordLink={resetLink} />,
-  })
-
-  res.status(200).json({ message: 'Email sent successfully' })
-  } catch (err) {
-    res.status(400).json(
-      {
-        message: 'Error encountered sending mail Try again!',
-        status: 400
+      if (!user || user === null) {
+        return res.status(404).json({ message: 'invalid user, create an account with sage-warehouse' })
       }
-    )
+
+      const resetToken = crypto.randomBytes(32).toString('hex')
+      const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+
+      const expiryDate = new Date()
+      expiryDate.setMinutes(expiryDate.getMinutes() + 10)
+
+      user.resetPasswordToken = hashedToken
+      user.resetPasswordExpire = expiryDate
+      await user.save({ validateBeforeSave: false })
+
+      // const resetLink = `${req.protocol}://${req.get('host')}/auth/reset-password/${resetToken}`
+      const resetLink = `http://localhost:3002/auth/reset-password/${resetToken}`
+
+      // confiure the email sender
+      resend.sendEmail({
+        from: 'sage-warehouse@resend.dev',
+        to: user.email,
+        subject: 'Reset Password,password expiry link will expire after 10 minutes.',
+        react: <SageWarehouseResetPasswordEmail name={user.name} product="Sage-Warehouse" resetPasswordLink={resetLink} />,
+      })
+
+      res.status(200).json({ message: 'Email sent successfully' })
+    } catch (err) {
+      res.status(400).json(
+        {
+          message: 'Error encountered sending mail Try again!',
+          status: 400
+        }
+      )
+    }
+  }
+  else {
+    res.status(405).json({
+      message: 'Method is not allowed'
+    })
   }
 }

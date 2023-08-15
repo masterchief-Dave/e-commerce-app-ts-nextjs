@@ -20,11 +20,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+
   try {
     // //{{url}}/products?page=1
     // console.log(req.query)
     const { page } = req.query
-    const products = await(
+    const products = await (
       // await axios.get(`http://localhost:8100/api/v1/products?page=${page}`)
       await axios.get(
         `https://sage-warehouse-backend.onrender.com/api/v1/products?page=${page}`
@@ -54,6 +55,7 @@ export default async function handler(
       },
     })
   }
+
 }
 
 // when I fetch my data from here that is when I can do things like getServerSideProps or getStaticProps.

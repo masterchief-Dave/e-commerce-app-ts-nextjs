@@ -2,7 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
-  name: string,
+  message: string
+  // data: 
 }
 
 export default function handler(
@@ -10,5 +11,5 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   res.setHeader('Set-Cookie', 'myCookie=exampleValue; Path=/; HttpOnly')
-  res.status(200).json({ name: 'John Doe' })
+  res.status(200).json({ message: 'John Doe' })
 }

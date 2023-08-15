@@ -10,8 +10,8 @@ FOR THE BACKEND
 3. when a user registers send an email to authenticate themselves
 
 //
-1. do the login authentication
-2. do the register authentication
+1. do the login authentication (done)
+2. do the register authentication (done)
 3. do the order processing
 4. add dashboard where a vendor can upload products
 5. create the react native application for the logistics part where I have a rider that does the logistics part
@@ -31,7 +31,7 @@ TODO
 9. create a product description page (done)
 10. create the user account section, where the user can setup card for payment edit thier username etc (done) remains (reviews page)
 11. create a product page (done)
-12. add formik for form validation
+12. add formik for form validation (started)
 13. 
 
 WORKING ON THE RESPONSIVENESS
@@ -96,3 +96,6 @@ redux toolkit for global state management
 
 WHEN HANDLING ERROR PAGE / 404 PAGE - USE THIS APPROACH
 https://techcrunch.com/nigeria --> just check this link
+
+14 08 2023
+1. next api general error handling middleware

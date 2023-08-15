@@ -15,6 +15,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  if (req.method === 'POST') {
+
   const password = req.body.password
   const token = req.query.token as string
   // await connectToMongoDB()
@@ -40,4 +42,9 @@ export default async function handler(
   res.status(200).json({
     message: 'Password reset successful'
   })
+  } else {
+    res.status(405).json({
+      message: 'Method is not allowed'
+    })
+  }
 }
