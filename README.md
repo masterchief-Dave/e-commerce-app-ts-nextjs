@@ -63,3 +63,9 @@ next-auth
 - create the seeder file (done)
 - create the middleware file
 - create the logger file for the backend api (removed)
+
+### an idea just occured to me
+I can make use of next-auth for my authentication and continue using my express backend api
+it is the same idea when I make use of oauth or okta etc, since I am making use of the same database I can actually do it
+so my next-auth on the client connected to my database
+express server connected to my database

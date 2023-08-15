@@ -6,6 +6,7 @@ type Data = {
   message: string
 }
 
+// http://localhost:3002/api/products/delete-product/1 METHOD === DELETE
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>

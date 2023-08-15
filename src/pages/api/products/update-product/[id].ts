@@ -7,6 +7,7 @@ type Data = {
   data?: Product
 }
 
+// http://localhost:3002/api/products/update-product/1 method=== PATCH
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -16,11 +17,9 @@ export default async function handler(
       const id = req.query.id
       // @ts-ignore
       let product = await Product.findById(id)
-
       if (!product) {
         return res.status(404).json({ message: 'Not found' })
       }
-
       // @ts-ignore
       product = await Product.findByIdAndUpdate(id, req.body, {
         runValidators: true,
