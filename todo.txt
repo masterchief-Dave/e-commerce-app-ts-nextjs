@@ -99,3 +99,11 @@ https://techcrunch.com/nigeria --> just check this link
 
 14 08 2023
 1. next api general error handling middleware
+
+order and processing payment
+if i use paystack in the client, what if the item the user is trying to order has finished
+what if the quantity of the item left is not up to what the user has selected
+keep the products quanity in the client and on the server at sync
+
+solution
+1. the products on my website have to be in sync with my server

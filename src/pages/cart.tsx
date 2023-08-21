@@ -1,19 +1,30 @@
+import { useRouter } from 'next/router'
+
 import { RootState } from '@/app/store'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { useCart } from '@/hooks/useCart'
-import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 
 type Props = {}
 
 const Cart = (props: Props) => {
   const { cart } = useCart()
 
-
   if (cart.length < 1) {
     return <NoItemInCart />
   }
+
+  const totalPrice = useSelector((state: RootState) => {
+    return selectorCartTotalAmount(state)
+  })
+
+  // console.log({ totalPrice })
+  const shippingFee = 10
+  const taxFee = 10
+  const amount = totalPrice + shippingFee + taxFee
 
   return (
     <Layout>
@@ -42,21 +53,21 @@ const Cart = (props: Props) => {
               <div className='space-y-4 border-b'>
                 <div className='flex items-center justify-between'>
                   <p>Subtotal</p>
-                  <p>$4000</p>
+                  <p>${totalPrice}</p>
                 </div>
                 <div className='flex items-center justify-between'>
                   <p>Shipping</p>
-                  <p>0.00</p>
+                  <p>${shippingFee.toFixed(2)}</p>
                 </div>
                 <div className='flex items-center justify-between'>
                   <p>Tax</p>
-                  <p>0</p>
+                  <p>${taxFee.toFixed(2)}</p>
                 </div>
               </div>
 
               <div className='flex items-center justify-between font-semibold'>
                 <p>Total</p>
-                <p>$6000</p>
+                <p>${amount}</p>
               </div>
 
               <button className='rounded-md bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.4rem]'>

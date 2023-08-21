@@ -4,9 +4,17 @@ import ResetEmailSentModal from '@/components/Modal/ResetEmailSent'
 import { Button } from '@chakra-ui/react'
 import axios from 'axios'
 import { PaystackHook } from '@/helpers/paystack'
+import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/app/store'
 
 const NavigationMenuDemoExample = () => {
 
+  const totalPrice = useSelector((state) => {
+    return selectorCartTotalAmount(state)
+  })
+
+  // console.log({ totalPrice })
   const fn = async () => {
     try {
       const response = await axios.post('/api/products/create-product')
@@ -17,7 +25,6 @@ const NavigationMenuDemoExample = () => {
     }
   }
 
-  console.log(process.env.NEXT_PUBLIC_PAYSTACK_API)
   return (
     // <NavigationMenuDemo />
     <div className='flex p-24'>

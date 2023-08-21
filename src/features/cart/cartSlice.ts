@@ -1,3 +1,4 @@
+import { RootState } from '@/app/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type CartState = {
@@ -9,6 +10,7 @@ const initialState: CartState = {
 
 interface ID {
   id: string
+  stock: number
 }
 
 export const cartSlice = createSlice({
@@ -31,6 +33,7 @@ export const cartSlice = createSlice({
       }
     },
     increaseCartItem: (state: CartState, action: PayloadAction<ID>) => {
+      console.log(action.payload.stock)
       const findIndex = state.value.findIndex((product) => {
         return product._id === action.payload.id
       })
@@ -84,6 +87,13 @@ export const cartSlice = createSlice({
 export const { addToCart, increaseCartItem, decreaseCartItem, removeItem } = cartSlice.actions
 export default cartSlice.reducer
 
+export const selectorCartTotalAmount = (state: RootState) => {
+  const totalPrice = state.cart.value.reduce((total, item) => {
+    return total + item.cartQuantity * item.price
+  }, 0)
+
+  return totalPrice
+}
 
 // remove item from the cart
 // reduce a particular item in the cart

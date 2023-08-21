@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { ChevronDownIcon, ChevronUpIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
+
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { increaseCartItem, decreaseCartItem, removeItem } from '@/features/cart/cartSlice'
 
@@ -17,6 +19,16 @@ type Props = {
 const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
+
+  // console.log({ id })
+
+  // checking the item quantity on the server
+  // @ts-ignore
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+  const { data } = useSWR(`http://localhost:8100/api/v1/products/${id}`, fetcher)
+  console.log(data?.data.product.stock)
+
 
   return (
     <div className='flex items-center justify-between gap-x-4 lg:gap-x-12 border-b py-8'>
@@ -57,12 +69,12 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
           <div className='flex flex-col items-center justify-center gap-2 lg:gap-4 text-text-primary-link'>
             {/* when the quanity is 1 then disable the button from going lower */}
             <span onClick={() => {
-              dispatch(increaseCartItem({ id }))
+              dispatch(increaseCartItem({ id, stock: data.data.product.stock }))
             }}>
               <ChevronUpIcon className='h-8 w-8 cursor-pointer' />
             </span>
             <span onClick={() => {
-              dispatch(decreaseCartItem({ id }))
+              dispatch(decreaseCartItem({ id, stock: data.data.product.stock }))
             }}>
               <ChevronDownIcon className='h-8 w-8 cursor-pointer' />
             </span>
@@ -72,7 +84,7 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
         <section className='space-y-4 text-xl lg:text-2xl'>
           <p className='text-xl lg:text-[2.5rem] font-black mb-4'>${price}</p>
           <p className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4' onClick={() => {
-            dispatch(removeItem({ id }))
+            dispatch(removeItem({ id, stock: data.data.product.stock }))
           }}>
             Remove
           </p>

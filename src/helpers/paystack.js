@@ -12,7 +12,7 @@ const config = {
   email: 'bodunrindavidbond@gmail.com',
   amount: 20000,
   publicKey: process.env.NEXT_PUBLIC_PAYSTACK_API,
-  // currency: 'USD',
+  currency: 'NGN',
 }
 
 const onClose = () => {
