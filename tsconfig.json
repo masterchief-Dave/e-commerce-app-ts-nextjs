@@ -40,6 +40,8 @@
 "src/lib/mongodb.js"
 ,
 "src/pages/demos/demo.jsx"
+,
+"src/hooks/paystack.js"
 ],
   "exclude": [
     "node_modules"
