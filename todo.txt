@@ -107,3 +107,4 @@ keep the products quanity in the client and on the server at sync
 
 solution
 1. the products on my website have to be in sync with my server
+2. when a user is trying to add products to cart check if the quanity the user is trying to add is up to the amount that is in my store

@@ -2,10 +2,12 @@ import { RootState } from '@/app/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type CartState = {
-  value: Cart[]
+  value: Cart[],
+  message?: String
 }
 const initialState: CartState = {
   value: [],
+  message: ''
 }
 
 interface ID {
@@ -33,13 +35,22 @@ export const cartSlice = createSlice({
       }
     },
     increaseCartItem: (state: CartState, action: PayloadAction<ID>) => {
-      console.log(action.payload.stock)
       const findIndex = state.value.findIndex((product) => {
         return product._id === action.payload.id
       })
 
       if (findIndex < 0) {
+        state.message = 'The item is no longer in stock'
         return
+      } else {
+        state.message = ''
+      }
+
+      if (state.value[findIndex].cartQuantity >= action.payload.stock) {
+        state.message = `Only ${state.value[findIndex].cartQuantity} left in stock`
+        return
+      } else {
+        state.message = ''
       }
 
       state.value[findIndex] = {
@@ -58,6 +69,10 @@ export const cartSlice = createSlice({
 
       if (state.value[findIndex].cartQuantity === 1) {
         return
+      }
+
+      if (state.value[findIndex].cartQuantity <= action.payload.stock) {
+        state.message = ''
       }
 
       state.value[findIndex] = {
