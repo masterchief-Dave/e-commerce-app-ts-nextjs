@@ -2,6 +2,11 @@ import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
 import { BillingAddress } from '@/components/Accordion/billingAddressAccordion'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
+import { PaystackHook } from '@/helpers/paystack'
+import { useCart } from '@/hooks/useCart'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/app/store'
+import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 
 const Checkout = () => {
   const styles = {
@@ -9,6 +14,17 @@ const Checkout = () => {
     priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
     priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`,
   }
+
+  const { cart } = useCart()
+
+  const totalPrice = useSelector((state: RootState) => {
+    return selectorCartTotalAmount(state)
+  })
+
+  // console.log({ totalPrice })
+  const shippingFee = 10
+  const taxFee = 10
+  const amount = totalPrice + shippingFee + taxFee
 
   return (
     <div>
@@ -46,14 +62,24 @@ const Checkout = () => {
             <div className=' col-start-3 col-end-11 lg:w-[30rem] lg:max-w-[30rem]'>
               <h2 className='mb-8 text-[2rem] font-bold'>Summary</h2>
               <article className='mb-[5rem] space-y-8'>
-                <div className='text-former-price-text flex justify-between border-b py-4'>
-                  <p className='text-base lg:text-[1.2rem]'>Original Price</p>
-                  <p className='text-[1.5rem] font-semibold'>NGN 230,000</p>
+                <div className='border-b space-y-3 py-4'>
+                  <div className='text-former-price-text flex justify-between'>
+                    <p className='text-base lg:text-[1.2rem]'>Original Price</p>
+                    <p className='text-[1.5rem] font-semibold'> ${totalPrice.toFixed(2)}</p>
+                  </div>
+                  <div className='flex items-center justify-between'>
+                    <p className='text-base lg:text-[1.2rem]'>Shipping</p>
+                    <p className='text-[1.5rem] font-semibold'>${shippingFee.toFixed(2)}</p>
+                  </div>
+                  <div className='flex items-center justify-between'>
+                    <p className='text-base lg:text-[1.2rem]'>Tax</p>
+                    <p className='text-[1.5rem] font-semibold'>${taxFee.toFixed(2)}</p>
+                  </div>
                 </div>
 
                 <div className='flex justify-between'>
                   <p className='text-base lg:text-[1.2rem]'>Total</p>
-                  <p className='text-[1.5rem] font-semibold'>NGN 230,000</p>
+                  <p className='text-[1.5rem] font-semibold'>${amount}</p>
                 </div>
 
                 <p className='text-former-price-text font-light'>
@@ -61,15 +87,12 @@ const Checkout = () => {
                   and condition
                 </p>
 
-                <button className='h-[4rem] w-full bg-primary-blue-500 text-[1.4rem] font-semibold text-white transition-all delay-75 hover:bg-primary-blue-300'>
-                  Complete Checkout
-                </button>
+                <PaystackHook price={20000} orders={cart} loading={false} />
 
                 <div className='flex items-center gap-x-8'>
                   <p className='text-former-price-text w-full text-center text-[1.3rem]'>
                     30 days money back guarantee
                   </p>
-
                   <LockClosedIcon className='h-8 w-8' />
                 </div>
               </article>

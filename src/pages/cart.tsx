@@ -7,20 +7,13 @@ import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { useCart } from '@/hooks/useCart'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+import Link from 'next/link'
+import { PaystackHook } from '@/helpers/paystack'
 
 type Props = {}
 
 const Cart = (props: Props) => {
   const { cart } = useCart()
-
-  // const totalPrice = useSelector((state: RootState) => {
-  //   return selectorCartTotalAmount(state)
-  // })
-
-  // console.log({ totalPrice })
-  // const shippingFee = 10
-  // const taxFee = 10
-  // const amount = totalPrice + shippingFee + taxFee
 
   return (
     <Layout>
@@ -54,12 +47,12 @@ const NoItemInCart = () => {
               Your shopping cart is empty
             </h1>
 
-            <button
-              className='h-fit w-fit rounded-md bg-primary-black-100 px-4 py-2 text-[1.4rem] font-semibold text-white'
-              onClick={() => router.push('/')}
+            <Link
+              className='h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2 text-[1.4rem] font-semibold text-white'
+              href='/' 
             >
               Continue Shopping
-            </button>
+            </Link>
           </div>
         </section>
       </main>
@@ -116,9 +109,11 @@ const ItemInCart = () => {
           <p>${amount}</p>
         </div>
 
-        <button className='rounded-md bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.4rem]'>
+        <Link
+          href='/checkout'
+          className='rounded-md flex items-center justify-center bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.4rem]'>
           Proceed to checkout
-        </button>
+        </Link>
       </section>
     </>
   )

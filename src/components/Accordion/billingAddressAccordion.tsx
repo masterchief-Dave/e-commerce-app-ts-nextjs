@@ -116,7 +116,7 @@ export const BillingAddress = () => {
                       <div className='space-y-8 px-2 py-8 lg:px-8'>
                         <form
                           action=''
-                          className='grid grid-cols-2 gap-12 p-4 lg:border lg:p-8'
+                          className='grid grid-cols-2 gap-12 p-4'
                         >
                           <div className='col-span-full'>
                             <label htmlFor='title' className={styles.label}>

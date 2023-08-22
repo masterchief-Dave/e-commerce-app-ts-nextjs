@@ -8,8 +8,6 @@ import { RootState } from '@/app/store'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { increaseCartItem, decreaseCartItem, removeItem } from '@/features/cart/cartSlice'
 
-// import AppleImage from 'public/assets/img/apple-macbook-with-chip.png'
-
 type Props = {
   id: string
   img: string

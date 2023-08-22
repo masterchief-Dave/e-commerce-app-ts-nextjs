@@ -1,7 +1,7 @@
 
-import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
-import ResetEmailSentModal from '@/components/Modal/ResetEmailSent'
-import { Button } from '@chakra-ui/react'
+// import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
+// import ResetEmailSentModal from '@/components/Modal/ResetEmailSent'
+// import { Button } from '@chakra-ui/react'
 import axios from 'axios'
 import { PaystackHook } from '@/helpers/paystack'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
