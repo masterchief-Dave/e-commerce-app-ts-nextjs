@@ -49,7 +49,7 @@ const NoItemInCart = () => {
 
             <Link
               className='h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2 text-[1.4rem] font-semibold text-white'
-              href='/' 
+              href='/'
             >
               Continue Shopping
             </Link>
@@ -68,9 +68,9 @@ const ItemInCart = () => {
   })
 
   // console.log({ totalPrice })
-  const shippingFee = 10
-  const taxFee = 10
-  const amount = totalPrice + shippingFee + taxFee
+  // const shippingFee = 10
+  // const taxFee = 10
+  // const amount = totalPrice + shippingFee + taxFee
 
   return (
     <>
@@ -89,26 +89,10 @@ const ItemInCart = () => {
       </div>
 
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
-        <div className='space-y-4 border-b'>
-          <div className='flex items-center justify-between'>
-            <p>Subtotal</p>
-            <p>${totalPrice}</p>
-          </div>
-          <div className='flex items-center justify-between'>
-            <p>Shipping</p>
-            <p>${shippingFee.toFixed(2)}</p>
-          </div>
-          <div className='flex items-center justify-between'>
-            <p>Tax</p>
-            <p>${taxFee.toFixed(2)}</p>
-          </div>
-        </div>
-
         <div className='flex items-center justify-between font-semibold'>
           <p>Total</p>
-          <p>${amount}</p>
+          <p>${totalPrice.toFixed(2)}</p>
         </div>
-
         <Link
           href='/checkout'
           className='rounded-md flex items-center justify-center bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.4rem]'>
