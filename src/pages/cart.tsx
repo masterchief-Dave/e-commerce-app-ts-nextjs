@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '@/app/store'
@@ -7,8 +7,6 @@ import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { useCart } from '@/hooks/useCart'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
-import Link from 'next/link'
-import { PaystackHook } from '@/helpers/paystack'
 
 type Props = {}
 
@@ -22,10 +20,8 @@ const Cart = (props: Props) => {
         <main className='grid grid-cols-12  font-inter'>
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
             <h1 className='text-[2rem] font-black uppercase'>Cart</h1>
-
             {/* cart product design layout and design*/}
             {cart.length >= 1 ? <ItemInCart /> : <NoItemInCart />}
-
           </section>
         </main>
       </div>
@@ -36,8 +32,6 @@ const Cart = (props: Props) => {
 export default Cart
 
 const NoItemInCart = () => {
-  const router = useRouter()
-
   return (
     <div>
       <main className='grid grid-cols-12'>
@@ -66,12 +60,6 @@ const ItemInCart = () => {
   const totalPrice = useSelector((state: RootState) => {
     return selectorCartTotalAmount(state)
   })
-
-  // console.log({ totalPrice })
-  // const shippingFee = 10
-  // const taxFee = 10
-  // const amount = totalPrice + shippingFee + taxFee
-
   return (
     <>
       <div className='px-12'>
@@ -87,7 +75,6 @@ const ItemInCart = () => {
             />)
         })}
       </div>
-
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
         <div className='flex items-center justify-between font-semibold'>
           <p>Total</p>

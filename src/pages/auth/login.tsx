@@ -4,14 +4,15 @@ import Image from 'next/image'
 import Cookies from 'js-cookie'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
+import { signIn } from 'next-auth/react'
+import axios from 'axios'
+
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
-import axios from 'axios'
 import { fetchLogin } from '@/utils/fetchLogin'
 import { loginUser } from '@/helpers'
-import { signIn } from 'next-auth/react'
 
 type Props = {
   myCookieValue: string,

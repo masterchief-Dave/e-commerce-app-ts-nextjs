@@ -11,7 +11,7 @@ import {
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
 
-export const BillingAddress = () => {
+export const BillingAddress = ({ title, firstname, lastname, addressLine1, addressLine2, country, zipcode, onChange }: BillingAddress) => {
   const [mounted, setMounted] = useState<boolean>(false)
   const [billingAddress, setBillingAddress] = useState<string>('')
 
@@ -122,20 +122,24 @@ export const BillingAddress = () => {
                             <label htmlFor='title' className={styles.label}>
                               Title
                             </label>
-                            <select name='' id='' className={styles.select}>
+                            <select
+                              name='title'
+                              id='title'
+                              className={styles.select}
+                              onChange={onChange}
+                            >
                               <option
-                                value=''
+                                value={title as string}
                                 disabled
                                 className='text-[1.2rem] italic'
                               >
                                 {' '}
                                 select title
                               </option>
-                              <option value=''>Mr.</option>
-                              <option value=''>Mrs.</option>
-                              <option value=''>Miss</option>
-                              <option value=''>Ms</option>
-                              <option value=''>Prefer not to say</option>
+                              <option value='mr'>Mr.</option>
+                              <option value='mrs'>Mrs.</option>
+                              <option value='miss'>Miss</option>
+                              <option value='ms'>Ms</option>
                             </select>
                           </div>
 
@@ -146,6 +150,9 @@ export const BillingAddress = () => {
                             <input
                               type='text'
                               id='firstname'
+                              name='firstname'
+                              onChange={onChange}
+                              value={firstname as string}
                               placeholder='First Name'
                               className={styles.input}
                             />
@@ -157,6 +164,9 @@ export const BillingAddress = () => {
                             <input
                               type='text'
                               id='lastname'
+                              name='lastname'
+                              onChange={onChange}
+                              value={lastname as string}
                               placeholder='Last Name'
                               className={styles.input}
                             />
@@ -167,8 +177,10 @@ export const BillingAddress = () => {
                               Country
                             </label>
                             <select
-                              name=''
+                              name='country'
                               id='country'
+                              onChange={onChange}
+                              value={country as string}
                               className={`h-[4.233rem] w-full border px-4 text-[1.2rem]`}
                             >
                               <option
@@ -184,6 +196,7 @@ export const BillingAddress = () => {
                                   <option
                                     key={data.iso}
                                     className={styles.option}
+                                    value={data.country}
                                   >
                                     {' '}
                                     {data.country}{' '}
@@ -194,13 +207,16 @@ export const BillingAddress = () => {
                           </div>
 
                           <div>
-                            <label htmlFor='Postcode' className={styles.label}>
-                              Postcode
+                            <label htmlFor='zipcode' className={styles.label}>
+                              Zip code
                             </label>
                             <input
                               type='text'
-                              id='Postcode'
-                              placeholder='Postcode'
+                              id='zipcode'
+                              name='zipcode'
+                              onChange={onChange}
+                              value={zipcode as string}
+                              placeholder='Zip code'
                               className={styles.input}
                             />
                           </div>
@@ -215,6 +231,9 @@ export const BillingAddress = () => {
                             <input
                               type='text'
                               id='AddressLine1'
+                              name='addressLine1'
+                              onChange={onChange}
+                              value={addressLine1 as string}
                               placeholder='Address Line 1'
                               className={styles.input}
                             />
@@ -230,24 +249,31 @@ export const BillingAddress = () => {
                             <input
                               type='text'
                               id='AddressLine2'
+                              name='addressLine2'
+                              onChange={onChange}
+                              value={addressLine2 as string}
                               placeholder='Address Line 2'
                               className={styles.input}
                             />
                           </div>
 
                           <div className='col-span-full flex items-center gap-x-4'>
-                            <input type='checkbox' className='' />
+                            <input
+                              type='checkbox'
+                              className=''
+                              name='default'
+                            />
                             <span className='text-[1.2rem]'>
                               Make this my default delivery address
                             </span>
                           </div>
 
-                          <div className='col-span-full flex items-center gap-x-4'>
+                          {/* <div className='col-span-full flex items-center gap-x-4'>
                             <input type='checkbox' className='' />
                             <span className='text-[1.2rem]'>
                               Make this my default billing address
                             </span>
-                          </div>
+                          </div> */}
 
                           <div className='w-[1/2]'>
                             <button className={styles.btn}>Save</button>

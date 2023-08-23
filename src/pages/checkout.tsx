@@ -1,12 +1,16 @@
+import { useSelector } from 'react-redux'
+import { LockClosedIcon } from '@heroicons/react/24/solid'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
 import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
 import { BillingAddress } from '@/components/Accordion/billingAddressAccordion'
-import { LockClosedIcon } from '@heroicons/react/24/solid'
 import { PaystackHook } from '@/helpers/paystack'
 import { useCart } from '@/hooks/useCart'
-import { useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+
 
 const Checkout = () => {
   const styles = {
@@ -26,6 +30,31 @@ const Checkout = () => {
   const taxFee = 10
   const amount = totalPrice + shippingFee + taxFee
 
+  // handle the form for the billingAddress 
+  const billingAddressformik = useFormik<BillingAddress>({
+    initialValues: {
+      title: '',
+      firstname: '',
+      lastname: '',
+      addressLine1: '',
+      addressLine2: '',
+      country: '',
+      zipcode: '',
+      default: false
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required(''),
+      firstname: Yup.string().required(),
+      lastname: Yup.string().required(),
+      addressLine1: Yup.string().required(),
+      country: Yup.string().required(),
+      zipcode: Yup.string().required()
+    }),
+    onSubmit: (values, formikHelpers) => { }
+  })
+
+  console.log(billingAddressformik.values)
+
   return (
     <div>
       <Navbar />
@@ -35,7 +64,16 @@ const Checkout = () => {
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
-              <BillingAddress />
+              <BillingAddress
+                title={billingAddressformik.values.title}
+                firstname={billingAddressformik.values.firstname}
+                lastname={billingAddressformik.values.lastname}
+                addressLine1={billingAddressformik.values.addressLine1}
+                addressLine2={billingAddressformik.values.addressLine2}
+                country={billingAddressformik.values.country}
+                zipcode={billingAddressformik.values.zipcode}
+                onChange={billingAddressformik.handleChange}
+              />
             </div>
 
             <div className='space-y-4'>

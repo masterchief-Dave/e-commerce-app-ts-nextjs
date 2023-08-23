@@ -156,6 +156,19 @@ type RegisterSession = {
   token: string | null
 }
 
+interface BillingAddress {
+  title: String
+  firstname: String
+  lastname: String
+  country: String
+  zipcode: String
+  addressLine1: String
+  addressLine2: String
+  default?: Boolean
+  onChange?: (e: any) => void
+}
+
+
 /**
  * {
     "success": true,
