@@ -10,32 +10,20 @@ import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useDispatch } from 'react-redux'
 
 import styles from './index.module.scss'
 import { countryCode } from '@/globals/countries'
+import { useAppDispatch } from '@/hooks/reduxhooks'
+import { addShippingAddress } from '@/features/shipping-address/address-slice'
 
 export const BillingAddress = () => {
   const [mounted, setMounted] = useState<boolean>(false)
   const [billingAddress, setBillingAddress] = useState<string>('')
+  const dispatch = useAppDispatch()
   // console.log({ billingAddress })
   useEffect(() => {
     setMounted(true)
   }, [])
-
-  // styles
-  // const styles = {
-  //   cardTitle: `font-semibold`,
-  //   cardText: `text-xl lg:text-[1.6rem] font-light`,
-  //   cardInput: `h-[4rem] w-full border px-4`,
-  //   cardImage: `h-12 w-12`,
-  //   label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
-  //   input: `w-full text-[1.2rem] p-4 border`,
-  //   btn: `bg-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.4rem] rounded-md`,
-  //   select: `border px-4 text-[1.2rem] w-full outline-0`,
-  //   option: `text-[1.2rem] font-medium text-primary-grey-300`,
-  //   accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
-  // }
 
   // handle the form for the billingAddress 
   const formik = useFormik<BillingAddress>({
@@ -58,9 +46,18 @@ export const BillingAddress = () => {
       zipcode: Yup.string().required()
     }),
     onSubmit: (values, formikHelpers) => {
-      console.log('the code is here')
-      console.log({ values })
-      //  move the values into redux global state
+      dispatch(addShippingAddress({
+        value: {
+          title: values.title,
+          firstname: values.firstname,
+          lastname: values.lastname,
+          country: values.country,
+          zipcode: values.zipcode,
+          addressLine1: values.addressLine1,
+          addressLine2: values.addressLine2
+        }
+      }))
+      // store the value into session storage
     },
   })
 
@@ -156,12 +153,12 @@ export const BillingAddress = () => {
                               name='title'
                               id='title'
                               className={styles.select}
+                              defaultValue={''}
                               onChange={formik.handleChange}
                             >
                               <option
                                 value={formik.values.title as string}
                                 disabled
-                                selected
                                 className='text-[1.2rem] italic'
                               >
                                 {' '}

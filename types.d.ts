@@ -79,7 +79,7 @@ interface ICard {
 
 
 interface IUser {
-  id: string
+  _id: string
   name: string
   googleId: string
   email: string

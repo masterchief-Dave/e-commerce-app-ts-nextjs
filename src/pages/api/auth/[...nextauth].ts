@@ -90,11 +90,15 @@ const options: NextAuthOptions = {
       // console.log({ token })
       const user = token.user as IUser
 
+      // console.log({ token })
+
       // session.user = user
       // session.expires = ''
       // session.token = token
+      // session.token = token as JWT
       session.role = user?.role || 'user'
       session.photo = user?.avatar ? user.avatar : token?.image as string
+      session.id = user?._id as string
       // session.expires = 30 * 1000
       return session
     }

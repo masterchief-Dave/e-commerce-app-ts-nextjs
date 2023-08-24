@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { usePaystackPayment } from 'react-paystack'
 
@@ -25,6 +26,9 @@ const onClose = () => {
 export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabled = true }) => {
   const router = useRouter()
   const amountToPay = parseFloat(price) * 100
+  const session = useSession()
+
+  const userId = session?.data?.id
 
   const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
@@ -32,9 +36,19 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
     try {
       axios.post(`http://localhost:8100/api/v1/payment/checkout-session/${reference?.reference}`, {
         orders,
-        reference
-      }).then(() => {
+        reference,
+        userId,
+        shippingAddress,
+        price,
+        shippingPrice: 10,
+        taxPrice: 10,
         // route to the place where u will see your order summary
+      }).then((data) => {
+        console.log(data.data)
+        router.push({
+          pathname: '/order-summary',
+          query: { orders: data.data.orders }
+        })
       })
     } catch (err) {
       console.log(err)
@@ -53,7 +67,7 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
   return (
     <button
       className='h-[4rem] bg-blue-500 text-white text-[1.4rem] font-medium rounded-md px-8 flex items-center justify-center w-full'
-      disabled={isDisabled}
+      disabled={false}
       onClick={() => initializePayment(onSuccess, onclose)}>
       Check out
     </button>

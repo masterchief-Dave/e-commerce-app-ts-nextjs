@@ -1,4 +1,3 @@
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 type ShippingAddress = {
@@ -37,5 +36,5 @@ const shippingSlice = createSlice({
   }
 })
 
-
+export const { addShippingAddress, getShippingAddress } = shippingSlice.actions
 export default shippingSlice.reducer

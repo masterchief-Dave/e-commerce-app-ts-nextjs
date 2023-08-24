@@ -21,7 +21,6 @@ type Props = {
   data: Session | null
 }
 
-
 type MobileProps = Omit<Props, 'isTop'>
 
 const styles = {
@@ -79,7 +78,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
             <input
               type='text'
               placeholder='search'
-              className='h-full w-[90%] rounded-md border-0 bg-transparent px-4 text-[1.4rem] outline-0 focus:outline-0'
+              className='h-full w-[90%] rounded-lg border-0 bg-transparent px-4 text-[1.4rem] outline-0 focus:outline-0'
             />
             <div className='flex h-full w-[10%] cursor-pointer items-center justify-center  '>
               <div className='w-fit rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>

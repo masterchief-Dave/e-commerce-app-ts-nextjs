@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
+import { useState } from 'react'
 
 import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
@@ -10,18 +9,19 @@ import { PaystackHook } from '@/helpers/paystack'
 import { useCart } from '@/hooks/useCart'
 import { RootState } from '@/app/store'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
-import { useState } from 'react'
 
+const styles = {
+  sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
+  priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
+  priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`,
+}
 
 const Checkout = () => {
   const [disable, setDisable] = useState(true)
-  const styles = {
-    sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
-    priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
-    priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`,
-  }
-
   const { cart } = useCart()
+  const shippingAddress = useSelector((state: RootState) => {
+    return state.shipping.value
+  })
 
   const totalPrice = useSelector((state: RootState) => {
     return selectorCartTotalAmount(state)
@@ -32,34 +32,8 @@ const Checkout = () => {
   const taxFee = 10
   const amount = totalPrice + shippingFee + taxFee
 
-  // handle the form for the billingAddress
-  // const billingAddressformik = useFormik<BillingAddress>({
-  //   initialValues: {
-  //     title: '',
-  //     firstname: '',
-  //     lastname: '',
-  //     addressLine1: '',
-  //     addressLine2: '',
-  //     country: '',
-  //     zipcode: '',
-  //     default: false
-  //   },
-  //   validationSchema: Yup.object({
-  //     title: Yup.string().required(''),
-  //     firstname: Yup.string().required(),
-  //     lastname: Yup.string().required(),
-  //     addressLine1: Yup.string().required(),
-  //     country: Yup.string().required(),
-  //     zipcode: Yup.string().required()
-  //   }),
-  //   onSubmit: (values, formikHelpers) => {
-  //     console.log('the code is here')
-  //     console.log({ values })
-  //     setDisable(false)
-  //   }
-  // })
-
-  // console.log(billingAddressformik.values)
+  // get shipping address, check to see if shipping address is present and 
+  console.log({ shippingAddress })
 
   return (
     <div>
@@ -70,17 +44,7 @@ const Checkout = () => {
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
-              <BillingAddress
-                // title={billingAddressformik.values.title}
-                // firstname={billingAddressformik.values.firstname}
-                // lastname={billingAddressformik.values.lastname}
-                // addressLine1={billingAddressformik.values.addressLine1}
-                // addressLine2={billingAddressformik.values.addressLine2}
-                // country={billingAddressformik.values.country}
-                // zipcode={billingAddressformik.values.zipcode}
-                // onChange={billingAddressformik.handleChange}
-                // onSubmit={billingAddressformik}
-              />
+              <BillingAddress />
             </div>
 
             {/* the beginning of payment methods */}
@@ -139,7 +103,7 @@ const Checkout = () => {
                   price={20000}
                   orders={cart}
                   loading={false}
-                  shippingAddress={''}
+                  shippingAddress={shippingAddress}
                   isDisabled={disable}
                 />
 
