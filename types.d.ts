@@ -165,7 +165,6 @@ interface BillingAddress {
   addressLine1: String
   addressLine2: String
   default?: Boolean
-  onChange?: (e: any) => void
 }
 
 

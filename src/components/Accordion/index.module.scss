@@ -1,0 +1,39 @@
+ .cardTitle {
+   @apply font-semibold
+ }
+
+ .cardText {
+   @apply text-xl font-light
+ }
+
+ .cardInput {
+   @apply h-[4rem] w-full border px-4
+ }
+
+ .cardImage {
+   @apply h-12 w-12
+ }
+
+ .label {
+   @apply font-medium text-[1.3rem] text-primary-grey-300 block
+ }
+
+ .input {
+   @apply w-full text-[1.2rem] p-4 border
+ }
+
+ .btn {
+   @apply bg-blue-500 px-8 py-4 text-base font-medium text-white text-[1.4rem] rounded-md
+ }
+
+ .select {
+   @apply border px-4 text-[1.2rem] w-full outline-0
+ }
+
+ .option {
+   @apply text-[1.2rem] font-medium text-primary-grey-300
+ }
+
+ .accordionHeader {
+   @apply text-[1.4rem] font-semibold
+ }

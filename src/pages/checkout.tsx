@@ -10,9 +10,11 @@ import { PaystackHook } from '@/helpers/paystack'
 import { useCart } from '@/hooks/useCart'
 import { RootState } from '@/app/store'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+import { useState } from 'react'
 
 
 const Checkout = () => {
+  const [disable, setDisable] = useState(true)
   const styles = {
     sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
     priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
@@ -30,30 +32,34 @@ const Checkout = () => {
   const taxFee = 10
   const amount = totalPrice + shippingFee + taxFee
 
-  // handle the form for the billingAddress 
-  const billingAddressformik = useFormik<BillingAddress>({
-    initialValues: {
-      title: '',
-      firstname: '',
-      lastname: '',
-      addressLine1: '',
-      addressLine2: '',
-      country: '',
-      zipcode: '',
-      default: false
-    },
-    validationSchema: Yup.object({
-      title: Yup.string().required(''),
-      firstname: Yup.string().required(),
-      lastname: Yup.string().required(),
-      addressLine1: Yup.string().required(),
-      country: Yup.string().required(),
-      zipcode: Yup.string().required()
-    }),
-    onSubmit: (values, formikHelpers) => { }
-  })
+  // handle the form for the billingAddress
+  // const billingAddressformik = useFormik<BillingAddress>({
+  //   initialValues: {
+  //     title: '',
+  //     firstname: '',
+  //     lastname: '',
+  //     addressLine1: '',
+  //     addressLine2: '',
+  //     country: '',
+  //     zipcode: '',
+  //     default: false
+  //   },
+  //   validationSchema: Yup.object({
+  //     title: Yup.string().required(''),
+  //     firstname: Yup.string().required(),
+  //     lastname: Yup.string().required(),
+  //     addressLine1: Yup.string().required(),
+  //     country: Yup.string().required(),
+  //     zipcode: Yup.string().required()
+  //   }),
+  //   onSubmit: (values, formikHelpers) => {
+  //     console.log('the code is here')
+  //     console.log({ values })
+  //     setDisable(false)
+  //   }
+  // })
 
-  console.log(billingAddressformik.values)
+  // console.log(billingAddressformik.values)
 
   return (
     <div>
@@ -65,30 +71,34 @@ const Checkout = () => {
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
               <BillingAddress
-                title={billingAddressformik.values.title}
-                firstname={billingAddressformik.values.firstname}
-                lastname={billingAddressformik.values.lastname}
-                addressLine1={billingAddressformik.values.addressLine1}
-                addressLine2={billingAddressformik.values.addressLine2}
-                country={billingAddressformik.values.country}
-                zipcode={billingAddressformik.values.zipcode}
-                onChange={billingAddressformik.handleChange}
+                // title={billingAddressformik.values.title}
+                // firstname={billingAddressformik.values.firstname}
+                // lastname={billingAddressformik.values.lastname}
+                // addressLine1={billingAddressformik.values.addressLine1}
+                // addressLine2={billingAddressformik.values.addressLine2}
+                // country={billingAddressformik.values.country}
+                // zipcode={billingAddressformik.values.zipcode}
+                // onChange={billingAddressformik.handleChange}
+                // onSubmit={billingAddressformik}
               />
             </div>
 
-            <div className='space-y-4'>
+            {/* the beginning of payment methods */}
+            {/* <div className='space-y-4'>
               <div className='flex items-center justify-between'>
                 <h3 className={styles.sectionHeader}>Payment methods</h3>
                 <div className='flex items-center gap-8'>
                   <p>Secured Connection</p>
                   <LockClosedIcon className='h-8 w-8' />
                 </div>
-              </div>
+              </div> */}
 
-              <div>
+            {/* <div>
                 <PaymentAccordion />
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
+            {/* the end of payment methods */}
+
 
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Order Details</h2>
@@ -125,7 +135,13 @@ const Checkout = () => {
                   and condition
                 </p>
 
-                <PaystackHook price={20000} orders={cart} loading={false} />
+                <PaystackHook
+                  price={20000}
+                  orders={cart}
+                  loading={false}
+                  shippingAddress={''}
+                  isDisabled={disable}
+                />
 
                 <div className='flex items-center gap-x-8'>
                   <p className='text-former-price-text w-full text-center text-[1.3rem]'>

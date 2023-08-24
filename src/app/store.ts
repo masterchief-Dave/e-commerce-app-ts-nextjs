@@ -4,6 +4,7 @@ import cartReducer from '@/features/cart/cartSlice'
 import wishListReducer from '@/features/wishlist/wishlistSlice'
 import loginReducer from '@/features/login/loginSlice'
 import RegisterReducer from '@/features/register/registerSlice'
+import ShippingReducer from '@/features/shipping-address/address-slice'
 import Cookies from 'js-cookie'
 
 // get toen from here when I want to access a protected route
@@ -28,7 +29,8 @@ export const store = configureStore({
     cart: cartReducer,
     wishlist: wishListReducer,
     login: loginReducer,
-    register: RegisterReducer
+    register: RegisterReducer,
+    shipping: ShippingReducer
   },
   preloadedState: {
     login: initialState

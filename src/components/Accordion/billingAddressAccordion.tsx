@@ -1,7 +1,5 @@
-// billing address
-
 'use client'
-import { countryCode } from '@/globals/countries'
+
 import {
   Accordion,
   AccordionButton,
@@ -10,30 +8,61 @@ import {
 } from '@chakra-ui/react'
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
 
-export const BillingAddress = ({ title, firstname, lastname, addressLine1, addressLine2, country, zipcode, onChange }: BillingAddress) => {
+import styles from './index.module.scss'
+import { countryCode } from '@/globals/countries'
+
+export const BillingAddress = () => {
   const [mounted, setMounted] = useState<boolean>(false)
   const [billingAddress, setBillingAddress] = useState<string>('')
-
-  console.log({ billingAddress })
-
+  // console.log({ billingAddress })
   useEffect(() => {
     setMounted(true)
   }, [])
 
   // styles
-  const styles = {
-    cardTitle: `font-semibold`,
-    cardText: `text-xl lg:text-[1.6rem] font-light`,
-    cardInput: `h-[4rem] w-full border px-4`,
-    cardImage: `h-12 w-12`,
-    label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
-    input: `w-full text-[1.2rem] p-4 border`,
-    btn: `bg-primary-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.4rem]`,
-    select: `border px-4 text-[1.2rem] w-full outline-0`,
-    option: `text-[1.2rem] font-medium text-primary-grey-300`,
-    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
-  }
+  // const styles = {
+  //   cardTitle: `font-semibold`,
+  //   cardText: `text-xl lg:text-[1.6rem] font-light`,
+  //   cardInput: `h-[4rem] w-full border px-4`,
+  //   cardImage: `h-12 w-12`,
+  //   label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
+  //   input: `w-full text-[1.2rem] p-4 border`,
+  //   btn: `bg-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.4rem] rounded-md`,
+  //   select: `border px-4 text-[1.2rem] w-full outline-0`,
+  //   option: `text-[1.2rem] font-medium text-primary-grey-300`,
+  //   accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
+  // }
+
+  // handle the form for the billingAddress 
+  const formik = useFormik<BillingAddress>({
+    initialValues: {
+      title: '',
+      firstname: '',
+      lastname: '',
+      addressLine1: '',
+      addressLine2: '',
+      country: '',
+      zipcode: '',
+      // default: false
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required(),
+      firstname: Yup.string().required(),
+      lastname: Yup.string().required(),
+      addressLine1: Yup.string().required(),
+      country: Yup.string().required(),
+      zipcode: Yup.string().required()
+    }),
+    onSubmit: (values, formikHelpers) => {
+      console.log('the code is here')
+      console.log({ values })
+      //  move the values into redux global state
+    },
+  })
 
   return (
     <div className='py-10 font-inter text-[1.4rem]'>
@@ -69,18 +98,18 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                         <section className='grid grid-cols-12 gap-4 text-left'>
                           <div className='col-start-1 col-end-8'>
                             <h5 className={styles.cardTitle}>Address</h5>
-                            <p className={styles.cardText}>
+                            <p className={`${styles.cardText} lg:text-[1.6rem]`}>
                               Osborne Foreshore Estate, 1A 2nd St, Ikoyi 106104,
                               Lagos
                             </p>
                           </div>
                           <div className='col-start-8 col-end-10'>
                             <h5 className={styles.cardTitle}>City</h5>
-                            <p className={styles.cardText}>Lagos</p>
+                            <p className={`${styles.cardText} lg:text-[1.6rem]`}>Lagos</p>
                           </div>
                           <div className='col-start-10 col-end-13'>
                             <h5 className={styles.cardTitle}>Postcode</h5>
-                            <p className={styles.cardText}>122024</p>
+                            <p className={`${styles.cardText} lg:text-[1.6rem]`}>122024</p>
                           </div>
                         </section>
                       </div>
@@ -117,6 +146,7 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                         <form
                           action=''
                           className='grid grid-cols-2 gap-12 p-4'
+                          onSubmit={formik.handleSubmit}
                         >
                           <div className='col-span-full'>
                             <label htmlFor='title' className={styles.label}>
@@ -126,15 +156,16 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                               name='title'
                               id='title'
                               className={styles.select}
-                              onChange={onChange}
+                              onChange={formik.handleChange}
                             >
                               <option
-                                value={title as string}
+                                value={formik.values.title as string}
                                 disabled
+                                selected
                                 className='text-[1.2rem] italic'
                               >
                                 {' '}
-                                select title
+                                Select Title
                               </option>
                               <option value='mr'>Mr.</option>
                               <option value='mrs'>Mrs.</option>
@@ -151,8 +182,8 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                               type='text'
                               id='firstname'
                               name='firstname'
-                              onChange={onChange}
-                              value={firstname as string}
+                              onChange={formik.handleChange}
+                              value={formik.values.firstname as string}
                               placeholder='First Name'
                               className={styles.input}
                             />
@@ -165,8 +196,8 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                               type='text'
                               id='lastname'
                               name='lastname'
-                              onChange={onChange}
-                              value={lastname as string}
+                              onChange={formik.handleChange}
+                              value={formik.values.lastname as string}
                               placeholder='Last Name'
                               className={styles.input}
                             />
@@ -179,8 +210,8 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                             <select
                               name='country'
                               id='country'
-                              onChange={onChange}
-                              value={country as string}
+                              onChange={formik.handleChange}
+                              value={formik.values.country as string}
                               className={`h-[4.233rem] w-full border px-4 text-[1.2rem]`}
                             >
                               <option
@@ -189,7 +220,7 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                                 className='text-[1.2rem] italic'
                               >
                                 {' '}
-                                select country
+                                Select Country
                               </option>
                               {countryCode.map((data) => {
                                 return (
@@ -214,8 +245,8 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                               type='text'
                               id='zipcode'
                               name='zipcode'
-                              onChange={onChange}
-                              value={zipcode as string}
+                              onChange={formik.handleChange}
+                              value={formik.values.zipcode as string}
                               placeholder='Zip code'
                               className={styles.input}
                             />
@@ -232,8 +263,8 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                               type='text'
                               id='AddressLine1'
                               name='addressLine1'
-                              onChange={onChange}
-                              value={addressLine1 as string}
+                              onChange={formik.handleChange}
+                              value={formik.values.addressLine1 as string}
                               placeholder='Address Line 1'
                               className={styles.input}
                             />
@@ -250,8 +281,8 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                               type='text'
                               id='AddressLine2'
                               name='addressLine2'
-                              onChange={onChange}
-                              value={addressLine2 as string}
+                              onChange={formik.handleChange}
+                              value={formik.values.addressLine2 as string}
                               placeholder='Address Line 2'
                               className={styles.input}
                             />
@@ -276,7 +307,11 @@ export const BillingAddress = ({ title, firstname, lastname, addressLine1, addre
                           </div> */}
 
                           <div className='w-[1/2]'>
-                            <button className={styles.btn}>Save</button>
+                            <button
+                              type='submit'
+                              className={styles.btn}>
+                              Save
+                            </button>
                           </div>
                         </form>
                       </div>

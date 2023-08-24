@@ -22,7 +22,7 @@ const onClose = () => {
   console.log('closed')
 }
 
-export const PaystackHook = ({ loading, orders, price }) => {
+export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabled = true }) => {
   const router = useRouter()
   const amountToPay = parseFloat(price) * 100
 
@@ -53,6 +53,7 @@ export const PaystackHook = ({ loading, orders, price }) => {
   return (
     <button
       className='h-[4rem] bg-blue-500 text-white text-[1.4rem] font-medium rounded-md px-8 flex items-center justify-center w-full'
+      disabled={isDisabled}
       onClick={() => initializePayment(onSuccess, onclose)}>
       Check out
     </button>
