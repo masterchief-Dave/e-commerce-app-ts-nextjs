@@ -34,7 +34,6 @@ export const ProductCard = ({ data }: Props) => {
       }))
     }
 
-
     if (clicked === false) {
       return toast('Item removed from wishlist')
     } else if (clicked === true) {
@@ -56,7 +55,7 @@ export const ProductCard = ({ data }: Props) => {
   }
 
   return (
-    <div className='max-w-[25rem] rounded-xl p-4 shadow-product-card-box-shadow'>
+    <div className='max-w-[25rem] rounded-xl space-y-8 p-4 shadow-product-card-box-shadow'>
       <div className='relative max-h-[20rem] rounded-xl'>
         <Image
           width={1000}
@@ -82,7 +81,7 @@ export const ProductCard = ({ data }: Props) => {
         </div>
       </div>
 
-      <div className='space-y-2 py-2 font-inter'>
+      <div className='space-y-8 py-2 font-inter'>
         <h3 className='max-w-[20rem] truncate text-center text-base font-normal lg:text-[1.4rem]'>
           {data.name}
         </h3>
@@ -99,7 +98,7 @@ export const ProductCard = ({ data }: Props) => {
           <span>{data.ratings} reviews</span>
         </div>
         <button
-          className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-xl bg-primary-grey-500 font-semibold hover:bg-primary-blue-300 hover:text-white hover:transition-all hover:delay-75'
+          className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md bg-primary-grey-500 font-semibold hover:bg-primary-blue-300 hover:text-white hover:transition-all hover:delay-75'
           onClick={handleAddToCart}
         >
           <ShoppingBagIcon className='h-4 w-4' />

@@ -1,5 +1,10 @@
+interface Props {
+  title: String
+  description: String
+  img: String
+}
 
-export const landingPageFeatures = [
+export const landingPageFeatures: Props[] = [
   {
     title: 'Worldwide Delivery',
     description: 'We offer competitive prices on our 100 million plus product any range.',

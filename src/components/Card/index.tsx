@@ -6,7 +6,7 @@ import { IconoirDeliveryTruck, RiCustomerService2Fill } from '@/globals/icons'
 type Props = {
   title: String
   description: String
-  img: any
+  img: String
 }
 
 const styles = {
