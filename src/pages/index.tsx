@@ -13,7 +13,8 @@ import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { ProductCardSkeleton } from '@/components/SkeletonLoading'
 import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
-
+import { landingPageFeatures } from '@/globals/home'
+import { FeaturesCard } from '@/components/Card'
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
@@ -153,6 +154,12 @@ export default function Home() {
                       Next
                     </button>
                   </div>
+                </section>
+
+                <section className='grid grid-cols-4 gap-24'>
+                  {landingPageFeatures.map((feature) => {
+                    return <FeaturesCard title={feature.title} description={feature.description} img={feature.img} />
+                  })}
                 </section>
               </div>
             </div>

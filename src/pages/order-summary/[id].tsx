@@ -1,13 +1,20 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import Logo from 'public/assets/celebrate.svg'
 
 const OrderSummary = () => {
   return (
     <div className='font-inter'>
+      <Head>
+        <title>Thank you! - Apple</title>
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       <main className='grid grid-cols-12 min-h-screen'>
         <section className='col-start-1 col-end-8 py-32 px-24 space-y-12'>
-          <h1 className='text-[2rem] font-bold'>Sage-Warehouse</h1>
+          <h1 className='text-[2.5rem] font-bold'>Sage-Warehouse</h1>
           <div className='flex gap-x-12'>
             <div className='h-20 w-20 flex items-center justify-center rounded-full border border-black'>
               <CheckIcon className='h-14 w-14' />
@@ -41,7 +48,7 @@ const OrderSummary = () => {
             <div className='text-[1.4rem] gap-x-1 font-medium flex items-center'>
               <p>Need help?</p>  <p className='text-blue-500'>Contact us</p>
             </div>
-            <button className='h-[4rem] flex items-center justify-center text-[1.4rem] font-medium bg-blue-500 rounded-md px-8 py-2 text-white'>Continue Shopping</button>
+            <Link href='/' className='h-[4rem] flex items-center justify-center text-[1.4rem] font-medium bg-blue-500 rounded-md px-8 py-2 text-white'>Continue Shopping</Link>
           </div>
         </section>
         <section className='col-start-8 col-end-13 py-32 px-24 bg-[#FAFAFA] sticky top-0 left-0 right-0'>
@@ -80,3 +87,7 @@ const OrderSummary = () => {
 }
 
 export default OrderSummary
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   return {}
+// }

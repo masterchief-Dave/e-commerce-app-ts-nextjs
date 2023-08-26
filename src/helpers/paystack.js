@@ -54,9 +54,8 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
       console.log(err)
     }
 
-    console.log({ response })
     // router.push({
-    //   pathname: '/success',
+    //   pathname: '/order-summary',
     //   query: { orders, reference, price: amountToPay },
     // })
   }
