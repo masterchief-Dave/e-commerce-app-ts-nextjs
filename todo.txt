@@ -117,3 +117,6 @@ look at this post for inspiration:
 https://stackoverflow.com/questions/68235182/nextjs-with-next-auth-setting-cookie-received-from-node-js
 
 https://www.reddit.com/r/nextjs/comments/rri1js/how_to_use_nextauth_with_a_separate_backend/
+
+3. add items to wishlist
+4. move authentication from next-auth to credentials login and passport login on my backend.

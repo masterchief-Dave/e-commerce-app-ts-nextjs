@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import { HeartIcon } from '@/globals/icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { StarIcon } from '@heroicons/react/24/outline'
-
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+
 import { addToCart } from '@/features/cart/cartSlice'
 import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
 import { useAppDispatch } from '@/hooks/reduxhooks'
@@ -16,43 +15,34 @@ type Props = {
 
 export const ProductCard = ({ data }: Props) => {
   const dispatch = useAppDispatch()
-  const [clicked, setClicked] = useState<boolean>(false)
+  const [clicked, setClicked] = useState<boolean | null>(null)
 
-  // console.log({ clicked })
-
-  const handleFavourite = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    e.preventDefault()
-
-    setClicked(!clicked)
-
-    if (clicked) {
-      handleAddToWishlist()
+  const handleFavourite = () => {
+    if (clicked === null) {
+      return setClicked(true)
     } else {
+      setClicked(!clicked)
+    }
+  }
+
+  useEffect(() => {
+    if (clicked === true) {
+      dispatch(addToWishList(data))
+      toast.success('Item added to wishlist')
+    } else if (clicked === false) {
       // remove from wishlist
       dispatch(removeFromWishlist({
         id: data._id
       }))
+      toast.success('Item removed from wishlist')
     }
-
-    if (clicked === false) {
-      return toast('Item removed from wishlist')
-    } else if (clicked === true) {
-      return toast('Item added to wishlist')
-    }
-  }
+  }, [clicked])
 
   // cart
   const handleAddToCart = () => {
     if (!data) return
 
     dispatch(addToCart(data))
-  }
-
-  // wishlist
-  const handleAddToWishlist = () => {
-    if (!data) return
-    dispatch(addToWishList(data))
   }
 
   return (
@@ -72,12 +62,13 @@ export const ProductCard = ({ data }: Props) => {
         </div>
 
         <div
-          className='absolute top-5 right-5  cursor-pointer rounded-md bg-[#fff] p-2'
-          onClick={handleFavourite}
+          className='absolute top-5 right-5 cursor-pointer rounded-md bg-[#fff] p-2'
+
         >
           <HeartIcon
             className='h-8 w-8'
-            fill={clicked === false ? 'none' : '#105caa'}
+            handleFavourite={handleFavourite}
+            fill={clicked === true ? '#105caa' : 'none'}
           />
         </div>
       </div>

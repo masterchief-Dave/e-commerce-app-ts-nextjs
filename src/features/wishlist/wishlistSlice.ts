@@ -34,7 +34,7 @@ export const wishlistSlice = createSlice({
 
     },
     addToWishList: (state: WishlistState, action: PayloadAction<Product>) => {
-      console.log(action.payload)
+      console.log('the reducer', action.payload)
       const findIndex = state.value.findIndex((item) => {
         return item._id === action.payload._id
       })

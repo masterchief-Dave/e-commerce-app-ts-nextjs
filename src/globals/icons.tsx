@@ -1,10 +1,10 @@
 type Props = {
   className: string
   fill: string
-  onClick?: () => void
+  handleFavourite: () => void
 }
 
-export const HeartIcon = ({ className, fill, onClick }: Props) => {
+export const HeartIcon = ({ className, fill, handleFavourite }: Props) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -13,7 +13,10 @@ export const HeartIcon = ({ className, fill, onClick }: Props) => {
       strokeWidth={1.5}
       stroke='currentColor'
       className={className ? className : 'h-6 w-6'}
-      onClick={onClick}
+      onClick={() => {
+        console.log('clicked')
+        handleFavourite()
+      }}
     >
       <path
         strokeLinecap='round'
