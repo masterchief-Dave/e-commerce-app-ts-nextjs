@@ -34,3 +34,9 @@ export default async function handler(
     return res.status(405).json({ message: 'method not allowed' })
   }
 }
+
+/**
+ * this is a protected and a restricted route this means that,
+ * 1. only a logged in user can access this route
+ * 2. only a user with an admin role can use this route to update products
+ */
