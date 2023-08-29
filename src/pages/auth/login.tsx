@@ -54,7 +54,8 @@ const Login = ({ myCookieValue, data }: Props) => {
       dispatch(loginStart())
       // https://sage-warehouse-backend.onrender.com/
 
-      // ## new code
+      // ## new code next-auth login
+      /*
       const loginResponse = await loginUser({ email, password })
       console.log({ loginResponse })
 
@@ -63,6 +64,18 @@ const Login = ({ myCookieValue, data }: Props) => {
       } else {
         router.push('/')
       }
+      */
+
+      // backend express server auth
+      const response = await axios.post('http://localhost:8100/api/v1/auth/login', {
+        email,
+        password
+      })
+
+      // store the user token in the localstorage for now in development mode, it will be removed later and replaced with cookies in production
+      localStorage.setItem('sage-warehouse', JSON.stringify({ token: response.data.token }))
+
+      console.log(response.data)
 
     } catch (err: any) {
       console.log(err)
@@ -82,7 +95,6 @@ const Login = ({ myCookieValue, data }: Props) => {
         <AuthNavbar />
         <section className='flex h-full w-full items-center justify-center py-16'>
           <div className='rounded-xl border py-4 px-6 space-y-8'>
-
             <form className='w-[35rem] max-w-[40rem] space-y-4' onSubmit={formik.handleSubmit}>
               <header>
                 <h1 className='text-center text-[2rem] font-normal'>Login</h1>

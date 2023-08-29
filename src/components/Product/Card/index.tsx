@@ -62,13 +62,12 @@ export const ProductCard = ({ data }: Props) => {
         </div>
 
         <div
-          className='absolute top-5 right-5 cursor-pointer rounded-md bg-[#fff] p-2'
-
+          className='absolute top-5 right-5 cursor-pointer rounded-md p-2'
         >
           <HeartIcon
-            className='h-8 w-8'
+            className='h-10 w-10 text-blue-500'
             handleFavourite={handleFavourite}
-            fill={clicked === true ? '#105caa' : 'none'}
+            fill={clicked === true ? '#3b82f6' : 'none'}
           />
         </div>
       </div>

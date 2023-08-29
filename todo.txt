@@ -120,3 +120,16 @@ https://www.reddit.com/r/nextjs/comments/rri1js/how_to_use_nextauth_with_a_separ
 
 3. add items to wishlist
 4. move authentication from next-auth to credentials login and passport login on my backend.
+5. how do i serve next.js app in express server
+
+next.js vs express server
+if i export my next.js app it becomes a static file and I am taking out some of next.js features such as getServerSideProps, but I will be able to make use of my express server store my cookies on the client, but I will have to manage user session myself
+
+problems I am facing with using next.js api, 
+1. I am having challenge creating express.js kind of middleware in next.js it seems I may have to write the logic for something like authController.protect in all the apis in my next.js api that needs it
+2. global error management, I am not really sure how to go about this one sef,
+
+adavantages
+1. I don't forfeit next.js features
+2. I don't manage user session myself I will use next-auth
+3. 

@@ -34,7 +34,7 @@ export const Navbar = () => {
 
   //my api auth
   const { isLoggedIn, user } = useAuth()
-  console.log('user session data', { data })
+  // console.log('user session data', { data })
 
   const { cart } = useCart()
 

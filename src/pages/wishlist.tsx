@@ -10,7 +10,7 @@ type Props = {}
 const wishlist = (props: Props) => {
 
   const wishlist = useAppSelector((state) => state.wishlist.value)
-  console.log(wishlist)
+  console.log({ wishlist })
 
   return (
     <Layout>
