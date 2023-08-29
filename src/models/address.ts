@@ -5,9 +5,6 @@ export const AddressSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  zip: {
-    type: String
-  },
   city: {
     type: String,
     required: true
@@ -15,6 +12,19 @@ export const AddressSchema = new mongoose.Schema({
   state: {
     type: String,
     required: true
+  },
+  phoneNumber: {
+    type: String,
+  },
+  zipCode: {
+    type: String
+  },
+  country: {
+    type: String
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 

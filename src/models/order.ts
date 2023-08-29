@@ -2,26 +2,13 @@ import mongoose, { Mongoose } from "mongoose"
 
 export const orderSchema = new mongoose.Schema({
   shippingInfo: {
-    address: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    phoneNo: {
-      type: String,
-      required: true,
-    },
-    postalCode: {
-      type: String,
-      required: true,
-    },
-    country: {
-      type: String,
-      required: true,
-    },
+    title: String,
+    firstname: String,
+    lastname: String,
+    country: String,
+    zipcode: String,
+    addressLine1: String,
+    addressLine2: String
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,13 +16,8 @@ export const orderSchema = new mongoose.Schema({
   },
   orderItems: [
     {
-      name: { type: String, required: true, },
       quantity: {
         type: Number,
-        required: true,
-      },
-      image: {
-        type: String,
         required: true,
       },
       price: {
@@ -49,17 +31,10 @@ export const orderSchema = new mongoose.Schema({
     },
   ],
   paymentInfo: {
-    id: {
-      type: String,
-    },
-    status: {
-      type: String,
-    },
-  },
-  itemsPrice: {
-    type: Number,
-    required: true,
-    default: 0,
+    status: String,
+    reference: String,
+    message: String,
+    transaction: String
   },
   taxPrice: {
     type: Number,

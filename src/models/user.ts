@@ -3,11 +3,10 @@ import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto"
-import { AddressSchema } from './address'
-import { CardSchema } from './card'
+
 import { JWT_SECRET, JWT_EXPIRES } from '@/utils/config'
 
-export const UserSchema = new mongoose.Schema<IUser>({
+export const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please enter your name'],
@@ -25,11 +24,17 @@ export const UserSchema = new mongoose.Schema<IUser>({
     type: String,
     required: [true, 'Please enter your password'],
     minLength: [5, 'Password cannot be less than 5 characters'],
-    select: false
+    select: false,
   },
   avatar: {
-    type: String,
-    default: 'https://res.cloudinary.com/diggungrj/image/upload/v1668579345/avataaars_rkyikx.svg'
+    public_id: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
   },
   role: {
     type: String,
@@ -51,8 +56,16 @@ export const UserSchema = new mongoose.Schema<IUser>({
   refreshToken: {
     type: String
   },
-  deliveryAddress: [AddressSchema],
-  creditCards: [CardSchema]
+  shippingAddress: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address'
+  }],
+  creditCards: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CreditCard'
+  }]
+  // shippingAddress: [AddressSchema], // this method means that the address will be created on the user model user.shippingAddress = {}
+  // creditCards: [CreditCardSchema]
 })
 
 

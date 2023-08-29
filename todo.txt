@@ -118,9 +118,12 @@ https://stackoverflow.com/questions/68235182/nextjs-with-next-auth-setting-cooki
 
 https://www.reddit.com/r/nextjs/comments/rri1js/how_to_use_nextauth_with_a_separate_backend/
 
-3. add items to wishlist
-4. move authentication from next-auth to credentials login and passport login on my backend.
-5. how do i serve next.js app in express server
+3. add items to wishlist (done)
+4. move authentication from next-auth to credentials login and passport login on my backend. (not going to work like I want) because of no.(5)
+5. how do i serve next.js app in express server (answered)
+6. move my backend code here 
+   start from updating my models
+7.create middlwares
 
 next.js vs express server
 if i export my next.js app it becomes a static file and I am taking out some of next.js features such as getServerSideProps, but I will be able to make use of my express server store my cookies on the client, but I will have to manage user session myself
