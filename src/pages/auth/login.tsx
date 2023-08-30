@@ -55,7 +55,7 @@ const Login = ({ myCookieValue, data }: Props) => {
       // https://sage-warehouse-backend.onrender.com/
 
       // ## new code next-auth login
-      /*
+
       const loginResponse = await loginUser({ email, password })
       console.log({ loginResponse })
 
@@ -64,8 +64,9 @@ const Login = ({ myCookieValue, data }: Props) => {
       } else {
         router.push('/')
       }
-      */
 
+
+      /*
       // backend express server auth
       const response = await axios.post('http://localhost:8100/api/v1/auth/login', {
         email,
@@ -76,6 +77,7 @@ const Login = ({ myCookieValue, data }: Props) => {
       localStorage.setItem('sage-warehouse', JSON.stringify({ token: response.data.token }))
 
       console.log(response.data)
+      */
 
     } catch (err: any) {
       console.log(err)

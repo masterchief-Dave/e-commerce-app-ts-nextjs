@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { LockClosedIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 
 import { IconoirDeliveryTruck, RiCustomerService2Fill } from '@/globals/icons'

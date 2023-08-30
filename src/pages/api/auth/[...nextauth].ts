@@ -9,7 +9,7 @@ import { User } from '@/models/user'
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@/utils/config'
 
 
-const options: NextAuthOptions = {
+export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
     id: 'credentials',

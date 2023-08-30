@@ -18,7 +18,7 @@ const NavigationMenuDemoExample = () => {
   // console.log({ totalPrice })
   const fn = async () => {
     try {
-      const response = await axios.post('/api/products/create-product')
+      const response = await axios.patch('/api/products/update-product/1')
       const data = await response.data
       console.log(data)
     } catch (err) {
@@ -27,10 +27,11 @@ const NavigationMenuDemoExample = () => {
   }
 
   const handleClick = async () => {
+    await fn()
 
-    const res = await axios.get('/api/gettest')
+    // const res = await axios.get('/api/gettest')
 
-    console.log(res)
+    // console.log(res)
   }
 
   return (
