@@ -2,35 +2,41 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-import { Product } from '@/models/product'
+import { Order } from '@/models/order'
+import { connectToMongoDB } from '@/lib/mongodb'
 
 type Data = {
   message: string
+  data?: Order[]
 }
 
-// http://localhost:3002/api/products/delete-product/1 METHOD === DELETE
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  if (req.method === 'DELETE') {
+  if (req.method === 'GET') {
     try {
       const session = await getSession({ req })
 
-      if (session?.role !== 'admin') {
+      if (!session?.role || session.role !== 'admin') {
         return res.status(400).json({
           message: `You do not have permission to access this route`
         })
       }
-      const id = req.query.id
-      // @ts-ignore
-      const product = await Product.findById(id)
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' })
-      }
 
-      await Product.findByIdAndDelete(id)
-      res.status(200).json({ message: 'product deleted' })
+      await connectToMongoDB()
+      // @ts-ignore
+      const orders = await Order.find().populate('user')
+      console.log({ orders })
+
+      if (!orders) return res.status(404).json({
+        message: 'No order found'
+      })
+
+      res.status(200).json({
+        message: 'ok',
+        data: orders
+      })
     } catch (err) {
       console.log(err)
     }
@@ -38,9 +44,3 @@ export default async function handler(
     return res.status(405).json({ message: 'method not allowed' })
   }
 }
-
-/**
- * to delete a product is for 
- * 1. a logged in user
- * 2. the user should have admin previledges
- */

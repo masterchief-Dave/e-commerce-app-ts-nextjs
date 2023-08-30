@@ -18,7 +18,7 @@ const NavigationMenuDemoExample = () => {
   // console.log({ totalPrice })
   const fn = async () => {
     try {
-      const response = await axios.patch('/api/products/update-product/1')
+      const response = await axios.get('/api/order/get-orders')
       const data = await response.data
       console.log(data)
     } catch (err) {

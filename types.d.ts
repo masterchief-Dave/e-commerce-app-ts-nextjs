@@ -157,16 +157,48 @@ type RegisterSession = {
 }
 
 interface BillingAddress {
-  title: String
-  firstname: String
-  lastname: String
-  country: String
-  zipcode: String
-  addressLine1: String
-  addressLine2: String
+  title: string
+  firstname: string
+  lastname: string
+  country: string
+  zipcode: string
+  addressLine1: string
+  addressLine2: string
   default?: Boolean
 }
 
+interface ShippingAddress {
+  street: string
+  city: string
+  state: string
+  phoneNumber: string
+  zipCode: string
+  country: string
+  user: User
+}
+
+interface Order {
+  shippingInfo: BillingAddress
+  user: User
+  orderItems: {
+    quantity: number
+    price: number
+    product: Product
+  }[]
+  paymentInfo: {
+    status: string
+    reference: string
+    message: string
+    transaction: string
+  }
+  taxPrice: number
+  shippingPrice: number
+  totalPrice: number
+  paidAt: Date
+  orderStatus: string
+  deliveredAt: Date
+  createdAt: Date
+}
 
 /**
  * {
