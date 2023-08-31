@@ -8,6 +8,7 @@ import { addToCart } from '@/features/cart/cartSlice'
 import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { RenderRating } from '@/helpers/renderRating'
+import { Product } from '../../../../types'
 
 type Props = {
   data: Product
@@ -86,7 +87,7 @@ export const ProductCard = ({ data }: Props) => {
               return <RenderRating color='#edab56' rating={4} key={index} />
             })}
             {new Array(5 - (Math.floor(data.ratings))).fill('0').map((rating, index) => {
-              return <RenderRating color='transparent' rating={1} />
+              return <RenderRating color='transparent' rating={1} key={index} />
             })}
           </div>
           {/* <span className='text-[1.4rem]'>{data.ratings}</span> */}

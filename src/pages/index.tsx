@@ -158,8 +158,13 @@ export default function Home() {
                 </section>
 
                 <section className='grid grid-cols-4 gap-24'>
-                  {landingPageFeatures.map((feature) => {
-                    return <FeaturesCard title={feature.title} description={feature.description} img={feature.img} />
+                  {landingPageFeatures.map((feature, index) => {
+                    return <FeaturesCard
+                      key={index}
+                      title={feature.title}
+                      description={feature.description}
+                      img={feature.img}
+                    />
                   })}
                 </section>
               </div>

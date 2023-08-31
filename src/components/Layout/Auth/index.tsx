@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react"
 
 import AuthBg from 'public/assets/img/auth-bg.jpg'
 
-
 type Props = {
   children: React.ReactNode
 }
@@ -16,10 +15,10 @@ const AuthLayout = ({ children }: Props) => {
   const session = useSession()
 
   useEffect(() => {
-    if (session) {
+    if (session.status === 'authenticated') {
       router.push('/')
     }
-  }, [])
+  }, [session])
 
   return (
     <div className="mx-auto font-jost w-full max-w-screen-2xl max-h-screen">
