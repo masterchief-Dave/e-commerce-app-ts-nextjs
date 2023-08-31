@@ -2,13 +2,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-import { Order } from '@/models/order'
 import { connectToMongoDB } from '@/lib/mongodb'
+import { Order } from '@/models/order'
 import { IOrder } from '../../../../../types'
 
 type Data = {
   message: string
-  data?: IOrder[]
+  data?: IOrder
 }
 
 export default async function handler(
@@ -19,20 +19,20 @@ export default async function handler(
     try {
       const session = await getSession({ req })
 
-      if (!session?.role || session.role !== 'admin') {
-        return res.status(400).json({
-          message: `You do not have permission to access this route`
+      if (!session) {
+        return res.status(400).json({ message: 'Sign in to access this resource' })
+      }
+      await connectToMongoDB()
+      // get all the orders where the user id is equal to === session._id
+      // @ts-ignore
+      const orders = await Order.find({ user: session._id }).populate('user')
+
+      console.log('orders', orders)
+      if (!orders || orders.length === 0 || orders.length < 1) {
+        return res.status(200).json({
+          message: 'You have not placed an order'
         })
       }
-
-      await connectToMongoDB()
-      // @ts-ignore
-      const orders = await Order.find().populate('user')
-      // console.log({ orders })
-
-      if (!orders) return res.status(404).json({
-        message: 'No order found'
-      })
 
       res.status(200).json({
         message: 'ok',

@@ -1,3 +1,5 @@
+import { Types } from "mongoose"
+
 interface Header {
   id: number
   title: string
@@ -79,7 +81,8 @@ interface ICard {
 
 
 interface IUser {
-  _id: string
+  id: string
+  _id: Types.ObjectId
   name: string
   googleId: string
   email: string
@@ -113,6 +116,7 @@ interface IUser {
 interface User {
   success: boolean
   token: string | null
+  _id?: string | Types.ObjectId
   user: {
     avatar: {
       public_id: string
@@ -177,7 +181,7 @@ interface ShippingAddress {
   user: User
 }
 
-interface Order {
+interface IOrder {
   shippingInfo: BillingAddress
   user: User
   orderItems: {

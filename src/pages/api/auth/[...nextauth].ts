@@ -1,12 +1,13 @@
 import { compare } from 'bcryptjs'
 import NextAuth, { NextAuthOptions } from 'next-auth'
-import { JWT } from 'next-auth/jwt'
+import { Types } from 'mongoose'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 import { connectToMongoDB } from '@/lib/mongodb'
 import { User } from '@/models/user'
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@/utils/config'
+import { IUser } from '../../../../types'
 
 
 export const options: NextAuthOptions = {
@@ -77,10 +78,8 @@ export const options: NextAuthOptions = {
     },
     jwt: async ({ token, user, session, account, profile }) => {
       user && (token.user = user)
-
       if (account) {
         token.accessToken = account!?.access_token
-        // token.id = profile.id
       }
 
       return token
@@ -89,6 +88,17 @@ export const options: NextAuthOptions = {
       // console.log({ session, token })
       // console.log({ token })
       const user = token.user as IUser
+      let db
+
+      try {
+        // @ts-ignore
+        db = await User.findOne({ email: token.email })
+        // console.log({ db })
+      } catch (err) {
+        console.log(err)
+      }
+
+      // console.log({ token })
 
       // console.log({ token })
 
@@ -98,7 +108,8 @@ export const options: NextAuthOptions = {
       // session.token = token as JWT
       session.role = user?.role || 'user'
       session.photo = user?.avatar ? user.avatar : token?.image as string
-      session.id = user?._id as string
+      session.googleId = user.id as string
+      session._id = db._id
       // session.expires = 30 * 1000
       return session
     }

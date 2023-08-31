@@ -4,11 +4,11 @@ import { getSession } from 'next-auth/react'
 
 import { Order } from '@/models/order'
 import { connectToMongoDB } from '@/lib/mongodb'
-
+import { IOrder } from '../../../../../types'
 
 type Data = {
   message: string
-  data?: Order
+  data?: IOrder
 }
 
 export default async function handler(

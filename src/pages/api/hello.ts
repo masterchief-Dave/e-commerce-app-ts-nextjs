@@ -10,6 +10,14 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.setHeader('Set-Cookie', 'myCookie=exampleValue; Path=/; HttpOnly')
-  res.status(200).json({ message: 'John Doe' })
+  if (req.method === 'GET') {
+    try {
+      res.setHeader('Set-Cookie', 'myCookie=exampleValue; Path=/; HttpOnly')
+      res.status(200).json({ message: 'John Doe' })
+    } catch (err) {
+      console.log(err)
+    }
+  } else {
+    return res.status(405).json({ message: 'method not allowed' })
+  }
 }

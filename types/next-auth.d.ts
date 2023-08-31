@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import NextAuth, { DefaultSession, DefaultUser } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 
@@ -13,10 +14,11 @@ declare module 'next-auth' {
 
   interface Session {
     // user?: User
+    _id: Types.ObjectId
     role: string
     token: string
     photo: string
-    id: string
+    googleId: string
   }
 }
 
