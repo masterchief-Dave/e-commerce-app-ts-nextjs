@@ -89,7 +89,7 @@ const ProductSlug = (props: Props) => {
     <Layout>
       <>
         <Navbar />
-        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 font-inter'>
+        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 font-jost'>
           {/* <div className='col-span-full'>
             <BreadCrumb />
           </div> */}

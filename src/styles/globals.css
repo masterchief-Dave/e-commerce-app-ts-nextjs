@@ -16,7 +16,7 @@
   }
 
   .auth-btn {
-    @apply h-[3.5rem] w-fit rounded-md px-[1.5rem] font-poppins text-[1.3rem] font-semibold hover:opacity-95;
+    @apply h-[3.5rem] w-fit rounded-md px-[1.5rem] font-jost text-[1.3rem] font-semibold;
   }
 
   input:focus-within,
@@ -39,4 +39,17 @@
     /* color: #edab56; */
     /* color: #3b82f6; */
   }
+.auth_bg_overlay {
+  position: relative;
+}
+
+.auth_bg_overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .2);
+}
 }

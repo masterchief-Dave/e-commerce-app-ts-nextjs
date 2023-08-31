@@ -21,7 +21,7 @@ export const AccountLayout = ({ children }: Props) => {
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
 
   return (
-    <div className='mx-auto w-full max-w-screen-2xl font-inter'>
+    <div className='mx-auto w-full max-w-screen-2xl font-jost'>
       <DashboardNavbar
         setShowMobileSidebar={setShowMobileSidebar}
         showMobileSidebar={showMobileSidebar}
@@ -67,7 +67,7 @@ export const SideBar = () => {
   }
 
   return (
-    <div className='sticky top-[10rem] w-full space-y-4 divide-y rounded-[1rem] border font-inter'>
+    <div className='sticky top-[10rem] w-full space-y-4 divide-y rounded-[1rem] border font-jost'>
       <section className='flex gap-x-8 p-8'>
         <div>
           <UserCircleIcon className='h-8 w-8' />

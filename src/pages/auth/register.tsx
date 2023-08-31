@@ -1,19 +1,19 @@
 import * as Yup from 'yup'
 import Link from 'next/link'
-
-import Cookies from 'js-cookie'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
+import axios from 'axios'
+
 import { Layout } from '@/components/Layout'
 import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { registerStart, registerSuccess, registerFailure } from '@/features/register/registerSlice'
 import { loginSuccess } from '@/features/login/loginSlice'
 import { BASE_URL } from '@/utils/config'
-import axios from 'axios'
 import { loginUser } from '@/helpers'
 import { Input } from '@/components/ui/input'
 import { Button } from "@/components/ui/button"
+import AuthLayout from '@/components/Layout/Auth'
 
 
 type Props = {}
@@ -81,17 +81,16 @@ const Register = (props: Props) => {
   }
 
   return (
-    <Layout>
-      <div className='font-poppins'>
-        <AuthNavbar />
-        <section className='flex h-full w-full items-center justify-center py-16'>
+    <AuthLayout>
+      <section className='h-fit w-full grid grid-cols-12'>
           <form
             action=''
-            className='w-[40rem] max-w-[40rem] space-y-4 rounded-xl border py-4 px-6'
+          className='col-start-2 col-end-12 space-y-4 rounded-xl border py-4 px-6'
             onSubmit={formik.handleSubmit}
           >
-            <header>
-              <h1 className='text-center text-[2rem] font-normal'>Register</h1>
+          <header className='mb-8'>
+            <h1 className='text-left text-[2rem] font-semibold'>Sign up</h1>
+            <p className='text-[1.4rem] text-primary-grey-100 font-normal'>Choose your preferred sign in method</p>
             </header>
 
             <div>
@@ -165,7 +164,7 @@ const Register = (props: Props) => {
 
             <Button type='submit' className={styles.btn}>Submit</Button>
 
-            <div>
+          {/* <div>
               <p>
                 By clicking signup you agree to Sage-warehouse{' '}
                 <span className='text-text-primary-link'>
@@ -174,7 +173,7 @@ const Register = (props: Props) => {
                   </Link>
                 </span>
               </p>
-            </div>
+            </div> */}
 
             <div className='text-[1.3rem]'>
               <p>
@@ -188,8 +187,7 @@ const Register = (props: Props) => {
             </div>
           </form>
         </section>
-      </div>
-    </Layout>
+    </AuthLayout>
   )
 }
 

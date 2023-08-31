@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import Cookies from "js-cookie"
+
 import { logout } from "@/features/login/loginSlice"
 
 export const useLogout = () => {
@@ -7,8 +7,6 @@ export const useLogout = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user')
-    Cookies.remove('authLoginToken')
-
     dispatch(logout())
   }
 

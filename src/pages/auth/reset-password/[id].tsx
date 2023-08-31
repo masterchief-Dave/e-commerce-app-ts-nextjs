@@ -55,7 +55,7 @@ const ResetPassword = (props: Props) => {
   return (
     <Layout>
       <>
-        <div className='py-16 font-poppins'>
+        <div className='py-16 font-jost'>
           <div className='flex items-center justify-center'>
             <section className='w-[35rem] max-w-[40rem] space-y-12 rounded-xl border px-8 py-4'>
               <header>

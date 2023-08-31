@@ -62,8 +62,8 @@ export const BillingAddress = () => {
   })
 
   return (
-    <div className='py-10 font-inter text-[1.4rem]'>
-      <div className='border-l border-r font-poppins'>
+    <div className='py-10 font-jost text-[1.4rem]'>
+      <div className='border-l border-r font-jost'>
         {mounted && (
           <Accordion allowToggle>
             <AccordionItem>

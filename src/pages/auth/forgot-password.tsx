@@ -50,7 +50,7 @@ const ForgotPassword = (props: Props) => {
     <Layout>
       <>
         {showModal && <ResetEmailSentModal email={email} setEmail={setEmail} isOpen={isOpen} setIsOpen={setIsOpen} />}
-        <div className='space-y-24 py-16 font-poppins'>
+        <div className='space-y-24 py-16 font-jost'>
           {notification && (
             <div className='fixed left-0 right-0 text-center top-[1rem] flex items-center justify-center'>
               <div className='border border-dashed text-red-500 bg-white p-8 space-y-4'>

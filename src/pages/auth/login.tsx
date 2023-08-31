@@ -1,7 +1,6 @@
 import * as Yup from 'yup'
 import Link from 'next/link'
 import Image from 'next/image'
-import Cookies from 'js-cookie'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
@@ -15,6 +14,7 @@ import { fetchLogin } from '@/utils/fetchLogin'
 import { loginUser } from '@/helpers'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import AuthLayout from '@/components/Layout/Auth'
 
 type Props = {
   myCookieValue: string,
@@ -94,111 +94,112 @@ const Login = ({ myCookieValue, data }: Props) => {
   }
 
   return (
-    <Layout>
-      <div className='font-poppins'>
-        <AuthNavbar />
-        <section className='flex h-full w-full items-center justify-center py-16'>
-          <div className='rounded-xl border py-4 px-6 space-y-8'>
-            <form className='w-[40rem] max-w-[40rem] space-y-4' onSubmit={formik.handleSubmit}>
-              <header>
-                <h1 className='text-center text-[2rem] font-normal'>Login</h1>
-              </header>
+    <AuthLayout>
+      <section className='h-fit w-full grid grid-cols-12'>
+        <div className='col-start-2 col-end-12 rounded-xl border py-4 px-6 space-y-4'>
+          <form className='space-y-4' onSubmit={formik.handleSubmit}>
+            <header className='mb-8'>
+              <h1 className='text-left text-[2rem] font-semibold'>Sign in</h1>
+              <p className='text-[1.4rem] text-primary-grey-100 font-normal'>Choose your preferred sign in method</p>
+            </header>
+            <div>
+              <label htmlFor='email' className={styles.label}>
+                Email Address
+              </label>
+              <Input
+                type='text'
+                placeholder='Email Address'
+                id='email'
+                name='email'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email ? <p className='text-red-500'>{formik.errors.email}</p> : null}
+            </div>
+
+            <div>
+              <label htmlFor='password' className={styles.label}>
+                Password
+              </label>
+              {/* add fingerprint icon, makes it look really cool */}
+              <Input
+                type='password'
+                placeholder='Password'
+                id='password'
+                name='password'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
+            </div>
+
+            <Button
+              className={`${styles.btn} text-white`}
+              type='submit'
+            >
+              Submit
+            </Button>
+
+            <div className='mb-8 text-[1.3rem] flex justify-between'>
               <div>
-                <label htmlFor='email' className={styles.label}>
-                  Email Address
-                </label>
-                <Input
-                  type='text'
-                  placeholder='Email Address'
-                  id='email'
-                  name='email'
-                  className={styles.input}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                />
-                {formik.touched.email && formik.errors.email ? <p className='text-red-500'>{formik.errors.email}</p> : null}
-              </div>
-
-              <div>
-                <label htmlFor='password' className={styles.label}>
-                  Password
-                </label>
-                {/* add fingerprint icon, makes it look really cool */}
-                <Input
-                  type='password'
-                  placeholder='Password'
-                  id='password'
-                  name='password'
-                  className={styles.input}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.password}
-                />
-                {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
-              </div>
-
-              <Button
-                className={`${styles.btn} text-white`}
-                type='submit'
-              >
-                Submit
-              </Button>
-
-              <div className='mb-8 flex justify-end'>
-                <Link
-                  href='/auth/forgot-password'
-                  className='text-[1.2srem] text-primary-yellow-200'
-                >
-                  Forgot password
-                </Link>
-              </div>
-
-              <div>
-                <p className='text-[1.3rem]'>
+                <p className=''>
                   Dont have an account{' '}
                   <span>
                     <Link
                       href='/auth/register'
-                      className='text-primary-yellow-200'
+                      className='text-primary-yellow-200 font-medium'
                     >
-                      Register here
+                      Sign up
                     </Link>
                   </span>{' '}
                 </p>
               </div>
 
-              <div className='flex justify-center'>
-                <span className='inline-block h-[1px] '></span>
-                <p className='font-bold'>OR</p>
-              </div>
-            </form>
-
-            <div className='space-y-4'>
-              <Button
-                className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
-                type='submit'
-                onClick={(e) => {
-                  e.preventDefault()
-                  // router.push('http://localhost:8100/api/v1/auth/google')
-                  handleGoogleAuth()
-                }
-                }
+              <Link
+                href='/auth/forgot-password'
+                className='font-medium text-primary-yellow-200'
               >
-                <p>Sign In with Google</p>
-                <Image
-                  src='/assets/icons/google.svg'
-                  alt='Google'
-                  className='h-[13px] w-[13px]'
-                  width={1000}
-                  height={1000}
-                />
-              </Button>
+                Reset password
+              </Link>
             </div>
+
+
+
+            <div className='flex justify-center'>
+              <span className='inline-block h-[1px] '></span>
+              <p className='font-bold'>OR</p>
+            </div>
+          </form>
+
+          <div className='space-y-4 col-start-2 col-end-12'>
+            <Button
+              className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
+              type='submit'
+              onClick={(e) => {
+                e.preventDefault()
+                // router.push('http://localhost:8100/api/v1/auth/google')
+                handleGoogleAuth()
+              }
+              }
+            >
+              <p>Sign In with Google</p>
+              <Image
+                src='/assets/icons/google.svg'
+                alt='Google'
+                className='h-[13px] w-[13px]'
+                width={1000}
+                height={1000}
+              />
+            </Button>
+
           </div>
-        </section>
-      </div>
-    </Layout>
+        </div>
+      </section>
+    </AuthLayout >
   )
 }
 

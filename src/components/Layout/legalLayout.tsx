@@ -9,7 +9,7 @@ type Props = {
 
 export const LegalLayout = ({ children }: Props) => {
   return (
-    <div className='Legal mx-auto w-full max-w-screen-2xl'>
+    <div className='Legal mx-auto w-full max-w-screen-2xl font-jost'>
       <Navbar />
       <header className='Legal_Header'>
         <section className='flex h-full w-full items-center'>

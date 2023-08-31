@@ -38,7 +38,7 @@ const Checkout = () => {
   return (
     <div>
       <Navbar />
-      <div className='relative grid grid-cols-12 font-inter'>
+      <div className='relative grid grid-cols-12 font-jost'>
         <div className='col-start-1 col-end-13 grid grid-cols-12 py-24 md:col-start-1 md:col-end-8'>
           <div className='col-start-2 col-end-12 space-y-12 p-2'>
             <h1 className='text-[2rem] font-bold'>Checkout</h1>

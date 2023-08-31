@@ -5,11 +5,9 @@ import wishListReducer from '@/features/wishlist/wishlistSlice'
 import loginReducer from '@/features/login/loginSlice'
 import RegisterReducer from '@/features/register/registerSlice'
 import ShippingReducer from '@/features/shipping-address/address-slice'
-import Cookies from 'js-cookie'
 
-// get toen from here when I want to access a protected route
-const authToken = Cookies.get('authLoginToken');
-// chec if the user is in the localstorage
+
+// check if the user is in the localstorage
 let savedUser
 if (typeof window !== 'undefined') {
   savedUser = window.localStorage.getItem('user')

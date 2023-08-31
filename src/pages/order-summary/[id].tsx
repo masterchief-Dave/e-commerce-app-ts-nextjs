@@ -7,7 +7,7 @@ import Logo from 'public/assets/celebrate.svg'
 
 const OrderSummary = () => {
   return (
-    <div className='font-inter'>
+    <div className='font-jost'>
       <Head>
         <title>Thank you! - Apple</title>
         <link rel='icon' href='/favicon.ico' />
