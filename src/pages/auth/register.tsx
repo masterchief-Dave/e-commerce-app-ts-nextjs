@@ -12,6 +12,9 @@ import { loginSuccess } from '@/features/login/loginSlice'
 import { BASE_URL } from '@/utils/config'
 import axios from 'axios'
 import { loginUser } from '@/helpers'
+import { Input } from '@/components/ui/input'
+import { Button } from "@/components/ui/button"
+
 
 type Props = {}
 
@@ -48,7 +51,7 @@ const Register = (props: Props) => {
 
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
-    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
+    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] mb-2 focus:ring-1 rounded-md`,
     btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.4rem] rounded-md`,
   }
 
@@ -84,7 +87,7 @@ const Register = (props: Props) => {
         <section className='flex h-full w-full items-center justify-center py-16'>
           <form
             action=''
-            className='w-[35rem] max-w-[40rem] space-y-4 rounded-xl border py-4 px-6'
+            className='w-[40rem] max-w-[40rem] space-y-4 rounded-xl border py-4 px-6'
             onSubmit={formik.handleSubmit}
           >
             <header>
@@ -95,7 +98,7 @@ const Register = (props: Props) => {
               <label htmlFor='fullName' className={styles.label}>
                 Full Name
               </label>
-              <input
+              <Input
                 type='text'
                 placeholder='Firstname Lastname'
                 id='fullName'
@@ -112,7 +115,7 @@ const Register = (props: Props) => {
               <label htmlFor='email' className={styles.label}>
                 Email Address
               </label>
-              <input
+              <Input
                 type='text'
                 placeholder='Email Address'
                 id='email'
@@ -130,7 +133,7 @@ const Register = (props: Props) => {
               <label htmlFor='password' className={styles.label}>
                 Password
               </label>
-              <input
+              <Input
                 type='password'
                 placeholder='Password'
                 id='password'
@@ -147,7 +150,7 @@ const Register = (props: Props) => {
               <label htmlFor='confirmPassword' className={styles.label}>
                 Confirm Password
               </label>
-              <input
+              <Input
                 type='password'
                 placeholder='Confirm Password'
                 id='confirmPassword'
@@ -160,7 +163,7 @@ const Register = (props: Props) => {
               {formik.touched.confirmPassword && formik.errors.confirmPassword ? <p className='text-red-500'>{formik.errors.confirmPassword}</p> : null}
             </div>
 
-            <button type='submit' className={styles.btn}>Submit</button>
+            <Button type='submit' className={styles.btn}>Submit</Button>
 
             <div>
               <p>

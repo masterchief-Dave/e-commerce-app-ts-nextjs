@@ -13,6 +13,8 @@ import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
 import { fetchLogin } from '@/utils/fetchLogin'
 import { loginUser } from '@/helpers'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   myCookieValue: string,
@@ -45,7 +47,7 @@ const Login = ({ myCookieValue, data }: Props) => {
 
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
-    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
+    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] mb-2 focus:ring-1 rounded-md`,
     btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300  font-medium text-[1.4rem] rounded-md`,
   }
 
@@ -97,7 +99,7 @@ const Login = ({ myCookieValue, data }: Props) => {
         <AuthNavbar />
         <section className='flex h-full w-full items-center justify-center py-16'>
           <div className='rounded-xl border py-4 px-6 space-y-8'>
-            <form className='w-[35rem] max-w-[40rem] space-y-4' onSubmit={formik.handleSubmit}>
+            <form className='w-[40rem] max-w-[40rem] space-y-4' onSubmit={formik.handleSubmit}>
               <header>
                 <h1 className='text-center text-[2rem] font-normal'>Login</h1>
               </header>
@@ -105,7 +107,7 @@ const Login = ({ myCookieValue, data }: Props) => {
                 <label htmlFor='email' className={styles.label}>
                   Email Address
                 </label>
-                <input
+                <Input
                   type='text'
                   placeholder='Email Address'
                   id='email'
@@ -123,7 +125,7 @@ const Login = ({ myCookieValue, data }: Props) => {
                   Password
                 </label>
                 {/* add fingerprint icon, makes it look really cool */}
-                <input
+                <Input
                   type='password'
                   placeholder='Password'
                   id='password'
@@ -136,12 +138,12 @@ const Login = ({ myCookieValue, data }: Props) => {
                 {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
               </div>
 
-              <button
+              <Button
                 className={`${styles.btn} text-white`}
                 type='submit'
               >
                 Submit
-              </button>
+              </Button>
 
               <div className='mb-8 flex justify-end'>
                 <Link
@@ -173,7 +175,7 @@ const Login = ({ myCookieValue, data }: Props) => {
             </form>
 
             <div className='space-y-4'>
-              <button
+              <Button
                 className={`${styles.btn} flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
                 type='submit'
                 onClick={(e) => {
@@ -191,7 +193,7 @@ const Login = ({ myCookieValue, data }: Props) => {
                   width={1000}
                   height={1000}
                 />
-              </button>
+              </Button>
             </div>
           </div>
         </section>
