@@ -34,7 +34,8 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
     // Implementation for whatever you want to do with reference and after success call.
     console.log(reference)
     try {
-      axios.post(`http://localhost:8100/api/v1/payment/checkout-session/${reference?.reference}`, {
+      // `http://localhost:8100/api/v1/payment/checkout-session/${reference?.reference}`
+      axios.post(`/api/order/create-order`, {
         orders,
         reference,
         userId,

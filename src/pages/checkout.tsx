@@ -100,7 +100,7 @@ const Checkout = () => {
                 </p>
 
                 <PaystackHook
-                  price={20000}
+                  price={amount}
                   orders={cart}
                   loading={false}
                   shippingAddress={shippingAddress}

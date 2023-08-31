@@ -182,6 +182,8 @@ interface ShippingAddress {
 }
 
 interface IOrder {
+  id?: Types.ObjectId
+  cartQuantity?: number
   shippingInfo: BillingAddress
   user: User
   orderItems: {
