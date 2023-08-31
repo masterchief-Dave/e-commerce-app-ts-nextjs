@@ -1,3 +1,4 @@
+'use client'
 import * as Yup from 'yup'
 import Link from 'next/link'
 import { useFormik } from 'formik'
@@ -5,8 +6,6 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
-import { Layout } from '@/components/Layout'
-import { AuthNavbar } from '@/components/Navbar/authNavbar'
 import { registerStart, registerSuccess, registerFailure } from '@/features/register/registerSlice'
 import { loginSuccess } from '@/features/login/loginSlice'
 import { BASE_URL } from '@/utils/config'
@@ -28,6 +27,7 @@ interface FormData {
 const Register = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter()
+
   // const [loading, setLoading] = useState(false)
 
   const formik = useFormik<FormData>({

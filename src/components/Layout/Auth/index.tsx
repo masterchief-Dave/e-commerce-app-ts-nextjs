@@ -1,5 +1,8 @@
-import Image from "next/image"
 import Link from 'next/link'
+import Image from "next/image"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 
 import AuthBg from 'public/assets/img/auth-bg.jpg'
 
@@ -9,6 +12,15 @@ type Props = {
 }
 
 const AuthLayout = ({ children }: Props) => {
+  const router = useRouter()
+  const session = useSession()
+
+  useEffect(() => {
+    if (session) {
+      router.push('/')
+    }
+  }, [])
+
   return (
     <div className="mx-auto font-jost w-full max-w-screen-2xl max-h-screen">
       <main className="grid grid-cols-12">
@@ -24,7 +36,7 @@ const AuthLayout = ({ children }: Props) => {
             </header>
           </div>
         </section>
-        <section className="col-start-7 col-end-13 flex items-center h-screen">
+        <section className="col-start-7 col-end-13 px-12 flex items-center h-screen">
           {children}
         </section>
       </main>
