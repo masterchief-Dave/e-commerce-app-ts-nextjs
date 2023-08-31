@@ -67,9 +67,16 @@ interface PaymentFormInput {
 
 interface IDelivery {
   street: string
-  zip: string
+  zipCode: string
   city: string
   state: string
+}
+
+interface IAddress extends IDelivery {
+  phoneNumber: string
+  country: string
+  user: Types.ObjectId
+  zipCode: string
 }
 
 interface ICard {

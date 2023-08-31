@@ -124,8 +124,8 @@ https://www.reddit.com/r/nextjs/comments/rri1js/how_to_use_nextauth_with_a_separ
 6. move my backend code here 
    start from updating my models (done)
    product routes (done)
-   order routes ()
-   payment controller - move the getcheckoutsession into the order conroller or create a new route for just checkout
+   order routes (done)
+   payment controller - move the getcheckoutsession into the order conroller or create a new route for just checkout (done)
    shipping
    reviews
 
