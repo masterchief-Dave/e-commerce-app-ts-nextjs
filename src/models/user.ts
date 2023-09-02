@@ -75,7 +75,12 @@ UserSchema.pre('save', async function (next) {
     return next()
   }
 
-  this.password = await bcrypt.hash(this.password, 10)
+  const userPassword = await bcrypt.hash(this.password, 10)
+  if (userPassword === null || userPassword === 'undefined') {
+    throw new Error('user password not provided')
+  }
+
+  this.password = userPassword
   next()
 })
 
