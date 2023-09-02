@@ -94,6 +94,7 @@ export const options: NextAuthOptions = {
         db = await User.findOne({ email: token.email })
         // console.log({ db })
       } catch (err) {
+        console.log('error from here, in the next-auth, no user found')
         console.log(err)
       }
 
