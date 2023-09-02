@@ -15,7 +15,6 @@ import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
 import { landingPageFeatures } from '@/globals/home'
 import { FeaturesCard } from '@/components/Card'
-import { Product } from '../../types'
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
