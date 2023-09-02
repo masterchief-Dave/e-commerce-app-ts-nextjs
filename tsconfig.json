@@ -33,16 +33,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-,
-"src/lib/mongodb.mjs"
-,
-"src/lib/mongodb.js"
-,
-"src/pages/demos/demo.jsx"
-,
-"src/hooks/paystack.js"
-],
+    ".next/types/**/*.ts",
+    "src/lib/mongodb.mjs",
+    "src/lib/mongodb.js",
+    "src/pages/demos/demo.jsx",
+    "src/hooks/paystack.js",
+    "src/models/user.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
