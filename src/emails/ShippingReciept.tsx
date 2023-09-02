@@ -45,12 +45,12 @@ export const NikeReceiptEmail = () => (
             alt="Nike"
             style={{ margin: 'auto' }}
           />
-          <Heading style={global.heading}>It's On Its Way.</Heading>
+          <Heading style={global.heading}>It&#39;s On Its Way.</Heading>
           <Text style={global.text}>
-            You order's is on its way. Use the link above to track its progress.
+            You order&#39;s is on its way. Use the link above to track its progress.
           </Text>
           <Text style={{ ...global.text, marginTop: 24 }}>
-            We´ve also charged your payment method for the cost of your order
+            We&#39;ve also charged your payment method for the cost of your order
             and will be removing any authorization holds. For payment details,
             please visit your Orders page on Nike.com or in the Nike app.
           </Text>
@@ -67,7 +67,7 @@ export const NikeReceiptEmail = () => (
           style={{ ...paddingX, paddingTop: '40px', paddingBottom: '40px' }}
         >
           <Row>
-            <Column>
+            <Column> 
               <Img
                 src={`${baseUrl}/static/nike-product.png`}
                 alt="Brazil 2022/23 Stadium Away Women's Nike Dri-FIT Soccer Jersey"
@@ -77,7 +77,7 @@ export const NikeReceiptEmail = () => (
             </Column>
             <Column style={{ verticalAlign: 'top', paddingLeft: '12px' }}>
               <Text style={{ ...paragraph, fontWeight: '500' }}>
-                Brazil 2022/23 Stadium Away Women's Nike Dri-FIT Soccer Jersey
+                Brazil 2022/23 Stadium Away Women&#39;s Nike Dri-FIT Soccer Jersey
               </Text>
               <Text style={global.text}>Size L (12–14)</Text>
             </Column>

@@ -78,7 +78,7 @@ export const options: NextAuthOptions = {
     jwt: async ({ token, user, session, account, profile }) => {
       user && (token.user = user)
       if (account) {
-        token.accessToken = account!?.access_token
+        token.accessToken = account && account.access_token
       }
 
       return token

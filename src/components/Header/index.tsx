@@ -68,9 +68,7 @@ export const Header = (props: Props) => {
                 />
                 <div className='absolute top-0 z-10  grid h-full w-full grid-cols-12 flex-col items-center justify-center'>
                   <div
-                    className={`col-start-2 col-end-7 space-y-10 ${
-                      true ? 'text-black' : 'text-white'
-                    }`}
+                    className={`col-start-2 col-end-7 space-y-10 text-black`}
                   >
                     <h2 className='text-base font-extralight lg:text-[2rem]'>
                       Top Best Seller 2023

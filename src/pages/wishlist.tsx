@@ -7,7 +7,7 @@ import { useAppSelector } from '@/hooks/reduxhooks'
 
 type Props = {}
 
-const wishlist = (props: Props) => {
+const Wishlist = (props: Props) => {
 
   const wishlist = useAppSelector((state) => state.wishlist.value)
   console.log({ wishlist })
@@ -36,7 +36,7 @@ const wishlist = (props: Props) => {
   )
 }
 
-export default wishlist
+export default Wishlist
 
 const NoItemInWishList = () => {
   return <section className=''>no items in your wishlist yet</section>

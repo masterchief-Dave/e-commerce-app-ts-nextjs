@@ -99,7 +99,7 @@ const ProductSlug = (props: Props) => {
             <section className='grid grid-cols-12'>
               <div className='col-start-1 col-end-6 border'>
                 <Image
-                  src={data.data?.product.images[0].url!}
+                  src={data.data?.product.images[0].url! as string}
                   alt={data?.data.product.name}
                   width={1000}
                   height={1000}
