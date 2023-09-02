@@ -7,7 +7,7 @@ const BreadCrumb = (props: Props) => {
   return (
     <section className='grid w-full grid-cols-12 bg-primary-breadcrumb'>
       <div className='col-start-2 col-end-12 mx-auto w-full'>
-        <div className='flex items-center gap-x-4 py-12 font-matter text-[1.2rem]'>
+        <div className='flex items-center gap-x-4 py-12 font-jost text-[1.2rem]'>
           <Link
             href='#'
             className='underline-offset-4 transition delay-75 ease-in hover:underline'

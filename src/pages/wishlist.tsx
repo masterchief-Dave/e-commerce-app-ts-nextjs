@@ -17,9 +17,9 @@ const Wishlist = (props: Props) => {
       <div>
         <Navbar />
         <BreadCrumb />
-        <main className='grid grid-cols-12 space-y-12 py-16'>
+        <main className='grid grid-cols-12 space-y-12 py-16 min-h-screen'>
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12'>
-            <h1 className='font-matter text-[2rem] font-black'>Wishlist</h1>
+            <h1 className='font-jost text-[2rem] font-black'>Wishlist</h1>
 
             <section>
               {/* <ProductCard img='' productName='' productPrice='' /> */}
@@ -39,5 +39,5 @@ const Wishlist = (props: Props) => {
 export default Wishlist
 
 const NoItemInWishList = () => {
-  return <section className=''>no items in your wishlist yet</section>
+  return <section className='min-h-screen'>no items in your wishlist yet</section>
 }

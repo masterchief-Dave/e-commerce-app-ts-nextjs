@@ -23,7 +23,7 @@ export const LegalLayout = ({ children }: Props) => {
         <section className='col-start-2 col-end-4'>
           <SideNav />
         </section>
-        <section className='col-start-5 col-end-12 font-matter text-[1.4rem]'>
+        <section className='col-start-5 col-end-12 font-jost text-[1.4rem]'>
           {children}
         </section>
       </main>
@@ -35,7 +35,7 @@ const SideNav = () => {
   const router = useRouter()
 
   return (
-    <aside className='Legal Legal_Sidebar h-[20rem] font-matter'>
+    <aside className='Legal Legal_Sidebar h-[20rem] font-jost'>
       <div>
         <h3 className='mb-[3rem] text-[2rem] text-[#222]'>ON THIS PAGE</h3>
         <nav className='flex flex-col gap-x-[1rem]'>
