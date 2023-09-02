@@ -34,6 +34,7 @@
     "colors": "^1.4.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.15",
+    "eslint-plugin-cypress": "^2.14.0",
     "eslint-plugin-jest": "^27.2.3",
     "formik": "^2.4.2",
     "framer-motion": "^10.15.1",

@@ -3,7 +3,6 @@ import { Order } from '@/models/order'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-import { IOrder } from '../../../../../types'
 
 type Data = {
   message: string

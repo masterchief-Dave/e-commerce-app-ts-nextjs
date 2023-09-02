@@ -4,7 +4,6 @@ import { getSession } from 'next-auth/react'
 
 import { connectToMongoDB } from '@/lib/mongodb'
 import { Order } from '@/models/order'
-import { IOrder } from '../../../../../types'
 
 type Data = {
   message: string

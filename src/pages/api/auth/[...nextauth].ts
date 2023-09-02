@@ -7,7 +7,6 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { connectToMongoDB } from '@/lib/mongodb'
 import { User } from '@/models/user'
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@/utils/config'
-import { IUser } from '../../../../types'
 
 
 export const options: NextAuthOptions = {

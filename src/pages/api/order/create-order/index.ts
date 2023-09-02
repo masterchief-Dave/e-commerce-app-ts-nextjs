@@ -2,7 +2,7 @@
 import { Product } from '@/models/product'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import { Cart, IOrder } from '../../../../../types'
+
 import { Order } from '@/models/order'
 
 type Data = {

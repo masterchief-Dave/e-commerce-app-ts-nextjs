@@ -4,7 +4,6 @@ import { User } from 'lucide-react'
 import { Types } from 'mongoose'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import { IAddress } from '../../../../../types'
 
 type Data = {
   message: string

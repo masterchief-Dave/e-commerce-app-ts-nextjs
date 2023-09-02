@@ -8,7 +8,6 @@ import { addToCart } from '@/features/cart/cartSlice'
 import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { RenderRating } from '@/helpers/renderRating'
-// import { Product } from '../../../../types'
 
 type Props = {
   data: Product
