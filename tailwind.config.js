@@ -74,7 +74,6 @@ module.exports = {
         'text-primary-link': '#3e92f2',
       },
       fontFamily: {
-        poppins: ['poppins', 'sans-serif'],
         roboto: ['roboto', 'sans-serif'],
         matter: ['matter', 'sans-serif'],
         inter: ['inter', 'sans-serif'],
