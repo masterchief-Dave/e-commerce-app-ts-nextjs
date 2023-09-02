@@ -19,7 +19,9 @@ const NavigationMenuDemoExample = () => {
   const fn = async () => {
     try {
       ///api/order/get-my-orders
-      const response = await axios.get('/api/order/get-my-orders')
+      // const response = await axios.get('/api/order/get-my-orders')
+      console.log('the btn was clicked')
+      const response = await axios.get('http://localhost:8100/api/v1/user/admin', { withCredentials: true })
       const data = await response.data
       console.log(data)
     } catch (err) {
