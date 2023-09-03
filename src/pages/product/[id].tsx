@@ -305,3 +305,5 @@ const ProductSlug = (props: Props) => {
 }
 
 export default ProductSlug
+
+// getserversideprops

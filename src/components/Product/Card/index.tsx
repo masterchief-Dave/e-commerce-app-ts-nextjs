@@ -8,6 +8,7 @@ import { addToCart } from '@/features/cart/cartSlice'
 import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { RenderRating } from '@/helpers/renderRating'
+import Link from 'next/link'
 
 type Props = {
   data: Product
@@ -46,7 +47,7 @@ export const ProductCard = ({ data }: Props) => {
   }
 
   return (
-    <div className='max-w-[25rem] font-jost space-y-8 p-4 shadow-sm border'>
+    <Link href={`/product/${data._id}`} className='max-w-[25rem] font-jost space-y-8 p-4 shadow-sm border'>
       <div className='relative max-h-[20rem]'>
         <Image
           width={1000}
@@ -101,6 +102,6 @@ export const ProductCard = ({ data }: Props) => {
           </span>
         </button>
       </div>
-    </div>
+    </Link>
   )
 }

@@ -1,8 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { connectToMongoDB } from '@/lib/mongodb'
-import { Product } from '@/models/product'
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+import { Product } from '@/models/product'
+import { connectToMongoDB } from '@/lib/mongodb'
 
 type Data = {
   message: string

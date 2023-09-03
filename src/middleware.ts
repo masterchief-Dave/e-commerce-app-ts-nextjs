@@ -13,7 +13,8 @@ export async function middleware(req: NextRequest) {
   // check if a user is an amdin or not
   console.log('the code is in the middleware before entering the update-product endpoint')
   // await connectToMongoDB()
-  const token = await getToken({ req })
+  const token = await getToken({ req, raw: true })
+  console.log({ token })
 
   // const user = jwt.verify(token?.accessToken as string, JWT_SECRET as string)
   // const session = await getServerSession(ctx, authOptions)

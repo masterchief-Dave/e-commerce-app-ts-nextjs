@@ -97,10 +97,10 @@ export const Footer = (props: Props) => {
             <h4 className={styles.footerHeader}>Legal</h4>
             <ul className='grid grid-cols-2 items-center gap-4 text-base font-normal text-primary-blue-700 lg:block lg:gap-0 lg:space-y-6 lg:text-[1.3rem]'>
               <li>
-                <Link href='#'>Terms and Condition</Link>
+                <Link href='/legal/terms-and-condition'>Terms and Condition</Link>
               </li>
               <li>
-                <Link href='#'> Privacy Policy </Link>
+                <Link href='/legal/privacy-policy'> Privacy Policy </Link>
               </li>
               <li>
                 <Link href='#'>Faq</Link>
@@ -112,10 +112,10 @@ export const Footer = (props: Props) => {
             <h4 className={styles.footerHeader}>Company</h4>
             <ul className='grid grid-cols-2 items-center gap-4 text-base font-normal text-primary-blue-700 lg:block lg:gap-0 lg:space-y-6 lg:text-[1.3rem]'>
               <li>
-                <Link href='#'>Shipping and Returns</Link>
+                <Link href='/company/shipping-returns'>Shipping and Returns</Link>
               </li>
               <li>
-                <Link href='#'> Refund Policy </Link>
+                <Link href='/company/refund-policy'> Refund Policy </Link>
               </li>
               {/* <li>
               <Link href='#'>Faq</Link>
