@@ -1,10 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useAppDispatch } from '@/hooks/reduxhooks'
+import { HeartIcon, StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
+import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
+import { GetServerSideProps } from 'next'
+import axios from 'axios'
+import { Tab } from '@headlessui/react'
 
+import { useAppDispatch } from '@/hooks/reduxhooks'
 import { Layout } from '@/components/Layout'
 // import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
@@ -17,15 +22,8 @@ import { Shipping } from '@/components/Product/Tabs/shipping'
 import { Warranty } from '@/components/Product/Tabs/warranty'
 import { Footer } from '@/components/Footer'
 
-import { HeartIcon, StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
-import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
-
-type Props = {}
-interface ISwr {
-  success: string
-  data: {
-    product: Product
-  }
+type Props = {
+  product: Product
 }
 
 const styles = {
@@ -36,37 +34,16 @@ const styles = {
   }
 }
 
-const ProductSlug = (props: Props) => {
-  const router = useRouter()
-  const dispatch = useAppDispatch()
-
-  const { id } = router.query
+const ProductSlug = ({ product }: Props) => {
   const [selectedTab, setSelectedTab] = useState('overview')
   const [productQuantity, setProductQuantity] = useState<number>(1)
-
-
-  // @ts-ignore
-  const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
-  const { data, error, isLoading } = useSWR<ISwr>(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`, fetcher)
-
-  if (!data) {
-    return 'Error'
-  }
-
-  if (error) {
-    return 'Error'
-  }
-
-  if (isLoading) {
-    return 'Loading...'
-  }
+  const dispatch = useAppDispatch()
 
   const render = () => {
     if (selectedTab === 'overview') {
       return <Overview />
     } else if (selectedTab === 'description') {
-      return <Description data={data.data.product.description} />
+      return <Description data={product.description} />
     } else if (selectedTab === 'returnPolicy') {
       return <ReturnPolicy />
     } else if (selectedTab === 'reviews') {
@@ -78,11 +55,69 @@ const ProductSlug = (props: Props) => {
     }
   }
 
-  // MouseEvent<HTMLHeadingElement, MouseEvent>
-  const handleSelectedTab = (e: any) => {
-    if (e.target.id !== null) {
-      setSelectedTab(e.target.id)
+  const [categories] = useState([
+    {
+      id: 1,
+      title: 'Oveview',
+      component: <Overview />
+    },
+    {
+      id: 2,
+      title: 'Description',
+      component: <Description data={product.description} />
+    },
+    {
+      id: 3,
+      title: 'Return Policy',
+      component: <ReturnPolicy />
+    },
+    {
+      id: 4,
+      title: 'Shipping',
+      component: <Shipping />
+    },
+    {
+      id: 5,
+      title: 'Warranty',
+      component: <Warranty />
+    },
+    {
+      id: 6,
+      title: 'Reviews',
+      component: <Reviews />
     }
+  ])
+
+  function MyTabs() {
+    return (
+      <Tab.Group>
+        <Tab.List className='grid grid-cols-6 px-4 border-b py-4'>
+          {categories.map((category: any) => {
+            return (
+              <Tab as={Fragment} key={category.id}>
+                {({ selected }) => (
+                  /* Use the `selected` state to conditionally style the selected tab. */
+                  <button
+                    className={
+                      selected ? `bg-blue-500 text-white ${styles.tabHeader} py-4` : `bg-white text-black ${styles.tabHeader}`
+                    }
+                  >
+                    {category.title}
+                  </button>
+                )}
+              </Tab>
+            )
+          })}
+        </Tab.List>
+        <Tab.Panels className='p-4'>
+          {categories.map((category) => {
+            return <Tab.Panel key={category.id}>
+              {category.component}
+            </Tab.Panel>
+          })}
+        </Tab.Panels>
+      </Tab.Group>
+    )
   }
 
   return (
@@ -99,8 +134,8 @@ const ProductSlug = (props: Props) => {
             <section className='grid grid-cols-12'>
               <div className='col-start-1 col-end-6 border'>
                 <Image
-                  src={data.data?.product.images[0].url! as string}
-                  alt={data?.data.product.name}
+                  src={product.images[0].url! as string}
+                  alt={product.name}
                   width={1000}
                   height={1000}
                   className='object-cover w-full h-full'
@@ -109,69 +144,69 @@ const ProductSlug = (props: Props) => {
 
               <article className='col-start-7 col-end-13 space-y-4'>
                 <h1 className='text-[1.6rem] font-bold leading-relaxed capitalize lg:text-[2rem] mb-12'>
-                  {data.data.product.name}
+                  {product.name}
                 </h1>
 
-                <div className='uppercase space-y-8'>
-                  <div className='grid grid-cols-productSlug items-center justify-between'>
+                <div className='uppercase text-[1.5rem] space-y-8'>
+                  <div className=''>
 
                     <div className='flex items-center gap-x-1'>
                       {/* {renderRating(data.data.product.ratings, '#EEB012')}
                       {renderRating(5 - data.data.product.ratings, '')} */}
 
                       <p className="flex items-center gap-x-1">
-                        {new Array(Math.floor(data.data.product.ratings)).fill(0).map((_, index) => {
+                        {new Array(Math.floor(product.ratings)).fill(0).map((_, index) => {
                           return <StarIcon key={index} className="h-8 w-8 #EEB012" fill='#EEB012' />
                         })}
 
-                        {new Array(5 - Math.floor(data.data.product.ratings)).fill(0).map((_, index) => {
-                          return <StarIconOutline key={index} className="h-8 w-8 #EEB012" />
+                        {new Array(5 - Math.floor(product.ratings)).fill(0).map((_, index) => {
+                          return <StarIconOutline key={index} className="h-8 w-8 text-[#EEB012]" />
                         })}
                       </p>
                     </div>
 
-                    <p className='text-[1.4rem] text-primary-grey-300'> 4 Reviews
+                    <p className='text-[1.2rem] lowercase text-primary-grey-300'> 4 Reviews
                     </p>
                   </div>
 
                   {/* product availability */}
-                  <div className='grid grid-cols-productSlug'>
+                  <div className='flex items-center gap-x-2'>
                     <h5 className='font-semibold'>Available:</h5>
-                    <CheckBadgeIcon fill='#6bb853' className='h-6 w-6' />
+                    <CheckBadgeIcon fill='#6bb853' className='h-8 w-8' />
                   </div>
 
                   {/* product weight */}
-                  <div className='grid grid-cols-productSlug'>
+                  {/* <div className='grid grid-cols-productSlug'>
                     <h5 className={`${styles.productDetails.title}`}>Sku: </h5>
                     <p></p>
-                  </div>
+                  </div> */}
 
                   {/* product category */}
-                  <div className='grid grid-cols-productSlug'>
+                  <div className='flex items-center gap-x-2'>
                     <h5 className={`${styles.productDetails.title}`}>Categories:</h5>
 
-                    <p>{data.data.product.category}</p>
+                    <p>{product.category}</p>
                   </div>
 
                   {/* product brand */}
-                  <div className='grid grid-cols-productSlug'>
+                  <div className='space-y-4'>
                     <h5 className={`${styles.productDetails.title}`}>
                       Product Code:{' '}
                       <span className='text-primary-grey-100'>524162</span>
                     </h5>
-                    <p>
+                    <h5 className={styles.productDetails.title}>
                       Brand:{' '}
                       <span>
                         <Link href='#' className='text-text-primary-link'>
-                          {data.data.product.seller}
+                          {product.seller}
                         </Link>
                       </span>
-                    </p>
+                    </h5>
                   </div>
                 </div>
 
                 <div className='flex items-center gap-x-8'>
-                  <p className='text-[2rem] font-bold lg:text-[3rem]'>${data.data.product.price}</p>
+                  <p className='text-[2rem] font-bold lg:text-[3rem]'>${product.price}</p>
 
                   <p className='text-[1.8rem] text-[#e0e0e0] font-medium line-through'>
                     $900
@@ -228,74 +263,9 @@ const ProductSlug = (props: Props) => {
 
           {/* product breakdown tab */}
           <div className='col-span-full col-start-2 col-end-12 bg-[#f6f6f6] py-2'>
-            <section>
-              <div className='grid grid-cols-6 px-4 border-b py-4'>
-                <div>
-                  <h2
-                    id='overview'
-                    className={`${styles.tabHeader} ${selectedTab === 'overview' ? 'text-primary-link' : ''
-                      }`}
-                    onClick={handleSelectedTab}
-                  >
-                    Overview
-                  </h2>
-                </div>
-                <div>
-                  <h2
-                    id='description'
-                    className={`${styles.tabHeader} ${selectedTab === 'description' ? 'text-primary-link' : ''
-                      }`}
-                    onClick={handleSelectedTab}
-                  >
-                    Description
-                  </h2>
-                </div>
-                <div>
-                  <h2
-                    id='shipping'
-                    className={`${styles.tabHeader} ${selectedTab === 'shipping' ? 'text-primary-link' : ''
-                      }`}
-                    onClick={handleSelectedTab}
-                  >
-                    Shipping
-                  </h2>
-                </div>
-                <div>
-                  <h2
-                    id='warranty'
-                    className={`${styles.tabHeader} ${selectedTab === 'warranty' ? 'text-primary-link' : ''
-                      }`}
-                    onClick={handleSelectedTab}
-                  >
-                    Warranty
-                  </h2>
-                </div>
-                <div>
-                  <h2
-                    id='returnPolicy'
-                    className={`${styles.tabHeader} ${selectedTab === 'returnPolicy' ? 'text-primary-link' : ''
-                      }`}
-                    onClick={handleSelectedTab}
-                  >
-                    Return policy
-                  </h2>
-                </div>
-                <div>
-                  <h2
-                    id='reviews'
-                    className={`${styles.tabHeader} ${selectedTab === 'reviews' ? 'text-primary-link' : ''
-                      }`}
-                    onClick={handleSelectedTab}
-                  >
-                    Reviews
-                  </h2>
-                </div>
-              </div>
-              <article className='max-h-[50vh] overflow-y-auto px-8 py-8 text-primary-grey-100'>
-                {render()}
-              </article>
-            </section>
+            {MyTabs()}
           </div>
+
         </main>
         <Footer />
         <ShoppingFixedBag />
@@ -306,4 +276,16 @@ const ProductSlug = (props: Props) => {
 
 export default ProductSlug
 
-// getserversideprops
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  const { id } = context.query
+  const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
+  const data = await response.data
+
+  // console.log({ data })
+
+  return {
+    props: {
+      product: data.data.product
+    }
+  }
+}

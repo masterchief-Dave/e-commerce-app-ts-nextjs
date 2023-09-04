@@ -16,7 +16,7 @@ export const ReturnPolicy = (props: Props) => {
           <p className='font-medium text-primary-grey-100'>
             For more information visit our{' '}
             <span>
-              <Link href='#' className='text-primary-link'>
+              <Link href='/company/shipping-returns' className='text-primary-link'>
                 return policy
               </Link>
             </span>
