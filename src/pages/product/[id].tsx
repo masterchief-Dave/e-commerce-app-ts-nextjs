@@ -23,6 +23,9 @@ import { Warranty } from '@/components/Product/Tabs/warranty'
 import { Footer } from '@/components/Footer'
 import { addToCart } from '@/features/cart/cartSlice'
 import { useCart } from '@/hooks/useCart'
+import { useSession } from 'next-auth/react'
+import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
+import { ProductTab } from '@/components/Tabs/Product'
 
 type Props = {
   product: Product
@@ -37,15 +40,35 @@ const styles = {
 }
 
 const ProductSlug = ({ product }: Props) => {
-  const [productQuantity, setProductQuantity] = useState<number>(1)
   const dispatch = useAppDispatch()
   const { cart } = useCart()
+  const session = useSession()
+  const [productQuantity, setProductQuantity] = useState<number>(1)
   let [isItemInCart, setIsItemInCart] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
+
+  // useEffect(() => {
+  //   // check if the user is authenticated
+  //   if (session.status === 'authenticated') {
+  //     setOpenModal(false)
+  //   }else {
+
+  //   }
+  // }, [])
+
+  const handleBuyNow = () => {
+    // some code
+    if (session.status !== 'authenticated') {
+      //open the modal
+      // 
+    }
+
+    // open paystack modal to make payment
+  }
 
   // # check if the item is in the cart
   useEffect(() => {
     const isItemInCart = cart.filter((item: Product) => {
-      console.log(item._id, product._id)
       return item._id === product._id
     })
 
@@ -53,81 +76,13 @@ const ProductSlug = ({ product }: Props) => {
       setIsItemInCart(true)
     }
 
-    console.log({ isItemInCart })
   }, [cart])
-
-
 
   const handleAddToCart = () => {
     dispatch(addToCart({
       ...product,
       cartQuantity: productQuantity
     }))
-  }
-
-  const [categories] = useState([
-    {
-      id: 1,
-      title: 'Oveview',
-      component: <Overview />
-    },
-    {
-      id: 2,
-      title: 'Description',
-      component: <Description data={product.description} />
-    },
-    {
-      id: 3,
-      title: 'Return Policy',
-      component: <ReturnPolicy />
-    },
-    {
-      id: 4,
-      title: 'Shipping',
-      component: <Shipping />
-    },
-    {
-      id: 5,
-      title: 'Warranty',
-      component: <Warranty />
-    },
-    {
-      id: 6,
-      title: 'Reviews',
-      component: <Reviews />
-    }
-  ])
-
-  function MyTabs() {
-    return (
-      <Tab.Group>
-        <Tab.List className='grid grid-cols-6 px-4 border-b py-4'>
-          {categories.map((category: any) => {
-            return (
-              <Tab as={Fragment} key={category.id}>
-                {({ selected }) => (
-                  /* Use the `selected` state to conditionally style the selected tab. */
-                  <button
-                    className={
-                      selected ? `bg-blue-500 text-white ${styles.tabHeader} py-4` : `bg-white text-black ${styles.tabHeader}`
-                    }
-                  >
-                    {category.title}
-                  </button>
-                )}
-              </Tab>
-            )
-          })}
-        </Tab.List>
-        <Tab.Panels className='p-4'>
-          {categories.map((category) => {
-            return <Tab.Panel key={category.id}>
-              {category.component}
-            </Tab.Panel>
-          })}
-        </Tab.Panels>
-      </Tab.Group>
-    )
   }
 
   return (
@@ -255,9 +210,19 @@ const ProductSlug = ({ product }: Props) => {
                   </div>
                 </div>
 
+                {
+                  /**
+                   * check if the user is authenticated, if not bring up authentication and redirect them to the billing address part, or they should have filled in billing address before they click on buy now I suppose
+                   * 
+                   * 
+                 */
+                }
+
                 <div className='flex items-center gap-x-8 py-4'>
-                  {/* move to checkout */}
-                  <button className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-primary-blue-300 font-semibold text-white'>
+                  {/* open paystack modal here to make payment for this item right here in the slug */}
+                  <button
+                    onClick={handleBuyNow}
+                    className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-primary-blue-300 font-semibold text-white'>
                     Buy now
                   </button>
 
@@ -275,12 +240,14 @@ const ProductSlug = ({ product }: Props) => {
 
           {/* product breakdown tab */}
           <div className='col-span-full col-start-2 col-end-12 bg-[#f6f6f6] py-2'>
-            {MyTabs()}
+            <ProductTab product={product} />
           </div>
 
         </main>
         <Footer />
         <ShoppingFixedBag />
+        {/* modal */}
+        {openModal && <AuthenticatedModal openModal={openModal} setOpenModal={setOpenModal} />}
       </>
     </Layout>
   )

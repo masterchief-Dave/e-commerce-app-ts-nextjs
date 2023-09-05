@@ -17,7 +17,7 @@ const styles = {
 }
 
 const Checkout = () => {
-  const [disable, setDisable] = useState(true)
+  const [disable, setDisable] = useState(true) 
   const { cart } = useCart()
   const shippingAddress = useSelector((state: RootState) => {
     return state.shipping.value
