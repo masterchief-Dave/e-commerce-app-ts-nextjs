@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { HeartIcon, StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
 import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
@@ -21,6 +21,8 @@ import { Reviews } from '@/components/Product/Tabs/reviews'
 import { Shipping } from '@/components/Product/Tabs/shipping'
 import { Warranty } from '@/components/Product/Tabs/warranty'
 import { Footer } from '@/components/Footer'
+import { addToCart } from '@/features/cart/cartSlice'
+import { useCart } from '@/hooks/useCart'
 
 type Props = {
   product: Product
@@ -35,24 +37,32 @@ const styles = {
 }
 
 const ProductSlug = ({ product }: Props) => {
-  const [selectedTab, setSelectedTab] = useState('overview')
   const [productQuantity, setProductQuantity] = useState<number>(1)
   const dispatch = useAppDispatch()
+  const { cart } = useCart()
+  let [isItemInCart, setIsItemInCart] = useState(false)
 
-  const render = () => {
-    if (selectedTab === 'overview') {
-      return <Overview />
-    } else if (selectedTab === 'description') {
-      return <Description data={product.description} />
-    } else if (selectedTab === 'returnPolicy') {
-      return <ReturnPolicy />
-    } else if (selectedTab === 'reviews') {
-      return <Reviews />
-    } else if (selectedTab === 'shipping') {
-      return <Shipping />
-    } else if (selectedTab === 'warranty') {
-      return <Warranty />
+  // # check if the item is in the cart
+  useEffect(() => {
+    const isItemInCart = cart.filter((item: Product) => {
+      console.log(item._id, product._id)
+      return item._id === product._id
+    })
+
+    if (isItemInCart.length === 1) {
+      setIsItemInCart(true)
     }
+
+    console.log({ isItemInCart })
+  }, [cart])
+
+
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      ...product,
+      cartQuantity: productQuantity
+    }))
   }
 
   const [categories] = useState([
@@ -184,7 +194,6 @@ const ProductSlug = ({ product }: Props) => {
                   {/* product category */}
                   <div className='flex items-center gap-x-2'>
                     <h5 className={`${styles.productDetails.title}`}>Categories:</h5>
-
                     <p>{product.category}</p>
                   </div>
 
@@ -209,7 +218,7 @@ const ProductSlug = ({ product }: Props) => {
                   <p className='text-[2rem] font-bold lg:text-[3rem]'>${product.price}</p>
 
                   <p className='text-[1.8rem] text-[#e0e0e0] font-medium line-through'>
-                    $900
+                    ${(product.price * 2.3).toFixed(2)}
                   </p>
                 </div>
 
@@ -239,10 +248,10 @@ const ProductSlug = ({ product }: Props) => {
                     </div>
 
                     {/* add to wishlist  */}
-                    <button className='flex h-[4rem] gap-x-4 items-center justify-center px-6 bg-[#f6f6f6] text-[1.2rem]'>
+                    {/* <button className='flex h-[4rem] gap-x-4 items-center justify-center px-6 bg-[#f6f6f6] text-[1.2rem]'>
                       <HeartIcon className='h-8 w-8' />
                       <p>Add to Wishlist</p>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
 
@@ -253,7 +262,10 @@ const ProductSlug = ({ product }: Props) => {
                   </button>
 
                   {/* add to cart  */}
-                  <button className='w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-black font-semibold text-white'>
+                  <button
+                    onClick={handleAddToCart}
+                    disabled={isItemInCart}
+                    className={`${isItemInCart ? 'cursor-not-allowed' : ''} w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-black font-semibold text-white`}>
                     Add to Cart
                   </button>
                 </div>
@@ -281,7 +293,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
   const data = await response.data
 
+
   // console.log({ data })
+  /**
+   *  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
+   * i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart 
+   * */
 
   return {
     props: {

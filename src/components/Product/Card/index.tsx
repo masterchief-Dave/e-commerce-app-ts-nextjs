@@ -43,19 +43,24 @@ export const ProductCard = ({ data }: Props) => {
   const handleAddToCart = () => {
     if (!data) return
 
-    dispatch(addToCart(data))
+    dispatch(addToCart({
+      ...data,
+      cartQuantity: 1
+    }))
   }
 
   return (
-    <Link href={`/product/${data._id}`} className='max-w-[25rem] font-jost space-y-8 p-4 shadow-sm border'>
+    <div className='max-w-[25rem] font-jost space-y-8 p-4 shadow-sm border'>
       <div className='relative max-h-[20rem]'>
-        <Image
-          width={1000}
-          height={1000}
-          src={data.images[0].url}
-          alt={data.images[0].public_id}
-          className='h-[20rem] max-h-[15rem] object-contain'
-        />
+        <Link href={`/product/${data._id}`} className='block h-[20rem] max-h-[15rem] object-contain'>
+          <Image
+            width={1000}
+            height={1000}
+            src={data.images[0].url}
+            alt={data.images[0].public_id}
+            className='h-[20rem] max-h-[15rem] object-contain'
+          />
+        </Link>
         <div className='absolute top-5 left-5 z-10'>
           <div className='bg-primary-red-100 px-2 text-base text-white lg:text-[1.2rem]'>
             25%
@@ -74,9 +79,9 @@ export const ProductCard = ({ data }: Props) => {
       </div>
 
       <div className='space-y-8 py-2 font-jost'>
-        <h3 className='max-w-[20rem] truncate text-center text-base font-normal lg:text-[1.4rem]'>
+        <Link href={`/product/${data._id}`} className='max-w-[20rem] block truncate text-center text-base font-normal lg:text-[1.4rem]'>
           {data.name}
-        </h3>
+        </Link>
         <div className='flex items-center justify-center gap-6 font-semibold'>
           <h5 className='text-primary-green-100 font-bold text-[1.6rem]'>${data.price.toFixed(2)}</h5>
           {/* <h6 className='text-[#e94560] font-medium text-[1.3rem] line-through'>$550</h6> */}
@@ -102,6 +107,6 @@ export const ProductCard = ({ data }: Props) => {
           </span>
         </button>
       </div>
-    </Link>
+    </div>
   )
 }
