@@ -23,7 +23,7 @@ export const DashboardNavbar = ({
 
   return (
     <nav
-      className={`grid w-full grid-cols-12 bg-primary-blue-100 py-4 font-jost`}
+      className={`grid w-full grid-cols-12 bg-primary-blue-100 py-4 `}
     >
       <ul className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] items-center justify-between gap-x-8'>
         <li>

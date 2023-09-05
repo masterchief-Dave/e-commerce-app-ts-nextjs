@@ -22,10 +22,12 @@ export default function App({
     <Provider store={store}>
       <SessionProvider session={session}>
         <ChakraProvider>
-          <Component {...pageProps} />
-          <Toaster />
+          <div className='font-jost'>
+            <Component {...pageProps} />
+            <Toaster />
+          </div>
         </ChakraProvider>
-      </SessionProvider> 
+      </SessionProvider>
     </Provider>
   )
 }

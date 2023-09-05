@@ -60,7 +60,7 @@ const ProductSlug = ({ product }: Props) => {
     // some code
     if (session.status !== 'authenticated') {
       //open the modal
-      // 
+      setOpenModal(true)
     }
 
     // open paystack modal to make payment
@@ -89,7 +89,7 @@ const ProductSlug = ({ product }: Props) => {
     <Layout>
       <>
         <Navbar />
-        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 font-jost'>
+        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 '>
           {/* <div className='col-span-full'>
             <BreadCrumb />
           </div> */}

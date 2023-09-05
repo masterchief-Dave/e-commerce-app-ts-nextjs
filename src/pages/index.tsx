@@ -88,7 +88,7 @@ export default function Home() {
             <div className='col-span-full mx-auto grid w-full grid-cols-12'>
               <div className='col-start-2 col-end-12 space-y-12'>
                 <section>
-                  <h2 className='mb-8 font-jost text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
+                  <h2 className='mb-8  text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
                     Product Categories
                   </h2>
                   <div className='flex flex-col items-center justify-between gap-8 lg:flex-row lg:flex-wrap'>
@@ -104,7 +104,7 @@ export default function Home() {
 
                 <section className='products-component space-y-12 bg-white py-12'>
                   {productError ? (
-                    <p className='px-8 font-jost text-2xl font-medium text-primary-grey-300'>
+                    <p className='px-8  text-2xl font-medium text-primary-grey-300'>
                       Error fetching products at this time try again later 😞
                     </p>
                   ) : (

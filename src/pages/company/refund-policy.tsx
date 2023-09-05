@@ -9,7 +9,7 @@ const RefunPolicy = () => {
         <Navbar />
       </div>
 
-      <main className='col-start-2 col-end-12 font-normal text-[1.4rem] font-jost leading-normal py-24 space-y-8'>
+      <main className='col-start-2 col-end-12 font-normal text-[1.4rem]  leading-normal py-24 space-y-8'>
 
         <h1 className='text-[2rem] font-bold'>Refund Policy</h1>
         <h2>Last Updated: 03/09/2023</h2>

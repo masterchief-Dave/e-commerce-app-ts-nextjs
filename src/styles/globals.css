@@ -6,7 +6,7 @@
   html {
     font-size: 62.5%;
     scroll-behavior: smooth;
-    font-family: inter;
+    font-family: jost;
   }
 }
 
@@ -16,7 +16,7 @@
   }
 
   .auth-btn {
-    @apply h-[3.5rem] w-fit rounded-md px-[1.5rem] font-jost text-[1.3rem] font-semibold;
+    @apply h-[3.5rem] w-fit rounded-md px-[1.5rem] text-[1.3rem] font-semibold;
   }
 
   input:focus-within,

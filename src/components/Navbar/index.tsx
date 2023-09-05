@@ -61,7 +61,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
 
   return ( 
     <nav
-      className={`grid grid-cols-12 bg-primary-blue-100 py-4 font-jost ${
+      className={`grid grid-cols-12 bg-primary-blue-100 py-4  ${
         isTop ? 'fixed top-0 right-0 z-[9999] w-full' : ''
       }`}
     >

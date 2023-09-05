@@ -16,12 +16,12 @@ type Props = {}
 export const Footer = (props: Props) => {
   const styles = {
     footerCardIcons: `lg:h-12 lg:w-12 w-6 h-6`,
-    footerHeader: `text-base lg:text-[1.8rem] font-semibold text-white font-jost`,
+    footerHeader: `text-base lg:text-[1.8rem] font-semibold text-white `,
     socialMediaIcons: `lg:h-12 lg:w-12 w-6 h-6 cursor-pointer`,
   }
 
   return (
-    <footer className='mx-auto grid font-jost w-full grid-cols-12'>
+    <footer className='mx-auto grid  w-full grid-cols-12'>
       <div className='col-span-full grid-cols-12 border-b bg-primary-blue-400 lg:grid'>
         <section className='col-start-2 col-end-12 flex flex-col items-center justify-between gap-4 p-12 lg:flex-row'>
           <div className='order-2 w-full space-y-8'>

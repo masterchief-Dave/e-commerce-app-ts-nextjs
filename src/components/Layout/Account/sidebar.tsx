@@ -20,7 +20,7 @@ export const MobileSideBar = ({
   }
 
   return (
-    <div className='absolute top-0 left-0 h-screen max-h-screen w-3/5 bg-[#EFEFEF] py-12 px-12 font-jost'>
+    <div className='absolute top-0 left-0 h-screen max-h-screen w-3/5 bg-[#EFEFEF] py-12 px-12 '>
       {/* close the sidebar */}
       <div className='mb-8 flex justify-end'>
         <div

@@ -61,8 +61,8 @@ export const PaymentAccordion = () => {
   // console.log(cardDetails)
 
   return (
-    <div className='py-10 font-jost text-[1.4rem]'>
-      <div className='border-l border-r font-jost'>
+    <div className='py-10  text-[1.4rem]'>
+      <div className='border-l border-r '>
         {mounted && (
           <Accordion allowToggle>
             <AccordionItem>

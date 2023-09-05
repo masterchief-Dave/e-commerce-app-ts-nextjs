@@ -57,7 +57,7 @@ export const Header = (props: Props) => {
         {data.map((data: Header, index: number): JSX.Element => {
           return (
             <div className='relative h-[100%] w-full max-w-[100vw]' key={index}>
-              <div className='relative h-full w-full font-jost'>
+              <div className='relative h-full w-full '>
                 <Image
                   src={data.img}
                   alt={data.title}

@@ -45,7 +45,7 @@ const Login = ({ myCookieValue, data }: Props) => {
   const styles = {
     label: `text-[1.4rem] font-normal block mb-2`,
     input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] mb-2 focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300  font-medium text-[1.4rem] rounded-md`,
+    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 font-medium text-[1.4rem] rounded-md`,
   }
 
   const handleSubmit = async ({ email, password }: FormData) => {
@@ -192,7 +192,6 @@ const Login = ({ myCookieValue, data }: Props) => {
                 height={1000}
               />
             </Button>
-
           </div>
         </div>
       </section>

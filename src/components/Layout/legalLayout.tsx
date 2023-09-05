@@ -9,7 +9,7 @@ type Props = {
 
 export const LegalLayout = ({ children }: Props) => {
   return (
-    <div className='Legal mx-auto w-full max-w-screen-2xl font-jost'>
+    <div className='Legal mx-auto w-full max-w-screen-2xl '>
       <Navbar />
       <header className='Legal_Header'>
         <section className='flex h-full w-full items-center'>
@@ -23,7 +23,7 @@ export const LegalLayout = ({ children }: Props) => {
         <section className='col-start-2 col-end-4'>
           <SideNav />
         </section>
-        <section className='col-start-5 col-end-12 font-jost text-[1.4rem]'>
+        <section className='col-start-5 col-end-12  text-[1.4rem]'>
           {children}
         </section>
       </main>
@@ -35,7 +35,7 @@ const SideNav = () => {
   const router = useRouter()
 
   return (
-    <aside className='Legal Legal_Sidebar h-[20rem] font-jost'>
+    <aside className='Legal Legal_Sidebar h-[20rem] '>
       <div>
         <h3 className='mb-[3rem] text-[2rem] text-[#222]'>ON THIS PAGE</h3>
         <nav className='flex flex-col gap-x-[1rem]'>

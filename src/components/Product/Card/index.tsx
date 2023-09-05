@@ -50,7 +50,7 @@ export const ProductCard = ({ data }: Props) => {
   }
 
   return (
-    <div className='max-w-[25rem] font-jost space-y-8 p-4 shadow-sm border'>
+    <div className='max-w-[25rem]  space-y-8 p-4 shadow-sm border'>
       <div className='relative max-h-[20rem]'>
         <Link href={`/product/${data._id}`} className='block h-[20rem] max-h-[15rem] object-contain'>
           <Image
@@ -78,7 +78,7 @@ export const ProductCard = ({ data }: Props) => {
         </div>
       </div>
 
-      <div className='space-y-8 py-2 font-jost'>
+      <div className='space-y-8 py-2 '>
         <Link href={`/product/${data._id}`} className='max-w-[20rem] block truncate text-center text-base font-normal lg:text-[1.4rem]'>
           {data.name}
         </Link>
