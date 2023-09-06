@@ -61,7 +61,8 @@ const Login = ({ myCookieValue, data }: Props) => {
       if (loginResponse && !loginResponse.ok) {
         console.log(loginResponse.error)
       } else {
-        router.push('/')
+        const pathname = router.asPath !== '/auth/login' ? router.asPath : '/'
+        router.push(pathname)
       }
 
 
@@ -85,8 +86,10 @@ const Login = ({ myCookieValue, data }: Props) => {
   }
 
   const handleGoogleAuth = async () => {
+    const pathname = router.asPath !== '/auth/login' ? router.asPath : '/'
+
     await signIn('google', {
-      callbackUrl: '/'
+      callbackUrl: pathname
     })
   }
 

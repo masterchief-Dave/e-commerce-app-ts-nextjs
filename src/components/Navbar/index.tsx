@@ -91,60 +91,6 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
         <div className='flex items-center gap-x-4'>
           {data?.user ? (
             <UserAccountDropdown />
-            // <div className='relative h-[4rem] w-[4rem] rounded-full'>
-            //   <Image
-            //     src={data?.photo ? data?.photo : data?.user?.image!}
-            //     alt='profile image'
-            //     width={1000}
-            //     height={1000}
-            //     className='h-[4rem] w-[4rem] cursor-pointer rounded-full object-cover'
-            //     onClick={() => setShowDropdown(!showDropdown)}
-            //   />
-
-            //   {showDropdown && (
-            //     <div className='absolute top-[4.5rem] z-[999] w-[15rem] rounded-xl border bg-[#FFF] py-4 px-2'>
-            //       <ul className='w-full space-y-1 divide-y'>
-            //         <li>
-            //           <Link
-            //             href='/account/profile'
-            //             className={styles.navDropdownLink}
-            //           >
-            //             {' '}
-            //             Account{' '}
-            //           </Link>
-            //         </li>
-            //         <li>
-            //           <Link
-            //             href='/account/orders'
-            //             className={styles.navDropdownLink}
-            //           >
-            //             {' '}
-            //             Orders{' '}
-            //           </Link>
-            //         </li>
-            //         <li>
-            //           <Link href='/wishlist' className={styles.navDropdownLink}>
-            //             {' '}
-            //             Wishlist{' '}
-            //           </Link>
-            //         </li>
-            //         <li>
-            //           <button
-            //             onClick={() =>
-            //               signOut({
-            //                 redirect: false
-            //               })
-            //               // handleSignOut()
-            //             }
-            //             className={`${styles.navDropdownLink} text-left`}
-            //           >
-            //             Sign out
-            //           </button>
-            //         </li>
-            //       </ul>
-            //     </div>
-            //   )}
-            // </div>
           ) : (
             <div className='flex items-center gap-x-8'>
               <li>
