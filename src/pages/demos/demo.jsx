@@ -8,6 +8,7 @@ import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
 import { Button } from '@chakra-ui/react'
+import { UserAccountDropdown } from '@/components/Dropdown/Account'
 
 const NavigationMenuDemoExample = () => {
 
@@ -45,6 +46,8 @@ const NavigationMenuDemoExample = () => {
       {/* <ResetEmailSentModal /> */}
       {/* <PaystackHook price={20000} /> */}
       <Button className='' onClick={handleClick}>test the endpoint</Button>
+
+      <UserAccountDropdown />
     </div>
   )
 }

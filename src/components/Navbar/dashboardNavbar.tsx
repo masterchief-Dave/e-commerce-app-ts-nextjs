@@ -5,6 +5,8 @@ import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useAuth } from '@/hooks/useAuth'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import { UserAccountDropdown } from '../Dropdown/Account'
 
 type Props = {
   showMobileSidebar: boolean
@@ -16,7 +18,8 @@ export const DashboardNavbar = ({
   showMobileSidebar,
 }: Props) => {
   const { isTop } = useStickyNavbar()
-  // console.log(data)
+  const session = useSession()
+  console.log({ session })
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
 
   const { user } = useAuth()
@@ -40,9 +43,10 @@ export const DashboardNavbar = ({
               Aloha 👋,{' '}
               {/* <span className='text-[1.5rem] lg:text-[2rem]'>{user?.name}</span> */}
             </p>
-            <div className='h-16 w-16 rounded-full'>
-              <Image src={user?.photo!} alt='photo' width={1000} height={1000} />
-            </div>
+            <UserAccountDropdown />
+            {/* <div className='h-16 w-16 rounded-full'>
+              <Image src={session?.data?.user?.image!} alt='photo' width={1000} height={1000} className='rounded-full' />
+            </div> */}
           </div>
         ) : (
           <li
