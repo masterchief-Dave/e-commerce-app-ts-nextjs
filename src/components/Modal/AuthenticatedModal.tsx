@@ -1,11 +1,12 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Button } from '../ui/button'
 import Image from 'next/image'
-import { Facebook, FacebookIcon, LucideFacebook } from 'lucide-react'
-import { CibApple, Fa6BrandsSquareXTwitter, LogosFacebook, LogosRedditIcon } from '@/globals/icons'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
+
+import { Button } from '../ui/button'
+import { CibApple, Fa6BrandsSquareXTwitter, LogosFacebook, LogosRedditIcon } from '@/globals/icons'
 
 type Props = {
   openModal: boolean
@@ -18,8 +19,10 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
     setOpenModal(false)
   }
 
-  const handleGoogleAuth = () => {
-    // some code
+  const handleGoogleAuth = async () => {
+    await signIn('google', {
+      callbackUrl: '/checkout'
+    })
   }
 
   return (

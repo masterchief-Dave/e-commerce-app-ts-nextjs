@@ -63,7 +63,7 @@ const ItemInCart = () => {
   return (
     <>
       <div className='px-12'>
-        {cart.map((item) => {
+        {cart.map((item: Cart) => {
           return (
             <CheckoutProduct
               key={item._id}

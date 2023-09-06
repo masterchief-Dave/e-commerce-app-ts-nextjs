@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
@@ -9,6 +9,10 @@ import { PaystackHook } from '@/helpers/paystack'
 import { useCart } from '@/hooks/useCart'
 import { RootState } from '@/app/store'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+import Link from 'next/link'
+import Image from 'next/image'
+import CheckoutProduct from '@/components/CheckoutProduct'
+import { useRouter } from 'next/router'
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
@@ -17,11 +21,19 @@ const styles = {
 }
 
 const Checkout = () => {
-  const [disable, setDisable] = useState(true) 
+  const [disable, setDisable] = useState(true)
+  const router = useRouter()
   const { cart } = useCart()
   const shippingAddress = useSelector((state: RootState) => {
     return state.shipping.value
   })
+
+  // check if item is in cart
+  useEffect(() => {
+    if (cart.length < 1) {
+      router.push('/')
+    }
+  }, [cart])
 
   const totalPrice = useSelector((state: RootState) => {
     return selectorCartTotalAmount(state)
@@ -37,9 +49,15 @@ const Checkout = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className='relative grid grid-cols-12 '>
-        <div className='col-start-1 col-end-13 grid grid-cols-12 py-24 md:col-start-1 md:col-end-8'>
+      <header className='grid grid-cols-12 border-b py-4'>
+        <h1 className='font-bold text-[2.5rem] col-span-full px-24'>
+          <Link href='/'>
+            Sage-Warehouse
+          </Link>
+        </h1>
+      </header>
+      <div className='relative grid grid-cols-12'>
+        <div className='col-start-1 col-end-13 min-h-screen grid grid-cols-12 py-24 md:col-start-1 md:col-end-8'>
           <div className='col-start-2 col-end-12 space-y-12 p-2'>
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
@@ -66,10 +84,23 @@ const Checkout = () => {
 
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Order Details</h2>
+              <div>
+                {cart.map((item: Cart) => {
+                  return (
+                    <CheckoutProduct
+                      key={item._id}
+                      id={item._id}
+                      img={item.images[0].url}
+                      name={item.name}
+                      price={item.price}
+                      cartQuantity={item.cartQuantity}
+                    />)
+                })}
+              </div>
             </div>
           </div>
         </div>
-        <div className='relative col-start-1 col-end-13 bg-[#F3F6F8] p-4 md:col-start-8 md:col-end-13'>
+        <div className='relative col-start-1 col-end-13 bg-[#F3F6F8] min-h-screen p-4 md:col-start-8 md:col-end-13'>
           <div className='sticky top-[10rem] grid grid-cols-12 py-[5rem]'>
             <div className=' col-start-3 col-end-11 lg:w-[30rem] lg:max-w-[30rem]'>
               <h2 className='mb-8 text-[2rem] font-bold'>Summary</h2>
@@ -117,7 +148,7 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-      </div>
+        h</div>
     </div>
   )
 }

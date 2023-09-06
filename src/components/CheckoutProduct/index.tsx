@@ -87,7 +87,7 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
         <section className='space-y-4 text-xl lg:text-2xl'>
           <p className='text-xl lg:text-[2.5rem] font-black mb-4'>${price.toFixed(2)}</p>
           <p className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4' onClick={() => {
-            dispatch(removeItem({ id, stock: data.data.product.stock }))
+            dispatch(removeItem({ id, stock: data?.data?.product?.stock }))
           }}>
             Remove
           </p>
