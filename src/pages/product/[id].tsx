@@ -7,23 +7,16 @@ import { HeartIcon, StarIcon as StarIconOutline } from '@heroicons/react/24/outl
 import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
 import { GetServerSideProps } from 'next'
 import axios from 'axios'
-import { Tab } from '@headlessui/react'
+import { useSession } from 'next-auth/react'
 
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { Layout } from '@/components/Layout'
 // import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
-import { Overview } from '@/components/Product/Tabs/overview'
-import { Description } from '@/components/Product/Tabs/description'
-import { ReturnPolicy } from '@/components/Product/Tabs/returnPolicy'
-import { Reviews } from '@/components/Product/Tabs/reviews'
-import { Shipping } from '@/components/Product/Tabs/shipping'
-import { Warranty } from '@/components/Product/Tabs/warranty'
 import { Footer } from '@/components/Footer'
 import { addToCart } from '@/features/cart/cartSlice'
 import { useCart } from '@/hooks/useCart'
-import { useSession } from 'next-auth/react'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { ProductTab } from '@/components/Tabs/Product'
 
@@ -40,6 +33,7 @@ const styles = {
 }
 
 const ProductSlug = ({ product }: Props) => {
+  const router = useRouter()
   const dispatch = useAppDispatch()
   const { cart } = useCart()
   const session = useSession()
@@ -47,23 +41,18 @@ const ProductSlug = ({ product }: Props) => {
   let [isItemInCart, setIsItemInCart] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
-  // useEffect(() => {
-  //   // check if the user is authenticated
-  //   if (session.status === 'authenticated') {
-  //     setOpenModal(false)
-  //   }else {
-
-  //   }
-  // }, [])
-
   const handleBuyNow = () => {
-    // some code
+    // add the product to cart
+    if (isItemInCart === false) {
+      handleAddToCart()
+    }
+
     if (session.status !== 'authenticated') {
       //open the modal
       setOpenModal(true)
+    } else {
+      router.push('/checkout')
     }
-
-    // open paystack modal to make payment
   }
 
   // # check if the item is in the cart
