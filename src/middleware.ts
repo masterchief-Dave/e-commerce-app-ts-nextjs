@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { getSession } from "next-auth/react"
-
-// import { getToken } from "next-auth/jwt"
+import { getToken } from "next-auth/jwt"
 // import { decode } from 'next-auth/jwt'
 // import { getServerSession } from "next-auth"
 
@@ -12,9 +10,9 @@ import { getSession } from "next-auth/react"
 // import { JWT_SECRET } from "./utils/config"
 
 export async function middleware(req: NextRequest) {
-  const session = await getSession()
+  const token = await getToken({ req })
 
-  if (!session?.user) {
+  if (!token?.user) {
     return NextResponse.rewrite(new URL('/auth/login', req.url))
   }
 }
