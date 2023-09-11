@@ -56,8 +56,8 @@ export function NavigationMenuDemo() {
   return (
     <NavigationMenu className="h-[4rem]">
       <NavigationMenuList>
-        <NavigationMenuItem className="h-full text-[1.4rem]">
-          <NavigationMenuTrigger className="text-[1.4rem] h-full font-medium">Home</NavigationMenuTrigger>
+        <NavigationMenuItem className="h-full text-[1.6rem]">
+          <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Home</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -70,7 +70,7 @@ export function NavigationMenuDemo() {
                     <div className="mb-2 mt-4 text-[1.8rem] font-medium">
                       Sage Warehouse
                     </div>
-                    <p className="text-[1.4rem] leading-tight text-muted-foreground">
+                    <p className="text-[1.6rem] leading-tight text-muted-foreground">
                       Beautifully designed components built with Radix UI and
                       Tailwind CSS.
                     </p>
@@ -90,7 +90,7 @@ export function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[1.4rem] h-full font-medium">Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Components</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
@@ -107,7 +107,7 @@ export function NavigationMenuDemo() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={`${navigationMenuTriggerStyle()} h-full text-[1.4rem]`}>
+            <NavigationMenuLink className={`${navigationMenuTriggerStyle()} h-full text-[1.6rem]`}>
               Blog
             </NavigationMenuLink>
           </Link>
@@ -132,8 +132,8 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-[1.4rem] font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-[1.4rem] leading-snug text-muted-foreground">
+          <div className="text-[1.6rem] font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-[1.6rem] leading-snug text-muted-foreground">
             {children}
           </p>
         </a>

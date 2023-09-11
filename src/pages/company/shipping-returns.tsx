@@ -8,7 +8,7 @@ const ShippingReturns = () => {
         <Navbar />
       </div>
 
-      <main className='col-start-2 col-end-12 font-normal text-[1.4rem]  leading-normal py-24 space-y-8'>
+      <main className='col-start-2 col-end-12 font-normal text-[1.6rem]  leading-normal py-24 space-y-8'>
         <h1 className='text-[2rem] font-bold'>Shipping Options</h1>
 
         At [Sage-Warehouse], we offer several shipping options to meet your needs:

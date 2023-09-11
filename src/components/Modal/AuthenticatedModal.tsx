@@ -74,7 +74,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                   </div>
                   <div className='space-y-4 col-start-2 col-end-12'>
                     <Button
-                      className={`h-[3.5rem] w-full hover:bg-primary-blue-300  font-medium text-[1.4rem] rounded-md flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
+                      className={`h-[3.5rem] w-full hover:bg-primary-blue-300  font-medium text-[1.6rem] rounded-md flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
                       type='submit'
                       onClick={(e) => {
                         e.preventDefault()

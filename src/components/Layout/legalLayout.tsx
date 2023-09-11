@@ -9,7 +9,7 @@ type Props = {
 
 export const LegalLayout = ({ children }: Props) => {
   return (
-    <div className='Legal mx-auto w-full max-w-screen-2xl '>
+    <div className='Legal mx-auto w-full max-w-screen-4xl'>
       <Navbar />
       <header className='Legal_Header'>
         <section className='flex h-full w-full items-center'>
@@ -23,7 +23,7 @@ export const LegalLayout = ({ children }: Props) => {
         <section className='col-start-2 col-end-4'>
           <SideNav />
         </section>
-        <section className='col-start-5 col-end-12  text-[1.4rem]'>
+        <section className='col-start-5 col-end-12  text-[1.6rem]'>
           {children}
         </section>
       </main>

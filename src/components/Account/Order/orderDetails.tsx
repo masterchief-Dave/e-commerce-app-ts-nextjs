@@ -92,7 +92,7 @@ export const OrderDetails = (props: Props) => {
 
             <div>
               <h3 className='font-black'>Status</h3>
-              <button className='h-fit w-fit rounded-md bg-primary-green-200 px-4 py-2 text-[1.4rem] font-semibold text-white'>
+              <button className='h-fit w-fit rounded-md bg-primary-green-200 px-4 py-2 text-[1.6rem] font-semibold text-white'>
                 Delivered
               </button>
             </div>

@@ -62,7 +62,7 @@ export const BillingAddress = () => {
   })
 
   return (
-    <div className='py-10  text-[1.4rem]'>
+    <div className='py-10  text-[1.6rem]'>
       <div className='border-l border-r '>
         {mounted && (
           <Accordion allowToggle>

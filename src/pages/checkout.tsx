@@ -16,8 +16,8 @@ import { useRouter } from 'next/router'
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
-  priceHeader: `font-medium lg:text-[1.4rem] text-[0.8rem]`,
-  priceText: `font-normal lg:text-[1.4rem] text-[0.8rem]`,
+  priceHeader: `font-medium lg:text-[1.6rem] text-[0.8rem]`,
+  priceText: `font-normal lg:text-[1.6rem] text-[0.8rem]`,
 }
 
 const Checkout = () => {

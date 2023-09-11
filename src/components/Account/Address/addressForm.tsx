@@ -6,15 +6,15 @@ type Props = {
 
 export const AddressForm = ({ setState }: Props) => {
   const styles = {
-    input: `text-[1.4rem] font-medium border h-[4rem] w-full px-4`,
-    label: `text-[1.4rem] font-medium text-primary block`,
+    input: `text-[1.6rem] font-medium border h-[4rem] w-full px-4`,
+    label: `text-[1.6rem] font-medium text-primary block`,
   }
 
   return (
     <div>
       <header className='flex items-center justify-between border-b p-8'>
         <div
-          className='flex cursor-pointer items-center gap-x-2 text-[1.4rem]'
+          className='flex cursor-pointer items-center gap-x-2 text-[1.6rem]'
           onClick={() => {
             setState(1)
           }}
@@ -81,7 +81,7 @@ export const AddressForm = ({ setState }: Props) => {
         </div>
 
         <div className='col-span-full'>
-          <button className='h-[4rem] w-full bg-primary-blue-300 text-[1.4rem] font-semibold text-white'>
+          <button className='h-[4rem] w-full bg-primary-blue-300 text-[1.6rem] font-semibold text-white'>
             Continue
           </button>
         </div>

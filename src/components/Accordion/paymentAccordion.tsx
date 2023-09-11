@@ -55,13 +55,13 @@ export const PaymentAccordion = () => {
     cardInput: `h-[4rem] text-[1.2rem] w-full border px-4`,
     cardImage: `h-12 w-12`,
     label: `block text-[1.3rem] font-semibold`,
-    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
+    accordionHeader: `text-[1.1rem] lg:text-[1.6rem] font-semibold`,
   }
 
   // console.log(cardDetails)
 
   return (
-    <div className='py-10  text-[1.4rem]'>
+    <div className='py-10  text-[1.6rem]'>
       <div className='border-l border-r '>
         {mounted && (
           <Accordion allowToggle>
@@ -125,7 +125,7 @@ export const PaymentAccordion = () => {
                         </section>
 
                         <section>
-                          <p className='text-[1.4rem] font-bold'>
+                          <p className='text-[1.6rem] font-bold'>
                             The amount your card will be charged is $64.95.
                           </p>
                         </section>
@@ -193,7 +193,7 @@ export const PaymentAccordion = () => {
                         </section>
 
                         <section>
-                          <p className='text-[1.4rem] font-bold'>
+                          <p className='text-[1.6rem] font-bold'>
                             The amount your card will be charged is $64.95.
                           </p>
                         </section>

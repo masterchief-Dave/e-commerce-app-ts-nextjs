@@ -14,13 +14,13 @@ const ForgotPasswordEmailSent = (props: Props) => {
             <h1 className='text-center text-[1.8rem] font-semibold'>
               Email Sent
             </h1>
-            <p className='text-[1.4rem] text-primary-grey-300'>
+            <p className='text-[1.6rem] text-primary-grey-300'>
               A link to reset your password has been sent to you on
               bodunrindavidbond@gmail.com
             </p>
 
             <button
-              className='h-[3.5rem] w-full rounded-md bg-primary-blue-500 text-[1.4rem] text-white hover:bg-primary-blue-300'
+              className='h-[3.5rem] w-full rounded-md bg-primary-blue-500 text-[1.6rem] text-white hover:bg-primary-blue-300'
               onClick={() => router.push('/auth/login')}
             >
               Return to Sign in

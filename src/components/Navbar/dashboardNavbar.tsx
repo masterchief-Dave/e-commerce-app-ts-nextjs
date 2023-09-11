@@ -39,7 +39,7 @@ export const DashboardNavbar = ({
 
         {isAboveMediaQuery ? (
           <div className='flex items-center gap-x-4'>
-            <p className='text-[1.1rem] font-semibold text-white lg:text-[1.4rem]'>
+            <p className='text-[1.1rem] font-semibold text-white lg:text-[1.6rem]'>
               Aloha 👋,{' '}
               {/* <span className='text-[1.5rem] lg:text-[2rem]'>{user?.name}</span> */}
             </p>
@@ -64,7 +64,7 @@ export const DashboardNavbar = ({
 // 900px
 
 /**
- *   <p className='text-[1.1rem] font-semibold lg:text-[1.4rem]'>
+ *   <p className='text-[1.1rem] font-semibold lg:text-[1.6rem]'>
             Welcome, <span className='text-[1.5rem] lg:text-[2rem]'>David</span>
       </p>
  */

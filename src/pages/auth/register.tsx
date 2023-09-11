@@ -50,9 +50,9 @@ const Register = (props: Props) => {
   })
 
   const styles = {
-    label: `text-[1.4rem] font-normal block mb-2`,
-    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] mb-2 focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.4rem] rounded-md`,
+    label: `text-[1.6rem] font-normal block mb-2`,
+    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.6rem] mb-2 focus:ring-1 rounded-md`,
+    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.6rem] rounded-md`,
   }
 
   const handleSubmit = async ({ name, email, password, confirmPassword }: FormData) => {
@@ -90,7 +90,7 @@ const Register = (props: Props) => {
           >
           <header className='mb-8'>
             <h1 className='text-left text-[2rem] font-semibold'>Sign up</h1>
-            <p className='text-[1.4rem] text-primary-grey-100 font-normal'>Choose your preferred sign in method</p>
+            <p className='text-[1.6rem] text-primary-grey-100 font-normal'>Choose your preferred sign in method</p>
             </header>
 
             <div>

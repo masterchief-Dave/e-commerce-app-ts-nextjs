@@ -28,10 +28,10 @@ export const AddPaymentMethodForm = () => {
   const styles = {
     cardTitle: `font-semibold`,
     cardText: `font-light`,
-    cardInput: `h-[4rem] lg:text-[1.4rem] text-[1rem] w-full border px-4`,
+    cardInput: `h-[4rem] lg:text-[1.6rem] text-[1rem] w-full border px-4`,
     cardImage: `h-12 w-12`,
     label: `block text-[1.3rem] font-semibold`,
-    accordionHeader: `text-[1.1rem] lg:text-[1.4rem] font-semibold`,
+    accordionHeader: `text-[1.1rem] lg:text-[1.6rem] font-semibold`,
   }
 
   return (
@@ -102,7 +102,7 @@ export const AddPaymentMethodForm = () => {
       </div>
 
       <div className='item-center col-span-full flex w-full gap-4'>
-        <button className='bg-black px-8 py-2 text-xl font-medium text-white lg:text-[1.4rem]'>
+        <button className='bg-black px-8 py-2 text-xl font-medium text-white lg:text-[1.6rem]'>
           Save
         </button>
       </div>

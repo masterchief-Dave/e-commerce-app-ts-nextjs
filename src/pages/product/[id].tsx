@@ -169,7 +169,7 @@ const ProductSlug = ({ product }: Props) => {
                 <div className='py-4'>
                   <h4 className='mb-4 text-lg font-medium'>Quantity</h4>
                   <div className='flex items-center gap-x-8'>
-                    <div className='flex items-center h-[4rem] text-[1.4rem]'>
+                    <div className='flex items-center h-[4rem] text-[1.6rem]'>
                       <button
                         className='border h-full px-6'
                         onClick={() => {

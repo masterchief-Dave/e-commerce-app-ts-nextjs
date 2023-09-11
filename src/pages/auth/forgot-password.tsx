@@ -59,13 +59,13 @@ const ForgotPassword = (props: Props) => {
                     <XMarkIcon className='h-10 w-10' />
                   </div>
                 </header>
-                <p className='text-[1.4rem] font-medium'>{notification}</p>
+                <p className='text-[1.6rem] font-medium'>{notification}</p>
               </div>
             </div>
           )
           }
           <div className='px-12'>
-            <p className='text-[1.4rem]'>
+            <p className='text-[1.6rem]'>
               Return to{' '}
               <span className='text-text-primary-link'>
                 <Link href='/auth/login'>Sign in</Link>
@@ -78,12 +78,12 @@ const ForgotPassword = (props: Props) => {
               <h1 className='text-center text-[1.8rem] font-semibold'>
                 Trouble Signin in ?
               </h1>
-              <p className='text-[1.4rem] text-primary-grey-300'>
+              <p className='text-[1.6rem] text-primary-grey-300'>
                 We&#39;ve got your back! Just enter your email address and
                 we&#39;ll send you a link with which you can reset your password
               </p>
 
-              <form className='text-[1.4rem] mt-8'>
+              <form className='text-[1.6rem] mt-8'>
                 <label htmlFor='email' className='block font-medium mb-2'>
                   Email
                 </label>

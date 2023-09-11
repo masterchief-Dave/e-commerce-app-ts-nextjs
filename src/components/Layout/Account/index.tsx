@@ -176,7 +176,7 @@ const MobileSidebar = () => {
 }
 
 /**
- *   <p className='text-[1.1rem] font-semibold lg:text-[1.4rem]'>
+ *   <p className='text-[1.1rem] font-semibold lg:text-[1.6rem]'>
             Welcome, <span className='text-[1.5rem] lg:text-[2rem]'>David</span>
           </p>
  */

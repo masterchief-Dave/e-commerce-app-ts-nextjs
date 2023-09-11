@@ -14,12 +14,12 @@ const ResetPasswordSuccess = (props: Props) => {
             <h1 className='text-center text-[1.8rem] font-semibold'>
               Email Sent
             </h1>
-            <p className='text-[1.4rem] text-primary-grey-300'>
+            <p className='text-[1.6rem] text-primary-grey-300'>
               Your password reset has been successful.
             </p>
 
             <button
-              className='h-[3.5rem] w-full rounded-md bg-primary-blue-100 text-[1.4rem] text-white'
+              className='h-[3.5rem] w-full rounded-md bg-primary-blue-100 text-[1.6rem] text-white'
               onClick={() => router.push('/auth/login')}
             >
               Return to Sign in

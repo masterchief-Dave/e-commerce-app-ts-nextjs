@@ -5,7 +5,7 @@ type Props = {}
 
 export const ReturnPolicy = (props: Props) => {
   return (
-    <div className='text-[1.4rem]'>
+    <div className='text-[1.6rem]'>
       <div className='flex gap-x-8'>
         <div className='flex h-14 w-14 items-center justify-center rounded-full bg-white'>
           <ReceiptRefundIcon className='h-8 w-8 text-primary-link' />

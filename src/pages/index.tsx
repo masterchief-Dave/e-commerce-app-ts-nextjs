@@ -132,23 +132,23 @@ export default function Home() {
 
                   <div className='flex items-center justify-end gap-x-4 px-8'>
                     <button
-                      className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'
+                      className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.6rem]'
                       onClick={() => handlePrevButton()}
                     >
                       Prev
                     </button>
-                    <button className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-blue-300 text-xl font-medium text-white lg:text-[1.4rem]'>
+                    <button className='flex h-10 w-10 items-center justify-center rounded-full bg-primary-blue-300 text-xl font-medium text-white lg:text-[1.6rem]'>
                       {pageIndex}
                     </button>
-                    <button className='text-xl font-medium lg:text-[1.4rem]'>
+                    <button className='text-xl font-medium lg:text-[1.6rem]'>
                       {pageIndex + 1}
                     </button>
                     <p>...</p>
-                    <button className='text-xl font-medium lg:text-[1.4rem]'>
+                    <button className='text-xl font-medium lg:text-[1.6rem]'>
                       10
                     </button>
                     <button
-                      className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.4rem]'
+                      className='rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.6rem]'
                       onClick={() => handleNextButton()}
                     >
                       Next

@@ -25,7 +25,7 @@ type Props = {
 type MobileProps = Omit<Props, 'isTop'>
 
 const styles = {
-  navDropdownLink: `block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
+  navDropdownLink: `block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.6rem]`,
 }
 
 export const Navbar = () => {
@@ -79,7 +79,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
             <input
               type='text'
               placeholder='search'
-              className='h-full w-[90%] rounded-lg border-0 bg-transparent px-4 text-[1.4rem] outline-0 focus:outline-0'
+              className='h-full w-[90%] rounded-lg border-0 bg-transparent px-4 text-[1.6rem] outline-0 focus:outline-0'
             />
             <div className='flex h-full w-[10%] cursor-pointer items-center justify-center  '>
               <div className='w-fit rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
@@ -94,19 +94,13 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           ) : (
             <div className='flex items-center gap-x-8'>
               <li>
-                  <Link href='/auth/login'>
-                    <button
-                      className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'
-                    >
-                      Login
-                    </button>
+                  <Link href='/auth/login' className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'>
+                    Login
                   </Link>
               </li>
               <li className='hidden'>
-                <Link href='/auth/register'>
-                  <button className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
+                  <Link href='/auth/register' className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
                     Sign up
-                  </button>
                 </Link>
               </li>
             </div>
@@ -134,7 +128,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
   const styles = {
     list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
     links: `w-full h-full block`,
-    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.4rem]`,
+    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.6rem]`,
   }
 
   useEffect(() => {

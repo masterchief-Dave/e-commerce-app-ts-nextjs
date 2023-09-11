@@ -66,7 +66,7 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
 
   return (
     <button
-      className='h-[4rem] bg-blue-500 text-white text-[1.4rem] font-medium rounded-md px-8 flex items-center justify-center w-full'
+      className='h-[4rem] bg-blue-500 text-white text-[1.6rem] font-medium rounded-md px-8 flex items-center justify-center w-full'
       disabled={false}
       onClick={() => initializePayment(onSuccess, onclose)}>
       Place Order

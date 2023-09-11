@@ -16,9 +16,9 @@ interface FormValues {
 
 const ResetPassword = (props: Props) => {
   const styles = {
-    label: `text-[1.4rem] font-normal block mb-2`,
-    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.4rem] focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-100 text-white font-medium text-[1.4rem] rounded-md`,
+    label: `text-[1.6rem] font-normal block mb-2`,
+    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.6rem] focus:ring-1 rounded-md`,
+    btn: `h-[3.5rem] w-full bg-primary-blue-100 text-white font-medium text-[1.6rem] rounded-md`,
   }
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
@@ -66,7 +66,7 @@ const ResetPassword = (props: Props) => {
 
               <form
                 action=''
-                className='space-y-4 text-[1.4rem]'
+                className='space-y-4 text-[1.6rem]'
                 onSubmit={formik.handleSubmit}
               >
                 <div>

@@ -29,13 +29,13 @@ export const BillingAddress = () => {
     cardImage: `h-12 w-12`,
     label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
     input: `w-full p-4 border`,
-    btn: `bg-primary-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.4rem]`,
+    btn: `bg-primary-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.6rem]`,
     select: `border px-8 py-4 text-[1.2rem] w-full outline-0`,
     option: `text-[1.2rem] font-medium text-primary-grey-300`,
   }
 
   return (
-    <div className='py-10  text-[1.4rem]'>
+    <div className='py-10  text-[1.6rem]'>
       <div className='border-l border-r '>
         {mounted && (
           <Accordion allowToggle>

@@ -1,14 +1,20 @@
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
+import { useFormik } from 'formik'
 
 type Props = {}
 
+interface FormData { }
+
 const user = (props: Props) => {
   const styles = {
-    label: `block text-[1.4rem] text-primary-grey-100 font-medium`,
-    input: `p-4 w-full px-4 text-xl lg:text-[1.4rem] border font-medium`,
-    editBtn: `px-8 py-2 lg:text-[1.4rem] bg-primary-blue-300 font-medium text-xl text-white rounded-md`,
+    label: `block text-[1.6rem] text-primary-grey-100 font-medium`,
+    input: `p-4 w-full px-4 text-xl lg:text-[1.6rem] border font-medium`,
+    editBtn: `px-8 py-2 lg:text-[1.6rem] bg-primary-blue-300 font-medium text-xl text-white rounded-md`,
   }
+
+  // const formik = useFormik({}) 
+  // fetch the user from the backend
   return (
     <div>
       <AccountLayout>
@@ -67,7 +73,7 @@ const user = (props: Props) => {
               </label>
               <input className={styles.input} />
             </div>
-            <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.4rem] font-semibold text-white '>
+            <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
               Save changes
             </button>
           </form>

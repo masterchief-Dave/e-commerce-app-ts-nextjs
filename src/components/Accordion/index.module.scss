@@ -23,7 +23,7 @@
  }
 
  .btn {
-   @apply bg-blue-500 px-8 py-4 text-base font-medium text-white text-[1.4rem] rounded-md
+  @apply bg-blue-500 px-8 py-4 text-base font-medium text-white text-[1.6rem] rounded-md
  }
 
  .select {
@@ -35,5 +35,5 @@
  }
 
  .accordionHeader {
-   @apply text-[1.4rem] font-semibold
+  @apply text-[1.6rem] font-semibold
  }

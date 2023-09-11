@@ -21,7 +21,7 @@ const AuthLayout = ({ children }: Props) => {
   }, [session])
 
   return (
-    <div className="mx-auto  w-full max-w-screen-2xl max-h-screen">
+    <div className="mx-auto w-full max-w-screen-4xl max-h-screen">
       <main className="grid grid-cols-12">
         <section className="col-start-1 col-end-7 relative auth_bg_overlay">
           <Image

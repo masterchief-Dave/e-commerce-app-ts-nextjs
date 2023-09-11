@@ -16,7 +16,7 @@
   }
 
   .auth-btn {
-    @apply h-[3.5rem] w-fit rounded-md px-[1.5rem] text-[1.3rem] font-semibold;
+    @apply h-[3.5rem] w-fit rounded-md px-[1.5rem] text-[1.3rem] font-semibold flex items-center justify-center;
   }
 
   input:focus-within,

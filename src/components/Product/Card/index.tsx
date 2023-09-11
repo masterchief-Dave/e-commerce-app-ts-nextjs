@@ -79,7 +79,7 @@ export const ProductCard = ({ data }: Props) => {
       </div>
 
       <div className='space-y-8 py-2 '>
-        <Link href={`/product/${data._id}`} className='max-w-[20rem] block truncate text-center text-base font-normal lg:text-[1.4rem]'>
+        <Link href={`/product/${data._id}`} className='max-w-[20rem] block truncate text-center text-base font-normal lg:text-[1.6rem]'>
           {data.name}
         </Link>
         <div className='flex items-center justify-center gap-6 font-semibold'>
@@ -95,14 +95,14 @@ export const ProductCard = ({ data }: Props) => {
               return <RenderRating color='transparent' rating={1} key={index} />
             })}
           </div>
-          {/* <span className='text-[1.4rem]'>{data.ratings}</span> */}
+          {/* <span className='text-[1.6rem]'>{data.ratings}</span> */}
         </div>
         <button
           className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md bg-white border font-semibold hover:bg-primary-blue-300 hover:text-white hover:transition-all hover:delay-75'
           onClick={handleAddToCart}
         >
           <ShoppingBagIcon className='h-8 w-8' />
-          <span className='capitalize text-[1.4rem]'>
+          <span className='capitalize text-[1.6rem]'>
             Add to cart
           </span>
         </button>

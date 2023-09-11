@@ -13,7 +13,7 @@ export const CategoryCard = ({ data: { categoryItems, name } }: Props) => {
     <div className='w-full bg-white p-8 shadow-product-card-box-shadow lg:w-fit'>
       <div>
         <div className='mb-8 flex items-center justify-between uppercase'>
-          <h3 className=' text-base font-bold lg:text-[1.4rem]'>
+          <h3 className=' text-base font-bold lg:text-[1.6rem]'>
             {name}
           </h3>
           <Link

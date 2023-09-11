@@ -24,7 +24,7 @@ const OrderSlug = (props: Props) => {
             </button>
           </header>
 
-          <div className='p-8 text-[1.4rem]'>
+          <div className='p-8 text-[1.6rem]'>
             <OrderDetails />
           </div>
         </div>

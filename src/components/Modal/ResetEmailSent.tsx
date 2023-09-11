@@ -63,19 +63,19 @@ export default function ResetEmailSentModal({ email = 'bodunrindavidbond@gmail.c
                   </header>
 
                   <div className="mt-2">
-                    <p className="text-[1.4rem] font-normal text-gray-500">
+                    <p className="text-[1.6rem] font-normal text-gray-500">
                       A link to reset your password has been sent to you on <span className='font-medium'> {email} </span>.
                     </p>
                   </div>
 
                   <div className="mt-4 flex items-center gap-x-8">
-                    <Link href='/auth/login' className='text-[1.4rem] delay-75 transition-all font-medium rounded-md px-4 py-2 hover:bg-primary-blue-500 hover:text-white'>
+                    <Link href='/auth/login' className='text-[1.6rem] delay-75 transition-all font-medium rounded-md px-4 py-2 hover:bg-primary-blue-500 hover:text-white'>
                       Return to Sign in
                     </Link>
 
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-[1.4rem] font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-[1.6rem] font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Got it, thanks!

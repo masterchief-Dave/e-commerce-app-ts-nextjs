@@ -12,7 +12,7 @@ export const AddressBox = ({ setState }: Props) => {
         <h1 className='text-xl font-black lg:text-2xl'>Delivery Address</h1>
 
         <button
-          className='h-fit w-fit rounded-md bg-primary-red-100 px-4 py-2 text-[1.4rem] font-semibold text-white'
+          className='h-fit w-fit rounded-md bg-primary-red-100 px-4 py-2 text-[1.6rem] font-semibold text-white'
           id='newAddress'
           onClick={() => {
             setState(2)
@@ -27,11 +27,11 @@ export const AddressBox = ({ setState }: Props) => {
           <header className='border-b p-4'>
             <div className='flex justify-end'>
               <div>
-                <button className='h-fit w-fit rounded-md px-4 py-2 text-[1.4rem] font-semibold'>
+                <button className='h-fit w-fit rounded-md px-4 py-2 text-[1.6rem] font-semibold'>
                   Edit
                 </button>
 
-                <button className='h-fit w-fit rounded-md px-4 py-2 text-[1.4rem] font-semibold text-primary-red-100'>
+                <button className='h-fit w-fit rounded-md px-4 py-2 text-[1.6rem] font-semibold text-primary-red-100'>
                   Delete
                 </button>
               </div>

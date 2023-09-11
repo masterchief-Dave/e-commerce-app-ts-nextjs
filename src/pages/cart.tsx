@@ -42,7 +42,7 @@ const NoItemInCart = () => {
             </h1>
 
             <Link
-              className='h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2 text-[1.4rem] font-semibold text-white'
+              className='h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2 text-[1.6rem] font-semibold text-white'
               href='/'
             >
               Continue Shopping
@@ -82,7 +82,7 @@ const ItemInCart = () => {
         </div>
         <Link
           href='/checkout'
-          className='rounded-md flex items-center justify-center bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.4rem]'>
+          className='rounded-md flex items-center justify-center bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.6rem]'>
           Proceed to checkout
         </Link>
       </section>
