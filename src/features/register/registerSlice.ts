@@ -25,7 +25,6 @@ const registerSlice = createSlice({
       state.user = null
     },
     registerSuccess: (state: RegisterState, action: PayloadAction<RegisterSession>) => {
-      console.log(action.payload)
       state.isRegistered = true
       state.loading = false
       state.error = null

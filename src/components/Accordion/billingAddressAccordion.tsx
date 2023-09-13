@@ -20,7 +20,7 @@ export const BillingAddress = () => {
   const [mounted, setMounted] = useState<boolean>(false)
   const [billingAddress, setBillingAddress] = useState<string>('')
   const dispatch = useAppDispatch()
-  // console.log({ billingAddress })
+
   useEffect(() => {
     setMounted(true)
   }, [])

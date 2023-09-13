@@ -58,8 +58,6 @@ export const PaymentAccordion = () => {
     accordionHeader: `text-[1.1rem] lg:text-[1.6rem] font-semibold`,
   }
 
-  // console.log(cardDetails)
-
   return (
     <div className='py-10  text-[1.6rem]'>
       <div className='border-l border-r '>

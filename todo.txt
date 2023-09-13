@@ -151,4 +151,5 @@ adavantages
 
 add the user information to header authorization token ? from where 
 
-can I access the next auth user in the middleware ?
+can I access the next auth user in the middleware ? 
+work on the dashboard part so that it pulls the user profile and updates the account dashboard

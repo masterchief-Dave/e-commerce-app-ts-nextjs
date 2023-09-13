@@ -1,8 +1,15 @@
+import { useFormik } from 'formik'
+import { GetServerSideProps } from 'next'
+
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
-import { useFormik } from 'formik'
+import axios from 'axios'
+import { getSession } from 'next-auth/react'
+import { data } from '@/globals/header'
 
-type Props = {}
+type Props = {
+  user: User | null
+}
 
 interface FormData { }
 
@@ -32,7 +39,7 @@ const user = (props: Props) => {
                 {' '}
                 Firstname{' '}
               </label>
-              <input className={styles.input} />
+              <input className={styles.input} placeholder={props.user?.user.name} />
             </div>
 
             <div>
@@ -47,15 +54,7 @@ const user = (props: Props) => {
                 {' '}
                 Email Address{' '}
               </label>
-              <input className={styles.input} />
-            </div>
-
-            <div>
-              <label htmlFor='currentPassword' className={styles.label}>
-                {' '}
-                Current Password
-              </label>
-              <input className={styles.input} />
+              <input className={styles.input} placeholder={props.user?.user.email} />
             </div>
 
             <div>
@@ -63,7 +62,7 @@ const user = (props: Props) => {
                 {' '}
                 New Password
               </label>
-              <input className={styles.input} />
+              <input className={styles.input} placeholder='********' />
             </div>
 
             <div>
@@ -71,7 +70,7 @@ const user = (props: Props) => {
                 {' '}
                 Confirm Password{' '}
               </label>
-              <input className={styles.input} />
+              <input className={styles.input} placeholder='********' />
             </div>
             <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
               Save changes
@@ -85,3 +84,38 @@ const user = (props: Props) => {
 }
 
 export default user
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+
+  // move this code into next api route
+  // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
+  const session = await getSession({ req: context.req })
+  let data
+
+  if (!session) {
+    return {
+      props: {
+        user: null
+      }
+    }
+  }
+  //note: i cannot use localhost here because server side props does not run on the browser but on the server side
+  try {
+    const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/user/profile/${session._id}`)
+    data = await response.data
+
+  } catch (err) {
+    // console.log(err)
+  }
+
+  /**
+   *  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
+   * i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart 
+   * */
+
+  return {
+    props: {
+      user: data
+    }
+  }
+}

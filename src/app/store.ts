@@ -13,7 +13,6 @@ if (typeof window !== 'undefined') {
   savedUser = window.localStorage.getItem('user')
 }
 
-console.log(savedUser)
 
 const initialState = {
   isLoggedIn: !!savedUser,

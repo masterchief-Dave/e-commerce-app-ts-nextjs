@@ -38,7 +38,6 @@ export const Header = (props: Props) => {
     ],
   }
 
-  // console.log(sliderRef.current)
   const handleLeftSlide = () => {
     if (sliderRef.current) {
       sliderRef.current.slickPrev()

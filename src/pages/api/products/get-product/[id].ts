@@ -2,6 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Product } from '@/models/product'
 import { connectToMongoDB } from '@/lib/mongodb'
+import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 
 type Data = {
   message: string,
@@ -17,9 +19,15 @@ export default async function handler(
     try {
       const id = req.query.id
 
+      console.log('the code is here in the get product api')
+
+      // const session = await getSession({ req })
+      // const session = await getServerSession(req)
+      // console.log({ session })
+
       // @ts-ignore
       const product = await Product.findById(id)
-      res.status(200).json({ message: 'John Doe', data: product })
+      res.status(200).json({ message: 'ok', data: product })
     } catch (err) {
       res.status(400).json({
         message: 'error'

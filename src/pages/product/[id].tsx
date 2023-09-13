@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import useSWR from 'swr'
-import { Fragment, useEffect, useState } from 'react'
+// import useSWR from 'swr'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { HeartIcon, StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
+import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
 import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
 import { GetServerSideProps } from 'next'
 import axios from 'axios'
@@ -246,7 +246,9 @@ export default ProductSlug
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const { id } = context.query
+  // move this code into next api route
   const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
+  // const response = await axios.get(`http://127.0.0.1:3002/api/products/get-product/${id}`)
   const data = await response.data
 
 

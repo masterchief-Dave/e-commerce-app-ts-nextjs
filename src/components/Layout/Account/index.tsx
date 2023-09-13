@@ -17,7 +17,7 @@ type Props = {
 
 export const AccountLayout = ({ children }: Props) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false)
-  // console.log(data)
+
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
 
   return (

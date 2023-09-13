@@ -19,7 +19,7 @@ export const DashboardNavbar = ({
 }: Props) => {
   const { isTop } = useStickyNavbar()
   const session = useSession()
-  console.log({ session })
+
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
 
   const { user } = useAuth()

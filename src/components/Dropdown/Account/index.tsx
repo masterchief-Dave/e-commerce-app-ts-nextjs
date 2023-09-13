@@ -6,8 +6,6 @@ import Link from 'next/link'
 export function UserAccountDropdown() {
   const session = useSession()
 
-  console.log({ session })
-
   if (session.status !== 'authenticated') {
     return
   }

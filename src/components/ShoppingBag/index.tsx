@@ -8,7 +8,7 @@ type Props = {}
 export const ShoppingFixedBag = (props: Props) => {
   const { cart } = useCart()
 
-  console.log({ cart })
+
   const itemsInCart = cart?.length || 0
 
   return (
