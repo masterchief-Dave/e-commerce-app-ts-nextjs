@@ -1,10 +1,8 @@
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
-type Props = {
-  setState: (step: number) => void
-}
 
-export const AddressForm = ({ setState }: Props) => {
+export const AddressForm = () => {
   const styles = {
     input: `text-[1.6rem] font-medium border h-[4rem] w-full px-4`,
     label: `text-[1.6rem] font-medium text-primary block`,
@@ -13,15 +11,13 @@ export const AddressForm = ({ setState }: Props) => {
   return (
     <div>
       <header className='flex items-center justify-between border-b p-8'>
-        <div
-          className='flex cursor-pointer items-center gap-x-2 text-[1.6rem]'
-          onClick={() => {
-            setState(1)
-          }}
+        <Link
+          href='/account/delivery-address'
+          className='flex cursor-pointer items-center gap-x-2 p-3 font-medium transition-all delay-75 rounded-md text-[1.6rem] hover:bg-blue-500 hover:text-white'
         >
           <ArrowLeftIcon className='h-6 w-6' />
           <p>Go back</p>
-        </div>
+        </Link>
       </header>
       <form action='' className='grid grid-cols-2 gap-8 p-8'>
         <div>

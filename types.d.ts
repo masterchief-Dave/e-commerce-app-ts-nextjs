@@ -1,4 +1,5 @@
 import { Types } from "mongoose"
+import { string } from "yup"
 
 
 declare global { 
@@ -76,10 +77,12 @@ declare global {
 }
 declare global {
   interface IDelivery {
+    _id: string
     street: string
     zipCode: string
     city: string
     state: string
+    country: string
   }
 }
 declare global {

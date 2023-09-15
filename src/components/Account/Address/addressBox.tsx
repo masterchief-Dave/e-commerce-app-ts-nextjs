@@ -1,26 +1,22 @@
 import { MapPinIcon, PhoneIcon, UserIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
-type Props = {
-  // setState: React.Dispatch<React.SetStateAction<number>>
-  setState: (step: number) => void
-}
+type Props = Omit<IDelivery, '_id'>
 
-export const AddressBox = ({ setState }: Props) => {
+export const AddressBox = ({ city, country, state, street, zipCode }: Props) => {
   return (
     <section>
       <header className='flex items-center justify-between border-b p-8'>
         <h1 className='text-xl font-black lg:text-2xl'>Delivery Address</h1>
 
-        <button
+        <Link
+          href='/account/add-address'
           className='h-fit w-fit rounded-md bg-primary-red-100 px-4 py-2 text-[1.6rem] font-semibold text-white'
           id='newAddress'
-          onClick={() => {
-            setState(2)
-          }}
         >
           {' '}
           Add new Address{' '}
-        </button>
+        </Link>
       </header>
       <div className='grid grid-cols-2 gap-8 p-8'>
         <div className='border'>
@@ -47,8 +43,7 @@ export const AddressBox = ({ setState }: Props) => {
             <div className='flex gap-x-2'>
               <MapPinIcon className='h-6 w-6' />
               <p className='truncated'>
-                2, Adisa Olarinde Dada street, Agbo-Igbala bustop off matogun
-                road, ogun state
+                {street} {city} {state}, {country}
               </p>
             </div>
 
@@ -62,3 +57,4 @@ export const AddressBox = ({ setState }: Props) => {
     </section>
   )
 }
+

@@ -1,10 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { Address } from '@/models/address'
+import { User } from '@/models/user'
 import { Types } from 'mongoose'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-
-import { User } from '@/models/user'
 
 type Data = {
   message: string
@@ -17,11 +16,6 @@ export default async function handler(
 ) {
   if (req.method === 'PATCH') {
     try {
-      const session = await getSession()
-
-      if (!session) {
-        return res.status(400).json({ message: 'login to access this resource' })
-      }
 
       // @ts-ignore
       const user = await User.findById(session._id)
@@ -31,21 +25,15 @@ export default async function handler(
       })
 
       if (!doesTheUserHaveAddress) {
-        return res.status(400).json({ message: 'bad request' })
+        return res.status(400).json({ message: 'no shipping info found' })
       }
 
-      // @ts-ignore
-      const shippingInfo = await Address.findByIdAndUpdate(req.query.id, req.body, {
-        new: true
-      })
-
-      if (!shippingInfo) {
-        return res.status(404).json({ message: 'no shipping info found' })
-      }
+      //  return shipping info
+      const shippingInfo = await Promise.all([])
 
       res.status(200).json({
         message: 'Shipping info updated',
-        data: shippingInfo
+        // data: shippingInfo
       })
     } catch (err) {
       console.log(err)

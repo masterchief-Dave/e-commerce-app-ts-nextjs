@@ -34,8 +34,10 @@ export const AccountLayout = ({ children }: Props) => {
             <SideBar />
           </section>
 
-          <section className='col-start-6 col-end-12 rounded-[1rem] border'>
-            {children}
+          <section className='col-start-6 col-end-12 min-h-screen'>
+            <main className='h-fit rounded-xl border'>
+              {children}
+            </main>
           </section>
         </div>
       ) : (
@@ -91,7 +93,7 @@ export const SideBar = () => {
             <Link
               href='/account/delivery-address'
               className={
-                router.pathname === '/account/delivery-address'
+                ['/account/delivery-address', '/account/add-address'].includes(router.pathname)
                   ? styles.active
                   : styles.link
               }
