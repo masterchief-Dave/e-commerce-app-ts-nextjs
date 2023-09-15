@@ -1,24 +1,20 @@
-import { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
+import axios from 'axios'
 
 import { AddressBox } from '@/components/Account/Address/addressBox'
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
-import { AddressForm } from '@/components/Account/Address/addressForm'
-import axios from 'axios'
 
 type Props = {
   address: IDelivery[] | null
 }
 
 const DeliveryAddress = (props: Props) => {
-  const [step, setStep] = useState<number>(1)
-
-  const render = () => {
-    if (step === 1) {
-      return (
-        <div>
+  return (
+    <div className=''>
+      <AccountLayout>
+        <>
           {props.address?.map((address) => {
             return <AddressBox
               key={address._id}
@@ -29,17 +25,7 @@ const DeliveryAddress = (props: Props) => {
               zipCode={address.zipCode}
             />
           })}
-        </div>
-      )
-    } else if (step === 2) {
-      return <AddressForm />
-    }
-  }
-
-  return (
-    <div className=''>
-      <AccountLayout>
-        <div>{render()}</div>
+        </>
       </AccountLayout>
       <Footer />
     </div>

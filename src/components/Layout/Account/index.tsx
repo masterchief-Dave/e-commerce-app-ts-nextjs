@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import BreadCrumb from '@/components/BreadCrumb'
-import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import {
   UserCircleIcon,
   WalletIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
+
+import BreadCrumb from '@/components/BreadCrumb'
+import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
 
@@ -17,7 +18,6 @@ type Props = {
 
 export const AccountLayout = ({ children }: Props) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false)
-
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
 
   return (
