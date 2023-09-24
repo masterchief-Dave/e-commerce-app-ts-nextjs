@@ -20,6 +20,8 @@ type Props = {
   isLoggedIn: boolean
   user: UserSession | null
   data: Session | null
+  searchTerm: string
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
 }
 
 type MobileProps = Omit<Props, 'isTop'>
@@ -32,6 +34,7 @@ export const Navbar = () => {
   const { handleLogout } = useLogout()
   const { isTop } = useStickyNavbar()
   const { data } = useSession()
+  const [searchTerm, setSearchTerm] = useState<string>('')
 
   //my api auth
   const { isLoggedIn, user } = useAuth()
@@ -45,20 +48,43 @@ export const Navbar = () => {
   return (
     <div className=''>
       <div className='block lg:hidden'>
-        <MobileNavbar handleSignOut={handleLogout} session={user} data={data} cartItems={cart} isLoggedIn={isLoggedIn} user={user} />
+        <MobileNavbar
+          handleSignOut={handleLogout}
+          session={user}
+          data={data}
+          cartItems={cart}
+          isLoggedIn={isLoggedIn}
+          user={user}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
       </div>
 
       <div className='hidden lg:block'>
-        <Desktop session={user} isTop={isTop} cartItems={cart} handleSignOut={handleLogout} isLoggedIn={isLoggedIn} user={user} data={data} />
+        <Desktop
+          session={user}
+          isTop={isTop}
+          cartItems={cart}
+          handleSignOut={handleLogout}
+          isLoggedIn={isLoggedIn}
+          user={user}
+          data={data}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
       </div>
     </div>
   )
 }
 
-const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data }: Props) => {
+const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data, searchTerm, setSearchTerm }: Props) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   // when I click outside close the dropdown
+  const handleSearchSubmit = (e: any) => {
+    e.preventDefault()
+    // handle submit
+  }
 
   return ( 
     <nav
@@ -75,18 +101,20 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           </h1>
         </li>
         <li className='lg:w-[30%] xl:w-[40%]'>
-          <div className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2'>
+          <form className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2' onSubmit={handleSearchSubmit}>
             <input
               type='text'
               placeholder='search'
               className='h-full w-[90%] rounded-lg border-0 bg-transparent px-4 text-[1.6rem] outline-0 focus:outline-0'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <div className='flex h-full w-[10%] cursor-pointer items-center justify-center  '>
               <div className='w-fit rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
                 <MagnifyingGlassIcon className='h-8 w-8 hover:text-white' />
               </div>
             </div>
-          </div>
+          </form>
         </li>
         <div className='flex items-center gap-x-4'>
           {data?.user ? (
