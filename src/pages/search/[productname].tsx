@@ -1,27 +1,16 @@
-import Image from 'next/image'
-import Link from 'next/link'
-// import useSWR from 'swr'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
-import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
 import { GetServerSideProps } from 'next'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 
-import { useAppDispatch } from '@/hooks/reduxhooks'
 import { Layout } from '@/components/Layout'
 // import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Footer } from '@/components/Footer'
-import { addToCart } from '@/features/cart/cartSlice'
-import { useCart } from '@/hooks/useCart'
-import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
-import { ProductTab } from '@/components/Tabs/Product'
+
 
 type Props = {
-  product: Product | null
+  product: Product[] | null
 }
 
 const styles = {
@@ -33,28 +22,24 @@ const styles = {
 }
 
 const ProductSlug = ({ product }: Props) => {
-  const router = useRouter()
-  const dispatch = useAppDispatch()
-  const { cart } = useCart()
-  const session = useSession()
-  const [productQuantity, setProductQuantity] = useState<number>(1)
-  let [isItemInCart, setIsItemInCart] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
+  console.log(product)
 
   return (
     <Layout>
       <>
         <Navbar />
-        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 '>
+        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 min-h-screen'>
           {/* <div className='col-span-full'>
             <BreadCrumb />
           </div> */}
 
+          {/* if the length of product is empty then display component that the system cannot find what u are looking for so go back to the homepage */}
+
+          {/* else list out the component */}
+
         </main>
         <Footer />
         <ShoppingFixedBag />
-        {/* modal */}
-        {openModal && <AuthenticatedModal openModal={openModal} setOpenModal={setOpenModal} />}
       </>
     </Layout>
   )
@@ -81,8 +66,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
   return {
     props: {
-      // product: data.data.product
-      product: null
+      product: data.data
     }
   }
+}
+
+const NoItemFound = () => {
+  return (
+    <div className=''></div>
+  )
 }
