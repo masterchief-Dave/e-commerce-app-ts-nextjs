@@ -7,7 +7,7 @@ import { signIn } from 'next-auth/react'
 
 import { useAppDispatch } from '@/hooks/reduxhooks'
 import { loginFailure, loginStart, loginSuccess } from '@/features/login/loginSlice'
-import { fetchLogin } from '@/utils/fetchLogin'
+// import { fetchLogin } from '@/utils/fetchLogin'
 import { loginUser } from '@/helpers'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -166,8 +166,6 @@ const Login = ({ myCookieValue, data }: Props) => {
                 Reset password
               </Link>
             </div>
-
-
 
             <div className='flex justify-center'>
               <span className='inline-block h-[1px] '></span>
