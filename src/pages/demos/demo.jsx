@@ -22,10 +22,13 @@ const NavigationMenuDemoExample = () => {
       ///api/order/get-my-orders
       // const response = await axios.get('/api/order/get-my-orders')
       console.log('the btn was clicked')
-      const response = await axios.get('/api/gettest')
+      // const response = await axios.get('/api/gettest')
       // const response = await axios.get('http://localhost:8100/api/v1/user/admin', { withCredentials: true })
-      const data = await response.data
-      console.log(data)
+      // const data = await response.data
+      // console.log(data)
+      // /api/products/getmyproducts?sort=asc&maxPrice=2000&minStock=10&minRating=4&minReview=2
+      const response = await axios.get('/api/products/getmyproducts?sort=asc&maxPrice=2000&minStock=10&minRating=4')
+      console.log(response)
     } catch (err) {
       console.log(err)
     }

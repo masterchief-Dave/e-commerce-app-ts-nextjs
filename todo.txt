@@ -156,3 +156,5 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 
 // DOCKER
 1. create docker image
+
+2. create category component where a user can filter the products based on CATEGORIES (important) 
