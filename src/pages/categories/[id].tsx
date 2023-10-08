@@ -5,7 +5,7 @@ const CategorySlug = () => {
 	return (
 		<div className=''>
 
-			<div></div>
+      <div>some data will show up here</div>
 		</div>
 	)
 }

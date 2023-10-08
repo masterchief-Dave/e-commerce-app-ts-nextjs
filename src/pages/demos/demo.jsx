@@ -27,7 +27,9 @@ const NavigationMenuDemoExample = () => {
       // const data = await response.data
       // console.log(data)
       // /api/products/getmyproducts?sort=asc&maxPrice=2000&minStock=10&minRating=4&minReview=2
-      const response = await axios.get('/api/products/getmyproducts?sort=asc&maxPrice=2000&minStock=10&minRating=4')
+      // api/products/getmyproducts?maxPrice=2000&minStock=10&minRating=4&sort=price
+      const response = await axios.get('/api/products/getmyproducts?minPrice=2000&minRating=4&sort=-price')
+      // http://localhost:3002/api/products/getmyproducts?maxPrice=2000&minStock=10&minRating=4&sort=-price
       console.log(response)
     } catch (err) {
       console.log(err)

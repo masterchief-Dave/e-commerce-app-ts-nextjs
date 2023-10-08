@@ -158,3 +158,5 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 1. create docker image
 
 2. create category component where a user can filter the products based on CATEGORIES (important) 
+3. create categories page, so when user clicks on a category like electronics, it will bring out all the data related to electronics
+4. 
