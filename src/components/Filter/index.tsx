@@ -37,7 +37,7 @@ const BrowseCategories = () => {
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4} className='text-[1.4rem] font-medium text-primary-grey-100'>
-          <p>Electronics</p>
+          <Link href=''>Electronics</Link>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

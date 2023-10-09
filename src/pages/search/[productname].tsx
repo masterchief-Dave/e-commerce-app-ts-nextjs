@@ -9,6 +9,7 @@ import { Footer } from '@/components/Footer'
 import { MaterialSymbolsRemoveShoppingCart } from '@/globals/icons'
 import { ProductCard } from '@/components/Product/Card'
 import { Filter } from '@/components/Filter'
+import { Sorting } from '@/components/Filter/sorting'
 
 
 type Props = {
@@ -24,6 +25,12 @@ const ProductSlug = ({ products }: Props) => {
           {/* <div className='col-span-full'>
             <BreadCrumb />
           </div> */}
+
+          <section className='col-start-2 col-end-12 flex justify-end'>
+            <div className=''>
+              <Sorting />
+            </div>
+          </section>
 
           {products?.length < 1 ? <NoItemFound /> : (
             <div className='col-start-2 col-end-12 grid grid-cols-12 gap-12'>
