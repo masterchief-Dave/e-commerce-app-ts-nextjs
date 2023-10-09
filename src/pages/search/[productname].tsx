@@ -8,6 +8,7 @@ import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Footer } from '@/components/Footer'
 import { MaterialSymbolsRemoveShoppingCart } from '@/globals/icons'
 import { ProductCard } from '@/components/Product/Card'
+import { Filter } from '@/components/Filter'
 
 
 type Props = {
@@ -25,14 +26,19 @@ const ProductSlug = ({ products }: Props) => {
           </div> */}
 
           {products?.length < 1 ? <NoItemFound /> : (
-            <div className='col-start-2 col-end-12 grid grid-cols-5 gap-12'>
-              {products.map((product: Product): React.ReactElement => {
-                return (
-                  <div key={product._id}>
-                    <ProductCard data={product} />
-                  </div>
-                )
-              })}
+            <div className='col-start-2 col-end-12 grid grid-cols-12 gap-12'>
+              <div className='col-start-1 col-end-3'>
+                <Filter />
+              </div>
+              <div className='col-start-3 col-end-13 grid grid-cols-5 gap-12'>
+                {products.map((product: Product): React.ReactElement => {
+                  return (
+                    <div key={product._id}>
+                      <ProductCard data={product} />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           )}
         </main>
