@@ -13,13 +13,15 @@ import twitter from 'public/assets/icons/twitter.svg'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 
+import { GithubIcon, TwitterIcon, LinkedinIcon } from 'lucide-react'
+
 type Props = {}
 
 export const Footer = (props: Props) => {
   const styles = {
     footerCardIcons: `lg:h-12 lg:w-12 w-6 h-6`,
     footerHeader: `text-[1.6rem] lg:text-[1.8rem] font-semibold text-white `,
-    socialMediaIcons: `lg:h-12 lg:w-12 w-6 h-6 cursor-pointer`,
+    socialMediaIcons: `lg:h-12 lg:w-12 w-6 h-6 cursor-pointer text-white`,
   }
 
   return (
@@ -43,21 +45,15 @@ export const Footer = (props: Props) => {
           </div>
 
           <div className='flex w-full items-start gap-6 lg:items-center'>
-            <Image
-              src={instagram}
-              alt='instagram'
-              className={styles.socialMediaIcons}
-            />
-            <Image
-              src={linkedin}
-              alt='linkedin'
-              className={styles.socialMediaIcons}
-            />
-            <Image
-              src={twitter}
-              alt='twitter'
-              className={styles.socialMediaIcons}
-            />
+            <Link href='https://github.com/davieoba'>
+              <GithubIcon className={styles.socialMediaIcons} />
+            </Link>
+            <Link href='https://twitter.com/bodunrindavid'>
+              <TwitterIcon className={styles.socialMediaIcons} />
+            </Link>
+            <Link href='https://www.linkedin.com/in/david-bodunrin-oluwaseun/'>
+              <LinkedinIcon className={styles.socialMediaIcons} />
+            </Link>
           </div>
         </section>
       </div>
