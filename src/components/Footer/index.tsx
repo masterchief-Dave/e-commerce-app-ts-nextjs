@@ -31,7 +31,7 @@ export const Footer = (props: Props) => {
           <div className='order-2 w-full space-y-8'>
             <h4 className={styles.footerHeader}>Newsletter</h4>
             <form>
-              <div className='flex w-full items-center gap-x-4 text-[1.6rem] lg:w-[40rem] lg:text-[1.2rem]'>
+              <div className='flex w-full items-center gap-x-4 text-[1.6rem] lg:w-[45rem] lg:text-[1.2rem]'>
                 <Input
                   type='text'
                   placeholder='email'
