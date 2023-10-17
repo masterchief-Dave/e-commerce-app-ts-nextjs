@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import useSWR from 'swr'
 import Head from 'next/head'
+import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
@@ -88,13 +89,22 @@ export default function Home() {
             <div className='col-span-full mx-auto grid w-full grid-cols-12'>
               <div className='col-start-2 col-end-12 space-y-12'>
                 <section>
-                  <h2 className='mb-8  text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
+                  <h2 className='mb-8 text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
                     Product Categories
                   </h2>
-                  <div className='flex flex-col items-center justify-between gap-8 lg:flex-row lg:flex-wrap'>
+                  <div className='flex flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12'>
                     <CategoryCard data={electronicsData} />
                     <CategoryCard data={computerData} />
                     <CategoryCard data={gamingData} />
+
+                    {/* show this section only in the lg screen size */}
+                    <div className='hidden lg:block lg:space-y-4 xl:hidden'>
+                      <h3 className='font-semibold text-[2rem] text-center'>Browse our Category</h3>
+                      <p className='text-[1.6rem] font-normal text-center text-primary-grey-100'>Discover endless possibilities. Explore our diverse categories now.</p>
+                      <div className='flex items-center justify-center'>
+                      <ShoppingCartIcon className='text-primary-blue-300 h-16 w-16'/>
+                      </div>
+                    </div>
                   </div>
                 </section>
 
