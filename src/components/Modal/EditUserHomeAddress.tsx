@@ -1,5 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { PencilIcon } from 'lucide-react'
+
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 
@@ -43,7 +45,7 @@ export default function EditUserAddressModal({ state, setState }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-25 blur-md backdrop-blur-sm" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto font-jost">
@@ -59,10 +61,11 @@ export default function EditUserAddressModal({ state, setState }: Props) {
               >
                 <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-8">
                   <Dialog.Title
-                    as="h3"
-                    className="text-4xl mb-12 font-medium leading-6 text-gray-900"
+                    as="div"
+                    className="text-4xl mb-12 font-medium leading-6 text-gray-900 flex items-center justify-between"
                   >
-                    Edit Address
+                    <h3>Edit Address</h3>
+                    <PencilIcon className='h-8 w-8'/>
                   </Dialog.Title>
                   <form className="mt-2 space-y-4 grid grid-cols-2 gap-8">
                     <div className='col-span-full'>
