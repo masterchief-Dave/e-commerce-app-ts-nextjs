@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -6,19 +7,40 @@ import {
   WalletIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
+import { useSession } from 'next-auth/react'
+// import { useRouter } from 'next/navigation'
 
 import BreadCrumb from '@/components/BreadCrumb'
 import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
+import Loader from '@/components/Loader'
 
 type Props = {
-  children: JSX.Element
+  children?: JSX.Element
+  user?: User | null
 }
 
-export const AccountLayout = ({ children }: Props) => {
+type ServerProps = {
+  user: User | null
+}
+
+export const AccountLayout = ({ children, user }: Props) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false)
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
+  const router = useRouter()
+
+  const {data: session, status} = useSession()
+
+  if(status === 'loading') {
+    return <Loader />
+  }
+
+  if (status === 'unauthenticated') {
+    router.push('/auth/login')
+    return <Loader />
+  }
+
 
   return (
     <div className='mx-auto w-full max-w-screen-2xl '>
@@ -63,7 +85,7 @@ export const SideBar = () => {
   const router = useRouter()
 
   const styles = {
-    header: `font-black text-[1.8rem]`,
+    header: `font-bold text-[1.8rem]`,
     active: `text-primary-red-100 text-[1.3rem] font-normal`,
     link: `text-[1.3rem] font-normal`,
   }
@@ -177,12 +199,3 @@ const MobileSidebar = () => {
   return <div>some code</div>
 }
 
-/**
- *   <p className='text-[1.1rem] font-semibold lg:text-[1.6rem]'>
-            Welcome, <span className='text-[1.5rem] lg:text-[2rem]'>David</span>
-          </p>
- */
-
-// when the screen is below 900 px show the hamburger icon
-// when the hamburger icon is clicked then the sidebar for dashboard should show
-// when the screen is above 900px then the hamburger icon shhould not show

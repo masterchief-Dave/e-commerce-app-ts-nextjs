@@ -19,7 +19,7 @@ const Cart = (props: Props) => {
         <Navbar />
         <main className='grid grid-cols-12  '>
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
-            <h1 className='text-[2rem] font-black uppercase'>Cart</h1>
+            <h1 className='text-[2rem] font-bold uppercase'>Cart</h1>
             {/* cart product design layout and design*/}
             {cart.length >= 1 ? <ItemInCart /> : <NoItemInCart />}
           </section>

@@ -7,7 +7,7 @@ const Addpayment = () => {
       <AccountLayout>
         <div>
           <header className='flex items-center justify-between border-b p-8'>
-            <h1 className='text-xl font-black lg:text-2xl'>
+            <h1 className='text-xl font-bold lg:text-2xl'>
               Add new Payment method
             </h1>
           </header>

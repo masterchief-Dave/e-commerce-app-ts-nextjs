@@ -10,7 +10,7 @@ const TermsAndCondition = (props: Props) => {
     <div>
       <LegalLayout>
         <div>
-          <h1 className='text-xl font-black uppercase lg:text-2xl'>
+          <h1 className='text-xl font-bold uppercase lg:text-2xl'>
             Terms And Condition
           </h1>
           <div>

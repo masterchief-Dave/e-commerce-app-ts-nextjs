@@ -20,7 +20,7 @@ const OrderSlug = (props: Props) => {
               }}
             >
               <ArrowLeftIcon className='h-6 w-6' />
-              <h1 className='text-xl font-black lg:text-2xl'>Order Details</h1>
+              <h1 className='text-xl font-bold lg:text-2xl'>Order Details</h1>
             </button>
           </header>
 

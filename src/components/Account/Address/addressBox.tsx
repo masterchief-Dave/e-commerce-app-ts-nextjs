@@ -13,7 +13,7 @@ export const AddressBox = ({ city, country, state, street, zipCode }: Props) => 
     <>
       <section>
         <header className='flex items-center justify-between border-b p-8'>
-          <h1 className='text-xl font-black lg:text-2xl'>Delivery Address</h1>
+          <h1 className='text-xl font-bold lg:text-2xl'>Delivery Address</h1>
           <Link
             href='/account/add-address'
             className='h-fit w-fit rounded-md bg-blue-500 px-4 py-2 text-[1.6rem] font-semibold text-white'

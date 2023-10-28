@@ -10,7 +10,7 @@ const Orders = () => {
       <AccountLayout>
         <div>
           <header className='border-b p-8'>
-            <h1 className='text-xl font-black lg:text-2xl'>My Orders</h1>
+            <h1 className='text-xl font-bold lg:text-2xl'>My Orders</h1>
           </header>
 
           <section className='max-h-[50rem] divide-y overflow-y-auto'>

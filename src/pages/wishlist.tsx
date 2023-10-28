@@ -19,7 +19,7 @@ const Wishlist = (props: Props) => {
         <BreadCrumb />
         <main className='grid grid-cols-12 space-y-12 py-16 min-h-screen'>
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12'>
-            <h1 className=' text-[2rem] font-black'>Wishlist</h1>
+            <h1 className=' text-[2rem] font-bold'>Wishlist</h1>
 
             <section>
               {/* <ProductCard img='' productName='' productPrice='' /> */}

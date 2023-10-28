@@ -34,7 +34,7 @@ export const OrderDetails = (props: Props) => {
             <p>0</p>
           </div>
 
-          <div className={`${styles.itemsBetween} font-black`}>
+          <div className={`${styles.itemsBetween} font-bold`}>
             <h3>Total Amount</h3>
             <p>#65,000</p>
           </div>
@@ -91,7 +91,7 @@ export const OrderDetails = (props: Props) => {
             </div>
 
             <div>
-              <h3 className='font-black'>Status</h3>
+              <h3 className='font-bold'>Status</h3>
               <button className='h-fit w-fit rounded-md bg-primary-green-200 px-4 py-2 text-[1.6rem] font-semibold text-white'>
                 Delivered
               </button>

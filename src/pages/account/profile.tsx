@@ -5,8 +5,7 @@ import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
 import axios from 'axios'
 import { getSession } from 'next-auth/react'
-import { data } from '@/globals/header'
-// import {authOptions }
+// import { data } from '@/globals/header'
 
 type Props = {
   user: User | null
@@ -28,7 +27,7 @@ const user = (props: Props) => {
       <AccountLayout>
         <div>
           <header className='flex items-center justify-between border-b p-8'>
-            <h1 className='text-xl font-black lg:text-2xl'>
+            <h1 className='text-xl font-bold lg:text-2xl'>
               Account Information
             </h1>
 

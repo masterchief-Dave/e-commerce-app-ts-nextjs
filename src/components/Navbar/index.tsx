@@ -108,7 +108,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
       <ul className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] items-center justify-between gap-x-8'>
         <li>
           <h1>
-            <Link href='/' className='text-[2rem] font-black text-white'>
+            <Link href='/' className='text-[2rem] font-bold text-white'>
               Sage - Warehouse
             </Link>
           </h1>
@@ -205,7 +205,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
       <ul className='relative flex items-center justify-between px-24'>
         <li>
           <h1>
-            <Link href='/' className='text-lg font-black text-white'>
+            <Link href='/' className='text-lg font-bold text-white'>
               Sage-Warehouse
             </Link>
           </h1>

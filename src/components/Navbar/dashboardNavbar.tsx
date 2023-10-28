@@ -31,7 +31,7 @@ export const DashboardNavbar = ({
       <ul className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] items-center justify-between gap-x-8'>
         <li>
           <Link href='/'>
-            <h1 className='text-[2rem] font-black text-white'>
+            <h1 className='text-[2rem] font-bold text-white'>
               Sage-Warehouse
             </h1>
           </Link>
