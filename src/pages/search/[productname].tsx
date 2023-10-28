@@ -10,6 +10,7 @@ import { MaterialSymbolsRemoveShoppingCart } from '@/globals/icons'
 import { ProductCard } from '@/components/Product/Card'
 import { Filter } from '@/components/Filter'
 import { Sorting } from '@/components/Filter/sorting'
+import { Pill } from '@/components/Shell/Pill'
 
 
 type Props = {
@@ -26,25 +27,29 @@ const ProductSlug = ({ products }: Props) => {
             <BreadCrumb />
           </div> */}
 
-          <section className='col-start-2 col-end-12 flex justify-end'>
-            <div className=''>
-              <Sorting />
-            </div>
-          </section>
-
           {products?.length < 1 ? <NoItemFound /> : (
             <div className='col-start-2 col-end-12 grid grid-cols-12 gap-12'>
               <div className='col-start-1 col-end-3'>
                 <Filter />
               </div>
-              <div className='col-start-3 col-end-13 grid grid-cols-5 gap-12'>
-                {products.map((product: Product): React.ReactElement => {
-                  return (
-                    <div key={product._id}>
-                      <ProductCard data={product} />
+              <div className='col-start-3 col-end-13'>
+                <section className='mb-12'>
+                  <div className='col-start-2 col-end-12 flex justify-end'>
+                    <div className=''>
+                      <Sorting />
                     </div>
-                  )
-                })}
+                  </div>
+
+                </section>
+                <section className='grid grid-cols-4 justify-items-end gap-12'>
+                  {products.map((product: Product): React.ReactElement => {
+                    return (
+                      <div key={product._id}>
+                        <ProductCard data={product} />
+                      </div>
+                    )
+                  })}
+                </section>
               </div>
             </div>
           )}
@@ -59,7 +64,7 @@ const ProductSlug = ({ products }: Props) => {
 const NoItemFound = () => {
   return (
     <div className='col-start-2 col-end-12 flex items-center justify-center w-full h-full'>
-      <div className='border rounded-2xl w-[45rem] space-y-8 p-12 shadow-sm'>
+      <div className='border rounded-2xl w-fit space-y-8 py-24 px-8 shadow-sm'>
         <div className='flex justify-center'>
           <MaterialSymbolsRemoveShoppingCart className='w-24 h-24' />
         </div>
@@ -68,6 +73,14 @@ const NoItemFound = () => {
           <h4 className='font-medium text-[2rem]'>We couldn't find what you were looking for.</h4>
           <p className='text-[1.6rem] text-center font-normal text-primary-grey-100'>Keep calm and try searching for more general terms or shop from categories below</p>
         </article>
+
+        <section className='flex items-center justify-center gap-x-4'>
+          <Pill content='apple' link='apple' />
+          <Pill content='watch' link='watch' />
+          <Pill content='usb' link='usb' />
+          <Pill content='bose' link='bose' />
+          <Pill content='samsung' link='samsung' />
+        </section>
       </div>
     </div>
   )
@@ -78,8 +91,8 @@ export default ProductSlug
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const { productname } = context.query
   let response
-  if(process.env.NODE_ENV === 'development'){
-     response = await axios.get(`http://localhost:8100/api/v1/products/search?productname=${productname}`)
+  if (process.env.NODE_ENV === 'development') {
+    response = await axios.get(`http://localhost:8100/api/v1/products/search?productname=${productname}`)
   }
 
   response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/search?productname=${productname}`)

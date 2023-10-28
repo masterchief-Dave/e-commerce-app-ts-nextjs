@@ -96,7 +96,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
   const onSubmit = ({ productName }: Search) => {
     console.log(productName)
     // i want to change to the product search page and then the product search should make use of this data to populate the page
-    router.push(`search/${productName}`)
+    router.push(`/search/${productName}`)
   }
 
   return ( 

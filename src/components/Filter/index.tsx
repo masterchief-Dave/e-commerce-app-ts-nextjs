@@ -30,7 +30,7 @@ const BrowseCategories = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold'>
+            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
               Browse Categories
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
@@ -50,7 +50,7 @@ const Price = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold'>
+            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
               Price
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
@@ -87,7 +87,7 @@ const Brand = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold'>
+            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
               Price
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
@@ -114,7 +114,7 @@ const Rating = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold'>
+            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
               Rating
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
@@ -122,6 +122,15 @@ const Rating = () => {
         </h2>
         <AccordionPanel pb={4} className='space-y-4'>
           <div className='space-y-4'>
+            <Link href='#' className='flex items-center gap-x-2 text-[1.4rem] font-medium text-primary-grey-100'>
+              <input type='radio' />
+              <label htmlFor='' className='flex items-center'>
+                {[5, 4, 3, 2, 1].map((star, index) => {
+                  return <Star className='h-8 w-8' key={index} fill='#edab56' stroke='none' />
+                })}
+              </label>
+            </Link>
+
             <Link href='#' className='flex items-center gap-x-2 text-[1.4rem] font-medium text-primary-grey-100'>
               <input type='radio' />
               <label htmlFor='' className='flex items-center'>
