@@ -78,7 +78,7 @@ const user = (props: Props) => {
           </form>
         </div>
       </AccountLayout>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

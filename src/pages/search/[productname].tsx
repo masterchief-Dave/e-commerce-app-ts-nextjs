@@ -56,24 +56,6 @@ const ProductSlug = ({ products }: Props) => {
   )
 }
 
-export default ProductSlug
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const { productname } = context.query
-  // move this code into next api route
-  const response = await axios.get(`http://localhost:8100/api/v1/products/search?productname=${productname}`)
-
-  // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${productname}`)
-  // const response = await axios.get(`http://127.0.0.1:3002/api/products/get-product/${id}`)
-  const data = await response.data
-
-  return {
-    props: {
-      products: data.data
-    }
-  }
-}
-
 const NoItemFound = () => {
   return (
     <div className='col-start-2 col-end-12 flex items-center justify-center w-full h-full'>
@@ -90,5 +72,29 @@ const NoItemFound = () => {
     </div>
   )
 }
+
+export default ProductSlug
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  const { productname } = context.query
+  let response
+  if(process.env.NODE_ENV === 'development'){
+     response = await axios.get(`http://localhost:8100/api/v1/products/search?productname=${productname}`)
+  }
+
+  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/search?productname=${productname}`)
+  // move this code into next api route
+
+  // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${productname}`)
+  // const response = await axios.get(`http://127.0.0.1:3002/api/products/get-product/${id}`)
+  const data = await response.data
+
+  return {
+    props: {
+      products: data.data
+    }
+  }
+}
+
 
 

@@ -195,7 +195,3 @@ export const SideBar = () => {
   )
 }
 
-const MobileSidebar = () => {
-  return <div>some code</div>
-}
-
