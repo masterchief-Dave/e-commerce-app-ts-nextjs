@@ -6,7 +6,8 @@
   html {
     font-size: 62.5%;
     scroll-behavior: smooth;
-    font-family: jost;
+    /* font-family: jost; */
+    font-family: rubik;
   }
 }
 

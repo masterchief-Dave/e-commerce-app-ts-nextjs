@@ -6,6 +6,7 @@ import { AccountLayout } from '@/components/Layout/Account'
 import axios from 'axios'
 import { getSession } from 'next-auth/react'
 import { data } from '@/globals/header'
+// import {authOptions }
 
 type Props = {
   user: User | null
@@ -86,6 +87,8 @@ const user = (props: Props) => {
 export default user
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+
+  // before a user can access this page check if the user has been authenticated or is authorized if there is no user session available then this page should not show to the user, and the user should be redirected back to the '/login' page 
 
   // move this code into next api route
   // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
