@@ -15,8 +15,8 @@ export const WeeklyDeals = (props: Props) => {
   const styles = {
     iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center cursor-pointer`,
     icon: `h-6 w-6 text-primary-grey-400`,
-    weeklyDealsTimeHead: `font-roboto font-bold text-[#999]`,
-    weeklyDealsTimeText: `flex text-white font-bold`,
+    weeklyDealsTimeHead: `font-bold text-[#999]`,
+    weeklyDealsTimeText: `flex text-white font-medium`,
   }
 
   const settings = {
@@ -67,7 +67,7 @@ export const WeeklyDeals = (props: Props) => {
   }
 
   return (
-    <div className='py-2 '>
+    <div className='py-2'>
       <header className='flex items-end justify-between border-b px-4 py-3 lg:items-center'>
         <div className='flex flex-col items-center gap-4 lg:flex-row'>
           <h2 className='w-full text-left text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>

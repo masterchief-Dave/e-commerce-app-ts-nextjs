@@ -26,21 +26,21 @@ export const DealCard = ({ key, data }: Props) => {
         <Image src={img} alt={name} width={1000} height={1000} />
       </div>
       <div className='space-y-4'>
-        <p className='text-base font-medium text-[#222] lg:text-[1.2rem]'>
+        <p className='text-base font-medium text-[#222] lg:text-[1.6rem]'>
           {name}
         </p>
         <div className='flex gap-1'>
-          {[0, 0, 0, 0].map((_, index: number) => {
+          {[0, 0, 0, 0, 0].map((_, index: number) => {
             return (
               <StarIcon
                 key={index}
-                className='h-4 w-4 text-primary-yellow-400'
+                className='h-6 w-6 text-primary-yellow-400'
                 fill='#ffd201'
               />
             )
           })}
         </div>
-        <div className='flex gap-4 text-xl font-bold'>
+        <div className='flex gap-4 text-[1.4rem] font-bold'>
           <p>${price}</p>
           <p className='text-primary-white-200 line-through'>${formerPrice}</p>
         </div>

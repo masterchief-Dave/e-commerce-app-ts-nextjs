@@ -13,9 +13,9 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req })
   console.log(token)
 
-  // if (!token?.user) {
-  //   return NextResponse.rewrite(new URL('/auth/login', req.url))
-  // }
+  if (!token?.user) {
+    return NextResponse.rewrite(new URL('/auth/login', req.url))
+  }
 }
 
 export const config = {
