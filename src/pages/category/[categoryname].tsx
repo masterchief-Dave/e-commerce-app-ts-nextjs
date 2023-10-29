@@ -1,31 +1,24 @@
+import React from 'react'
 import { GetServerSideProps } from 'next'
 import axios from 'axios'
 
-import { Layout } from '@/components/Layout'
-// import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
-import { ShoppingFixedBag } from '@/components/ShoppingBag'
-import { Footer } from '@/components/Footer'
-import { ProductCard } from '@/components/Product/Card'
+import { Layout } from '@/components/Layout'
+import NoItemFound from '@/components/Shell/NoItemFound'
 import { Filter } from '@/components/Filter'
 import { Sorting } from '@/components/Filter/sorting'
-import NoItemFound from '@/components/Shell/NoItemFound'
-
+import { ProductCard } from '@/components/Product/Card'
 
 type Props = {
   products: Product[]
 }
 
-const ProductSlug = ({ products }: Props) => {
+const CategorySlug: React.FC<Props> = ({ products }) => {
   return (
     <Layout>
       <section className='h-screen'>
         <Navbar />
-        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32'>
-          {/* <div className='col-span-full'>
-            <BreadCrumb />
-          </div> */}
-
+        <main className='mx-auto grid w-full grid-cols-12 space-y-12 py-32 overflow-hidden'>
           <section className='mb-12 col-start-2 col-end-12 flex justify-end'>
             <div className='col-start-2 col-end-12 flex justify-end'>
               <div className=''>
@@ -41,7 +34,7 @@ const ProductSlug = ({ products }: Props) => {
               </div>
               <div className='col-start-3 col-end-13'>
                 <section className='grid grid-cols-4 justify-items-end gap-12'>
-                  {products.map((product: Product): React.ReactElement => {
+                  {products?.map((product: Product): React.ReactElement => {
                     return (
                       <div key={product._id}>
                         <ProductCard data={product} />
@@ -53,30 +46,28 @@ const ProductSlug = ({ products }: Props) => {
             </div>
           )}
         </main>
-        <Footer />
-        <ShoppingFixedBag />
       </section>
     </Layout>
   )
 }
 
-
-export default ProductSlug
+export default CategorySlug
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const { productname } = context.query
+  const { categoryname } = context.query
   let response
 
-  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/search?productname=${productname}`)
-  // move this code into next api route
-  const data = await response.data
+  // if (process.env.NODE_ENV === 'development') {
+  //   response = await axios.get(`http://localhost:8100/api/v1/products/category?categoryname=${categoryname}`)
+  // }
+
+  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/category?categoryname=${categoryname}`)
 
   return {
     props: {
-      products: data.data
+      products: await response?.data.data
     }
   }
 }
-
 
 

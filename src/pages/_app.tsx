@@ -22,7 +22,7 @@ export default function App({
     <Provider store={store}>
       <SessionProvider session={session}>
         <ChakraProvider>
-          <div className='font-rubik'>
+          <div className='font-rubik max-w-screen-2xl mx-auto'>
             <Component {...pageProps} />
             <Toaster />
           </div>

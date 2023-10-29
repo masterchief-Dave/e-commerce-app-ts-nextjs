@@ -6,13 +6,17 @@ export const apiFeatures = (
   minReview: string,
   maxReview: string,
   minRating: string,
-  maxRating: string
+  maxRating: string,
+  productname: string,
+  categoryname: string
 ) => {
 
   const priceQuery: any = {}
   const stockQuery: any = {}
   const reviewQuery: any = {}
   const ratingQuery: any = {}
+  let searchQuery: any = {}
+  let categoryQuery: any = {}
 
   if (minPrice) {
     priceQuery.$gte = parseFloat(minPrice as string)
@@ -46,10 +50,23 @@ export const apiFeatures = (
     ratingQuery.$lte = parseFloat(maxRating as string)
   }
 
+  if(productname) {
+  // const products = await Product.find({ name: { $regex: productname, $options: 'i' } })
+  // this is the query { price: { '$gte': 2000 }, ratings: { '$gte': 4 } }
+
+    searchQuery = {$regex: productname, $options: 'i'}
+  }
+
+  if(categoryname) {
+    categoryQuery = {$regex: categoryname, $options: 'i'}
+  }
+
   return {
     priceQuery,
     stockQuery,
     reviewQuery,
-    ratingQuery
+    ratingQuery,
+    searchQuery,
+    categoryQuery
   }
 }

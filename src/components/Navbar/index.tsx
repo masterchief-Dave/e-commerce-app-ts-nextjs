@@ -105,7 +105,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
         isTop ? 'fixed top-0 right-0 z-[9999] w-full' : ''
       }`}
     >
-      <ul className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] items-center justify-between gap-x-8'>
+      <ul className='col-start-2 col-end-12 mx-auto flex w-full items-center justify-between gap-x-8'>
         <li>
           <h1>
             <Link href='/' className='text-[2rem] font-bold text-white'>

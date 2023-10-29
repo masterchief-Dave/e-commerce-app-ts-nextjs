@@ -14,7 +14,7 @@ import BreadCrumb from '@/components/BreadCrumb'
 import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
-import Loader from '@/components/Loader'
+import Loader from '@/components/Shell/Loader'
 
 type Props = {
   children?: JSX.Element

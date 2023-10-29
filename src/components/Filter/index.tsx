@@ -1,3 +1,4 @@
+import { brandCategory, priceCategory, productCategory } from '@/globals/sort'
 import {
   Accordion,
   AccordionItem,
@@ -8,6 +9,10 @@ import {
 } from '@chakra-ui/react'
 import { Star } from 'lucide-react'
 import Link from 'next/link'
+
+const styles = {
+  accoordionHeader: `text-[1.4rem] font-normal text-primary-grey-100 py-4`
+}
 
 export const Filter = () => {
   return (
@@ -30,15 +35,22 @@ const BrowseCategories = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
+            <Box as="span" flex='1' textAlign='left' className={`${styles.accoordionHeader}`}>
               Browse Categories
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4} className='text-[1.4rem] font-medium text-primary-grey-100'>
-          <Link href=''>Electronics</Link>
-        </AccordionPanel>
+        {productCategory.map(({ title, link }, idx) => {
+          return (
+            <AccordionPanel
+              pb={4}
+              className='text-[1.4rem] font-medium text-primary-grey-100'
+              key={idx}>
+              <Link href={link}>{title}</Link>
+            </AccordionPanel>
+          )
+        })}
       </AccordionItem>
     </Accordion>
   )
@@ -50,7 +62,7 @@ const Price = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
+            <Box as="span" flex='1' textAlign='left' className={`${styles.accoordionHeader}`}>
               Price
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
@@ -61,25 +73,17 @@ const Price = () => {
             return (
               <Link href='#' className='flex items-center gap-x-2 text-[1.4rem] font-medium text-primary-grey-100' key={price.id}>
                 <input type='radio' />
-                <p>{price.text}</p>
+                <p>{price.title}</p>
               </Link>
             )
           })}
-
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
   )
 }
 
-const priceCategory = [
-  { id: 1, link: ``, text: 'Under $20' },
-  { id: 2, link: ``, text: '$20 - $50' },
-  { id: 3, link: ``, text: '$50 - $100' },
-  { id: 4, link: ``, text: '$100 - $200' },
-  { id: 5, link: ``, text: '$200 - $400' },
-  { id: 6, link: ``, text: 'Above $400' }
-]
+
 
 const Brand = () => {
   return (
@@ -87,18 +91,18 @@ const Brand = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
+            <Box as="span" flex='1' textAlign='left' className={`${styles.accoordionHeader}`}>
               Price
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4} className='space-y-4'>
-          {priceCategory.map((price) => {
+          {brandCategory.map((price) => {
             return (
               <Link href='#' className='flex items-center gap-x-2 text-[1.4rem] font-medium text-primary-grey-100' key={price.id}>
                 <input type='radio' />
-                <label htmlFor=''>{price.text}</label>
+                <label htmlFor=''>{price.title}</label>
               </Link>
             )
           })}
@@ -114,7 +118,7 @@ const Rating = () => {
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box as="span" flex='1' textAlign='left' className='text-[1.8rem] font-semibold py-4'>
+            <Box as="span" flex='1' textAlign='left' className={`${styles.accoordionHeader}`}>
               Rating
             </Box>
             <AccordionIcon className='h-12 w-12' width={'12px'} height={'12px'} />
