@@ -14,6 +14,7 @@ type Props = {
 }
 
 const CategorySlug: React.FC<Props> = ({ products }) => {
+  // console.log(products)
   return (
     <Layout>
       <section className='h-screen'>
@@ -54,18 +55,34 @@ const CategorySlug: React.FC<Props> = ({ products }) => {
 export default CategorySlug
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  // console.log(context?.query)
   const { categoryname } = context.query
   let response
 
+
+  console.log('context.query', context.query)
+  // console.log((categoryname as string)?.split('&sort='))
+
+  /**
+   *      query: { categoryname: 'electronics&sort=-price' },
+    resolvedUrl: '/category/electronics%26sort%3D-price',
+    params: { categoryname: 'electronics&sort=-price' },
+
+   */
   // if (process.env.NODE_ENV === 'development') {
   //   response = await axios.get(`http://localhost:8100/api/v1/products/category?categoryname=${categoryname}`)
   // }
 
-  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/category?categoryname=${categoryname}`)
+  // {{url}}/products?keyword=apple&categoryname=laptops
+  // {{url}}/products?categoryname=laptops&sort=-price
+  // {{url}}/products?categoryname=laptops&sort=-price&sort=price
+  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products?categoryname=${categoryname}`)
+  // console.log('response.data.data', response.data.data)
+  // response = await axios.get(`http://local/host:3002/api/products/getmyproducts?minPrice=2000&minRating=4&categoryname=${categoryname?.[0]}&sort=${categoryname?.[1]}`)
 
   return {
     props: {
-      products: await response?.data.data
+      products: await response?.data.data.products
     }
   }
 }
