@@ -5,8 +5,12 @@ import { Button } from "../ui/button"
 
 export const Sorting = () => {
   const path = useRouter().asPath
-  const categoryname = path.split('/')[2]
+  const pathname = path.split('/')[1]
+  const productname = path.split('/')[2]
+  const categoryname = path.split('')[2]
   const router = useRouter()
+
+  console.log(productname)
 
 
   // /category/accessories
@@ -17,18 +21,23 @@ export const Sorting = () => {
   // {{url}}/products?categoryname=laptops&sort=-price&sort=price
 
   const sortAsc = () => {
-    // const buildpath = `/category/${categoryname}&sort=price`
+    if(pathname === 'search'){
+      const buildpath = `/search/${productname}&sort=price`
+      return router.push(buildpath)
+    }
     const buildpath = `/category/${categoryname}&sort=price`
-
     router.push(buildpath)
   }
 
   const sortDesc = () => {
+    if(pathname === 'search'){
+      const buildpath = `/search/${productname}&sort=-price`
+      return router.push(buildpath)
+    }
     const buildpath = `/category/${categoryname}&sort=-price`
     router.push(buildpath)
   }
 
-  console.log({path})
   return (
     <div className="flex items-center gap-x-2 divide-x">
       <p className="text-[1.6rem] font-medium">Sort By: </p>

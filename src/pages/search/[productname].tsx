@@ -67,13 +67,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   const { productname } = context.query
   let response
 
-  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/search?productname=${productname}`)
+  // response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/search?productname=${productname}`)
   // move this code into next api route
+  // {{url}}/products?keyword=apple&sort=-price
+  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products?keyword=${productname}`)
+
   const data = await response.data
 
   return {
     props: {
-      products: data.data
+      products: data.data.products
     }
   }
 }
