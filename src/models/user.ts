@@ -60,6 +60,10 @@ export const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address'
   }],
+  order: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Order'
+  }],
   creditCards: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'CreditCard'

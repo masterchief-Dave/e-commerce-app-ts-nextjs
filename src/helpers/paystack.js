@@ -30,6 +30,8 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
 
   const userId = session?.data?.id
 
+  console.log(userId)
+
   const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
     console.log(reference)
@@ -45,13 +47,15 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
         taxPrice: 10,
         // route to the place where u will see your order summary
       }).then((data) => {
+        console.log('the order was successful and you should be redirected now!')
         console.log(data.data)
         router.push({
-          pathname: '/order-summary',
+          pathname: '/order-summary/id',
           query: { orders: data.data.orders }
         })
       })
     } catch (err) {
+      console.log('the order was not successful and u will not be redirected yet!')
       console.log(err)
     }
 

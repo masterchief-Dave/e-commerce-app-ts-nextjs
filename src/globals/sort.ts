@@ -17,12 +17,12 @@ export const productCategory: CategoryProps[] = [
 ]
 
 export const priceCategory: CategoryProps[] = [
-  { id: 1, link: ``, title: 'Under $20' },
-  { id: 2, link: ``, title: '$20 - $50' },
-  { id: 3, link: ``, title: '$50 - $100' },
-  { id: 4, link: ``, title: '$100 - $200' },
-  { id: 5, link: ``, title: '$200 - $400' },
-  { id: 6, link: ``, title: 'Above $400' }
+  { id: 1, link: `/search/[lte]=20`, title: 'Under $20' },
+  { id: 2, link: `/search/[gt]=20&[lte]=50`, title: '$20 - $50' },
+  { id: 3, link: `/search/[gt]=50&[lte]=100`, title: '$50 - $100' },
+  { id: 4, link: `/search/[gt]=100&[lte]=200`, title: '$100 - $200' },
+  { id: 5, link: `/search/[gt]=200&[lte]=400`, title: '$200 - $400' },
+  { id: 6, link: `/search/[gt]=400`, title: 'Above $400' }
 ]
 
 export const brandCategory: CategoryProps[] = [

@@ -106,7 +106,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
 
                   <div>
                     <p className='text-[1.2rem] font-normal'>
-                      By registering for an AliExpress account, you agree that you have read and accepted our AliExpress Free Membership Agreement and <Link className='text-blue-500' href='/legal/privacy-policy'>Privacy Policy</Link>.
+                      By registering for an Sage-Warehouse account, you agree that you have read and accepted our Sage-Warehouse Free Membership Agreement and <Link className='text-blue-500' href='/legal/privacy-policy'>Privacy Policy</Link>.
                     </p>
                   </div>
                 </Dialog.Panel>

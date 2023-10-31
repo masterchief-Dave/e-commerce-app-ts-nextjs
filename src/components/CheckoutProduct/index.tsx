@@ -25,7 +25,7 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
   // @ts-ignore
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-  const { data } = useSWR(`http://localhost:8100/api/v1/products/${id}`, fetcher, { refreshInterval: 1000 })
+  const { data } = useSWR(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`, fetcher, { refreshInterval: 1000 })
 
   if (message !== undefined && message?.length > 2) {
     alert(message)

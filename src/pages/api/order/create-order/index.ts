@@ -2,8 +2,11 @@
 import { Product } from '@/models/product'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
+import { options } from '../../auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
 
 import { Order } from '@/models/order'
+import { User } from '@/models/user'
 
 type Data = {
   message: string
@@ -16,7 +19,12 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-      const session = await getSession({ req })
+
+      console.log('the code is here in the create order route')
+      // const session = await getSession({ req })
+      const session = await getServerSession(req, res, options)
+
+      console.log({session})
       const { orders, reference, userId, shippingAddress, price, taxPrice, shippingPrice } = req.body
 
       const orderProducts = await Promise.all(orders.map(async (order: Cart) => {
@@ -43,7 +51,7 @@ export default async function handler(
       // @ts-ignore
       const newOrder = await Order.create({
         shippingInfo: shippingAddress,
-        user: userId,
+        user: session?._id,
         orderItems: orderProducts,
         paymentInfo: {
           reference: reference.reference,
@@ -60,6 +68,14 @@ export default async function handler(
         createdAt: new Date()
       })
 
+      // the new order will have an id that is what i want to save in the user's document
+      console.log('user id', session?._id)
+      // @ts-ignore
+      const user = await User.findById(session?._id)
+      console.log('user', user)
+      await user.order.push(newOrder._id)
+      await user.save({validateBeforeSave: false})
+
       // I can use paystack to perhaps verify the order
       res.status(200).json({
         message: 'order created',
@@ -69,6 +85,7 @@ export default async function handler(
       console.log(err)
     }
   } else {
+    console.log('the method is not allowed')
     return res.status(405).json({ message: 'method not allowed' })
   }
 }

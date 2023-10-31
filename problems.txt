@@ -1,0 +1,2 @@
+1. I am using next-auth for authentication and authorization it turns out that next-auth updated thier package and it broke my code, it took me some time to read through thier documentation to figure the problem out.
+2.

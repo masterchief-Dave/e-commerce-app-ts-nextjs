@@ -159,6 +159,10 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 
 2. create category component where a user can filter the products based on CATEGORIES (important) (in progress)
 3. create categories page, so when user clicks on a category like electronics, it will bring out all the data related to electronics (in progress)
+4. re-create model in typescript so that i dont have to be using the @ts-ignore
+5. add the order to the user document
+6. in my single product page, if the modal comes up and i do my authentication the page will redirect me to the homepage instead of it to continue from the single product page even to the cart etc.
+7. when i make payment in the checkout page, my app does not redirect to order-confirmation successful page etc
 
 -------------
 Features
