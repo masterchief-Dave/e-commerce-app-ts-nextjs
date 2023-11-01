@@ -36,7 +36,6 @@ const ForgotPassword = (props: Props) => {
           setNotification(null)
         }, 3000)
       }
-      // console.log({ response })
     } catch (err) {
       setShowModal(false)
       setNotification('Error encountered sending mail Try again!')

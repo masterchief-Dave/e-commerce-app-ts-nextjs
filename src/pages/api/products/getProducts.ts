@@ -23,7 +23,6 @@ export default async function handler(
 
   try {
     // //{{url}}/products?page=1
-    // console.log(req.query)
     const { page } = req.query
     const products = await (
       // await axios.get(`http://localhost:8100/api/v1/products?page=${page}`)
@@ -32,7 +31,6 @@ export default async function handler(
       )
     ).data
 
-    // console.log({ products })
     res.status(200).json({
       status: 'success',
       data: {
@@ -42,8 +40,6 @@ export default async function handler(
       },
     })
   } catch (err: any) {
-    // console.log('the code is in the catch block')
-    // console.log(err.message)
     res.status(400).json({
       status: 'Error',
       message: 'Error',

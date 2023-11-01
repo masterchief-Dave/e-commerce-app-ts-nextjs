@@ -27,7 +27,6 @@ export default async function handler(
       await connectToMongoDB()
       // @ts-ignore
       const orders = await Order.find().populate('user')
-      // console.log({ orders })
 
       if (!orders) return res.status(404).json({
         message: 'No order found'

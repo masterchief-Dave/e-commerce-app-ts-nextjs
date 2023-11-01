@@ -44,7 +44,6 @@ const Register = (props: Props) => {
       confirmPassword: Yup.string().required('Confirm your password').oneOf([Yup.ref('password')], 'Passwords must be the same')
     }),
     onSubmit(values, formikHelpers) {
-      console.log('the code is here')
       handleSubmit(values)
     },
   })

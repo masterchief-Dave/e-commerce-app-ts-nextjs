@@ -10,7 +10,6 @@ export const Sorting = () => {
   const categoryname = path.split('')[2]
   const router = useRouter()
 
-  // console.log(productname)
 
 
   // /category/accessories

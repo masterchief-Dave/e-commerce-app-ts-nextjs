@@ -42,7 +42,6 @@ export const Navbar = () => {
   const { data } = useSession()
 
   const { isLoggedIn, user } = useAuth()
-  // console.log('user session data', { data })
 
   const { cart } = useCart()
 
@@ -94,16 +93,14 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
 
   // when I click outside close the dropdown
   const onSubmit = ({ productName }: Search) => {
-    console.log(productName)
     // i want to change to the product search page and then the product search should make use of this data to populate the page
     router.push(`/search/${productName}`)
   }
 
-  return ( 
+  return (
     <nav
-      className={`grid grid-cols-12 bg-primary-blue-100 py-4  ${
-        isTop ? 'fixed top-0 right-0 z-[9999] w-full' : ''
-      }`}
+      className={`grid grid-cols-12 bg-primary-blue-100 py-4  ${isTop ? 'fixed top-0 right-0 z-[9999] w-full' : ''
+        }`}
     >
       <ul className='col-start-2 col-end-12 mx-auto flex w-full items-center justify-between gap-x-8'>
         <li>
@@ -136,13 +133,13 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           ) : (
             <div className='flex items-center gap-x-8'>
               <li>
-                  <Link href='/auth/login' className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'>
-                    Login
-                  </Link>
+                <Link href='/auth/login' className='auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white'>
+                  Login
+                </Link>
               </li>
               <li className='hidden'>
-                  <Link href='/auth/register' className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
-                    Sign up
+                <Link href='/auth/register' className='auth-btn bg-primary-yellow-100 text-primary-blue-100'>
+                  Sign up
                 </Link>
               </li>
             </div>

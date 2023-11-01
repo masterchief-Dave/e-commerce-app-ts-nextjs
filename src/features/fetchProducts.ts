@@ -18,12 +18,10 @@ const productsApi = axios.create({
 
 // https://sage-warehouse-backend.onrender.com/api/v1/products
 export const fetchProducts = async (pageIndex: number): Promise<Data> => {
-  // console.log(pageIndex)
   const response = await axios.get(
     `/api/products/getProducts?page=${pageIndex}`
   )
 
-  // console.log(response.data)
 
   return response.data
 }

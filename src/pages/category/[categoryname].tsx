@@ -14,7 +14,6 @@ type Props = {
 }
 
 const CategorySlug: React.FC<Props> = ({ products }) => {
-  // console.log(products)
   return (
     <Layout>
       <section className='h-screen'>
@@ -55,12 +54,11 @@ const CategorySlug: React.FC<Props> = ({ products }) => {
 export default CategorySlug
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  // console.log(context?.query)
   const { categoryname } = context.query
   let response
 
 
-  console.log('context.query', context.query)
+  // console.log('context.query', context.query)
   // console.log((categoryname as string)?.split('&sort='))
 
   /**

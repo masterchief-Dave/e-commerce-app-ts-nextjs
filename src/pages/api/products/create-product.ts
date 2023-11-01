@@ -17,11 +17,9 @@ export default async function handler(
    * - authentication has been handled
    * - authorization: from the user session the user can check to see the role 
    */
-  // console.log('cookies', req.cookies)
   if (req.method === 'POST') {
     const session = await getSession({ req })
 
-    // console.log(req.session)
     // only an admin can create products
     res.status(200).json({ message: 'John Doe' })
 

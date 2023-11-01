@@ -31,7 +31,6 @@ export default async function handler(
 
   if (!user) return res.status(400).json({ status: 'fail', message: 'invalid or expired token' })
 
-  // console.log({ password })
   // const hashedPassword = await bcrypt.hash(password, 10)
   // console.log({ hashedPassword })
   user.password = password

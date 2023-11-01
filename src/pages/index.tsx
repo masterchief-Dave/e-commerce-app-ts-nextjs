@@ -68,7 +68,6 @@ export default function Home() {
     setPageIndex((prev) => prev + 1)
   }
 
-  // console.log({ pageIndex })
 
   return (
     <>

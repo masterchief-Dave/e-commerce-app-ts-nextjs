@@ -21,7 +21,6 @@ export default async function handler(
 
       // const session = await getSession({ req })
       // const session = await getServerSession(req)
-      // console.log({ session })
 
       // @ts-ignore
       const product = await Product.findById(id)

@@ -85,7 +85,6 @@ export const options: NextAuthOptions = {
     },
     session: async ({ session, token }) => {
       // console.log({ session, token })
-      // console.log({ token })
       const user = token.user as IUser
       let db
 
@@ -97,8 +96,6 @@ export const options: NextAuthOptions = {
         console.log('error from here, in the next-auth, no user found')
         console.log(err)
       }
-
-      // console.log({ token })
 
       // console.log({ token })
 
