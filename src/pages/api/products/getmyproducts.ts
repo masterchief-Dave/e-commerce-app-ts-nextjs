@@ -34,12 +34,10 @@ export default async function handler(
   try {
     const { minPrice, maxPrice, minStock, maxStock, minReview, maxReview, minRating, maxRating, productname, categoryname } = req.query
 
-    console.log(req.query)
-
+  
     const { priceQuery, stockQuery, reviewQuery, ratingQuery, searchQuery, categoryQuery } = apiFeatures(minPrice as string, maxPrice as string, minStock as string, maxStock as string, minReview as string, maxReview as string, minRating as string, maxRating as string, productname as string, categoryname as string)
 
-    console.log({searchQuery})
-
+  
     let query: Product = {
       price: isObjectEmpty(priceQuery) ? 0 : priceQuery,
       stock: isObjectEmpty(stockQuery) ? 0 : stockQuery,
@@ -57,18 +55,12 @@ export default async function handler(
       }
     })
 
-    console.log('this is the query', query)
-    // /api/products/getmyproducts?minPrice=2000&minRating=4&sort=-price
-    // /api/products/getmyproducts?minPrice=2000&minRating=4&productname=apple&sort=-price
-    console.log('this is the query after removing,', req.query.sort)
 
     await connectToMongoDB()
     // @ts-ignore
     const product = await Product.find(query).sort(req.query.sort)
 
-    console.log(query)
-    console.log({ product })
-
+ 
     res.end()
   } catch (err) {
     console.log(err)

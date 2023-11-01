@@ -17,9 +17,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     try {
-      console.log('the code is here')
       const id = req.query
-      console.log({ id })
       await connectToMongoDB()
 
       // @ts-ignore

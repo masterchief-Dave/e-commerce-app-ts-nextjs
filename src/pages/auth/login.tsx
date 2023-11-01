@@ -56,8 +56,7 @@ const Login = ({ myCookieValue, data }: Props) => {
       // ## new code next-auth login
 
       const loginResponse = await loginUser({ email, password })
-      console.log({ loginResponse })
-
+   
       if (loginResponse && !loginResponse.ok) {
         console.log(loginResponse.error)
       } else {

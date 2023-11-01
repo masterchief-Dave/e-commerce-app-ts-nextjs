@@ -30,11 +30,11 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
 
   const userId = session?.data?.id
 
-  console.log(userId)
+  // console.log(userId)
 
   const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference)
+    // console.log(reference)
     try {
       // `http://localhost:8100/api/v1/payment/checkout-session/${reference?.reference}`
       axios.post(`/api/order/create-order`, {
@@ -47,11 +47,11 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
         taxPrice: 10,
         // route to the place where u will see your order summary
       }).then((data) => {
-        console.log('the order was successful and you should be redirected now!')
-        console.log(data.data)
+        // console.log('the order was successful and you should be redirected now!')
+        // console.log(data.data.data._id)
         router.push({
-          pathname: '/order-summary/id',
-          query: { orders: data.data.orders }
+          pathname: `/order-summary/${data.data.data._id}`,
+          // query: { orders: data.data.orders }
         })
       })
     } catch (err) {

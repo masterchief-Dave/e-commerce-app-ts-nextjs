@@ -19,8 +19,6 @@ export default async function handler(
     try {
       const id = req.query.id
 
-      console.log('the code is here in the get product api')
-
       // const session = await getSession({ req })
       // const session = await getServerSession(req)
       // console.log({ session })

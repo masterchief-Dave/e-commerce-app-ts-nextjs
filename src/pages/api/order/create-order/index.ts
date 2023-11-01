@@ -19,12 +19,9 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-
-      console.log('the code is here in the create order route')
       // const session = await getSession({ req })
       const session = await getServerSession(req, res, options)
 
-      console.log({session})
       const { orders, reference, userId, shippingAddress, price, taxPrice, shippingPrice } = req.body
 
       const orderProducts = await Promise.all(orders.map(async (order: Cart) => {
@@ -69,12 +66,11 @@ export default async function handler(
       })
 
       // the new order will have an id that is what i want to save in the user's document
-      console.log('user id', session?._id)
+     
       // @ts-ignore
       const user = await User.findById(session?._id)
-      console.log('user', user)
       await user.order.push(newOrder._id)
-      await user.save({validateBeforeSave: false})
+      await user.save({ validateBeforeSave: false })
 
       // I can use paystack to perhaps verify the order
       res.status(200).json({

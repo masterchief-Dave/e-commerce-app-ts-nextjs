@@ -45,7 +45,7 @@ const Checkout = () => {
   const amount = totalPrice + shippingFee + taxFee
 
   // get shipping address, check to see if shipping address is present and 
-  console.log({ shippingAddress })
+  // console.log({ shippingAddress })
 
   return (
     <div>

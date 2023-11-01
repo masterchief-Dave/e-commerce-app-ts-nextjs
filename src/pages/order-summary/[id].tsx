@@ -1,9 +1,12 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
+import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Logo from 'public/assets/celebrate.svg'
+
+type Props = {}
 
 const OrderSummary = () => {
   return (
@@ -88,6 +91,17 @@ const OrderSummary = () => {
 
 export default OrderSummary
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   return {}
-// }
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  const {id} = context.query
+
+  // console.log({id})
+
+  // get the order from here and send message to notify the user in thier email
+  // const order = axios.get(`https://sagewarehouse`)
+
+  return {
+    props: {
+      
+    }
+  }
+}

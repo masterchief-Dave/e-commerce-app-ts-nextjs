@@ -20,12 +20,12 @@ export default async function handler(
   // console.log('cookies', req.cookies)
   if (req.method === 'POST') {
     const session = await getSession({ req })
-    console.log({ session })
+
     // console.log(req.session)
     // only an admin can create products
     res.status(200).json({ message: 'John Doe' })
 
-    console.log(session?.role)
+  
     if (session?.role !== 'admin') {
       return res.status(400).json({
         message: 'bad request'

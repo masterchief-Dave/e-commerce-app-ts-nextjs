@@ -26,7 +26,7 @@ export default async function handler(
       // @ts-ignore
       const orders = await Order.find({ user: session._id }).populate('user')
 
-      console.log('orders', orders)
+      // console.log('orders', orders)
       if (!orders || orders.length === 0 || orders.length < 1) {
         return res.status(200).json({
           message: 'You have not placed an order'

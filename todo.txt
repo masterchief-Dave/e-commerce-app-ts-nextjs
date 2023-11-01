@@ -163,6 +163,8 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 5. add the order to the user document
 6. in my single product page, if the modal comes up and i do my authentication the page will redirect me to the homepage instead of it to continue from the single product page even to the cart etc.
 7. when i make payment in the checkout page, my app does not redirect to order-confirmation successful page etc
+8. after making payment for an item the item is not removed from my cart
+9. create an admin cms part where they can remove users, monitor orders, create order for client, the admin part will also have web socket connection so anytime a user sends a request or makes an order the admin will be alerted and they would have to take apropriate action
 
 -------------
 Features
