@@ -221,7 +221,7 @@ declare global {
 
 declare global {
   interface IOrder {
-    id?: Types.ObjectId
+    _id?: Types.ObjectId
     cartQuantity?: number
     shippingInfo: BillingAddress
     user: User

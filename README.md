@@ -69,3 +69,40 @@ I can make use of next-auth for my authentication and continue using my express 
 it is the same idea when I make use of oauth or okta etc, since I am making use of the same database I can actually do it
 so my next-auth on the client connected to my database
 express server connected to my database
+
+```js
+import NextAuth from 'next-auth'
+import Providers from 'next-auth/providers'
+
+const options = {
+  providers: [
+  ],
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token = {
+          ...token,
+          id: user.id,
+          username: user.username,
+          accessToken: user.accessToken,
+        }
+      }
+      return token
+    },
+    session: async ({ session, token }) => {
+      if (token) {
+        session.user = {
+          id: token.id,
+          username: token.username,
+        }
+        session.accessToken = token.accessToken
+      }
+      return session
+    },
+  },
+  secret: 'your-secret-key',
+  session: {
+    jwt: true,
+  },
+}
+```

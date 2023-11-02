@@ -1,18 +1,29 @@
+import { fetchOrder } from '@/utils/fetchOrder'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
+import { getToken } from 'next-auth/jwt'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import Logo from 'public/assets/celebrate.svg'
 
-type Props = {}
+type Props = {
+  order: IOrder
+}
 
-const OrderSummary = () => {
+const OrderSummary = ({ order }: Props) => {
+  const total = Number(order.totalPrice.toFixed(2))
+  const tax = Number(order.taxPrice.toFixed(2))
+  const shipping = Number(order.shippingPrice.toFixed(2))
+  const result = total - tax - shipping
+
+  const trackingId: string = order._id as unknown as string
+
   return (
     <div className=''>
       <Head>
-        <title>Thank you! - Apple</title>
+        <title>Thank you! - Sage-Warehouse</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='grid grid-cols-12 min-h-screen'>
@@ -26,7 +37,7 @@ const OrderSummary = () => {
               <h3 className='font-medium text-[1.6rem]'>Thank You!</h3>
               <div className='flex items-center gap-x-2'>
                 <p className='font-medium text-[1.6rem]'>Order</p>
-                <span className='text-[1.6rem] text-primary-grey-300'>#</span>
+                <span className='text-[1.6rem] text-primary-grey-300'>#{order.paymentInfo.reference}</span>
               </div>
             </div>
           </div>
@@ -36,9 +47,9 @@ const OrderSummary = () => {
               <h3 className='text-[1.6rem] text-primary-grey-300 font-medium'>Your order is confirmed</h3>
               <p className='text-[1.6rem]'>We've accepted your order, and we're getting it ready. Come back to this page for updates on your shipment status.</p>
             </div>
-            <div className='py-6 space-y-4'>
-              <h3 className='text-[1.6rem] font-medium text-primary-grey-300'>Order Tracking Number</h3>
-              <p></p>
+            <div className='py-6 space-y-4 text-[1.6rem]'>
+              <h3 className='font-medium text-primary-grey-300'>Order Tracking Number</h3>
+              <p>{trackingId}</p>
             </div>
           </div>
 
@@ -64,22 +75,24 @@ const OrderSummary = () => {
             <article className='mb-[5rem] space-y-8'>
               <div className='border-b space-y-3 py-4'>
                 <div className='text-former-price-text flex justify-between'>
-                  <p className='text-base lg:text-[1.2rem] text-primary-grey-300'>Original Price</p>
-                  <p className='text-[1.5rem] font-semibold'> ${200.00}</p>
+                  <p className='text-[1.4rem] text-primary-grey-300'>Original Price</p>
+                  <p className='text-[1.5rem] font-semibold'>
+                    ${result.toFixed(2)}
+                  </p>
                 </div>
                 <div className='flex items-center justify-between'>
-                  <p className='text-base lg:text-[1.2rem] text-primary-grey-300'>Shipping</p>
-                  <p className='text-[1.5rem] font-semibold'>${200.00}</p>
+                  <p className='text-[1.4rem] text-primary-grey-300'>Shipping</p>
+                  <p className='text-[1.5rem] font-semibold'>${order.shippingPrice.toFixed(2)}</p>
                 </div>
                 <div className='flex items-center justify-between'>
-                  <p className='text-base lg:text-[1.2rem] text-primary-grey-300'>Tax</p>
-                  <p className='text-[1.5rem] font-semibold'>${200.00}</p>
+                  <p className='text-[1.4rem] text-primary-grey-300'>Tax</p>
+                  <p className='text-[1.5rem] font-semibold'>${order.taxPrice.toFixed(2)}</p>
                 </div>
               </div>
 
               <div className='flex justify-between'>
-                <p className='text-base lg:text-[1.2rem] text-primary-grey-300'>Total</p>
-                <p className='text-[1.5rem] font-semibold'>200.00</p>
+                <p className='text-[1.4rem] text-primary-grey-300'>Total</p>
+                <p className='text-[1.5rem] font-semibold'>${order.totalPrice.toFixed(2)}</p>
               </div>
             </article>
           </div>
@@ -92,16 +105,12 @@ const OrderSummary = () => {
 export default OrderSummary
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const {id} = context.query
-
-  // console.log({id})
-
-  // get the order from here and send message to notify the user in thier email
-  // const order = axios.get(`https://sagewarehouse`)
+  const { id } = context.query
+  const order = await fetchOrder(id as string, context.req)
 
   return {
     props: {
-      
+      order: order
     }
   }
 }

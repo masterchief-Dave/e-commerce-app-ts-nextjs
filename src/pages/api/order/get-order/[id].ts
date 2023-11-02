@@ -4,6 +4,8 @@ import { getSession } from 'next-auth/react'
 
 import { Order } from '@/models/order'
 import { connectToMongoDB } from '@/lib/mongodb'
+import { getServerSession } from 'next-auth'
+import { options } from '../../auth/[...nextauth]'
 
 type Data = {
   message: string
@@ -17,8 +19,12 @@ export default async function handler(
   if (req.method === 'GET') {
     try {
       const session = await getSession({ req })
+      // const session = await getServerSession(req, res, options)
 
-      if (!session?.role || session.role !== 'admin') {
+      console.log(session)
+
+
+      if (!session?.role) {
         return res.status(400).json({
           message: `You do not have permission to access this route`
         })

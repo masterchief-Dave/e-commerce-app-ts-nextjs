@@ -21,7 +21,8 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
 
   const handleGoogleAuth = async () => {
     await signIn('google', {
-      callbackUrl: '/checkout'
+      callbackUrl: '/checkout',
+      redirect: true
     })
   }
 
@@ -30,7 +31,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
       <div className="fixed inset-0 flex items-center justify-center" />
 
       <Transition appear show={openModal} as={Fragment}>
-        <Dialog as="div" className="relative z-10 text-[1.6rem] font-jost" onClose={handleCloseModal}>
+        <Dialog as="div" className="relative z-10 text-[1.6rem] font-rubik" onClose={handleCloseModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

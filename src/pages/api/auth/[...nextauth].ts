@@ -12,30 +12,30 @@ import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@/utils/config'
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-    id: 'credentials',
-    name: 'credentials-login',
-    credentials: {
-      email: { label: 'Email', type: 'text' },
-      password: { label: 'Password', type: 'password' }
-    },
-    async authorize(credentials, req) {
-      await connectToMongoDB().catch(err => { throw new Error(err) })
+      id: 'credentials',
+      name: 'credentials-login',
+      credentials: {
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' }
+      },
+      async authorize(credentials, req) {
+        await connectToMongoDB().catch(err => { throw new Error(err) })
 
-      // @ts-ignore
-      const user = await User.findOne({
-        email: credentials?.email
-      }).select('+password')
-      if (!user) {
-        throw new Error('Invalid credentials')
-      }
+        // @ts-ignore
+        const user = await User.findOne({
+          email: credentials?.email
+        }).select('+password')
+        if (!user) {
+          throw new Error('Invalid credentials')
+        }
 
-      const isPasswordCorrect = await compare(credentials?.password!, user.password)
-      if (!isPasswordCorrect) {
-        throw new Error('Invalid credentials')
-      }
+        const isPasswordCorrect = await compare(credentials?.password!, user.password)
+        if (!isPasswordCorrect) {
+          throw new Error('Invalid credentials')
+        }
 
-      return user
-    },
+        return user
+      },
     }),
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID as string,
@@ -49,8 +49,9 @@ export const options: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
-    maxAge: 60 * 60 * 24
+    maxAge: 60 * 60 * 24,
   },
+  secret: 'MY_NAME_IS_DAVID_AND_THIS_IS_IS_14227273___NIIWIWJames&Johnarebrother_never_the_same_security_not-test',
   callbacks: {
     async signIn({ user, account, profile }) {
 
