@@ -142,6 +142,7 @@ if i export my next.js app it becomes a static file and I am taking out some of 
 problems I am facing with using next.js api, 
 1. I am having challenge creating express.js kind of middleware in next.js it seems I may have to write the logic for something like authController.protect in all the apis in my next.js api that needs it
 2. global error management, I am not really sure how to go about this one sef,
+3. serverless function timeout with error 504, like in the case of my create order it takes time and then vercel will just time out this is one of the things i dont like about serverless functions it takes 5s to timeout 
 
 adavantages
 1. I don't forfeit next.js features
@@ -160,11 +161,15 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 2. create category component where a user can filter the products based on CATEGORIES (important) (in progress)
 3. create categories page, so when user clicks on a category like electronics, it will bring out all the data related to electronics (in progress)
 4. re-create model in typescript so that i dont have to be using the @ts-ignore
-5. add the order to the user document
+5. add the order to the user document (done)
 6. in my single product page, if the modal comes up and i do my authentication the page will redirect me to the homepage instead of it to continue from the single product page even to the cart etc.
-7. when i make payment in the checkout page, my app does not redirect to order-confirmation successful page etc
-8. after making payment for an item the item is not removed from my cart
+7. when i make payment in the checkout page, my app does not redirect to order-confirmation successful page (done)
+8. after making payment for an item the item is not removed from my cart (done) 
 9. create an admin cms part where they can remove users, monitor orders, create order for client, the admin part will also have web socket connection so anytime a user sends a request or makes an order the admin will be alerted and they would have to take apropriate action
+10. if a user is not logged in they will still be able to buy something if the go to the cart and then proceed to checkout 
+11. in the user dashboard the user name is only on the firstname, there is no firstname
+12. the order page does not show the user order yet
+13. there are no reviews or ways to add reviews
 
 -------------
 Features
