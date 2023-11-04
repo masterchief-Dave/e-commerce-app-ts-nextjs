@@ -1,27 +1,42 @@
+import axios from 'axios'
+import { useEffect, useRef, useState } from 'react'
 import { useFormik } from 'formik'
 import { GetServerSideProps } from 'next'
-
-import { Footer } from '@/components/Footer'
-import { AccountLayout } from '@/components/Layout/Account'
-import axios from 'axios'
 import { getSession } from 'next-auth/react'
+
+import { AccountLayout } from '@/components/Layout/Account'
 // import { data } from '@/globals/header'
 
-type Props = {
-  user: User | null
-}
+type Props = Pick<User, "user">
 
 interface FormData { }
 
 const user = (props: Props) => {
+  const [firstName, lastName] = props.user.name.split(' ')
+  const [canEdit, setCanEdit] = useState<boolean>(false)
+  const oldPasswordRef = useRef<HTMLInputElement | null>(null)
+
   const styles = {
     label: `block text-[1.6rem] text-primary-grey-100 font-medium`,
     input: `p-4 w-full px-4 text-xl lg:text-[1.6rem] border font-medium`,
-    editBtn: `px-8 py-2 lg:text-[1.6rem] bg-primary-blue-300 font-medium text-xl text-white rounded-md`,
+    editBtn: `px-8 py-2 lg:text-[1.6rem] font-medium text-xl text-white rounded-md`,
   }
+
+  const handleCanEditToggle = () => {
+    setCanEdit(!canEdit)
+  }
+
+  useEffect(() => {
+    if (canEdit && oldPasswordRef.current) {
+      oldPasswordRef?.current.focus()
+    }
+
+  }, [canEdit])
+
 
   // const formik = useFormik({}) 
   // fetch the user from the backend
+
   return (
     <div>
       <AccountLayout>
@@ -31,7 +46,7 @@ const user = (props: Props) => {
               Account Information
             </h1>
 
-            <button className={styles.editBtn}>Edit</button>
+            <button className={`${styles.editBtn} ${canEdit ? 'bg-primary-blue-300' : 'bg-slate-500'}`} onClick={handleCanEditToggle}>Edit</button>
           </header>
           <form action='' className='space-y-4 p-8'>
             <div>
@@ -39,14 +54,14 @@ const user = (props: Props) => {
                 {' '}
                 Firstname{' '}
               </label>
-              <input className={styles.input} placeholder={props.user?.user.name} />
+              <input className={styles.input} placeholder={firstName} disabled />
             </div>
 
             <div>
               <label htmlFor='lastname' className={styles.label}>
                 Last name{' '}
               </label>
-              <input className={styles.input} />
+              <input className={styles.input} placeholder={lastName} disabled />
             </div>
 
             <div>
@@ -54,15 +69,15 @@ const user = (props: Props) => {
                 {' '}
                 Email Address{' '}
               </label>
-              <input className={styles.input} placeholder={props.user?.user.email} />
+              <input className={styles.input} placeholder={props.user?.email} disabled />
             </div>
 
             <div>
-              <label htmlFor='newPassword' className={styles.label}>
+              <label htmlFor='oldPassword' className={styles.label}>
                 {' '}
-                New Password
+                Old Password
               </label>
-              <input className={styles.input} placeholder='********' />
+              <input className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`} disabled={canEdit ? false: true } placeholder='********'  ref={oldPasswordRef} />
             </div>
 
             <div>
@@ -70,7 +85,7 @@ const user = (props: Props) => {
                 {' '}
                 Confirm Password{' '}
               </label>
-              <input className={styles.input} placeholder='********' />
+              <input className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`} placeholder='********' disabled={canEdit ? false : true} />
             </div>
             <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
               Save changes
@@ -117,7 +132,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
   return {
     props: {
-      user: data
+      user: data.user
     }
   }
 }
