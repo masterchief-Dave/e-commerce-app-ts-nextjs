@@ -2,7 +2,7 @@ import { Types } from "mongoose"
 import { string } from "yup"
 
 
-declare global { 
+declare global {
   interface Header {
     id: number
     title: string
@@ -26,7 +26,7 @@ declare global {
   }
 }
 
-declare global { 
+declare global {
   interface ICategory {
     img: string | StaticImageData
     name: string
@@ -281,3 +281,11 @@ interface Register {
     "passwordChangedAt": "2022/11/20"
 }
  */
+
+declare global {
+
+  type UpdatePasswordProps = {
+    password: string
+    newPassword: string
+  }
+}

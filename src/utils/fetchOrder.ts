@@ -1,4 +1,6 @@
-export const fetchOrder = async (id: string, req:any) => {
+import { NextApiRequest } from "next"
+
+export const fetchOrder = async (id: string, req:NextApiRequest) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/get-order/${id}`, {
     headers: {
       cookie: req.headers.cookie || ''

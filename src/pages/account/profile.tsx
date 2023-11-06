@@ -3,8 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useFormik } from 'formik'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
+import * as Yup from 'yup'
 
 import { AccountLayout } from '@/components/Layout/Account'
+import { getUpdatePassword } from '@/utils/updatePassword'
+import toast from 'react-hot-toast'
 // import { data } from '@/globals/header'
 
 type Props = Pick<User, "user">
@@ -34,8 +37,33 @@ const user = (props: Props) => {
   }, [canEdit])
 
 
-  // const formik = useFormik({}) 
-  // fetch the user from the backend
+  const formik = useFormik<UpdatePasswordProps>({
+    initialValues: {
+      password: '',
+      newPassword: ''
+    },
+    validationSchema: Yup.object({
+      password: Yup.string().required().min(5),
+      newPassword: Yup.string().required().min(5)
+    }),
+    onSubmit: async (values) => {
+      // update the password from here
+      const data = {
+        password: values.password,
+        newPassword: values.newPassword
+      }
+
+      try {
+        const response = await getUpdatePassword({ data })
+        if(response.status === 200) {
+          toast.success('Password updated')
+        }
+      } catch (err) {
+        toast.error('user info could not be updated')
+      }
+      // console.log(response)
+    }
+  })
 
   return (
     <div>
@@ -48,7 +76,7 @@ const user = (props: Props) => {
 
             <button className={`${styles.editBtn} ${canEdit ? 'bg-primary-blue-300' : 'bg-slate-500'}`} onClick={handleCanEditToggle}>Edit</button>
           </header>
-          <form action='' className='space-y-4 p-8'>
+          <form action='' className='space-y-4 p-8' onSubmit={formik.handleSubmit}>
             <div>
               <label htmlFor='firstname' className={styles.label}>
                 {' '}
@@ -77,18 +105,37 @@ const user = (props: Props) => {
                 {' '}
                 Old Password
               </label>
-              <input className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`} disabled={canEdit ? false: true } placeholder='********'  ref={oldPasswordRef} />
+              <input
+                type='password'
+                className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`}
+                disabled={canEdit ? false : true}
+                placeholder='********'
+                ref={oldPasswordRef}
+                onChange={formik.handleChange}
+                name='password'
+                value={formik.values.password}
+              />
+              {formik.errors.password && <span>{formik.errors.password}</span>}
             </div>
 
             <div>
               <label htmlFor='confirmPassword' className={styles.label}>
                 {' '}
-                Confirm Password{' '}
+                New Password{' '}
               </label>
-              <input className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`} placeholder='********' disabled={canEdit ? false : true} />
+              <input
+                type='password'
+                className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`}
+                placeholder='********'
+                disabled={canEdit ? false : true}
+                name='newPassword'
+                onChange={formik.handleChange}
+                value={formik.values.newPassword}
+              />
+              {formik.errors.newPassword && <span>{formik.errors.newPassword}</span>}
             </div>
             <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
-              Save changes
+              Update Information
             </button>
           </form>
         </div>
@@ -116,7 +163,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
       }
     }
   }
-  //note: i cannot use localhost here because server side props does not run on the browser but on the server side
+  //note: i cannot use localhost here because server side props does not run on the browser but on the server side, what i have to do is move this code to util and call it from there
   try {
     const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/user/profile/${session._id}`)
     data = await response.data
