@@ -4,15 +4,14 @@ import { useFormik } from 'formik'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import * as Yup from 'yup'
+import toast from 'react-hot-toast'
 
 import { AccountLayout } from '@/components/Layout/Account'
 import { getUpdatePassword } from '@/utils/updatePassword'
-import toast from 'react-hot-toast'
-// import { data } from '@/globals/header'
+import { fetchDataFromExpressServer } from '@/utils/fetchOrder'
+import { getToken } from 'next-auth/jwt'
 
 type Props = Pick<User, "user">
-
-interface FormData { }
 
 const user = (props: Props) => {
   const [firstName, lastName] = props.user.name.split(' ')
@@ -55,7 +54,7 @@ const user = (props: Props) => {
 
       try {
         const response = await getUpdatePassword({ data })
-        if(response.status === 200) {
+        if (response.status === 200) {
           toast.success('Password updated')
         }
       } catch (err) {
@@ -167,6 +166,17 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   try {
     const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/user/profile/${session._id}`)
     data = await response.data
+
+    const token = await getToken({
+      req: context.req,
+      secret: process.env.JWT_SECRET,
+      encryption: true
+    })
+
+    console.log({token})
+
+    const expressApiOrders = await fetchDataFromExpressServer(context.req, token!.accessToken as string)
+
 
   } catch (err) {
     // console.log(err)

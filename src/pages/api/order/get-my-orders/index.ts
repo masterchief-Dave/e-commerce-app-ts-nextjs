@@ -21,7 +21,7 @@ export default async function handler(
       if (!session) {
         return res.status(400).json({ message: 'Sign in to access this resource' })
       }
-      await connectToMongoDB()
+      // await connectToMongoDB()
       // get all the orders where the user id is equal to === session._id
       // @ts-ignore
       const orders = await Order.find({ user: session._id }).populate('user')

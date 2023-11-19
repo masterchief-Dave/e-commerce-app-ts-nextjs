@@ -170,6 +170,7 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 11. in the user dashboard the user name is only on the firstname, there is no firstname (done)
 12. the order page does not show the user order yet
 13. there are no reviews or ways to add reviews
+14. user password can be updated (done)
 
 -------------
 Features

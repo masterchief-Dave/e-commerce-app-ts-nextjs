@@ -21,15 +21,12 @@ export default async function handler(
       const session = await getSession({ req })
       // const session = await getServerSession(req, res, options)
 
-      console.log(session)
-
-
       if (!session?.role) {
         return res.status(400).json({
           message: `You do not have permission to access this route`
         })
       }
-      await connectToMongoDB()
+      // await connectToMongoDB()
 
       // @ts-ignore
       const order = await Order.findById(req.query.id).populate('user')

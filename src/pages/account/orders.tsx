@@ -1,10 +1,17 @@
 import { useState } from 'react'
 import { Order } from '@/components/Account/Order/order'
 import { AccountLayout } from '@/components/Layout/Account'
+import { GetServerSideProps } from 'next'
+import { fetchDataFromExpressServer, fetchOrder } from '@/utils/fetchOrder'
 
-const Orders = () => {
+type Props = {
+  orders: IOrder[] | null
+}
+
+const Orders = ({orders}: Props) => {
   const [step, setStep] = useState(1)
-
+  console.log(orders)
+ 
   return (
     <div>
       <AccountLayout>
@@ -14,9 +21,12 @@ const Orders = () => {
           </header>
 
           <section className='max-h-[50rem] divide-y overflow-y-auto'>
-            <Order />
-            <Order />
-            <Order />
+            {/* {orders?.map((order) => {
+              // console.log({order})
+              return  <Order />
+            })}
+            */}
+         
           </section>
         </div>
       </AccountLayout>
@@ -25,3 +35,23 @@ const Orders = () => {
 }
 
 export default Orders
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  try{
+    const orders = await fetchOrder(context.req)
+    
+    return {
+      props: {
+        orders: orders
+      }
+    }
+
+    // api calling express server
+  
+  }catch(err){
+    return {
+      props: {
+        orders: null
+      }
+    }
+  }
+}

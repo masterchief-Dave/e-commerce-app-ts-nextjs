@@ -51,8 +51,6 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
         // route to the place where u will see your order summary
       }).then((data) => {
         //  remove the item from the cart
-        console.log('orders made', orders)
-        console.log('get the product id', data)
         orders.forEach((order) => {
           dispatch(removeItem({
             id: order._id

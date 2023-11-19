@@ -38,6 +38,7 @@ export const options: NextAuthOptions = {
       },
     }),
     GoogleProvider({
+      
       clientId: GOOGLE_CLIENT_ID as string,
       clientSecret: GOOGLE_CLIENT_SECRET as string,
       // callbackUrl: 'http://localhost:3002/api/auth/callback/google'
@@ -52,6 +53,7 @@ export const options: NextAuthOptions = {
     maxAge: 60 * 60 * 24,
   },
   secret: 'MY_NAME_IS_DAVID_AND_THIS_IS_IS_14227273___NIIWIWJames&Johnarebrother_never_the_same_security_not-test',
+  
   callbacks: {
     async signIn({ user, account, profile }) {
 

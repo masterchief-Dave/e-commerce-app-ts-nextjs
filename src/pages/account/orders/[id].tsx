@@ -1,9 +1,14 @@
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+
 import { OrderDetails } from '@/components/Account/Order/orderDetails'
 import { AccountLayout } from '@/components/Layout/Account'
-import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { useRouter } from 'next/router'
+import { fetchOrder } from '@/utils/fetchOrder'
 
-type Props = {}
+type Props = {
+  order: IOrder[] | null
+}
 
 const OrderSlug = (props: Props) => {
   const router = useRouter()
@@ -34,3 +39,21 @@ const OrderSlug = (props: Props) => {
 }
 
 export default OrderSlug
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  try {
+    const data = await fetchOrder(context.req)
+
+    return {
+      props: {
+        order: data
+      }
+    }
+  } catch (err) {
+    return {
+      props: {
+        order: null
+      }
+    }
+  }
+}

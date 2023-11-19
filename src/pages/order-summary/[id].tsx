@@ -1,8 +1,7 @@
-import { fetchOrder } from '@/utils/fetchOrder'
+import { fetchUserOrder } from '@/utils/fetchUserOrder'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import { getToken } from 'next-auth/jwt'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -106,7 +105,7 @@ export default OrderSummary
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const { id } = context.query
-  const order = await fetchOrder(id as string, context.req)
+  const order = await fetchUserOrder(id as string, context.req)
 
   return {
     props: {
