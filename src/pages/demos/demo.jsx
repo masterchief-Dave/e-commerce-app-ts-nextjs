@@ -9,8 +9,12 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/app/store'
 import { Button } from '@chakra-ui/react'
 import { UserAccountDropdown } from '@/components/Dropdown/Account'
+import { useSession } from 'next-auth/react'
 
 const NavigationMenuDemoExample = () => {
+  const session = useSession()
+
+  // console.log(session)
 
   const totalPrice = useSelector((state) => {
     return selectorCartTotalAmount(state)
@@ -30,10 +34,26 @@ const NavigationMenuDemoExample = () => {
       // api/products/getmyproducts?maxPrice=2000&minStock=10&minRating=4&sort=price
 
       // to test => /api/products/getmyproducts?minPrice=2000&minRating=4&productname=apple&sort=-price
-      const response = await axios.get('/api/products/getmyproducts?minPrice=2000&minRating=4&sort=-price')
+      // const response = await axios.get('/api/products/getmyproducts?minPrice=2000&minRating=4&sort=-price')
       // const response = await axios.get('/api/products/getmyproducts?minPrice=2000&minRating=4&sort=-price')
       // http://localhost:3002/api/products/getmyproducts?maxPrice=2000&minStock=10&minRating=4&sort=-price
-      console.log(response)
+
+      const accessToken = `ya29.a0AfB_byCdDDT25J_Usm3mOw-DGdCzbP9OAKEYjozZtCN-Wvw-eOJp6qa81EFdNZzYzHiLUYwL-FL0j-bcIKK1s1Eex2bWYl05L21wMKFF4IJ-esElUClqZRRl4_o--KhdFiSIFO_DPT0jCFafq_1AJauWIQXb22dm0O9naCgYKAY4SARESFQHGX2MiNBhkGGxcv-3x18fy5jc_3g0171`
+
+      // const response = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${accessToken}`)
+
+      // console.log(response)
+
+      // this is the code that works (please note)
+      const userResponse = await axios.get(
+        'https://www.googleapis.com/oauth2/v3/userinfo',
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      )
+      console.log(userResponse)
     } catch (err) {
       console.log(err)
     }

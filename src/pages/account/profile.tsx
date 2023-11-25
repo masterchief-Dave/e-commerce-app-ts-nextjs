@@ -153,6 +153,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   // move this code into next api route
   // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
   const session = await getSession({ req: context.req })
+  // console.log(session)
   let data
 
   if (!session) {
@@ -170,10 +171,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     const token = await getToken({
       req: context.req,
       secret: process.env.JWT_SECRET,
-      encryption: true
     })
 
-    console.log({token})
+    console.log({ token })
 
     const expressApiOrders = await fetchDataFromExpressServer(context.req, token!.accessToken as string)
 

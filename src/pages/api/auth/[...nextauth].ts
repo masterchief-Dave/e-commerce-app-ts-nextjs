@@ -7,7 +7,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { connectToMongoDB } from '@/lib/mongodb'
 import { User } from '@/models/user'
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from '@/utils/config'
-
+import jwt from 'jsonwebtoken'
 
 export const options: NextAuthOptions = {
   providers: [
@@ -38,7 +38,7 @@ export const options: NextAuthOptions = {
       },
     }),
     GoogleProvider({
-      
+
       clientId: GOOGLE_CLIENT_ID as string,
       clientSecret: GOOGLE_CLIENT_SECRET as string,
       // callbackUrl: 'http://localhost:3002/api/auth/callback/google'
@@ -53,7 +53,6 @@ export const options: NextAuthOptions = {
     maxAge: 60 * 60 * 24,
   },
   secret: 'MY_NAME_IS_DAVID_AND_THIS_IS_IS_14227273___NIIWIWJames&Johnarebrother_never_the_same_security_not-test',
-  
   callbacks: {
     async signIn({ user, account, profile }) {
 
@@ -84,6 +83,22 @@ export const options: NextAuthOptions = {
         token.accessToken = account && account.access_token
       }
 
+      if (user) {
+        token.id = user.id
+        // create my token here 
+        // token.accessToken = 'David Bodunrin Oluwaseun new'
+        token.sage = 'new'
+        const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: process.env.JWT_EXPIRES })
+        token.accessToken = accessToken
+      }
+
+      // console.log({ session })
+      // console.log({ profile })
+      // console.log({ account })
+      // console.log({ user })
+      // console.log({ token })
+
+
       return token
     },
     session: async ({ session, token }) => {
@@ -110,6 +125,7 @@ export const options: NextAuthOptions = {
       session.photo = user?.avatar ? user.avatar : token?.image as string
       session.googleId = user.id as string
       session._id = db._id
+      session.user.token = token.accessToken
       // session.expires = 30 * 1000
       return session
     }

@@ -19,6 +19,9 @@ declare module 'next-auth' {
     token: string
     photo: string
     googleId: string
+    user: {
+      token?: accessToken
+    } & DefaultSession["user"]
   }
 }
 
