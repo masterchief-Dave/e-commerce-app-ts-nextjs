@@ -13,7 +13,7 @@ import { getToken } from 'next-auth/jwt'
 
 type Props = Pick<User, "user">
 
-const user = (props: Props) => {
+const User = (props: Props) => {
   const [firstName, lastName] = props.user.name.split(' ')
   const [canEdit, setCanEdit] = useState<boolean>(false)
   const oldPasswordRef = useRef<HTMLInputElement | null>(null)
@@ -144,7 +144,7 @@ const user = (props: Props) => {
   )
 }
 
-export default user
+export default User
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 
