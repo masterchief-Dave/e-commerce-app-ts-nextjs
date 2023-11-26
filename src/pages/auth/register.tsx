@@ -66,7 +66,7 @@ const Register = (props: Props) => {
 
         if (loginResponse && !loginResponse.ok) {
           console.log(loginResponse.error)
-          throw new Error(loginResponse.error)
+          throw new Error(loginResponse?.error!)
         } else {
           router.push('/')
         }
@@ -82,86 +82,86 @@ const Register = (props: Props) => {
   return (
     <AuthLayout>
       <section className='h-fit w-full grid grid-cols-12'>
-          <form
-            action=''
+        <form
+          action=''
           className='col-start-2 col-end-12 space-y-4 rounded-xl border py-4 px-6'
-            onSubmit={formik.handleSubmit}
-          >
+          onSubmit={formik.handleSubmit}
+        >
           <header className='mb-8'>
             <h1 className='text-left text-[2rem] font-semibold'>Sign up</h1>
             <p className='text-[1.6rem] text-primary-grey-100 font-normal'>Choose your preferred sign in method</p>
-            </header>
+          </header>
 
-            <div>
-              <label htmlFor='fullName' className={styles.label}>
-                Full Name
-              </label>
-              <Input
-                type='text'
-                placeholder='Firstname Lastname'
-                id='fullName'
-                name='name'
-                className={styles.input}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-              />
-              {formik.touched.name && formik.errors.name ? <p className='text-red-500'>{formik.errors.name}</p> : null}
-            </div>
+          <div>
+            <label htmlFor='fullName' className={styles.label}>
+              Full Name
+            </label>
+            <Input
+              type='text'
+              placeholder='Firstname Lastname'
+              id='fullName'
+              name='name'
+              className={styles.input}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+            />
+            {formik.touched.name && formik.errors.name ? <p className='text-red-500'>{formik.errors.name}</p> : null}
+          </div>
 
-            <div>
-              <label htmlFor='email' className={styles.label}>
-                Email Address
-              </label>
-              <Input
-                type='text'
-                placeholder='Email Address'
-                id='email'
-                name='email'
-                className={styles.input}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-              {formik.touched.email && formik.errors.email ? <p className='text-red-500'>{formik.errors.email}</p> : null}
+          <div>
+            <label htmlFor='email' className={styles.label}>
+              Email Address
+            </label>
+            <Input
+              type='text'
+              placeholder='Email Address'
+              id='email'
+              name='email'
+              className={styles.input}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+            />
+            {formik.touched.email && formik.errors.email ? <p className='text-red-500'>{formik.errors.email}</p> : null}
 
-            </div>
+          </div>
 
-            <div>
-              <label htmlFor='password' className={styles.label}>
-                Password
-              </label>
-              <Input
-                type='password'
-                placeholder='Password'
-                id='password'
-                name='password'
-                className={styles.input}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-              {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
-            </div>
+          <div>
+            <label htmlFor='password' className={styles.label}>
+              Password
+            </label>
+            <Input
+              type='password'
+              placeholder='Password'
+              id='password'
+              name='password'
+              className={styles.input}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
+            {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
+          </div>
 
-            <div>
-              <label htmlFor='confirmPassword' className={styles.label}>
-                Confirm Password
-              </label>
-              <Input
-                type='password'
-                placeholder='Confirm Password'
-                id='confirmPassword'
-                name='confirmPassword'
-                className={styles.input}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.confirmPassword}
-              />
-              {formik.touched.confirmPassword && formik.errors.confirmPassword ? <p className='text-red-500'>{formik.errors.confirmPassword}</p> : null}
-            </div>
+          <div>
+            <label htmlFor='confirmPassword' className={styles.label}>
+              Confirm Password
+            </label>
+            <Input
+              type='password'
+              placeholder='Confirm Password'
+              id='confirmPassword'
+              name='confirmPassword'
+              className={styles.input}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.confirmPassword}
+            />
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? <p className='text-red-500'>{formik.errors.confirmPassword}</p> : null}
+          </div>
 
-            <Button type='submit' className={styles.btn}>Submit</Button>
+          <Button type='submit' className={styles.btn}>Submit</Button>
 
           {/* <div>
               <p>
@@ -174,18 +174,18 @@ const Register = (props: Props) => {
               </p>
             </div> */}
 
-            <div className='text-[1.3rem]'>
-              <p>
-                Already have an account{' '}
-                <span>
-                  <Link href='/auth/login' className='text-primary-yellow-200'>
-                    Login here
-                  </Link>
-                </span>
-              </p>
-            </div>
-          </form>
-        </section>
+          <div className='text-[1.3rem]'>
+            <p>
+              Already have an account{' '}
+              <span>
+                <Link href='/auth/login' className='text-primary-yellow-200'>
+                  Login here
+                </Link>
+              </span>
+            </p>
+          </div>
+        </form>
+      </section>
     </AuthLayout>
   )
 }
