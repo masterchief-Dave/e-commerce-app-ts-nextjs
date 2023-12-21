@@ -88,7 +88,7 @@ export default function Home() {
             <div className='col-span-full mx-auto grid w-full grid-cols-12'>
               <div className='col-start-2 col-end-12 space-y-12'>
                 <section>
-                  <h2 className='mb-8 text-base font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
+                  <h2 className='mb-8 text-[1.6rem] font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
                     Product Categories
                   </h2>
                   <div className='flex flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12'>
@@ -101,7 +101,7 @@ export default function Home() {
                       <h3 className='font-semibold text-[2rem] text-center'>Browse our Category</h3>
                       <p className='text-[1.6rem] font-normal text-center text-primary-grey-100'>Discover endless possibilities. Explore our diverse categories now.</p>
                       <div className='flex items-center justify-center'>
-                      <ShoppingCartIcon className='text-primary-blue-300 h-16 w-16'/>
+                        <ShoppingCartIcon className='text-primary-blue-300 h-16 w-16' />
                       </div>
                     </div>
                   </div>
@@ -121,20 +121,20 @@ export default function Home() {
                       <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
                         {isLoading
                           ? new Array(8).fill(2).map((_, index) => {
-                              return <ProductCardSkeleton key={index} />
-                            })
+                            return <ProductCardSkeleton key={index} />
+                          })
                           : data?.data.products.map(
-                              (product: Product, index: number) => {
-                                return (
-                                  <div
-                                    key={product._id}
-                                    className={styles.productContainer}
-                                  >
-                                    <ProductCard data={product} />
-                                  </div>
-                                )
-                              }
-                            )}
+                            (product: Product, index: number) => {
+                              return (
+                                <div
+                                  key={product._id}
+                                  className={styles.productContainer}
+                                >
+                                  <ProductCard data={product} />
+                                </div>
+                              )
+                            }
+                          )}
                       </div>
                     </section>
                   )}

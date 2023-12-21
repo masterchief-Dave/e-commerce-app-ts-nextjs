@@ -1,10 +1,35 @@
-import mongoose from 'mongoose'
+import mongoose, { Document, Types } from 'mongoose'
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import crypto from "crypto"
 
 import { JWT_SECRET, JWT_EXPIRES } from '@/utils/config'
+
+interface UserType extends Document {
+  name: string
+  googleId: string
+  email: string
+  password: string
+  avatar: {
+    public_id: string,
+    url: string
+  }
+  role: 'admin' | 'user'
+  createdAt: Date
+  resetPasswordToken: string
+  resetPasswordExpire: Date
+  passwordChangedAt: Date
+  active: boolean
+  refreshToken: string
+  shippingAddress: Types.ObjectId[]
+  order: Types.ObjectId[]
+  creditCards: Types.ObjectId[]
+  getJwtToken: () => string
+  comparePassword: (password: string) => boolean
+  changedPasswordAfter: (timeStamp: number) => boolean
+  generatePasswordResetToken: () => string
+}
 
 export const UserSchema = new mongoose.Schema({
   name: {
@@ -152,4 +177,10 @@ UserSchema.methods.generatePasswordResetToken = function () {
   return resetToken
 }
 
-export const User = mongoose.models.User ? mongoose.models.User : mongoose.model('User', UserSchema)
+export const User = mongoose.models.User ? mongoose.models.User : (mongoose.models.User as mongoose.Model<UserType>) || mongoose.model('User', UserSchema)
+// export default (mongoose.models.User as mongoose.Model<User>) || mongoose.model('User', schema);
+
+// https://stackoverflow.com/questions/65831652/getting-error-the-expression-is-not-callable-mongoose-nextjs
+/**
+ * please read the comments in this stack overflow page, you will see there how to write the code without errors.
+ */

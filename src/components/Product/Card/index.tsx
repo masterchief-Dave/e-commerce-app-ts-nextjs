@@ -62,7 +62,7 @@ export const ProductCard = ({ data }: Props) => {
           />
         </Link>
         <div className='absolute top-5 left-5 z-10'>
-          <div className='bg-primary-red-100 px-2 text-base text-white lg:text-[1.2rem]'>
+          <div className='bg-primary-red-100 px-2 text-[1.6rem] text-white lg:text-[1.2rem]'>
             25%
           </div>
         </div>
@@ -79,7 +79,7 @@ export const ProductCard = ({ data }: Props) => {
       </div>
 
       <div className='space-y-8 py-2 '>
-        <Link href={`/product/${data._id}`} className='max-w-[20rem] block truncate text-center text-base font-normal lg:text-[1.6rem]'>
+        <Link href={`/product/${data._id}`} className='max-w-[20rem] block truncate text-center text-[1.6rem] font-normal lg:text-[1.6rem]'>
           {data.name}
         </Link>
         <div className='flex items-center justify-center gap-6 font-semibold'>

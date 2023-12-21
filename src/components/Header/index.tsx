@@ -69,10 +69,10 @@ export const Header = (props: Props) => {
                   <div
                     className={`col-start-2 col-end-7 space-y-10 text-black`}
                   >
-                    <h2 className='text-base font-extralight lg:text-[2rem]'>
+                    <h2 className='text-[1.6rem] font-extralight lg:text-[2rem]'>
                       Top Best Seller 2023
                     </h2>
-                    <h1 className='max-w-[50rem] text-base uppercase leading-[5rem] lg:text-[6rem]'>
+                    <h1 className='max-w-[50rem] text-[1.6rem] uppercase leading-[5rem] lg:text-[6rem]'>
                       {' '}
                       <span className='font-extrabold leading-10'>
                         {data.nameBold}

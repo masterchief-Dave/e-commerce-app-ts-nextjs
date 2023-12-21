@@ -9,12 +9,14 @@ import { Session } from 'next-auth'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
+import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
 
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import { useCart } from '@/hooks/useCart'
 import { useAuth } from '@/hooks/useAuth'
 import { useLogout } from '@/hooks/useLogout'
 import { UserAccountDropdown } from '../Dropdown/Account'
+import { Button } from '../ui/button'
 
 type Props = {
   session: UserLoginSession | null
@@ -40,10 +42,9 @@ export const Navbar = () => {
   const { handleLogout } = useLogout()
   const { isTop } = useStickyNavbar()
   const { data } = useSession()
-
   const { isLoggedIn, user } = useAuth()
-
   const { cart } = useCart()
+
 
   return (
     <div className=''>
@@ -91,10 +92,21 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
     }
   })
 
-  // when I click outside close the dropdown
   const onSubmit = ({ productName }: Search) => {
     // i want to change to the product search page and then the product search should make use of this data to populate the page
     router.push(`/search/${productName}`)
+  }
+
+  // move the items in the cart into the searchurl params
+  const onCartClick = () => {
+    const cartIds = cartItems.map((product) => product._id)
+
+    router.push('/cart', {
+      pathname: '/cart',
+      query: {
+        id: [...cartIds]
+      }
+    })
   }
 
   return (
@@ -106,7 +118,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
         <li>
           <h1>
             <Link href='/' className='text-[2rem] font-bold text-white'>
-              Sage - Warehouse
+              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
             </Link>
           </h1>
         </li>
@@ -146,12 +158,12 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           )}
 
           <li>
-            <Link href='/cart' className='relative'>
+            <Button className='relative' onClick={onCartClick}>
               <ShoppingBagIcon className='h-12 w-12 text-white' />
               <span className='absolute top-0 left-[15px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
                 {cartItems.length}
               </span>
-            </Link>
+            </Button>
           </li>
         </div>
       </ul>
@@ -165,9 +177,9 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
   const barIconRef = useRef<HTMLLIElement | null>(null)
 
   const styles = {
-    list: `p-4 font-medium text-white hover:bg-[#fff]/20 rounded-xl`,
+    list: `p-4 font-normal text-white text-[1.6rem] hover:bg-[#fff]/20 rounded-xl`,
     links: `w-full h-full block`,
-    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 text-[1rem] hover:rounded-md hover:bg-primary-blue-200 lg:text-[1.6rem]`,
+    navDropdownLink: `inline-block w-full rounded-md px-4 py-4 hover:rounded-md hover:bg-primary-blue-200 text-[1.6rem]`,
   }
 
   useEffect(() => {
@@ -183,7 +195,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
         mobileNavbarRef.current !== undefined &&
         mobileNavbarRef.current !== null
       ) {
-        if (!mobileNavbarRef?.current!.contains(e.target)) {
+        if (!mobileNavbarRef?.current.contains(e.target)) {
           setShowMenu(false)
         }
       }
@@ -194,7 +206,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
     return () => {
       document.removeEventListener('mousedown', handler)
     }
-  })
+  }, [barIconRef, mobileNavbarRef, showMenu])
   // handle the case for click outside of the opened menu or when esc key is pressed on the keyboard
 
   return (
@@ -203,7 +215,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
         <li>
           <h1>
             <Link href='/' className='text-lg font-bold text-white'>
-              Sage-Warehouse
+              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
             </Link>
           </h1>
         </li>
@@ -241,7 +253,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
                 <input
                   type='text'
                   placeholder='Search'
-                  className={`block w-full rounded-md p-4 font-medium text-black`}
+                  className={`block w-full rounded-md p-4 text-[1.6rem] font-medium text-black`}
                 />
               </li>
               <li>

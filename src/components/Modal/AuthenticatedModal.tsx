@@ -20,10 +20,11 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
   }
 
   const handleGoogleAuth = async () => {
-    await signIn('google', {
-      callbackUrl: '/checkout',
-      redirect: true
+    const response = await signIn('google', {
+      redirect: false
     })
+
+    console.log('response from google auth', { response })
   }
 
   return (

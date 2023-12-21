@@ -14,7 +14,7 @@ export const CategoryCard = ({ data: { categoryItems, name, link } }: Props) => 
     <div className='w-full bg-white p-8 shadow-product-card-box-shadow lg:w-fit xl:w-full'>
       <div>
         <div className='mb-8 flex items-center justify-between uppercase'>
-          <h3 className=' text-base font-bold lg:text-[1.6rem]'>
+          <h3 className=' text-[1.6rem] font-bold lg:text-[1.6rem]'>
             {name}
           </h3>
           <Link

@@ -28,7 +28,7 @@ export const BillingAddress = () => {
     cardImage: `h-12 w-12`,
     label: `font-medium text-[1.3rem] text-primary-grey-300 block`,
     input: `w-full p-4 border`,
-    btn: `bg-primary-blue-500 px-8 py-4 text-base font-medium text-white lg:text-[1.6rem]`,
+    btn: `bg-primary-blue-500 px-8 py-4 text-[1.6rem] font-medium text-white lg:text-[1.6rem]`,
     select: `border px-8 py-4 text-[1.2rem] w-full outline-0`,
     option: `text-[1.2rem] font-medium text-primary-grey-300`,
   }
@@ -43,7 +43,7 @@ export const BillingAddress = () => {
                 return (
                   <>
                     <h2>
-                      <AccordionButton className='flex justify-between bg-primary-blue-200 text-base lg:text-[1.3rem]'>
+                      <AccordionButton className='flex justify-between bg-primary-blue-200 text-[1.6rem] lg:text-[1.3rem]'>
                         <div className='flex items-center gap-8'>
                           <input
                             type='radio'
@@ -89,7 +89,7 @@ export const BillingAddress = () => {
               {({ isExpanded }) => {
                 return (
                   <>
-                    <AccordionButton className='flex justify-between bg-primary-blue-200 text-base lg:text-[1.3rem]'>
+                    <AccordionButton className='flex justify-between bg-primary-blue-200 text-[1.6rem] lg:text-[1.3rem]'>
                       <div className='flex items-center gap-8'>
                         <input
                           type='radio'

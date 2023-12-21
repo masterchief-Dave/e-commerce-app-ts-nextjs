@@ -71,7 +71,7 @@ export const BillingAddress = () => {
                 return (
                   <>
                     <h2>
-                      <AccordionButton className='flex justify-between bg-[#f7f9fa] text-base lg:text-[1.5rem]'>
+                      <AccordionButton className='flex justify-between bg-[#f7f9fa] text-[1.6rem] lg:text-[1.5rem]'>
                         <div className='flex items-center gap-8'>
                           <input
                             type='radio'

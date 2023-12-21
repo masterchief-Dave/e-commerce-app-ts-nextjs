@@ -16,39 +16,39 @@ import {
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
+    title: "Electronics",
+    href: "/category/electronics",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "Elevate your tech game with cutting-edge electronics that seamlessly blend innovation and style.",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    title: "Gaming Consoles",
+    href: "/category/console",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Immerse yourself in the ultimate gaming experience with our top-tier consoles, delivering unparalleled performance and graphics.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "Computers",
+    href: "/category/computers",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Unleash the power of productivity with our high-performance computers designed to meet all your computing needs.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "Accessories",
+    href: "/category/accessories",
+    description: "Explore a world of accessories that complement your devices, ensuring convenience and enhancing functionality.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "Headphones",
+    href: "/category/headphones",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "Dive into a realm of crystal-clear sound with our curated selection of headphones that redefine audio excellence.",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "Mobile Phones",
+    href: "/category/mobile-phones",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Stay connected and up-to-date with the latest mobile phones featuring advanced technology and sleek designs.",
   },
 ]
 // home, all demos, pages, categories, blog
@@ -59,7 +59,7 @@ export function NavigationMenuDemo() {
         <NavigationMenuItem className="h-full text-[1.6rem]">
           <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Home</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <Link
@@ -71,26 +71,27 @@ export function NavigationMenuDemo() {
                       Sage Warehouse
                     </div>
                     <p className="text-[1.6rem] leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
+                      "Indulge in a seamless shopping experience with our beautifully designed e-commerce app, where every detail is crafted for your convenience. Discover a world where buying whatever you want is effortless, thanks to our user-friendly interface and intuitive features. Shop confidently with secure transactions, and elevate your online shopping journey with us."
+
+                      Built With Next.js Tailwind CSS, Shadcn UI.
                     </p>
                   </Link>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
+              {/* <ListItem href="/docs" title="Introduction">
+                Re-usable components built using Shadcn UI and Tailwind CSS.
+              </ListItem> */}
+              {/* <ListItem href="/docs/installation" title="Installation">
                 How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
+              </ListItem> */}
+              {/* <ListItem href="/docs/primitives/typography" title="Typography">
                 Styles for headings, paragraphs, lists...etc
-              </ListItem>
+              </ListItem> */}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Shop</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (

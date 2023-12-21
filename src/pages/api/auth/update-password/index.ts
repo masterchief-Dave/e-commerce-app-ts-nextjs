@@ -24,7 +24,7 @@ export default async function handler(
 
       const session = await getServerSession(req, res, options)
       // @ts-ignore
-      const user = await User.findById(session._id).populate('password')
+      const user = await User.findById(session!._id).populate('password')
       const isPasswordCorrect = await bcrypt.compare(password, user.password)
 
       if (!isPasswordCorrect) {

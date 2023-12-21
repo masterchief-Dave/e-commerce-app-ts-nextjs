@@ -58,7 +58,7 @@ const Register = (props: Props) => {
     try {
       dispatch(registerStart())
 
-      const response = await axios.post('http://localhost:3002/api/auth/register', { name, email, password, confirmPassword })
+      const response = await axios.post('https://sage-warehouse-backend.onrender.com/api/auth/register', { name, email, password, confirmPassword })
 
       if (response.data.success) {
         // save user in session

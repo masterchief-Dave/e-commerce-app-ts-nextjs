@@ -13,6 +13,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
+import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
@@ -52,7 +53,7 @@ const Checkout = () => {
       <header className='grid grid-cols-12 border-b py-4'>
         <h1 className='font-bold text-[2.5rem] col-span-full px-24'>
           <Link href='/'>
-            Sage-Warehouse
+            <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
           </Link>
         </h1>
       </header>
@@ -107,21 +108,21 @@ const Checkout = () => {
               <article className='mb-[5rem] space-y-8'>
                 <div className='border-b space-y-3 py-4'>
                   <div className='text-former-price-text flex justify-between'>
-                    <p className='text-base lg:text-[1.2rem]'>Original Price</p>
+                    <p className='text-[1.6rem] lg:text-[1.2rem]'>Original Price</p>
                     <p className='text-[1.5rem] font-semibold'> ${totalPrice.toFixed(2)}</p>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <p className='text-base lg:text-[1.2rem]'>Shipping</p>
+                    <p className='text-[1.6rem] lg:text-[1.2rem]'>Shipping</p>
                     <p className='text-[1.5rem] font-semibold'>${shippingFee.toFixed(2)}</p>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <p className='text-base lg:text-[1.2rem]'>Tax</p>
+                    <p className='text-[1.6rem] lg:text-[1.2rem]'>Tax</p>
                     <p className='text-[1.5rem] font-semibold'>${taxFee.toFixed(2)}</p>
                   </div>
                 </div>
 
                 <div className='flex justify-between'>
-                  <p className='text-base lg:text-[1.2rem]'>Total</p>
+                  <p className='text-[1.6rem] lg:text-[1.2rem]'>Total</p>
                   <p className='text-[1.5rem] font-semibold'>${amount}</p>
                 </div>
 
