@@ -17,7 +17,7 @@ declare module 'next-auth' {
     _id: Types.ObjectId
     role: string
     token: string
-    photo: string
+    photo: { url: string, public_id: string }
     googleId: string
     user: {
       token?: accessToken

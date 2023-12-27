@@ -38,7 +38,6 @@ export const options: NextAuthOptions = {
       },
     }),
     GoogleProvider({
-
       clientId: GOOGLE_CLIENT_ID as string,
       clientSecret: GOOGLE_CLIENT_SECRET as string,
       // callbackUrl: 'http://localhost:3002/api/auth/callback/google'
@@ -87,17 +86,10 @@ export const options: NextAuthOptions = {
         token.id = user.id
         // create my token here 
         // token.accessToken = 'David Bodunrin Oluwaseun new'
-        token.sage = 'new'
+        // token.sage = 'new'
         const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: process.env.JWT_EXPIRES })
         token.accessToken = accessToken
       }
-
-      // console.log({ session })
-      // console.log({ profile })
-      // console.log({ account })
-      // console.log({ user })
-      // console.log({ token })
-
 
       return token
     },
@@ -115,14 +107,12 @@ export const options: NextAuthOptions = {
         console.log(err)
       }
 
-      // console.log({ token })
-
       // session.user = user
       // session.expires = ''
       // session.token = token
       // session.token = token as JWT
       session.role = user?.role || 'user'
-      session.photo = user?.avatar ? user.avatar : token?.image as string
+      session.photo.url = user?.avatar ? user.avatar : token?.image as string
       session.googleId = user.id as string
       session._id = db._id
       session.user.token = token.accessToken
@@ -131,22 +121,6 @@ export const options: NextAuthOptions = {
     }
   }
 }
-
-/**
- * address: string;
-    image: string;
-    email: string;
-    iat: number;
-    exp: number;
-    jti: string;
-    password: string;
-    picture: string;
-    role: string;
-    sub: string;
-    success: boolean;
-    token: string;
-    user: string;
- */
 
 // export default NextAuth(options)
 const authHandler = NextAuth(options)

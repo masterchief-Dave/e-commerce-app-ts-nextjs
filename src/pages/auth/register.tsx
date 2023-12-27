@@ -7,12 +7,13 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
 import { registerStart, registerSuccess, registerFailure } from '@/features/register/registerSlice'
-import { loginSuccess } from '@/features/login/loginSlice'
+// import { loginSuccess } from '@/features/login/loginSlice'
 import { BASE_URL } from '@/utils/config'
 import { loginUser } from '@/helpers'
 import { Input } from '@/components/ui/input'
 import { Button } from "@/components/ui/button"
 import AuthLayout from '@/components/Layout/Auth'
+import toast from 'react-hot-toast'
 
 
 type Props = {}
@@ -50,8 +51,8 @@ const Register = (props: Props) => {
 
   const styles = {
     label: `text-[1.6rem] font-normal block mb-2`,
-    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.6rem] mb-2 focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.6rem] rounded-md`,
+    input: `h-[5.6rem] w-full outline-0 px-4 border text-[1.6rem] mb-2 focus:ring-1 rounded-md`,
+    btn: `h-[5.6rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.6rem] rounded-md`,
   }
 
   const handleSubmit = async ({ name, email, password, confirmPassword }: FormData) => {
@@ -66,15 +67,18 @@ const Register = (props: Props) => {
 
         if (loginResponse && !loginResponse.ok) {
           console.log(loginResponse.error)
+
+          toast.error('Error with Login')
           throw new Error(loginResponse?.error!)
         } else {
           router.push('/')
+          toast.success('Register Successful')
         }
-
       }
 
     } catch (err: any) {
-      console.log(err)
+      // console.log(err)
+      toast.error('An Error Occured')
       dispatch(registerFailure(err.message))
     }
   }
@@ -174,7 +178,7 @@ const Register = (props: Props) => {
               </p>
             </div> */}
 
-          <div className='text-[1.3rem]'>
+          <div className='text-[1.6rem]'>
             <p>
               Already have an account{' '}
               <span>

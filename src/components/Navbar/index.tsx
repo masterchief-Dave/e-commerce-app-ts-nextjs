@@ -45,6 +45,8 @@ export const Navbar = () => {
   const { isLoggedIn, user } = useAuth()
   const { cart } = useCart()
 
+  console.log({ data })
+
 
   return (
     <div className=''>
@@ -123,7 +125,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           </h1>
         </li>
         <li className='lg:w-[30%] xl:w-[40%]'>
-          <form className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2' onSubmit={formik.handleSubmit}>
+          <form className='flex h-[5.6rem] w-full items-center rounded-sm bg-white hover:ring-2' onSubmit={formik.handleSubmit}>
             <input
               type='text'
               placeholder='search'
@@ -139,7 +141,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
             </div>
           </form>
         </li>
-        <div className='flex items-center gap-x-4'>
+        <div className='flex items-center gap-x-4 text-[1.6rem]'>
           {data?.user ? (
             <UserAccountDropdown />
           ) : (
@@ -159,8 +161,8 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
 
           <li>
             <Button className='relative' onClick={onCartClick}>
-              <ShoppingBagIcon className='h-12 w-12 text-white' />
-              <span className='absolute top-0 left-[15px] flex h-[1.5rem] w-[1.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
+              <ShoppingBagIcon className='h-16 w-16 text-white' />
+              <span className='absolute top-0 left-[30px] flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
                 {cartItems.length}
               </span>
             </Button>

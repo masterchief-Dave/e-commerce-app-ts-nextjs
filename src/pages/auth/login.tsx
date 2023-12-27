@@ -44,19 +44,19 @@ const Login = ({ myCookieValue, data }: Props) => {
 
   const styles = {
     label: `text-[1.6rem] font-normal block mb-2`,
-    input: `h-[3.5rem] w-full outline-0 px-4 border text-[1.6rem] mb-2 focus:ring-1 rounded-md`,
-    btn: `h-[3.5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 font-medium text-[1.6rem] rounded-md`,
+    input: `h-[5.6rem] w-full outline-0 px-4 border text-[1.6rem] mb-2 focus:ring-1 rounded-md`,
+    btn: `h-[5.6rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 font-medium text-[1.6rem] rounded-md`,
   }
 
   const handleSubmit = async ({ email, password }: FormData) => {
     try {
-      dispatch(loginStart())
+      // dispatch(loginStart())
       // https://sage-warehouse-backend.onrender.com/
 
       // ## new code next-auth login
 
       const loginResponse = await loginUser({ email, password })
-   
+
       if (loginResponse && !loginResponse.ok) {
         console.log(loginResponse.error)
       } else {
@@ -143,7 +143,7 @@ const Login = ({ myCookieValue, data }: Props) => {
               Submit
             </Button>
 
-            <div className='mb-8 text-[1.3rem] flex justify-between'>
+            <div className='mb-8 text-[1.6rem] flex justify-between'>
               <div>
                 <p className=''>
                   Dont have an account{' '}

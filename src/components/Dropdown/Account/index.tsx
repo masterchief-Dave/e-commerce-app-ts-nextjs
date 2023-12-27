@@ -24,20 +24,22 @@ export function UserAccountDropdown() {
   return (
     <Menu as='div' className='text-[1.6rem] z-[99]'>
       <Menu.Button className='relative block w-16 h-16'>
-        <Image src={session?.data?.user?.image! || session?.data?.photo!} alt='user logo' width={1000} height={1000} className='h-16 w-16 rounded-full' />
+        <Image src={session?.data?.user?.image !== undefined ? session?.data?.user?.image! : session?.data?.photo!.url!} alt='user logo' width={1000} height={1000} className='h-16 w-16 rounded-full' />
       </Menu.Button>
       <Menu.Items className='absolute p-2 top-[5.7rem] rounded-xl border bg-white'>
         {links.map((link) => {
-          return <Menu.Item as='li' className={styles.list} key={link.id}>
-            {({ active }) => (
-              <Link
-                className={`${active && 'bg-blue-500'} py-2 block px-12 hover:rounded-md hover:text-white`}
-                href={link.link}
-              >
-                {link.name}
-              </Link>
-            )}
-          </Menu.Item>
+          return (
+            <Menu.Item as='li' className={styles.list} key={link.id}>
+              {({ active }) => (
+                <Link
+                  className={`${active && 'bg-blue-500'} py-2 block px-12 hover:rounded-md hover:text-white`}
+                  href={link.link}
+                >
+                  {link.name}
+                </Link>
+              )}
+            </Menu.Item>
+          )
         })}
 
         <Menu.Item as='li' className={styles.list}>
