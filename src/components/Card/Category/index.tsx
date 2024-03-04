@@ -19,7 +19,7 @@ export const CategoryCard = ({ data: { categoryItems, name, link } }: Props) => 
           </h3>
           <Link
             href={link}
-            className='text-[1rem] text-primary-grey-500 hover:text-primary-blue-300'
+            className='text-[1.5rem] text-primary-grey-500 hover:text-primary-blue-300'
           >
             View all categories
           </Link>

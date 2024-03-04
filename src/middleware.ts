@@ -1,25 +1,20 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { getToken } from "next-auth/jwt"
-// import { decode } from 'next-auth/jwt'
-// import { getServerSession } from "next-auth"
-
-// import { User } from "./models/user"
-// import { connectToMongoDB } from "./lib/mongodb"
-// import { options } from "./pages/api/auth/[...nextauth]"
-// import { JWT_SECRET } from "./utils/config"
+import { fetchRefresh } from "./utils/fetchRefresh"
 
 export async function middleware(req: NextRequest) {
-  const token = await getToken({ req })
+  const token = req.cookies.get("sage_warehouse_token")?.value || ""
 
-  // if (!token?.user) {
-  //   return NextResponse.rewrite(new URL('/auth/login', req.url))
-  // }
+  // const response = await fetchRefresh()
+  // const data = await response
+
 }
 
 export const config = {
-  matcher: ["/account/:path*"]
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
 }
+
+// '/((?!api|_next/static|_next/image|favicon.ico).*)'
 
 // "/api/products/update-product"
 // /api/products/:path*

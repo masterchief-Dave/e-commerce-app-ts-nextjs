@@ -1,0 +1,170 @@
+import { Button } from "@/components/ui/button"
+import { loginSchema, loginVal } from "@/lib/schema/auth.schema"
+import { useFormik } from "formik"
+import { InputContainer } from ".."
+import { EyeIcon, EyeOffIcon, FingerprintIcon, UserIcon } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { ErrorLabel } from "@/components/ui/errorLabel"
+import { useState } from "react"
+import { useRouter } from "next/router"
+import { signIn } from 'next-auth/react'
+import Link from "next/link"
+import FormError from "../form-error"
+import Image from "next/image"
+
+
+const styles = {
+  label: `text-[1.6rem] font-normal block mb-2`,
+  input: `text-[1.6rem] border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+  btn: `h-[5rem] w-full bg-primary-blue-500 font-medium text-[1.6rem] rounded-md`,
+}
+interface FormProps {
+  handleSubmit: (email: string, password: string) => void
+  error?: { state: boolean, message: string }
+}
+
+function LoginForm({ handleSubmit, error }: FormProps) {
+  const [show, setShow] = useState(false)
+
+  const router = useRouter()
+  const formik = useFormik<{ email: string, password: string }>({
+    initialValues: loginVal,
+    validationSchema: loginSchema,
+    onSubmit: (values, formikHelpers) => {
+      // console.log(values)
+      handleSubmit(values.email, values.password)
+    }
+  })
+
+  const toggle = () => {
+    setShow(!show)
+  }
+  const handleGoogleAuth = async () => {
+    const pathname = router.asPath !== '/auth/login' ? router.asPath : '/'
+
+    await signIn('google', {
+      callbackUrl: pathname
+    })
+  }
+  return (
+    <>
+      <div className='col-start-3 col-end-11 rounded-xl border py-4 px-6 space-y-4'>
+        <form className='space-y-4' onSubmit={formik.handleSubmit}>
+          <header className='mb-8'>
+            <h1 className='text-left text-[2rem] font-semibold'>Sign in</h1>
+            <p className='text-[1.6rem] text-primary-grey-100 font-normal'>Choose your preferred sign in method</p>
+          </header>
+          <div>
+            <label htmlFor='email' className={styles.label}>
+              Email Address
+            </label>
+            <InputContainer className="mb-2">
+              <UserIcon className="h-8 w-8" />
+              <Input
+                type='text'
+                placeholder='Email Address'
+                id='email'
+                name='email'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+            </InputContainer>
+            {formik.touched.email && formik.errors.email ? <ErrorLabel text={formik.errors.email} /> : null}
+          </div>
+
+          <div>
+            <label htmlFor='password' className={styles.label}>
+              Password
+            </label>
+            {/* add fingerprint icon, makes it look really cool */}
+            <InputContainer className="mb-2">
+              <FingerprintIcon />
+              <Input
+                type={show ? 'text' : 'password'}
+                placeholder='Password'
+                id='password'
+                name='password'
+                className={`${styles.input} flex-1`}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {show ? (
+                <EyeOffIcon className="h-8 w-8 cursor-pointer" onClick={toggle} />
+              ) : (
+                <EyeIcon className="h-8 w-8 cursor-pointer" onClick={toggle} />
+              )}
+            </InputContainer>
+            {formik.touched.password && formik.errors.password ? <ErrorLabel text={formik.errors.password} /> : null}
+          </div>
+
+          {/* <FormSuccess message="Mail sent" /> */}
+          {error?.state && <FormError message={error.message || "Invalid Credentials"} />}
+
+          <Button
+            className={`h-[5rem] text-white`}
+            type='submit'
+            variant={"primary"}
+          >
+            Submit
+          </Button>
+
+          <div className='mb-8 text-[1.6rem] flex justify-between'>
+            <div>
+              <p className=''>
+                Dont have an account{' '}
+                <span>
+                  <Link
+                    href='/auth/register'
+                    className='text-primary-yellow-200 font-medium underline underline-offset-2'
+                  >
+                    Sign up
+                  </Link>
+                </span>{' '}
+              </p>
+            </div>
+
+            <Link
+              href='/auth/forgot-password'
+              className='font-medium text-primary-yellow-200 underline underline-offset-2'
+            >
+              Reset password
+            </Link>
+          </div>
+
+          <div className='flex justify-center'>
+            <span className='inline-block h-[1px] '></span>
+            <p className='font-semibold text-[1.6rem]'>OR</p>
+          </div>
+        </form>
+
+        <div className='space-y-4 col-start-2 col-end-12'>
+          <Button
+            className={`h-[5rem] flex items-center justify-center gap-x-4 text-white  hover:text-primary-blue-100`}
+            type='submit'
+            variant='primary'
+            onClick={(e) => {
+              e.preventDefault()
+              // router.push('http://localhost:8100/api/v1/auth/google')
+              handleGoogleAuth()
+            }
+            }
+          >
+            <p>Sign In with Google</p>
+            <Image
+              src='/assets/icons/google.svg'
+              alt='Google'
+              className='h-[13px] w-[13px]'
+              width={1000}
+              height={1000}
+            />
+          </Button>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default LoginForm

@@ -6,7 +6,7 @@ export const fetchUserOrder = async (id: string, req: any) => {
   })
 
   const data = await res.json()
-  const order:IOrder = data.data
+  const order: IOrder = data.data
 
   return order
 }

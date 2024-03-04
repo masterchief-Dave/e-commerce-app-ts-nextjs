@@ -10,13 +10,31 @@ import '@/styles/globals.css'
 import './demos/demo.scss'
 import '../components/Dropdown/dropdown.scss'
 import '@/styles/main.scss'
-
 import { store } from '@/app/store'
+import { useEffect } from "react"
+import axios from "axios"
+import useRefreshToken from "@/hooks/useRefreshToken"
+import useAuth from "@/hooks/useAuth"
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
-}: AppProps<{ session: Session }>) {
+  pageProps: { loading, session, ...pageProps },
+}: AppProps<{ session: Session, loading: boolean }>) {
+  const refreshToken = useRefreshToken()
+  const { user } = useAuth()
+
+  useEffect(() => {
+    const verifyRefreshToken = async () => {
+      try {
+        await refreshToken()
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    !user?.token && verifyRefreshToken()
+  }, [])
+
   return (
     <Provider store={store}>
       <SessionProvider session={session}>

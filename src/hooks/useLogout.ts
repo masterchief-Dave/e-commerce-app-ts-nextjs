@@ -1,14 +1,22 @@
-import { useDispatch } from "react-redux"
+import useAuth from "./useAuth"
+import { globalAxios } from "@/helpers/apiService"
 
-import { logout } from "@/features/login/loginSlice"
 
-export const useLogout = () => {
-  const dispatch = useDispatch()
+const useLogout = () => {
+  const { setUser } = useAuth()
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('user')
-    dispatch(logout())
+    setUser(null)
+
+    try {
+      await globalAxios.post('/auth/logout', {}, { withCredentials: true })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  return { handleLogout }
+  return handleLogout
 }
+
+export default useLogout

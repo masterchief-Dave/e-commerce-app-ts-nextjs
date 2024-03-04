@@ -8,15 +8,13 @@ import ShippingReducer from '@/features/shipping-address/address-slice'
 
 
 // check if the user is in the localstorage
-let savedUser
-if (typeof window !== 'undefined') {
-  savedUser = window.localStorage.getItem('user')
-}
+// let savedUser
+// if (typeof window !== 'undefined') {
+//   savedUser = window.localStorage.getItem('user')
+// }
 
 
 const initialState = {
-  isLoggedIn: !!savedUser,
-  user: savedUser ? JSON.parse(savedUser) : null,
   error: null,
   loading: false
 }
@@ -29,13 +27,10 @@ export const store = configureStore({
     register: RegisterReducer,
     shipping: ShippingReducer
   },
-  preloadedState: {
-    login: initialState
-  }
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+// export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+// export type AppDispatch = typeof store.dispatch
 

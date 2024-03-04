@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import Image from 'next/image'
-import { CheckIcon, HeartIcon, StarIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react';
+import Image from 'next/image';
+import { CheckIcon, HeartIcon, StarIcon } from '@heroicons/react/24/outline';
 
 type Props = {
-  key: number
-  data: BestDeals
-}
+  key: number;
+  data: BestDeals;
+};
 
 export const DealCard = ({ key, data }: Props) => {
-  const { id, name, img, rating, price, formerPrice } = data
+  const { id, name, img, rating, price, formerPrice } = data;
 
-  const [like, setLike] = useState<boolean>(false)
+  const [like, setLike] = useState<boolean>(false);
 
   const handleLike = () => {
-    setLike(!like)
-  }
+    setLike(!like);
+  };
 
   return (
     <div
@@ -26,7 +26,7 @@ export const DealCard = ({ key, data }: Props) => {
         <Image src={img} alt={name} width={1000} height={1000} />
       </div>
       <div className='space-y-4'>
-        <p className='text-[1.6rem] font-medium text-[#222] lg:text-[1.2rem]'>
+        <p className='text-[1.6rem] font-medium text-[#444]'>
           {name}
         </p>
         <div className='flex gap-1'>
@@ -37,10 +37,10 @@ export const DealCard = ({ key, data }: Props) => {
                 className='h-4 w-4 text-primary-yellow-400'
                 fill='#ffd201'
               />
-            )
+            );
           })}
         </div>
-        <div className='flex gap-4 text-xl font-bold'>
+        <div className='flex gap-4 text-[1.6rem] font-bold'>
           <p>${price}</p>
           <p className='text-primary-white-200 line-through'>${formerPrice}</p>
         </div>
@@ -60,5 +60,5 @@ export const DealCard = ({ key, data }: Props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

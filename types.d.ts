@@ -162,6 +162,23 @@ declare global {
 }
 
 declare global {
+  interface AuthUser {
+    avatar: {
+      public_id: string
+      url: string
+    }
+    _id: string
+    name: string
+    email: string
+    password: string
+    role: string
+    passwordChangedAt: string
+    createdAt: string
+    __v?: number
+  }
+}
+
+declare global {
   type UserLoginSession = {
     id: string
     photo: string
@@ -174,7 +191,7 @@ declare global {
 
 declare global {
   type UserSession = {
-    id: string
+    _id: string
     photo: string
     name: string
     email: string

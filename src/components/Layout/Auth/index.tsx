@@ -12,13 +12,13 @@ type Props = {
 
 const AuthLayout = ({ children }: Props) => {
   const router = useRouter()
-  const session = useSession()
+  // const session = useSession()
 
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      router.push('/')
-    }
-  }, [session])
+  // useEffect(() => {
+  //   if (session.status === 'authenticated') {
+  //     router.push('/')
+  //   }
+  // }, [session])
 
   return (
     <div className="mx-auto w-full max-w-screen-4xl max-h-screen">

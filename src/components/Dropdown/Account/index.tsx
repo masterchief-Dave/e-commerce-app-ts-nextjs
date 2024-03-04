@@ -1,14 +1,17 @@
+import useLogout from "@/hooks/useLogout"
 import { Menu } from '@headlessui/react'
-import { signOut, useSession } from 'next-auth/react'
+// import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import AvatarComp from "@/components/molecules/avatar"
 
-export function UserAccountDropdown() {
-  const session = useSession()
+export function UserAccountDropdown({ photo, alt, fallback }: { photo?: string, alt: string, fallback: string }) {
+  const logout = useLogout()
 
-  if (session.status !== 'authenticated') {
+  if (!photo) {
     return
   }
+
 
   const styles = {
     list: `block`
@@ -23,8 +26,8 @@ export function UserAccountDropdown() {
 
   return (
     <Menu as='div' className='text-[1.6rem] z-[99]'>
-      <Menu.Button className='relative block w-16 h-16'>
-        <Image src={session?.data?.user?.image !== undefined ? session?.data?.user?.image! : session?.data?.photo!.url!} alt='user logo' width={1000} height={1000} className='h-16 w-16 rounded-full' />
+      <Menu.Button className='relative block'>
+        <AvatarComp src={photo} alt={alt} fallback={fallback} />
       </Menu.Button>
       <Menu.Items className='absolute p-2 top-[5.7rem] rounded-xl border bg-white'>
         {links.map((link) => {
@@ -48,10 +51,7 @@ export function UserAccountDropdown() {
               <button
                 className={`${active && 'bg-blue-500'} text-left py-2 block px-12 hover:rounded-md hover:text-white w-full`}
                 onClick={() =>
-                  signOut({
-                    redirect: false
-                  })
-                  // handleSignOut()
+                  logout()
                 }>
                 Sign Out
               </button>

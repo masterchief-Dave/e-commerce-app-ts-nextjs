@@ -173,7 +173,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
       secret: process.env.JWT_SECRET,
     })
 
-    console.log({ token })
+    // console.log({ token })
 
     const expressApiOrders = await fetchDataFromExpressServer(context.req, token!.accessToken as string)
 

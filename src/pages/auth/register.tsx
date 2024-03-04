@@ -14,6 +14,11 @@ import { Input } from '@/components/ui/input'
 import { Button } from "@/components/ui/button"
 import AuthLayout from '@/components/Layout/Auth'
 import toast from 'react-hot-toast'
+import { ErrorLabel } from "@/components/ui/errorLabel"
+import { InputContainer } from "@/components/Form"
+import { EyeIcon, EyeOffIcon, FingerprintIcon, MailIcon, UserIcon } from "lucide-react"
+import { registerSchema, registerVal } from "@/lib/schema/auth.schema"
+import { useState } from "react"
 
 
 type Props = {}
@@ -28,22 +33,14 @@ interface FormData {
 const Register = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter()
-
-  // const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState({
+    password: false,
+    confirmPassword: false
+  })
 
   const formik = useFormik<FormData>({
-    initialValues: {
-      name: "",
-      password: "",
-      email: "",
-      confirmPassword: "",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().max(100, "Must be less than 100 Characters").required('Required'),
-      password: Yup.string().min(5, "Must be more than 5 Characters").required('Required'),
-      email: Yup.string().email().required('Must be a valid email'),
-      confirmPassword: Yup.string().required('Confirm your password').oneOf([Yup.ref('password')], 'Passwords must be the same')
-    }),
+    initialValues: registerVal,
+    validationSchema: registerSchema,
     onSubmit(values, formikHelpers) {
       handleSubmit(values)
     },
@@ -51,8 +48,9 @@ const Register = (props: Props) => {
 
   const styles = {
     label: `text-[1.6rem] font-normal block mb-2`,
-    input: `h-[5.6rem] w-full outline-0 px-4 border text-[1.6rem] mb-2 focus:ring-1 rounded-md`,
-    btn: `h-[5.6rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.6rem] rounded-md`,
+    input: `text-[1.6rem] border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+    btn: `h-[5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.6rem] rounded-md`,
+    icon: `cursor-pointer w-8 h-8`
   }
 
   const handleSubmit = async ({ name, email, password, confirmPassword }: FormData) => {
@@ -83,12 +81,21 @@ const Register = (props: Props) => {
     }
   }
 
+  const handleToggle = (name: string, state: boolean) => {
+    setShow((prev) => {
+      return {
+        ...prev,
+        [name]: !prev[name as keyof typeof show]
+      }
+    })
+  }
+
   return (
     <AuthLayout>
       <section className='h-fit w-full grid grid-cols-12'>
         <form
           action=''
-          className='col-start-2 col-end-12 space-y-4 rounded-xl border py-4 px-6'
+          className='col-start-3 col-end-11 space-y-4 rounded-2xl border p-8'
           onSubmit={formik.handleSubmit}
         >
           <header className='mb-8'>
@@ -100,34 +107,40 @@ const Register = (props: Props) => {
             <label htmlFor='fullName' className={styles.label}>
               Full Name
             </label>
-            <Input
-              type='text'
-              placeholder='Firstname Lastname'
-              id='fullName'
-              name='name'
-              className={styles.input}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
-            {formik.touched.name && formik.errors.name ? <p className='text-red-500'>{formik.errors.name}</p> : null}
+            <InputContainer className="mb-2">
+              <UserIcon className="h-8 w-8" />
+              <Input
+                type='text'
+                placeholder='Firstname Lastname'
+                id='fullName'
+                name='name'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.name}
+              />
+            </InputContainer>
+            {formik.touched.name && formik.errors.name ? <ErrorLabel text={formik.errors.name} /> : null}
           </div>
 
           <div>
             <label htmlFor='email' className={styles.label}>
               Email Address
             </label>
-            <Input
-              type='text'
-              placeholder='Email Address'
-              id='email'
-              name='email'
-              className={styles.input}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.touched.email && formik.errors.email ? <p className='text-red-500'>{formik.errors.email}</p> : null}
+            <InputContainer className="mb-2">
+              <MailIcon className="h-8 w-8" />
+              <Input
+                type='text'
+                placeholder='Email Address'
+                id='email'
+                name='email'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+            </InputContainer>
+            {formik.touched.email && formik.errors.email ? <ErrorLabel text={formik.errors.email} /> : null}
 
           </div>
 
@@ -135,37 +148,53 @@ const Register = (props: Props) => {
             <label htmlFor='password' className={styles.label}>
               Password
             </label>
-            <Input
-              type='password'
-              placeholder='Password'
-              id='password'
-              name='password'
-              className={styles.input}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            {formik.touched.password && formik.errors.password ? <p className='text-red-500'>{formik.errors.password}</p> : null}
+            <InputContainer className="mb-2">
+              <FingerprintIcon className="h-8 w-8" />
+              <Input
+                type={show.password ? 'text' : 'password'}
+                placeholder='Password'
+                id='password'
+                name='password'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {show.password ? (
+                <EyeOffIcon className={styles.icon} onClick={() => handleToggle("password", false)} />
+              ) : (
+                <EyeIcon className={styles.icon} onClick={() => handleToggle("password", true)} />
+              )}
+            </InputContainer>
+            {formik.touched.password && formik.errors.password ? <ErrorLabel text={formik.errors.password} /> : null}
           </div>
 
           <div>
             <label htmlFor='confirmPassword' className={styles.label}>
               Confirm Password
             </label>
-            <Input
-              type='password'
-              placeholder='Confirm Password'
-              id='confirmPassword'
-              name='confirmPassword'
-              className={styles.input}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.confirmPassword}
-            />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword ? <p className='text-red-500'>{formik.errors.confirmPassword}</p> : null}
+            <InputContainer className="mb-2">
+              <FingerprintIcon className="h-8 w-8" />
+              <Input
+                type={show.confirmPassword ? 'text' : 'password'}
+                placeholder='Confirm Password'
+                id='confirmPassword'
+                name='confirmPassword'
+                className={styles.input}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.confirmPassword}
+              />
+              {show.confirmPassword ? (
+                <EyeOffIcon className={styles.icon} onClick={() => handleToggle("confirmPassword", false)} />
+              ) : (
+                <EyeIcon className={styles.icon} onClick={() => handleToggle("confirmPassword", true)} />
+              )}
+            </InputContainer>
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? <ErrorLabel text={formik.errors.confirmPassword} /> : null}
           </div>
 
-          <Button type='submit' className={styles.btn}>Submit</Button>
+          <Button type='submit' variant="primary" className='h-[5rem]'>Submit</Button>
 
           {/* <div>
               <p>
@@ -182,7 +211,7 @@ const Register = (props: Props) => {
             <p>
               Already have an account{' '}
               <span>
-                <Link href='/auth/login' className='text-primary-yellow-200'>
+                <Link href='/auth/login' className='text-primary-yellow-200 underline underline-offset-2 font-medium'>
                   Login here
                 </Link>
               </span>

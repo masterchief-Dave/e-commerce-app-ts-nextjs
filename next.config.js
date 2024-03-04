@@ -19,7 +19,8 @@ const nextConfig = {
     ]
   },
   experimental: {
-    serverComponentsExternalPackages: ['mongoose']
+    serverComponentsExternalPackages: ['mongoose'],
+    appDir: false
   }
 }
 

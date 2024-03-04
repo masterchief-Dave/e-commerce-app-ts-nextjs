@@ -19,6 +19,7 @@ import { addToCart } from '@/features/cart/cartSlice'
 import { useCart } from '@/hooks/useCart'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { ProductTab } from '@/components/Tabs/Product'
+import useAuth from "@/hooks/useAuth"
 
 type Props = {
   product: Product
@@ -40,6 +41,9 @@ const ProductSlug = ({ product }: Props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1)
   let [isItemInCart, setIsItemInCart] = useState(false)
   const [openModal, setOpenModal] = useState(false)
+
+  const { user } = useAuth()
+  console.log({ user })
 
   const handleBuyNow = () => {
     // add the product to cart
@@ -167,7 +171,7 @@ const ProductSlug = ({ product }: Props) => {
                 </div>
 
                 <div className='py-4'>
-                  <h4 className='mb-4 text-lg font-medium'>Quantity</h4>
+                  <h4 className='mb-4 text-[1.6rem] font-medium'>Quantity</h4>
                   <div className='flex items-center gap-x-8'>
                     <div className='flex items-center h-[4rem] text-[1.6rem]'>
                       <button

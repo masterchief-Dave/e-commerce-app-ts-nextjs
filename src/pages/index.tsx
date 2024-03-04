@@ -16,9 +16,14 @@ import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
 import { landingPageFeatures } from '@/globals/home'
 import { FeaturesCard } from '@/components/Card'
+import Testimonials from "@/components/Testimonial"
+import useAuth from "@/hooks/useAuth"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
+
+  const { user } = useAuth()
+  console.log({ user })
 
   //{{url}}/products?page=1
 
@@ -91,7 +96,7 @@ export default function Home() {
                   <h2 className='mb-8 text-[1.6rem] font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
                     Product Categories
                   </h2>
-                  <div className='flex flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12'>
+                  <div className='sm:flex sm:flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12'>
                     <CategoryCard data={electronicsData} />
                     <CategoryCard data={computerData} />
                     <CategoryCard data={gamingData} />
@@ -178,6 +183,8 @@ export default function Home() {
               </div>
             </div>
           </main>
+          {/* testimonial section */}
+          <Testimonials />
           <Footer />
         </>
       </Layout>

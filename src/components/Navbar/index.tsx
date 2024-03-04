@@ -13,8 +13,8 @@ import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
 
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import { useCart } from '@/hooks/useCart'
-import { useAuth } from '@/hooks/useAuth'
-import { useLogout } from '@/hooks/useLogout'
+import useAuth from '@/hooks/useAuth'
+import useLogout from '@/hooks/useLogout'
 import { UserAccountDropdown } from '../Dropdown/Account'
 import { Button } from '../ui/button'
 
@@ -24,7 +24,7 @@ type Props = {
   cartItems: Cart[]
   handleSignOut: () => void
   isLoggedIn: boolean
-  user: UserSession | null
+  user: Omit<UserSession, 'success'> | null
   data: Session | null
   // i am not using these states any more i am using formik to validate and manage the state of the input for searching
   searchTerm?: string
@@ -39,38 +39,35 @@ type MobileProps = Omit<Props, 'isTop'>
 
 
 export const Navbar = () => {
-  const { handleLogout } = useLogout()
+  const logout = useLogout()
   const { isTop } = useStickyNavbar()
   const { data } = useSession()
-  const { isLoggedIn, user } = useAuth()
+  const { user } = useAuth()
   const { cart } = useCart()
-
-  console.log({ data })
 
 
   return (
     <div className=''>
       <div className='block lg:hidden'>
         <MobileNavbar
-          handleSignOut={handleLogout}
-          session={user}
+          handleSignOut={logout}
+          session={null}
+          isLoggedIn={false}
+          user={user}
           data={data}
           cartItems={cart}
-          isLoggedIn={isLoggedIn}
-          user={user}
-
         />
       </div>
 
       <div className='hidden lg:block'>
         <Desktop
-          session={user}
           isTop={isTop}
           cartItems={cart}
-          handleSignOut={handleLogout}
-          isLoggedIn={isLoggedIn}
-          user={user}
+          handleSignOut={logout}
           data={data}
+          session={null}
+          isLoggedIn={false}
+          user={user}
         />
       </div>
     </div>
@@ -81,6 +78,8 @@ export const Navbar = () => {
 
 const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data }: Props) => {
   const router = useRouter()
+
+  console.log({ user })
 
   const formik = useFormik<Search>({
     initialValues: {
@@ -113,7 +112,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
 
   return (
     <nav
-      className={`grid grid-cols-12 bg-primary-blue-100 py-4  ${isTop ? 'fixed top-0 right-0 z-[9999] w-full' : ''
+      className={`grid grid-cols-12 bg-primary-blue-100/30 py-4  ${isTop ? 'fixed top-0 right-0 z-[99] w-full backdrop-blur-xl' : ''
         }`}
     >
       <ul className='col-start-2 col-end-12 mx-auto flex w-full items-center justify-between gap-x-8'>
@@ -125,7 +124,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           </h1>
         </li>
         <li className='lg:w-[30%] xl:w-[40%]'>
-          <form className='flex h-[5.6rem] w-full items-center rounded-sm bg-white hover:ring-2' onSubmit={formik.handleSubmit}>
+          <form className='flex h-[4rem] w-full items-center rounded-sm bg-white hover:ring-2' onSubmit={formik.handleSubmit}>
             <input
               type='text'
               placeholder='search'
@@ -141,9 +140,10 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
             </div>
           </form>
         </li>
+
         <div className='flex items-center gap-x-4 text-[1.6rem]'>
-          {data?.user ? (
-            <UserAccountDropdown />
+          {user?._id ? (
+            <UserAccountDropdown photo={user.photo} alt={user.name} fallback={user.name} />
           ) : (
             <div className='flex items-center gap-x-8'>
               <li>
@@ -160,9 +160,9 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
           )}
 
           <li>
-            <Button className='relative' onClick={onCartClick}>
-              <ShoppingBagIcon className='h-16 w-16 text-white' />
-              <span className='absolute top-0 left-[30px] flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
+            <Button className='relative bg-transparent border-0' onClick={onCartClick}>
+              <ShoppingBagIcon className='h-12 w-12 text-white' />
+              <span className='absolute top-0 left-[30px] flex h-[2rem] w-[2rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
                 {cartItems.length}
               </span>
             </Button>

@@ -1,3 +1,4 @@
+/* @import "./preflight.css"; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,12 +13,26 @@
 }
 
 @layer components {
+
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    appearance: button;
+    /* background-color: unset;
+    background-image: unset; */
+  }
+
+  /* button[type="submit"] {
+    @apply bg-transparent text-black hover:text-white hover:bg-blend-saturation hover:bg-blue-500;
+  } */
+
   button {
     outline: none;
   }
 
   .auth-btn {
-    @apply h-[5rem] w-fit rounded-md px-12 text-[1.6rem] font-semibold flex items-center justify-center;
+    @apply h-[4rem] w-fit rounded-md px-8 font-medium flex items-center justify-center text-[1.6rem] border-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0;
   }
 
   input:focus-within,

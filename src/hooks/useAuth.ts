@@ -1,7 +1,12 @@
-import { useAppSelector } from '@/hooks/reduxhooks'
+import useUserStore from "@/lib/store/user.store"
 
-export const useAuth = () => {
-  const auth = useAppSelector((state) => state.login)
+const useAuth = () => {
+  const { user, setUser } = useUserStore((state) => state)
 
-  return auth
+  return {
+    user,
+    setUser
+  }
 }
+
+export default useAuth

@@ -6,12 +6,22 @@ import axios from 'axios'
 import { PaystackHook } from '@/helpers/paystack'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/app/store'
+// import { RootState } from '@/app/store'
 import { Button } from '@chakra-ui/react'
 import { UserAccountDropdown } from '@/components/Dropdown/Account'
 import { useSession } from 'next-auth/react'
+import { getUser } from "@/lib"
+import { useUserStore } from "@/hooks/useUserStore"
+import { apiService } from "@/helpers/apiService"
+import useAuth from "@/hooks/useAuth"
+import useAxiosPrivate from "@/hooks/useAxios.hook"
+// import getUser from "@/hooks/getUser"
 
 const NavigationMenuDemoExample = () => {
+  const { user } = useAuth()
+  const axiosPrivate = useAxiosPrivate()
+  console.log({ user })
+
   const session = useSession()
 
   // console.log(session)
@@ -45,15 +55,31 @@ const NavigationMenuDemoExample = () => {
       // console.log(response)
 
       // this is the code that works (please note)
-      const userResponse = await axios.get(
-        'https://www.googleapis.com/oauth2/v3/userinfo',
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        }
-      )
-      console.log(userResponse)
+      // const userResponse = await axios.get(
+      //   'https://www.googleapis.com/oauth2/v3/userinfo',
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${accessToken}`
+      //     }
+      //   }
+      // )
+      // console.log(userResponse)
+
+
+      // get the user from my own server
+      // fetchAuth()
+      // const response = await axiosPrivate.get('/user', {
+      //   headers: {
+      //     'Authorization': user?.token
+      //   }
+      // })
+      const response = await apiService('/user')
+      console.log('response from the demo page', response)
+      // const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/user`, {
+      //   credentials: 'include',
+
+      // })
+
     } catch (err) {
       console.log(err)
     }
@@ -67,6 +93,8 @@ const NavigationMenuDemoExample = () => {
     // console.log(res)
   }
 
+  // getUser()
+
   return (
     // <NavigationMenuDemo />
     <div className='flex p-24'>
@@ -75,7 +103,6 @@ const NavigationMenuDemoExample = () => {
       {/* <PaystackHook price={20000} /> */}
       <Button className='' onClick={handleClick}>test the endpoint</Button>
 
-      <UserAccountDropdown />
     </div>
   )
 }

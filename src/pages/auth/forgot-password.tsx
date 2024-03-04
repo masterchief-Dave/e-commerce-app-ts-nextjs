@@ -6,6 +6,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 
 import { Layout } from '@/components/Layout'
 import ResetEmailSentModal from '@/components/Modal/ResetEmailSent'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 type Props = {}
 
@@ -73,9 +75,9 @@ const ForgotPassword = (props: Props) => {
           </div>
 
           <div className='flex items-center justify-center'>
-            <section className='w-[35rem] max-w-[40rem] space-y-8 rounded-xl border px-8 py-4'>
+            <section className='w-[45rem] max-w-[45rem] space-y-8 rounded-xl border px-8 py-12'>
               <h1 className='text-center text-[1.8rem] font-semibold'>
-                Trouble Signin in ?
+                Trouble Signing in ?
               </h1>
               <p className='text-[1.6rem] text-primary-grey-300'>
                 We&#39;ve got your back! Just enter your email address and
@@ -86,21 +88,21 @@ const ForgotPassword = (props: Props) => {
                 <label htmlFor='email' className='block font-medium mb-2'>
                   Email
                 </label>
-                <input
+                <Input
                   type='text'
-                  placeholder='email'
-                  className='mb-4 h-[3.5rem] w-full rounded-md border px-4 font-normal focus:ring-1'
+                  placeholder='Email'
+                  className='mb-4 h-[5.6rem] text-[1.6rem] w-full rounded-md border px-4 font-normal focus:ring-1'
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
 
-                <button
+                <Button
                   type='submit'
-                  className='h-[3.5rem] w-full rounded-md bg-blue-500 text-white hover:bg-primary-blue-300'
+                  className='h-[5.6rem] text-[1.6rem] w-full rounded-md bg-blue-500 text-white hover:bg-primary-blue-300'
                   onClick={handleAuthClick}
                 >
                   Submit
-                </button>
+                </Button>
               </form>
             </section>
           </div>
