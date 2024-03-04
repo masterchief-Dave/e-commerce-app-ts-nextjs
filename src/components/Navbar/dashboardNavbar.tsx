@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useStickyNavbar } from '@/hooks/useStickyNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
-import { useAuth } from '@/hooks/useAuth'
+import useAuth from '@/hooks/useAuth'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { UserAccountDropdown } from '../Dropdown/Account'
@@ -43,7 +43,7 @@ export const DashboardNavbar = ({
               Aloha 👋,{' '}
               {/* <span className='text-[1.5rem] lg:text-[2rem]'>{user?.name}</span> */}
             </p>
-            <UserAccountDropdown />
+            <UserAccountDropdown photo={user?.photo} alt={user?.name + 'photo'} fallback="e.k" />
             {/* <div className='h-16 w-16 rounded-full'>
               <Image src={session?.data?.user?.image!} alt='photo' width={1000} height={1000} className='rounded-full' />
             </div> */}

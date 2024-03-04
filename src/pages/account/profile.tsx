@@ -14,7 +14,7 @@ import { getToken } from 'next-auth/jwt'
 type Props = Pick<User, "user">
 
 const User = (props: Props) => {
-  const [firstName, lastName] = props.user.name.split(' ')
+  const [firstName, lastName] = useState('')
   const [canEdit, setCanEdit] = useState<boolean>(false)
   const oldPasswordRef = useRef<HTMLInputElement | null>(null)
 

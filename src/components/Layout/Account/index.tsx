@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -15,6 +16,7 @@ import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
 import Loader from '@/components/Shell/Loader'
+import useAuth from "@/hooks/useAuth"
 
 type Props = {
   children?: JSX.Element
@@ -25,21 +27,24 @@ type ServerProps = {
   user: User | null
 }
 
-export const AccountLayout = ({ children, user }: Props) => {
+export const AccountLayout = ({ children }: Props) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false)
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
   const router = useRouter()
+  const { user } = useAuth()
 
-  const {data: session, status} = useSession()
+  console.log({ user })
 
-  if(status === 'loading') {
-    return <Loader />
-  }
+  const { data: session, status } = useSession()
 
-  if (status === 'unauthenticated') {
-    router.push('/auth/login')
-    return <Loader />
-  }
+  // if (user?._id === 'loading') {
+  //   return <Loader />
+  // }
+
+  // if (status === 'unauthenticated') {
+  //   router.push('/auth/login')
+  //   return <Loader />
+  // }
 
 
   return (

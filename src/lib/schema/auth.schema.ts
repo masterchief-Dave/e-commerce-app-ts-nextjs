@@ -24,3 +24,4 @@ export const registerSchema = yup.object().shape({
   password: yup.string().min(5, "Must be more than 5 Characters").required('Password is Required'),
   confirmPassword: yup.string().required('Confirm your password').oneOf([yup.ref('password')], 'Passwords must be the same')
 })
+

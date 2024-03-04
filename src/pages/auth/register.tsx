@@ -1,14 +1,9 @@
 'use client'
-import * as Yup from 'yup'
+
 import Link from 'next/link'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
 import axios from 'axios'
-
-import { registerStart, registerSuccess, registerFailure } from '@/features/register/registerSlice'
-// import { loginSuccess } from '@/features/login/loginSlice'
-import { BASE_URL } from '@/utils/config'
 import { loginUser } from '@/helpers'
 import { Input } from '@/components/ui/input'
 import { Button } from "@/components/ui/button"
@@ -19,9 +14,9 @@ import { InputContainer } from "@/components/Form"
 import { EyeIcon, EyeOffIcon, FingerprintIcon, MailIcon, UserIcon } from "lucide-react"
 import { registerSchema, registerVal } from "@/lib/schema/auth.schema"
 import { useState } from "react"
-
-
-type Props = {}
+import { error, info } from "@/lib/utils/logger"
+import useAuth from "@/hooks/useAuth"
+import AuthService from "@/lib/services/auth.service"
 
 interface FormData {
   name: string
@@ -30,8 +25,8 @@ interface FormData {
   confirmPassword: string
 }
 
-const Register = (props: Props) => {
-  const dispatch = useDispatch()
+const Register = () => {
+  const { setUser } = useAuth()
   const router = useRouter()
   const [show, setShow] = useState({
     password: false,
@@ -55,20 +50,31 @@ const Register = (props: Props) => {
 
   const handleSubmit = async ({ name, email, password, confirmPassword }: FormData) => {
     try {
-      dispatch(registerStart())
-
-      const response = await axios.post('https://sage-warehouse-backend.onrender.com/api/v1/auth/register', { name, email, password, confirmPassword })
+      const response = await AuthService.register({
+        name: name,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword
+      })
 
       if (response.data.success) {
         // save user in session
         const loginResponse = await loginUser({ email, password })
 
         if (loginResponse && !loginResponse.ok) {
-          console.log(loginResponse.error)
+          info(loginResponse.error)
 
           toast.error('Error with Login')
           throw new Error(loginResponse?.error!)
         } else {
+          axios.defaults.headers.common['Authorization'] = response.data.user.token
+          setUser({
+            _id: response.data.user._id,
+            name: response.data.user.name,
+            email: response.data.user.email,
+            photo: response.data.user.photo,
+            token: response.data.user.token
+          })
           router.push('/')
           toast.success('Register Successful')
         }
@@ -77,7 +83,7 @@ const Register = (props: Props) => {
     } catch (err: any) {
       // console.log(err)
       toast.error('An Error Occured')
-      dispatch(registerFailure(err.message))
+      error({ url: router.asPath, message: 'An error occured in the register page', err })
     }
   }
 

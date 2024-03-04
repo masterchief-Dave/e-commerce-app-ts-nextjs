@@ -147,8 +147,8 @@ function LoginForm({ handleSubmit, error }: FormProps) {
             variant='primary'
             onClick={(e) => {
               e.preventDefault()
-              // router.push('http://localhost:8100/api/v1/auth/google')
-              handleGoogleAuth()
+              router.push('http://localhost:8100/api/v1/auth/google')
+              // handleGoogleAuth()
             }
             }
           >

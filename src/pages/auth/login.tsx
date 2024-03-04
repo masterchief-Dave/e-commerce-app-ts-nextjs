@@ -28,7 +28,6 @@ const Login = ({ myCookieValue, data }: Props) => {
     try {
       // https://sage-warehouse-backend.onrender.com/
       const response = await AuthService.login({ email, password })
-      console.log({ response })
 
       if (response?.success) {
         axios.defaults.headers.common["Authorization"] = response.user.token
@@ -57,17 +56,5 @@ const Login = ({ myCookieValue, data }: Props) => {
     </AuthLayout >
   )
 }
-
-// export async function getServerSideProps({ req }: any) {
-//   const response = await fetchLogin()
-//   console.log(response)
-//   const myCookieValue = req.cookies.e_commerce_token || 'No cookie found'
-//   return {
-//     props: {
-//       myCookieValue,
-//       // data
-//     },
-//   }
-// }
 
 export default Login

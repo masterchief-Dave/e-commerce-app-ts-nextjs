@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Head from 'next/head'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
@@ -18,12 +18,34 @@ import { landingPageFeatures } from '@/globals/home'
 import { FeaturesCard } from '@/components/Card'
 import Testimonials from "@/components/Testimonial"
 import useAuth from "@/hooks/useAuth"
+import { useSearchParams } from "next/navigation"
+import axios from "axios"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
-
-  const { user } = useAuth()
+  const params = useSearchParams()
+  const { user, setUser } = useAuth()
   console.log({ user })
+
+  // CREATE USE-EFFECT TO CAPTURE THE DATA COMING FROM THE SERVER
+  useEffect(() => {
+    const name = params?.get('name')
+    const email = params?.get('email')
+    const token = params?.get('token')
+    const id = params?.get('id')
+    const photo = params?.get('photo')
+
+    if (name !== undefined && name?.length! > 1) {
+      axios.defaults.headers.common["Authorization"] = token
+      return setUser({
+        email: email ?? '',
+        _id: id ?? '',
+        name: name ?? '',
+        photo: photo ?? '',
+        token: token ?? ''
+      })
+    }
+  }, [])
 
   //{{url}}/products?page=1
 

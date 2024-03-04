@@ -1,3 +1,4 @@
+import { info } from "@/lib/utils/logger"
 import axios from "axios"
 
 export const fetchOrder = async (req: any) => {
@@ -13,7 +14,7 @@ export const fetchOrder = async (req: any) => {
 
 // calling my express server from here
 export const fetchDataFromExpressServer = async (req: any, token: string) => {
-  console.log('token to fetch data from express server', { token })
+  // info('token to fetch data from express server', { token })
   const response = await axios.get(`http://localhost:8100/api/v1/order`, {
     withCredentials: true,
     headers: {
