@@ -73,4 +73,20 @@
     height: 100%;
     background-color: rgba(0, 0, 0, .2);
   }
+
+  /* toaster */
+  .success-toast {
+    background-color: #008000 !important;
+    color: #FFF !important;
+    font-size: 44px !important;
+    font-weight: 600;
+    font-family: rubik;
+  }
+
+  .bad-toast {
+    background-color: #EF4444;
+    color: #FFF;
+  }
+
+  /* toaster */
 }

@@ -33,8 +33,6 @@ export const AccountLayout = ({ children }: Props) => {
   const router = useRouter()
   const { user } = useAuth()
 
-  console.log({ user })
-
   const { data: session, status } = useSession()
 
   // if (user?._id === 'loading') {

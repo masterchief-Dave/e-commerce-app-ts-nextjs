@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const CategoryCard = ({ products, category }: Props) => {
-  console.log({ products })
+
   return (
     <div className='w-full bg-white p-8 shadow-product-card-box-shadow lg:w-fit xl:w-full'>
       <div>

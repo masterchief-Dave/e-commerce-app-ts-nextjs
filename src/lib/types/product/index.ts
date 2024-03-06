@@ -1,3 +1,5 @@
 export interface CategoryInterface {
-  data: { name: string, products: Product[] }[]
+  data: {
+    data: { name: string, products: Product[] }[]
+  }
 }

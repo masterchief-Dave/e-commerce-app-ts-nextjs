@@ -13,21 +13,14 @@ import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { useSearchParams } from 'next/navigation'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
 
 type Props = {}
 
 const Cart = (props: Props) => {
-  // const { cart } = useCart()
-  const searchParams = useSearchParams()
+  const { data } = useGetCart()
 
-  const cartItems = searchParams?.getAll('id')
-
-  console.log({ cartItems })
-
-  useEffect(() => {
-    // get the items in the url search params and populate the page, 
-
-  }, [cartItems])
+  console.log(data)
 
   return (
     <Layout>
@@ -37,7 +30,7 @@ const Cart = (props: Props) => {
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
             <h1 className='text-[2rem] font-bold uppercase'>Cart</h1>
             {/* cart product design layout and design*/}
-            {/* {cart.length >= 1 ? <ItemInCart /> : <NoItemInCart />} */}
+            {data && data?.data?.length >= 1 ? <ItemInCart cart={data.data} /> : <NoItemInCart />}
           </section>
         </main>
       </div>
@@ -70,8 +63,7 @@ const NoItemInCart = () => {
   )
 }
 
-const ItemInCart = () => {
-  const { cart } = useCart()
+const ItemInCart = ({ cart }: { cart: string[] }) => {
   const session = useSession()
   const router = useRouter()
   const [openModal, setOpenModal] = useState(false)
@@ -96,7 +88,7 @@ const ItemInCart = () => {
   return (
     <>
       <div className='px-12'>
-        {cart.map((item: Cart) => {
+        {/* {cart.map((item: Cart) => {
           return (
             <CheckoutProduct
               key={item._id}
@@ -106,7 +98,7 @@ const ItemInCart = () => {
               price={item.price}
               cartQuantity={item.cartQuantity}
             />)
-        })}
+        })} */}
       </div>
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
         <div className='flex items-center justify-between font-semibold'>

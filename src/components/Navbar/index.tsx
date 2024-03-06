@@ -79,8 +79,6 @@ export const Navbar = () => {
 const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data }: Props) => {
   const router = useRouter()
 
-  console.log({ user })
-
   const formik = useFormik<Search>({
     initialValues: {
       productName: ''

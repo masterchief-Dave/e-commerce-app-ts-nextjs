@@ -1,52 +1,44 @@
-import Image from 'next/image'
-import { HeartIcon } from '@/globals/icons'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+"use client"
 
-import { addToCart } from '@/features/cart/cartSlice'
-import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
-import { useAppDispatch } from '@/lib/hooks/reduxhooks'
+import Image from 'next/image'
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { RenderRating } from '@/helpers/renderRating'
 import Link from 'next/link'
+import { useAddToCart, useLikeProduct } from "@/lib/hooks/product/product.hook"
+import { HeartIcon } from "lucide-react"
+import useAuth from "@/lib/hooks/useAuth"
+import { useGetCart, useGetLikedProducts } from "@/lib/hooks/user/user.hook"
+import Spinner from "@/components/molecules/spinner"
+import { useToast } from "@/components/ui/use-toast"
 
 type Props = {
+  page: number
   data: Product
 }
 
-export const ProductCard = ({ data }: Props) => {
-  const dispatch = useAppDispatch()
-  const [clicked, setClicked] = useState<boolean | null>(null)
+export const ProductCard = ({ page, data }: Props) => {
+  const userQuery = useGetLikedProducts()
+  const { trigger, isMutating } = useLikeProduct(page)
+  const cartQuery = useAddToCart(page)
+  const getCartQuery = useGetCart()
 
-  const handleFavourite = () => {
-    if (clicked === null) {
-      return setClicked(true)
-    } else {
-      setClicked(!clicked)
-    }
+  const userFavorites = userQuery?.data?.data
+  const userCart = getCartQuery?.data
+  const handleLikeProduct = () => {
+    trigger({ id: data?._id, page: page }, {
+      optimisticData: userFavorites && ([userFavorites.includes(data?._id) ? userFavorites?.filter((fav) => fav !== data?._id) : [...userFavorites, data._id]]),
+      rollbackOnError: true
+    })
   }
 
-  useEffect(() => {
-    if (clicked === true) {
-      dispatch(addToWishList(data))
-      toast.success('Item added to wishlist')
-    } else if (clicked === false) {
-      // remove from wishlist
-      dispatch(removeFromWishlist({
-        id: data._id
-      }))
-      toast.success('Item removed from wishlist')
-    }
-  }, [clicked])
 
   // cart
   const handleAddToCart = () => {
     if (!data) return
 
-    dispatch(addToCart({
-      ...data,
-      cartQuantity: 1
-    }))
+    cartQuery.trigger({ id: data?._id, page: page }, {
+      rollbackOnError: true
+    })
   }
 
   return (
@@ -70,11 +62,15 @@ export const ProductCard = ({ data }: Props) => {
         <div
           className='absolute top-5 right-5 cursor-pointer rounded-md p-2'
         >
-          <HeartIcon
-            className='h-10 w-10 text-blue-500'
-            handleFavourite={handleFavourite}
-            fill={clicked === true ? '#3b82f6' : 'none'}
-          />
+          {userQuery.isLoading ? <Spinner /> : (
+            isMutating ? <Spinner /> : (
+              <button disabled={isMutating || userQuery.isValidating} onClick={handleLikeProduct} className="h-14 w-14 rounded-full bg-white flex items-center justify-center">
+                <HeartIcon
+                  aria-disabled={isMutating || userQuery.isValidating}
+                  fill={userQuery?.data?.data.includes(data._id) ? '#FF0000' : 'transparent'} stroke={userQuery.data?.data.includes(data._id) ? '#FF0000' : '#FF0000'} />
+              </button>
+            )
+          )}
         </div>
       </div>
 
@@ -98,15 +94,22 @@ export const ProductCard = ({ data }: Props) => {
           {/* <span className='text-[1.6rem]'>{data.ratings}</span> */}
         </div>
         <button
-          className='flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md bg-white border font-semibold hover:bg-primary-blue-300 hover:text-white hover:transition-all hover:delay-75'
+          className={`flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${getCartQuery.data?.data.includes(data._id) ? 'text-[#FF0000] hover:bg-[#FF0000] hover:text-white' : 'bg-white hover:bg-primary-blue-300 hover:text-white '}`}
           onClick={handleAddToCart}
         >
           <ShoppingBagIcon className='h-8 w-8' />
-          <span className='capitalize text-[1.6rem]'>
-            Add to cart
-          </span>
+          {getCartQuery.data?.data.includes(data?._id) ? (
+            <span className='capitalize text-[1.6rem]'>
+              {cartQuery.isMutating ? <Spinner /> : 'Remove from cart'}
+            </span>
+          ) : (
+            <span className='capitalize text-[1.6rem]'>
+              {cartQuery.isMutating ? <Spinner /> : 'Add to cart'}
+            </span>
+          )}
+
         </button>
       </div>
-    </div>
+    </div >
   )
 }

@@ -9,7 +9,6 @@ const useAxiosPrivate = () => {
 
   useEffect(() => {
     const requestInterceptor = globalAxios.interceptors.request.use((config) => {
-      console.log('the code is in the request header')
       if (!config.headers['Authorization']) {
         config.headers['Authorization'] = user?.token
       }
@@ -19,8 +18,7 @@ const useAxiosPrivate = () => {
     const responseInterceptor = globalAxios.interceptors.response.use((response) => response, async (error) => {
       const prevRequest = error?.config
 
-      console.log('error response', error.response.status)
-
+      // console.log('error response', error.response.status)
       if (error.response.status === 401 && !prevRequest?.sent) {
         prevRequest.sent = true
         const newAccessToken = await refresh()

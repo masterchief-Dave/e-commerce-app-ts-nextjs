@@ -1,4 +1,4 @@
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from "@/components/ui/toaster"
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'react-redux'
 import { SessionProvider } from 'next-auth/react'
