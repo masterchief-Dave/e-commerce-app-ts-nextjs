@@ -9,17 +9,17 @@ import { GetServerSideProps } from 'next'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 
-import { useAppDispatch } from '@/hooks/reduxhooks'
+import { useAppDispatch } from '@/lib/hooks/reduxhooks'
 import { Layout } from '@/components/Layout'
 // import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Footer } from '@/components/Footer'
 import { addToCart } from '@/features/cart/cartSlice'
-import { useCart } from '@/hooks/useCart'
+import { useCart } from '@/lib/hooks/useCart'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { ProductTab } from '@/components/Tabs/Product'
-import useAuth from "@/hooks/useAuth"
+import useAuth from "@/lib/hooks/useAuth"
 
 type Props = {
   product: Product

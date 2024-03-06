@@ -13,7 +13,7 @@ import * as Yup from 'yup'
 
 import styles from './index.module.scss'
 import { countryCode } from '@/globals/countries'
-import { useAppDispatch } from '@/hooks/reduxhooks'
+import { useAppDispatch } from '@/lib/hooks/reduxhooks'
 import { addShippingAddress } from '@/features/shipping-address/address-slice'
 
 export const BillingAddress = () => {

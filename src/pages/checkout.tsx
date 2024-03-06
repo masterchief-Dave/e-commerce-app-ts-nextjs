@@ -6,14 +6,14 @@ import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
 import { BillingAddress } from '@/components/Accordion/billingAddressAccordion'
 import { PaystackHook } from '@/helpers/paystack'
-import { useCart } from '@/hooks/useCart'
-import { RootState } from '@/app/store'
+import { useCart } from '@/lib/hooks/useCart'
 import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 import Link from 'next/link'
 import Image from 'next/image'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
+import { RootState } from '@/app/store'
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,

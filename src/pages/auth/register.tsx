@@ -15,7 +15,7 @@ import { EyeIcon, EyeOffIcon, FingerprintIcon, MailIcon, UserIcon } from "lucide
 import { registerSchema, registerVal } from "@/lib/schema/auth.schema"
 import { useState } from "react"
 import { error, info } from "@/lib/utils/logger"
-import useAuth from "@/hooks/useAuth"
+import useAuth from "@/lib/hooks/useAuth"
 import AuthService from "@/lib/services/auth.service"
 
 interface FormData {
@@ -79,7 +79,6 @@ const Register = () => {
           toast.success('Register Successful')
         }
       }
-
     } catch (err: any) {
       // console.log(err)
       toast.error('An Error Occured')

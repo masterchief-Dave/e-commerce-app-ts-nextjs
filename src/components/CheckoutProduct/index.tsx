@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import { RootState } from '@/app/store'
-import { useAppDispatch } from '@/hooks/reduxhooks'
+import { useAppDispatch } from '@/lib/hooks/reduxhooks'
 import { increaseCartItem, decreaseCartItem, removeItem } from '@/features/cart/cartSlice'
 
 type Props = {

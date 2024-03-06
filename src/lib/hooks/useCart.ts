@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/hooks/reduxhooks'
+import { useAppSelector } from '@/lib/hooks/reduxhooks'
 
 export const useCart = () => {
   const cart = useAppSelector((state) => state.cart.value)

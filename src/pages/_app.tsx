@@ -13,8 +13,9 @@ import '@/styles/main.scss'
 import { store } from '@/app/store'
 import { useEffect } from "react"
 import axios from "axios"
-import useRefreshToken from "@/hooks/useRefreshToken"
-import useAuth from "@/hooks/useAuth"
+import useRefreshToken from "@/lib/hooks/useRefreshToken"
+import useAuth from "@/lib/hooks/useAuth"
+import SWRProvider from "@/SWRProvider"
 
 export default function App({
   Component,
@@ -39,10 +40,12 @@ export default function App({
     <Provider store={store}>
       <SessionProvider session={session}>
         <ChakraProvider>
-          <div className='font-rubik max-w-[2560px] mx-auto'>
-            <Component {...pageProps} />
-            <Toaster />
-          </div>
+          <SWRProvider>
+            <div className='font-rubik max-w-[2560px] mx-auto'>
+              <Component {...pageProps} />
+              <Toaster />
+            </div>
+          </SWRProvider>
         </ChakraProvider>
       </SessionProvider>
     </Provider>

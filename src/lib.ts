@@ -2,7 +2,6 @@ import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 // const { cookies } = require('next/headers').headers()
 import { apiService } from "@/helpers/apiService"
-import { useUserStore } from "./hooks/useUserStore"
 
 const secretKey = "secret"
 const key = new TextEncoder().encode(secretKey)

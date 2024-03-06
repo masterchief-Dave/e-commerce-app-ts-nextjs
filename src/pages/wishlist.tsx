@@ -3,13 +3,11 @@ import { Footer } from '@/components/Footer'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
 import { ProductCard } from '@/components/Product/Card'
-import { useAppSelector } from '@/hooks/reduxhooks'
+
 
 type Props = {}
 
 const Wishlist = (props: Props) => {
-
-  const wishlist = useAppSelector((state) => state.wishlist.value)
 
   return (
     <Layout>

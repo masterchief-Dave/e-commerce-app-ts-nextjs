@@ -6,7 +6,7 @@ import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 
 import { addToCart } from '@/features/cart/cartSlice'
 import { addToWishList, removeFromWishlist } from '@/features/wishlist/wishlistSlice'
-import { useAppDispatch } from '@/hooks/reduxhooks'
+import { useAppDispatch } from '@/lib/hooks/reduxhooks'
 import { RenderRating } from '@/helpers/renderRating'
 import Link from 'next/link'
 

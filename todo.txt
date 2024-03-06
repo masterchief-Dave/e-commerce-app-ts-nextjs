@@ -172,6 +172,9 @@ work on the dashboard part so that it pulls the user profile and updates the acc
 13. there are no reviews or ways to add reviews
 14. user password can be updated (done)
 
+REFACTORING
+1. Refactor the use of redux and move to zustand completely 
+
 -------------
 Features
 -------------

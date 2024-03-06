@@ -13,10 +13,10 @@ import { useSession } from 'next-auth/react'
 
 import BreadCrumb from '@/components/BreadCrumb'
 import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
-import useMediaQuery from '@/hooks/useMediaQuery'
+import useMediaQuery from '@/lib/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
 import Loader from '@/components/Shell/Loader'
-import useAuth from "@/hooks/useAuth"
+import useAuth from "@/lib/hooks/useAuth"
 
 type Props = {
   children?: JSX.Element

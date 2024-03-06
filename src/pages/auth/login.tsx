@@ -3,7 +3,7 @@ import LoginForm from "@/components/Form/loginForm"
 import AuthService from "@/lib/services/auth.service"
 import axios from "axios"
 import { useRouter } from "next/navigation"
-import useAuth from "@/hooks/useAuth"
+import useAuth from "@/lib/hooks/useAuth"
 import { useState } from "react"
 
 type Props = {

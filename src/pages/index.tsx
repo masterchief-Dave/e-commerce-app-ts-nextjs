@@ -11,21 +11,23 @@ import { Footer } from '@/components/Footer'
 import { CategoryCard } from '@/components/Card/Category'
 import { ProductCard } from '@/components/Product/Card'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
-import { ProductCardSkeleton } from '@/components/SkeletonLoading'
+import { CategorySkeleton, ProductCardSkeleton } from '@/components/SkeletonLoading'
 import { electronicsData, gamingData, computerData } from '@/globals/category'
 import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
 import { landingPageFeatures } from '@/globals/home'
 import { FeaturesCard } from '@/components/Card'
 import Testimonials from "@/components/Testimonial"
-import useAuth from "@/hooks/useAuth"
 import { useSearchParams } from "next/navigation"
 import axios from "axios"
+import useAuth from "@/lib/hooks/useAuth"
+import { useGetCategories } from "@/lib/hooks/product/product.hook"
+import type { CategoryInterface } from "@/lib/types/product"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
   const params = useSearchParams()
   const { user, setUser } = useAuth()
-  console.log({ user })
+  // console.log({ user })
 
   // CREATE USE-EFFECT TO CAPTURE THE DATA COMING FROM THE SERVER
   useEffect(() => {
@@ -46,6 +48,8 @@ export default function Home() {
       })
     }
   }, [])
+
+  const { data: categories, isLoading: categoriesLoading } = useGetCategories()
 
   //{{url}}/products?page=1
 
@@ -119,9 +123,19 @@ export default function Home() {
                     Product Categories
                   </h2>
                   <div className='sm:flex sm:flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12'>
-                    <CategoryCard data={electronicsData} />
-                    <CategoryCard data={computerData} />
-                    <CategoryCard data={gamingData} />
+                    {!categoriesLoading ? (
+                      <>
+                        <CategoryCard products={categories?.data[0]?.products} category={categories?.data[0]?.name} />
+                        <CategoryCard products={categories?.data[1]?.products} category={categories?.data[1]?.name} />
+                        <CategoryCard products={categories?.data[2]?.products} category={categories?.data[2]?.name} />
+                      </>
+                    ) : (
+                      <>
+                        {new Array(3).fill(3).map((_, index) => {
+                          return <CategorySkeleton key={index + 1} />
+                        })}
+                      </>
+                    )}
 
                     {/* show this section only in the lg screen size */}
                     <div className='hidden lg:block lg:space-y-4 xl:hidden'>

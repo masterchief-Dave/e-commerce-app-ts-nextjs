@@ -1,4 +1,4 @@
-import useLogout from "@/hooks/useLogout"
+import useLogout from "@/lib/hooks/useLogout"
 import { Menu } from '@headlessui/react'
 // import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'

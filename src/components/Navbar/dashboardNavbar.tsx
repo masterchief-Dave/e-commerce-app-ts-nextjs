@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import { useStickyNavbar } from '@/hooks/useStickyNavbar'
-import useMediaQuery from '@/hooks/useMediaQuery'
-import useAuth from '@/hooks/useAuth'
+import { useStickyNavbar } from '@/lib/hooks/useStickyNavbar'
+import useMediaQuery from '@/lib/hooks/useMediaQuery'
+import useAuth from '@/lib/hooks/useAuth'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { UserAccountDropdown } from '../Dropdown/Account'
