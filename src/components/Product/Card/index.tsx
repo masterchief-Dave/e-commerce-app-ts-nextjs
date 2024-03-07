@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useAddToCart, useLikeProduct } from "@/lib/hooks/product/product.hook"
 import { HeartIcon } from "lucide-react"
 import useAuth from "@/lib/hooks/useAuth"
-import { useGetCart, useGetLikedProducts } from "@/lib/hooks/user/user.hook"
+import { useGetCart } from "@/lib/hooks/user/user.hook"
 import Spinner from "@/components/molecules/spinner"
 import { useToast } from "@/components/ui/use-toast"
 
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const ProductCard = ({ page, data }: Props) => {
-  // const userQuery = useGetLikedProducts()
+
   const { trigger, isMutating } = useLikeProduct(page)
   const cartQuery = useAddToCart(page)
   // const getCartQuery = useGetCart()

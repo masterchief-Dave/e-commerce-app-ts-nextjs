@@ -43,7 +43,7 @@ const Cart = (props: Props) => {
                   return <CartSkeleton key={index + 1} />
                 })}
               </div>
-            ) : data && data.data.length > 1 ? <ItemInCart cart={data.products} /> : <NoItemInCart />}
+            ) : data && data.data.length >= 1 ? <ItemInCart cart={data.products} /> : <NoItemInCart />}
 
           </section>
         </main>
@@ -109,6 +109,7 @@ const ItemInCart = ({ cart }: { cart: CartProducts[] }) => {
               name={item.name}
               price={item.price}
               cartQuantity={item.quantity}
+              stock={item.stock}
             />)
         })}
       </div>

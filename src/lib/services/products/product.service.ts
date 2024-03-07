@@ -24,7 +24,23 @@ class ProductService {
     })
   }
 
+  static async increaseItemInCart(url: string, { arg }: { arg: { id: string } }) {
+    return await apiService(`/products/increase-item-in-cart`, 'POST', {
+      id: arg.id
+    })
+  }
 
+  static async decreaseItemInCart(url: string, { arg }: { arg: { id: string } }) {
+    return await apiService(`/products/decrease-item-in-cart`, 'POST', {
+      id: arg.id
+    })
+  }
+
+  static async removeItemInCart(url: string, { arg }: { arg: { id: string } }) {
+    return await apiService('/products/remove-item-in-cart', 'POST', {
+      id: arg.id
+    })
+  }
 }
 
 export default ProductService

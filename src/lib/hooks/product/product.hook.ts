@@ -42,3 +42,36 @@ export const useAddToCart = (page: number) => {
     }
   })
 }
+
+export const useIncreaseItemInCart = () => {
+  const { mutate } = useGetCart()
+
+  return useSWRMutation('/products/increase-item-in-cart', ProductService.increaseItemInCart, {
+    onError() { },
+    onSuccess: () => {
+      mutate()
+    }
+  })
+}
+
+export const useDecreaseItemInCart = () => {
+  const { mutate } = useGetCart()
+
+  return useSWRMutation('/products/decrease-item-in-cart', ProductService.decreaseItemInCart, {
+    onError() { },
+    onSuccess: () => {
+      mutate()
+    }
+  })
+}
+
+export const useRemoveItemIncart = () => {
+  const { mutate } = useGetCart()
+
+  return useSWRMutation('/products/remove-item-in-cart', ProductService.removeItemInCart, {
+    onError() { },
+    onSuccess: () => {
+      mutate()
+    }
+  })
+}

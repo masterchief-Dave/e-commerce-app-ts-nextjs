@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import { RootState } from '@/app/store'
 import { useAppDispatch } from '@/lib/hooks/reduxhooks'
 import { increaseCartItem, decreaseCartItem, removeItem } from '@/features/cart/cartSlice'
+import { useDecreaseItemInCart, useIncreaseItemInCart, useRemoveItemIncart } from "@/lib/hooks/product/product.hook"
 
 type Props = {
   id: string
@@ -14,12 +15,16 @@ type Props = {
   name: string
   price: number
   cartQuantity: number
+  stock: number
 }
 
-const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
+const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const message = useSelector((state: RootState) => state.cart.message)
+  const increaseItemQuery = useIncreaseItemInCart()
+  const decreaseItemQuery = useDecreaseItemInCart()
+  const removeItemQuery = useRemoveItemIncart()
 
   // checking the item quantity on the server
   // @ts-ignore
@@ -29,6 +34,24 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
 
   if (message !== undefined && message?.length > 2) {
     alert(message)
+  }
+
+  const handleIncreaseItemQuantity = () => {
+    increaseItemQuery.trigger({ id: id }, {
+      optimisticData: increaseItemQuery.data && cartQuantity + 1,
+      rollbackOnError: true
+    })
+  }
+
+  const handleDecreaseItemQuantity = () => {
+    decreaseItemQuery.trigger({ id: id }, {
+      optimisticData: decreaseItemQuery.data && cartQuantity - 1,
+      rollbackOnError: true
+    })
+  }
+
+  const handleRemoveItemFromCart = () => {
+    removeItemQuery.trigger({ id: id })
   }
 
   return (
@@ -69,16 +92,18 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
           <p>{cartQuantity}</p>
           <div className='flex flex-col items-center justify-center gap-2 lg:gap-4 text-text-primary-link'>
             {/* when the quanity is 1 then disable the button from going lower */}
-            <span onClick={() => {
-              dispatch(increaseCartItem({ id, stock: data?.data?.product.stock }))
-            }}>
+            <button
+              onClick={handleIncreaseItemQuantity}
+              disabled={increaseItemQuery.isMutating || cartQuantity >= stock}
+            >
               <ChevronUpIcon className='h-8 w-8 cursor-pointer' />
-            </span>
-            <span onClick={() => {
-              dispatch(decreaseCartItem({ id, stock: data?.data?.product.stock }))
-            }}>
+            </button>
+            <button
+              onClick={handleDecreaseItemQuantity}
+              disabled={decreaseItemQuery.isMutating || cartQuantity < 1}
+            >
               <ChevronDownIcon className='h-8 w-8 cursor-pointer' />
-            </span>
+            </button>
           </div>
           {/* I want this message to clear after some time */}
           {/* <span className='text-[1.3rem] font-normal text-primary-red-100'> toast {message}</span> */}
@@ -86,11 +111,11 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id }: Props) => {
 
         <section className='space-y-4 text-xl lg:text-2xl'>
           <p className='text-xl lg:text-[2.5rem] font-bold mb-4'>${price.toFixed(2)}</p>
-          <p className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4' onClick={() => {
-            dispatch(removeItem({ id, stock: data?.data?.product?.stock }))
-          }}>
+          <button
+            className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4'
+            onClick={handleRemoveItemFromCart}>
             Remove
-          </p>
+          </button>
         </section>
       </section>
     </div>
