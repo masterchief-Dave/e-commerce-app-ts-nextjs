@@ -14,11 +14,18 @@ import { useEffect, useState } from 'react'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { useSearchParams } from 'next/navigation'
 import { useGetCart } from "@/lib/hooks/user/user.hook"
+import fetchCart from "@/utils/fetchCart"
+import Spinner from "@/components/molecules/spinner"
+import globalAxios from '@/lib/hooks/useAxios.hook'
+
+import { Skeleton } from "@/components/ui/skeleton"
+import { CartSkeleton } from "@/components/skeleton"
+import type { CartProducts } from "@/lib/types/user/user.type"
 
 type Props = {}
 
 const Cart = (props: Props) => {
-  const { data } = useGetCart()
+  const { data, isLoading } = useGetCart()
 
   console.log(data)
 
@@ -30,7 +37,14 @@ const Cart = (props: Props) => {
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
             <h1 className='text-[2rem] font-bold uppercase'>Cart</h1>
             {/* cart product design layout and design*/}
-            {data && data?.data?.length >= 1 ? <ItemInCart cart={data.data} /> : <NoItemInCart />}
+            {isLoading ? (
+              <div className="flex flex-col">
+                {new Array(3).fill(3).map((_, index) => {
+                  return <CartSkeleton key={index + 1} />
+                })}
+              </div>
+            ) : data && data.data.length > 1 ? <ItemInCart cart={data.products} /> : <NoItemInCart />}
+
           </section>
         </main>
       </div>
@@ -63,8 +77,8 @@ const NoItemInCart = () => {
   )
 }
 
-const ItemInCart = ({ cart }: { cart: string[] }) => {
-  const session = useSession()
+const ItemInCart = ({ cart }: { cart: CartProducts[] }) => {
+
   const router = useRouter()
   const [openModal, setOpenModal] = useState(false)
 
@@ -73,22 +87,20 @@ const ItemInCart = ({ cart }: { cart: string[] }) => {
   })
 
   const handleProceedToCheckout = () => {
-    if (session.status === 'unauthenticated') {
-      // bring up auth modal and save the redirect because the user should be redirected to the /checkout page
-      return setOpenModal(true)
-    }
+    // if (user === 'unauthenticated') {
+    //   // bring up auth modal and save the redirect because the user should be redirected to the /checkout page
+    //   return setOpenModal(true)
+    // }
 
     router.push('/checkout')
   }
 
-  /**
-   * in this cart page move all the items in my cart to the url query params style, and then when a user clicks on the auth link and the page refreshes the content of the cart can be retrieved from the url search params and the user can proceed to checkout
-   */
+  console.log({ cart })
 
   return (
     <>
       <div className='px-12'>
-        {/* {cart.map((item: Cart) => {
+        {cart?.map((item: CartProducts) => {
           return (
             <CheckoutProduct
               key={item._id}
@@ -96,9 +108,9 @@ const ItemInCart = ({ cart }: { cart: string[] }) => {
               img={item.images[0].url}
               name={item.name}
               price={item.price}
-              cartQuantity={item.cartQuantity}
+              cartQuantity={item.quantity}
             />)
-        })} */}
+        })}
       </div>
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
         <div className='flex items-center justify-between font-semibold'>
@@ -115,3 +127,4 @@ const ItemInCart = ({ cart }: { cart: string[] }) => {
     </>
   )
 }
+

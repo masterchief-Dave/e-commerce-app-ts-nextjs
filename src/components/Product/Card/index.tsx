@@ -17,20 +17,22 @@ type Props = {
 }
 
 export const ProductCard = ({ page, data }: Props) => {
-  const userQuery = useGetLikedProducts()
+  // const userQuery = useGetLikedProducts()
   const { trigger, isMutating } = useLikeProduct(page)
   const cartQuery = useAddToCart(page)
-  const getCartQuery = useGetCart()
+  // const getCartQuery = useGetCart()
 
-  const userFavorites = userQuery?.data?.data
-  const userCart = getCartQuery?.data
-  const handleLikeProduct = () => {
-    trigger({ id: data?._id, page: page }, {
-      optimisticData: userFavorites && ([userFavorites.includes(data?._id) ? userFavorites?.filter((fav) => fav !== data?._id) : [...userFavorites, data._id]]),
-      rollbackOnError: true
-    })
-  }
+  // const userFavorites = userQuery?.data?.data
+  // const userCartIds = getCartQuery?.data?.data.map((cart) => {
+  //   return cart.id
+  // })
 
+  // const handleLikeProduct = () => {
+  //   trigger({ id: data?._id, page: page }, {
+  //     optimisticData: userFavorites && ([userFavorites.includes(data?._id) ? userFavorites?.filter((fav) => fav !== data?._id) : [...userFavorites, data._id]]),
+  //     rollbackOnError: true
+  //   })
+  // }
 
   // cart
   const handleAddToCart = () => {
@@ -62,15 +64,18 @@ export const ProductCard = ({ page, data }: Props) => {
         <div
           className='absolute top-5 right-5 cursor-pointer rounded-md p-2'
         >
-          {userQuery.isLoading ? <Spinner /> : (
+          {/* {userQuery.isLoading ? <Spinner /> : (
             isMutating ? <Spinner /> : (
-              <button disabled={isMutating || userQuery.isValidating} onClick={handleLikeProduct} className="h-14 w-14 rounded-full bg-white flex items-center justify-center">
+              <button
+                disabled={isMutating || userQuery.isValidating}
+                onClick={handleLikeProduct}
+                className="h-14 w-14 rounded-full bg-white flex items-center justify-center">
                 <HeartIcon
                   aria-disabled={isMutating || userQuery.isValidating}
                   fill={userQuery?.data?.data.includes(data._id) ? '#FF0000' : 'transparent'} stroke={userQuery.data?.data.includes(data._id) ? '#FF0000' : '#FF0000'} />
               </button>
             )
-          )}
+          )} */}
         </div>
       </div>
 
@@ -93,12 +98,12 @@ export const ProductCard = ({ page, data }: Props) => {
           </div>
           {/* <span className='text-[1.6rem]'>{data.ratings}</span> */}
         </div>
-        <button
-          className={`flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${getCartQuery.data?.data.includes(data._id) ? 'text-[#FF0000] hover:bg-[#FF0000] hover:text-white' : 'bg-white hover:bg-primary-blue-300 hover:text-white '}`}
+        {/* <button
+          className={`flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${userCartIds?.includes(data._id) ? 'text-[#FF0000] hover:bg-[#FF0000] hover:text-white' : 'bg-white hover:bg-primary-blue-300 hover:text-white '}`}
           onClick={handleAddToCart}
         >
           <ShoppingBagIcon className='h-8 w-8' />
-          {getCartQuery.data?.data.includes(data?._id) ? (
+          {userCartIds?.includes(data?._id) ? (
             <span className='capitalize text-[1.6rem]'>
               {cartQuery.isMutating ? <Spinner /> : 'Remove from cart'}
             </span>
@@ -108,7 +113,7 @@ export const ProductCard = ({ page, data }: Props) => {
             </span>
           )}
 
-        </button>
+        </button> */}
       </div>
     </div >
   )

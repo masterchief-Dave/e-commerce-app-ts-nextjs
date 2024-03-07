@@ -1,5 +1,4 @@
 import { apiService } from "@/helpers/apiService"
-import axios from "axios"
 
 class ProductService {
   static async getAllCategories() {

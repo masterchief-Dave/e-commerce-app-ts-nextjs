@@ -23,3 +23,12 @@ export const CategorySkeleton = () => {
     </div>
   )
 }
+
+export const CartSkeleton = () => {
+  return (
+    <div className="mb-24 h-[20rem] min-h-[20rem]">
+      <Skeleton height={'10rem'} />
+      <SkeletonText mt={'4'} noOfLines={4} spacing={'4'} skeletonHeight={'2'} />
+    </div>
+  )
+}

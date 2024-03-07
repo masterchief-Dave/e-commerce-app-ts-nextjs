@@ -12,6 +12,7 @@ const useAxiosPrivate = () => {
       if (!config.headers['Authorization']) {
         config.headers['Authorization'] = user?.token
       }
+
       return config
     }, (error) => Promise.reject(error))
 

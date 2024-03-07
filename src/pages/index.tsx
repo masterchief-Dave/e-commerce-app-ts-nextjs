@@ -47,7 +47,7 @@ export default function Home() {
   }, [])
 
   const { data: categories, isLoading: categoriesLoading } = useGetCategories()
-  console.log(categories?.data.data)
+  // console.log(categories?.data.data)
 
   const { isLoading: isAllProductsLoading, data: allProductsData, error: productFetchingError } = useGetProducts({ page: pageIndex })
 

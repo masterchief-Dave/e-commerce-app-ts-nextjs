@@ -11,29 +11,37 @@ import './demos/demo.scss'
 import '../components/Dropdown/dropdown.scss'
 import '@/styles/main.scss'
 import { store } from '@/app/store'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import useRefreshToken from "@/lib/hooks/useRefreshToken"
 import useAuth from "@/lib/hooks/useAuth"
 import SWRProvider from "@/SWRProvider"
+import Spinner from "@/components/molecules/spinner"
 
 export default function App({
   Component,
-  pageProps: { loading, session, ...pageProps },
-}: AppProps<{ session: Session, loading: boolean }>) {
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   const refreshToken = useRefreshToken()
   const { user } = useAuth()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    let isMounted = true
     const verifyRefreshToken = async () => {
+
       try {
         await refreshToken()
       } catch (err) {
         console.log(err)
+      } finally {
+        isMounted && setIsLoading(false)
       }
     }
 
-    !user?.token && verifyRefreshToken()
+    !user?.token ? verifyRefreshToken() : setIsLoading(false)
+
+    // return () => isMounted = false
   }, [])
 
   return (
@@ -42,8 +50,17 @@ export default function App({
         <ChakraProvider>
           <SWRProvider>
             <div className='font-rubik max-w-[2560px] mx-auto'>
-              <Component {...pageProps} />
-              <Toaster />
+              {isLoading ? (
+                <div className="flex items-center justify-center h-screen">
+                  <Spinner className="h-[40px] w-[40px]" />
+                </div>
+              ) : (
+                <>
+                  <Component {...pageProps} />
+                  <Toaster />
+                </>
+              )}
+
             </div>
           </SWRProvider>
         </ChakraProvider>
