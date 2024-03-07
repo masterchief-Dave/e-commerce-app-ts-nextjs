@@ -4,13 +4,14 @@ import useSWR from "swr"
 import useAuth from "../useAuth"
 
 export const useGetLikedProducts = () => {
-  return useSWR<UserWishlistInterface>('/user/wishlist', () => UserService.getWishlist())
+  const { user } = useAuth()
+  return useSWR<UserWishlistInterface>(user && user._id.length > 1 ? '/user/wishlist' : null, () => UserService.getWishlist())
 }
 
 export const useGetCart = () => {
   const { user } = useAuth()
 
-  return useSWR<UserCartInterface>(`/user/cart`, () => UserService.getCart(user?.token as string))
+  return useSWR<UserCartInterface>(user && user._id.length > 1 ? `/user/cart` : null, () => UserService.getCart(user?.token as string))
 }
 
 /**

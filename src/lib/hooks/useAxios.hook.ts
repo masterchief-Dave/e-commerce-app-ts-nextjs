@@ -8,6 +8,10 @@ const useAxiosPrivate = () => {
   const { user } = useAuth()
 
   useEffect(() => {
+    if (user && user?._id.length < 1) return
+
+    console.log('the code got here')
+
     const requestInterceptor = globalAxios.interceptors.request.use((config) => {
       if (!config.headers['Authorization']) {
         config.headers['Authorization'] = user?.token

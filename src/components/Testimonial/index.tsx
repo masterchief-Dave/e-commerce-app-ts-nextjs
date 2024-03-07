@@ -48,7 +48,7 @@ export function TestimonialCard({
   return (
     <div className="w-[300px] border space-y-3 rounded-lg bg-white px-5 py-3 text-[1.6rem] shadow-sm">
       <div className="flex items-center gap-2">
-        <Image src={avatar} alt={name} className="size-8 h-24 rounded-full" />
+        <Image src={avatar} alt={name} className="h-24 w-24 rounded-full" width={1000} height={1000} />
         <div>
           <div className="font-medium">{name}</div>
           <div className="text-stone-600">{title}</div>

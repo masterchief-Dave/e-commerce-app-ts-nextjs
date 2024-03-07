@@ -41,7 +41,7 @@ const Checkout = () => {
       <header className='grid grid-cols-12 border-b py-4'>
         <h1 className='font-bold text-[2.5rem] col-span-full px-24'>
           <Link href='/'>
-            <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
+            <Image src={SWLogo} alt='Brand Logo' height={50} width={50} />
           </Link>
         </h1>
       </header>

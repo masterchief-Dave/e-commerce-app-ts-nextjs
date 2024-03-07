@@ -114,7 +114,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
         <li>
           <h1>
             <Link href='/' className='text-[2rem] font-bold text-white'>
-              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
+              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} />
             </Link>
           </h1>
         </li>
@@ -212,7 +212,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
         <li>
           <h1>
             <Link href='/' className='text-lg font-bold text-white'>
-              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
+              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} />
             </Link>
           </h1>
         </li>

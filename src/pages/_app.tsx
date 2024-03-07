@@ -33,6 +33,7 @@ export default function App({
         await refreshToken()
       } catch (err) {
         console.log(err)
+        setIsLoading(false)
       } finally {
         isMounted && setIsLoading(false)
       }
@@ -40,7 +41,9 @@ export default function App({
 
     !user?.token ? verifyRefreshToken() : setIsLoading(false)
 
-    // return () => isMounted = false
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   return (
