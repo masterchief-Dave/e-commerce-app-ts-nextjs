@@ -6,14 +6,12 @@ import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
 import { BillingAddress } from '@/components/Accordion/billingAddressAccordion'
 import { PaystackHook } from '@/helpers/paystack'
-import { useCart } from '@/lib/hooks/useCart'
-import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
-import { RootState } from '@/app/store'
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
@@ -24,21 +22,11 @@ const styles = {
 const Checkout = () => {
   const [disable, setDisable] = useState(true)
   const router = useRouter()
-  const { cart } = useCart()
-  const shippingAddress = useSelector((state: RootState) => {
-    return state.shipping.value
-  })
-
+  const shippingAddress = null
   // check if item is in cart
-  useEffect(() => {
-    if (cart.length < 1) {
-      router.push('/')
-    }
-  }, [cart])
 
-  const totalPrice = useSelector((state: RootState) => {
-    return selectorCartTotalAmount(state)
-  })
+
+  const totalPrice = 0
 
   // console.log({ totalPrice })
   const shippingFee = 10
@@ -86,7 +74,7 @@ const Checkout = () => {
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Order Details</h2>
               <div>
-                {cart.map((item: Cart) => {
+                {/* {cart.map((item: Cart) => {
                   return (
                     <CheckoutProduct
                       key={item._id}
@@ -96,7 +84,7 @@ const Checkout = () => {
                       price={item.price}
                       cartQuantity={item.cartQuantity}
                     />)
-                })}
+                })} */}
               </div>
             </div>
           </div>
@@ -131,13 +119,13 @@ const Checkout = () => {
                   and condition
                 </p>
 
-                <PaystackHook
+                {/* <PaystackHook
                   price={amount}
                   orders={cart}
                   loading={false}
                   shippingAddress={shippingAddress}
                   isDisabled={disable}
-                />
+                /> */}
 
                 <div className='flex items-center gap-x-8'>
                   <p className='text-former-price-text w-full text-center text-[1.3rem]'>

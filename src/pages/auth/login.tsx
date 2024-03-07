@@ -44,7 +44,6 @@ const Login = ({ myCookieValue, data }: Props) => {
       setError({ state: true, message: response?.statusText })
     } catch (err: any) {
       console.log(err)
-      // dispatch(loginFailure(err.message))
     }
   }
 

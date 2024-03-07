@@ -1,12 +1,7 @@
 import Image from 'next/image'
-import { useSelector } from 'react-redux'
 import { ChevronDownIcon, ChevronUpIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-
-import { RootState } from '@/app/store'
-import { useAppDispatch } from '@/lib/hooks/reduxhooks'
-import { increaseCartItem, decreaseCartItem, removeItem } from '@/features/cart/cartSlice'
 import { useDecreaseItemInCart, useIncreaseItemInCart, useRemoveItemIncart } from "@/lib/hooks/product/product.hook"
 
 type Props = {
@@ -15,13 +10,12 @@ type Props = {
   name: string
   price: number
   cartQuantity: number
-  stock: number
+  stock?: number
 }
 
 const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) => {
   const router = useRouter()
-  const dispatch = useAppDispatch()
-  const message = useSelector((state: RootState) => state.cart.message)
+
   const increaseItemQuery = useIncreaseItemInCart()
   const decreaseItemQuery = useDecreaseItemInCart()
   const removeItemQuery = useRemoveItemIncart()
@@ -32,9 +26,6 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) =
 
   const { data } = useSWR(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`, fetcher, { refreshInterval: 1000 })
 
-  if (message !== undefined && message?.length > 2) {
-    alert(message)
-  }
 
   const handleIncreaseItemQuantity = () => {
     increaseItemQuery.trigger({ id: id }, {
@@ -94,7 +85,7 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) =
             {/* when the quanity is 1 then disable the button from going lower */}
             <button
               onClick={handleIncreaseItemQuantity}
-              disabled={increaseItemQuery.isMutating || cartQuantity >= stock}
+              disabled={increaseItemQuery.isMutating || cartQuantity >= stock!}
             >
               <ChevronUpIcon className='h-8 w-8 cursor-pointer' />
             </button>

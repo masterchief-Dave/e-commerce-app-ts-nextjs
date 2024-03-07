@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
 
 import { useStickyNavbar } from '@/lib/hooks/useStickyNavbar'
-import { useCart } from '@/lib/hooks/useCart'
 import useAuth from '@/lib/hooks/useAuth'
 import useLogout from '@/lib/hooks/useLogout'
 import { UserAccountDropdown } from '../Dropdown/Account'
@@ -43,8 +42,6 @@ export const Navbar = () => {
   const { isTop } = useStickyNavbar()
   const { data } = useSession()
   const { user } = useAuth()
-  const { cart } = useCart()
-
 
   return (
     <div className=''>
@@ -55,14 +52,14 @@ export const Navbar = () => {
           isLoggedIn={false}
           user={user}
           data={data}
-          cartItems={cart}
+          cartItems={[]}
         />
       </div>
 
       <div className='hidden lg:block'>
         <Desktop
           isTop={isTop}
-          cartItems={cart}
+          cartItems={[]}
           handleSignOut={logout}
           data={data}
           session={null}

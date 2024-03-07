@@ -13,13 +13,12 @@ import * as Yup from 'yup'
 
 import styles from './index.module.scss'
 import { countryCode } from '@/globals/countries'
-import { useAppDispatch } from '@/lib/hooks/reduxhooks'
-import { addShippingAddress } from '@/features/shipping-address/address-slice'
+
 
 export const BillingAddress = () => {
   const [mounted, setMounted] = useState<boolean>(false)
   const [billingAddress, setBillingAddress] = useState<string>('')
-  const dispatch = useAppDispatch()
+
 
   useEffect(() => {
     setMounted(true)
@@ -46,17 +45,17 @@ export const BillingAddress = () => {
       zipcode: Yup.string().required()
     }),
     onSubmit: (values, formikHelpers) => {
-      dispatch(addShippingAddress({
-        value: {
-          title: values.title,
-          firstname: values.firstname,
-          lastname: values.lastname,
-          country: values.country,
-          zipcode: values.zipcode,
-          addressLine1: values.addressLine1,
-          addressLine2: values.addressLine2
-        }
-      }))
+      // dispatch(addShippingAddress({
+      //   value: {
+      //     title: values.title,
+      //     firstname: values.firstname,
+      //     lastname: values.lastname,
+      //     country: values.country,
+      //     zipcode: values.zipcode,
+      //     addressLine1: values.addressLine1,
+      //     addressLine2: values.addressLine2
+      //   }
+      // }))
       // store the value into session storage
     },
   })

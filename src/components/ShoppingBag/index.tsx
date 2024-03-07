@@ -1,15 +1,12 @@
 import Link from 'next/link'
 
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
-import { useCart } from '@/lib/hooks/useCart'
 
 type Props = {}
 
 export const ShoppingFixedBag = (props: Props) => {
-  const { cart } = useCart()
 
-
-  const itemsInCart = cart?.length || 0
+  const itemsInCart = 0
 
   return (
     <Link

@@ -88,7 +88,7 @@ const User = (props: Props) => {
               <label htmlFor='lastname' className={styles.label}>
                 Last name{' '}
               </label>
-              <input className={styles.input} placeholder={lastName} disabled />
+              <input className={styles.input} placeholder="" disabled />
             </div>
 
             <div>

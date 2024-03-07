@@ -8,15 +8,11 @@ import { StarIcon, CheckBadgeIcon } from '@heroicons/react/24/solid'
 import { GetServerSideProps } from 'next'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
-
-import { useAppDispatch } from '@/lib/hooks/reduxhooks'
 import { Layout } from '@/components/Layout'
 // import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from '@/components/Navbar'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
 import { Footer } from '@/components/Footer'
-import { addToCart } from '@/features/cart/cartSlice'
-import { useCart } from '@/lib/hooks/useCart'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { ProductTab } from '@/components/Tabs/Product'
 import useAuth from "@/lib/hooks/useAuth"
@@ -35,8 +31,6 @@ const styles = {
 
 const ProductSlug = ({ product }: Props) => {
   const router = useRouter()
-  const dispatch = useAppDispatch()
-  const { cart } = useCart()
   const session = useSession()
   const [productQuantity, setProductQuantity] = useState<number>(1)
   let [isItemInCart, setIsItemInCart] = useState(false)
@@ -60,22 +54,10 @@ const ProductSlug = ({ product }: Props) => {
   }
 
   // # check if the item is in the cart
-  useEffect(() => {
-    const isItemInCart = cart.filter((item: Product) => {
-      return item._id === product._id
-    })
 
-    if (isItemInCart.length === 1) {
-      setIsItemInCart(true)
-    }
-
-  }, [cart])
 
   const handleAddToCart = () => {
-    dispatch(addToCart({
-      ...product,
-      cartQuantity: productQuantity
-    }))
+    // add item to cart
   }
 
   return (

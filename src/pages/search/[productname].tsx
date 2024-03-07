@@ -44,7 +44,7 @@ const ProductSlug = ({ products }: Props) => {
                   {products.map((product: Product): React.ReactElement => {
                     return (
                       <div key={product._id}>
-                        <ProductCard data={product} />
+                        <ProductCard data={product} page={1} />
                       </div>
                     )
                   })}

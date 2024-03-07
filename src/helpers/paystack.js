@@ -1,5 +1,3 @@
-import { removeItem } from '@/features/cart/cartSlice'
-import { useAppDispatch } from '@/hooks/reduxhooks'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -29,7 +27,7 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
   const router = useRouter()
   const amountToPay = parseFloat(price) * 100
   const session = useSession()
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
   const userId = session?.data?.id
 
@@ -51,11 +49,11 @@ export const PaystackHook = ({ loading, orders, price, shippingAddress, isDisabl
         // route to the place where u will see your order summary
       }).then((data) => {
         //  remove the item from the cart
-        orders.forEach((order) => {
-          dispatch(removeItem({
-            id: order._id
-          }))
-        })
+        // orders.forEach((order) => {
+        //   dispatch(removeItem({
+        //     id: order._id
+        //   }))
+        // })
         router.push({
           pathname: `/order-summary/${data.data.data._id}`,
           // query: { orders: data.data.orders }

@@ -10,7 +10,6 @@ import '@/styles/globals.css'
 import './demos/demo.scss'
 import '../components/Dropdown/dropdown.scss'
 import '@/styles/main.scss'
-import { store } from '@/app/store'
 import { useEffect, useState } from "react"
 import axios from "axios"
 import useRefreshToken from "@/lib/hooks/useRefreshToken"
@@ -45,26 +44,24 @@ export default function App({
   }, [])
 
   return (
-    <Provider store={store}>
-      <SessionProvider session={session}>
-        <ChakraProvider>
-          <SWRProvider>
-            <div className='font-rubik max-w-[2560px] mx-auto'>
-              {isLoading ? (
-                <div className="flex items-center justify-center h-screen">
-                  <Spinner className="h-[40px] w-[40px]" />
-                </div>
-              ) : (
-                <>
-                  <Component {...pageProps} />
-                  <Toaster />
-                </>
-              )}
+    <SessionProvider session={session}>
+      <ChakraProvider>
+        <SWRProvider>
+          <div className='font-rubik max-w-[2560px] mx-auto'>
+            {isLoading ? (
+              <div className="flex items-center justify-center h-screen">
+                <Spinner className="h-[40px] w-[40px]" />
+              </div>
+            ) : (
+              <>
+                <Component {...pageProps} />
+                <Toaster />
+              </>
+            )}
 
-            </div>
-          </SWRProvider>
-        </ChakraProvider>
-      </SessionProvider>
-    </Provider>
+          </div>
+        </SWRProvider>
+      </ChakraProvider>
+    </SessionProvider>
   )
 }

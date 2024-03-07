@@ -1,24 +1,12 @@
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
-
-import { RootState } from '@/app/store'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
-import { useCart } from '@/lib/hooks/useCart'
-import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
-import { useSearchParams } from 'next/navigation'
 import { useGetCart } from "@/lib/hooks/user/user.hook"
-import fetchCart from "@/utils/fetchCart"
-import Spinner from "@/components/molecules/spinner"
-import globalAxios from '@/lib/hooks/useAxios.hook'
-
-import { Skeleton } from "@/components/ui/skeleton"
 import { CartSkeleton } from "@/components/skeleton"
 import type { CartProducts } from "@/lib/types/user/user.type"
 
@@ -82,9 +70,7 @@ const ItemInCart = ({ cart }: { cart: CartProducts[] }) => {
   const router = useRouter()
   const [openModal, setOpenModal] = useState(false)
 
-  const totalPrice = useSelector((state: RootState) => {
-    return selectorCartTotalAmount(state)
-  })
+  const totalPrice = 0
 
   const handleProceedToCheckout = () => {
     // if (user === 'unauthenticated') {

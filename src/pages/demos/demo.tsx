@@ -4,7 +4,6 @@
 // import { Button } from '@chakra-ui/react'
 import axios from 'axios'
 import { PaystackHook } from '@/helpers/paystack'
-import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 import { useSelector } from 'react-redux'
 // import { RootState } from '@/app/store'
 import { Button } from '@chakra-ui/react'
@@ -26,9 +25,7 @@ const NavigationMenuDemoExample = () => {
 
   // console.log(session)
 
-  const totalPrice = useSelector((state: any) => {
-    return selectorCartTotalAmount(state)
-  })
+  const totalPrice = 0
 
   // console.log({ totalPrice })
   const fn = async () => {
