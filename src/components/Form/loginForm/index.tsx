@@ -39,13 +39,7 @@ function LoginForm({ handleSubmit, error }: FormProps) {
   const toggle = () => {
     setShow(!show)
   }
-  const handleGoogleAuth = async () => {
-    const pathname = router.asPath !== '/auth/login' ? router.asPath : '/'
 
-    await signIn('google', {
-      callbackUrl: pathname
-    })
-  }
   return (
     <>
       <div className='col-start-3 col-end-11 rounded-xl border py-4 px-6 space-y-4'>
@@ -142,12 +136,13 @@ function LoginForm({ handleSubmit, error }: FormProps) {
 
         <div className='space-y-4 col-start-2 col-end-12'>
           <Button
-            className={`h-[5rem] flex items-center justify-center gap-x-4 text-white  hover:text-primary-blue-100`}
+            className={`h-[5rem] flex items-center justify-center gap-x-4 bg-white text-black hover:bg-black  hover:text-white`}
             type='submit'
             variant='primary'
             onClick={(e) => {
               e.preventDefault()
-              router.push('http://localhost:8100/api/v1/auth/google')
+              router.push(`${process.env.NEXT_PUBLIC_API_SERVER}/auth/google`)
+              // router.push('http://localhost:8100/api/v1/auth/google')
               // handleGoogleAuth()
             }
             }

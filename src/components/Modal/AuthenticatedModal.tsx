@@ -9,6 +9,14 @@ import { Button } from '../ui/button'
 import { CibApple, Fa6BrandsSquareXTwitter, LogosFacebook, LogosRedditIcon } from '@/globals/icons'
 import { InputContainer } from "../Form"
 import { Input } from "../ui/input"
+import { useFormik } from "formik"
+import { loginSchema, loginVal } from "@/lib/schema/auth.schema"
+import { ErrorLabel } from "../ui/errorLabel"
+import { useRouter } from "next/router"
+import AuthService from "@/lib/services/auth.service"
+import axios from "axios"
+import useAuth from "@/lib/hooks/useAuth"
+import Spinner from "../molecules/spinner"
 
 type Props = {
   openModal: boolean
@@ -16,17 +24,42 @@ type Props = {
 }
 
 const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const { setUser } = useAuth()
+  const router = useRouter()
+  const formik = useFormik({
+    initialValues: loginVal,
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      try {
+        setIsLoading(true)
+        const response = await AuthService.login({ email: values.email, password: values.password })
 
+        if (response?.success) {
+          setIsLoading(false)
+          axios.defaults.headers.common["Authorization"] = response.user.token
+          setUser({
+            email: response.user.email,
+            _id: response.user._id,
+            name: response.user.name,
+            photo: response.user.photo,
+            token: response.user.token
+          })
+          // router.push('/')
+          setOpenModal(false)
+
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
+        }
+      } catch (err: any) {
+        setIsLoading(false)
+        console.log(err)
+      }
+    }
+  })
   const handleCloseModal = () => {
     setOpenModal(false)
-  }
-
-  const handleGoogleAuth = async () => {
-    const response = await signIn('google', {
-      redirect: false
-    })
-
-    console.log('response from google auth', { response })
   }
 
   return (
@@ -77,15 +110,25 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                     </div> */}
                   </div>
                   <section>
-                    <form className="flex flex-col gap-8">
+                    <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>
                       <div>
-                        <Input placeholder="Email" className="h-[4rem] text-[1.6rem]" />
+                        <Input placeholder="Email" className="h-[4rem] text-[1.6rem]" value={formik.values.email} name="email" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                        {formik.touched.email && formik.errors.email && <ErrorLabel text={formik.errors.email} className="text-[1.4rem]" />}
                       </div>
                       <div>
-                        <Input placeholder="Password" className="h-[4rem] text-[1.6rem]" />
+                        <Input placeholder="Password" className="h-[4rem] text-[1.6rem]" value={formik.values.password} name="password" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                        {formik.touched.password && formik.errors.password && <ErrorLabel text={formik.errors.password} className="text-[1.4rem]" />}
                       </div>
 
-                      <Button className="h-[4rem] text-[1.6rem]">Login</Button>
+                      <Button
+                        type="submit"
+                        className="h-[4rem] text-[1.6rem] bg-black text-white btn">
+                        {isLoading ? (
+                          <Spinner className="text-white" />
+                        ) : (
+                          <span>Login</span>
+                        )}
+                      </Button>
                     </form>
                   </section>
 
@@ -106,10 +149,8 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                       type='submit'
                       onClick={(e) => {
                         e.preventDefault()
-                        // router.push('http://localhost:8100/api/v1/auth/google')
-                        handleGoogleAuth()
-                      }
-                      }
+                        router.push(`${process.env.NEXT_PUBLIC_API_SERVER}/auth/google`)
+                      }}
                     >
                       <p>Sign In with Google</p>
                       <Image
