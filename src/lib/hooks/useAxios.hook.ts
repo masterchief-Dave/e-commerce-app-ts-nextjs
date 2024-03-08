@@ -10,8 +10,6 @@ const useAxiosPrivate = () => {
   useEffect(() => {
     if (user && user?._id.length < 1) return
 
-    console.log('the code got here')
-
     const requestInterceptor = globalAxios.interceptors.request.use((config) => {
       if (!config.headers['Authorization']) {
         config.headers['Authorization'] = user?.token
@@ -28,7 +26,6 @@ const useAxiosPrivate = () => {
         prevRequest.sent = true
         const newAccessToken = await refresh()
         prevRequest.headers['Authorization'] = newAccessToken
-
         return globalAxios(prevRequest)
       }
 

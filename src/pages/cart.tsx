@@ -9,6 +9,9 @@ import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { useGetCart } from "@/lib/hooks/user/user.hook"
 import { CartSkeleton } from "@/components/skeleton"
 import type { CartProducts } from "@/lib/types/user/user.type"
+import type { GetServerSideProps } from "next"
+import { getCookie } from "cookies-next"
+import UserService from "@/lib/services/user/user.service"
 
 type Props = {}
 
@@ -115,3 +118,27 @@ const ItemInCart = ({ cart }: { cart: CartProducts[] }) => {
   )
 }
 
+export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }) => {
+
+  try {
+    const token = getCookie('Authorization', { req, res })
+
+    console.log({ token })
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/user/cart`, {
+      method: 'GET',
+      headers: {
+        'Authorization': token!
+      }
+    })
+
+    const cart = await response.json()
+
+    console.log({ obj: cart.products })
+  } catch (err) {
+    // some code
+  }
+
+  return {
+    props: {}
+  }
+}

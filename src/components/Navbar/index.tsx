@@ -129,7 +129,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
               onChange={formik.handleChange}
             />
             <div className='flex h-full w-[10%] cursor-pointer items-center justify-center  '>
-              <button type='submit' className='w-fit rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
+              <button type='submit' className='w-fit bg-transparent rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
                 <MagnifyingGlassIcon className='h-8 w-8 hover:text-white' />
               </button>
             </div>

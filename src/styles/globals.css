@@ -19,7 +19,6 @@
   [type='reset'],
   [type='submit'] {
     appearance: button;
-    background-color: black;
     /* background-color: unset;
     background-image: unset; */
   }

@@ -2,3 +2,18 @@
 - one of the reasons is because i cannot make use of local server in server side props, which means i had to deploy the api  
 - the reason i am making use of next auth is because of the session management is fantastic, however because of that i cannot protect routes in my express api routes because the token sent from the client to the server cannot be decoded on the server.
 - 
+
+
+window[WINDOW_USER_SCRIPT_VARIABLE] = data
+
+ISSUES I AM FACING
+I Noticed that in the /cart page, the page is loading, which does not really make sense because it is not necessarily a protected page,
+I also noticed that the faq page and  the legal pages were doing the same thing, which is loading to check if the user is present,
+
+SOLUTION
+1. the initial solution that came to me is that I should wrap in the layout the components that needs the user auth and not use the wrapping in my _app.tsx file
+by doing this the pages that don't need user authentication will not have a problem
+
+ANOTHER ISSUE
+2. With my current implementation, I cannot make use of server side props because, I cannot get the Authorization header which is not present inside the server req header
+

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { AddressBox } from '@/components/Account/Address/addressBox'
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
+import { getCookie } from 'cookies-next'
 
 type Props = {
   address: IDelivery[] | null
@@ -36,6 +37,12 @@ export default DeliveryAddress
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const session = await getSession({ req: context.req })
+  const request = context.req
+  const resp = context.res
+
+  const auth_cookie = getCookie('Authorization', { req: request, res: resp })
+
+  // console.log({ request })
   let data
 
   if (!session) {

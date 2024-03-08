@@ -21,37 +21,37 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
-  const refreshToken = useRefreshToken()
-  const { user } = useAuth()
-  const [isLoading, setIsLoading] = useState(true)
+  // const refreshToken = useRefreshToken()
+  // const { user } = useAuth()
+  // const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    let isMounted = true
-    const verifyRefreshToken = async () => {
+  // useEffect(() => {
+  //   let isMounted = true
+  //   const verifyRefreshToken = async () => {
 
-      try {
-        await refreshToken()
-      } catch (err) {
-        console.log(err)
-        setIsLoading(false)
-      } finally {
-        isMounted && setIsLoading(false)
-      }
-    }
+  //     try {
+  //       await refreshToken()
+  //     } catch (err) {
+  //       console.log(err)
+  //       setIsLoading(false)
+  //     } finally {
+  //       isMounted && setIsLoading(false)
+  //     }
+  //   }
 
-    !user?.token ? verifyRefreshToken() : setIsLoading(false)
+  //   !user?.token ? verifyRefreshToken() : setIsLoading(false)
 
-    return () => {
-      isMounted = false
-    }
-  }, [])
+  //   return () => {
+  //     isMounted = false
+  //   }
+  // }, [])
 
   return (
     <SessionProvider session={session}>
       <ChakraProvider>
         <SWRProvider>
           <div className='font-rubik max-w-[2560px] mx-auto'>
-            {isLoading ? (
+            {/* {isLoading ? (
               <div className="flex items-center justify-center h-screen">
                 <Spinner className="h-[40px] w-[40px]" />
               </div>
@@ -60,8 +60,11 @@ export default function App({
                 <Component {...pageProps} />
                 <Toaster />
               </>
-            )}
-
+            )} */}
+            <>
+              <Component {...pageProps} />
+              <Toaster />
+            </>
           </div>
         </SWRProvider>
       </ChakraProvider>

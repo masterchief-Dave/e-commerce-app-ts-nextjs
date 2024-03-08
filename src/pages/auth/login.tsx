@@ -5,6 +5,7 @@ import axios from "axios"
 import { useRouter } from "next/navigation"
 import useAuth from "@/lib/hooks/useAuth"
 import { useState } from "react"
+import { setCookie } from 'cookies-next'
 
 type Props = {
   myCookieValue: string,
@@ -31,6 +32,8 @@ const Login = ({ myCookieValue, data }: Props) => {
 
       if (response?.success) {
         axios.defaults.headers.common["Authorization"] = response.user.token
+        // SET THE HEADER COOKIE HERE FOR THE SERVER SIDE PROPS
+        setCookie('Authorization', response.user.token)
         setUser({
           email: response.user.email,
           _id: response.user._id,
