@@ -12,6 +12,8 @@ import Image from 'next/image'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
+import type { UserCart } from "@/lib/types/user/user.type"
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
@@ -23,6 +25,7 @@ const Checkout = () => {
   const [disable, setDisable] = useState(true)
   const router = useRouter()
   const shippingAddress = null
+  const getCartQuery = useGetCart()
   // check if item is in cart
 
 
@@ -32,6 +35,8 @@ const Checkout = () => {
   const shippingFee = 10
   const taxFee = 10
   const amount = totalPrice + shippingFee + taxFee
+
+
 
   // get shipping address, check to see if shipping address is present and 
   // console.log({ shippingAddress })
@@ -74,17 +79,17 @@ const Checkout = () => {
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Order Details</h2>
               <div>
-                {/* {cart.map((item: Cart) => {
+                {getCartQuery.data?.data.map((item: UserCart) => {
                   return (
                     <CheckoutProduct
                       key={item._id}
                       id={item._id}
-                      img={item.images[0].url}
+                      img={item.image}
                       name={item.name}
                       price={item.price}
-                      cartQuantity={item.cartQuantity}
+                      cartQuantity={item.quantity}
                     />)
-                })} */}
+                })}
               </div>
             </div>
           </div>

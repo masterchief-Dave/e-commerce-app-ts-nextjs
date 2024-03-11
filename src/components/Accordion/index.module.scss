@@ -15,19 +15,19 @@
  }
 
  .label {
-   @apply font-medium text-[1.3rem] text-primary-grey-300 block
+   @apply font-medium text-[1.6rem] text-primary-grey-300 block
  }
 
  .input {
-   @apply w-full text-[1.2rem] p-4 border
+   @apply w-full text-[1.6rem] p-4 border h-[4rem]
  }
 
  .btn {
-  @apply bg-blue-500 px-8 py-4 text-[1.6rem] font-medium text-white text-[1.6rem] rounded-md
+   @apply bg-blue-500 px-8 py-4 h-[4rem] font-medium text-white text-[1.6rem] rounded-md
  }
 
  .select {
-   @apply border px-4 text-[1.2rem] w-full outline-0
+   @apply border px-4 text-[1.6rem] w-full outline-0
  }
 
  .option {
@@ -35,5 +35,5 @@
  }
 
  .accordionHeader {
-  @apply text-[1.6rem] font-semibold
+   @apply text-[1.6rem] font-semibold
  }

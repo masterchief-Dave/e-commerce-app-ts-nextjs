@@ -15,7 +15,6 @@ function AuthWrapper({ children }: { children: React.ReactNode }) {
       try {
         await refreshToken()
       } catch (err) {
-        console.log(err)
         setIsLoading(false)
       } finally {
         isMounted && setIsLoading(false)

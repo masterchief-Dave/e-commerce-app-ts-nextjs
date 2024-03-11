@@ -25,3 +25,9 @@ export const registerSchema = yup.object().shape({
   confirmPassword: yup.string().required('Confirm your password').oneOf([yup.ref('password')], 'Passwords must be the same')
 })
 
+export const titleOptions: { label: string, value: string }[] = [
+  { label: 'Mr', value: 'mr' },
+  { label: 'Mrs', value: 'mrs' },
+  // { label: '', value: '' },
+  // { label: '', value: '' }
+] 

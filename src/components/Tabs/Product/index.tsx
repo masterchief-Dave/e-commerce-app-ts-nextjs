@@ -12,7 +12,7 @@ type Props = {
   product: Product
 }
 const styles = {
-  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer`,
+  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer flex items-center justify-center`,
   productDetails: {
     title: `font-semibold`,
     description: `font-medium`
@@ -60,19 +60,19 @@ export const ProductTab = ({ product }: Props) => {
             <Tab as={Fragment} key={category.id}>
               {({ selected }) => (
                 /* Use the `selected` state to conditionally style the selected tab. */
-                <button
+                <div
                   className={
                     selected ? `bg-blue-500 text-white ${styles.tabHeader} py-4` : `bg-white text-black ${styles.tabHeader}`
                   }
                 >
                   {category.title}
-                </button>
+                </div>
               )}
             </Tab>
           )
         })}
       </Tab.List>
-      <Tab.Panels className='p-4'>
+      <Tab.Panels className='p-4 min-h-[20rem]'>
         {categories.map((category) => {
           return <Tab.Panel key={category.id}>
             {category.component}

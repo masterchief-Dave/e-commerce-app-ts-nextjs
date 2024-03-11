@@ -92,22 +92,19 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-12 text-left align-middle shadow-xl transition-all space-y-8">
-                  <section className="flex items-center justify-end">
-                    <div className='cursor-pointer' onClick={handleCloseModal}>
-                      <XMarkIcon className='h-8 w-8' />
-                    </div>
-                  </section>
+
                   <div className='relative flex items-center justify-between'>
                     <Dialog.Title
                       as="h3"
-                      className="text-[1.6rem] text-left font-bold leading-6 text-gray-900"
+                      className="text-[1.6rem] font-bold leading-6 text-gray-900"
                     >
-                      Sign In
+                      <section className="flex items-center justify-between">
+                        <h1 className="font-medium text-3xl">Sign in</h1>
+                      </section>
                     </Dialog.Title>
-
-                    {/* <div className='cursor-pointer' onClick={handleCloseModal}>
+                    <div className='cursor-pointer' onClick={handleCloseModal}>
                       <XMarkIcon className='h-8 w-8' />
-                    </div> */}
+                    </div>
                   </div>
                   <section>
                     <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>

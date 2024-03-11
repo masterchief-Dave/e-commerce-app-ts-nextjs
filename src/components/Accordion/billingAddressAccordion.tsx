@@ -13,6 +13,9 @@ import * as Yup from 'yup'
 
 import styles from './index.module.scss'
 import { countryCode } from '@/globals/countries'
+import { Input } from "../ui/input"
+import SelectComp from "../molecules/selectComp"
+import { titleOptions } from "@/lib/schema/auth.schema"
 
 
 export const BillingAddress = () => {
@@ -59,6 +62,8 @@ export const BillingAddress = () => {
       // store the value into session storage
     },
   })
+
+  const handleTitleChange = () => { }
 
   return (
     <div className='py-10  text-[1.6rem]'>
@@ -119,9 +124,9 @@ export const BillingAddress = () => {
               {({ isExpanded }) => {
                 return (
                   <>
-                    <AccordionButton className='flex justify-between bg-[#f7f9fa] text-[1.1rem] lg:text-[1.5rem]'>
+                    <AccordionButton className='flex justify-between bg-[#f7f9fa] text-[1.1rem] lg:text-[1.6rem]'>
                       <div className='flex items-center gap-8'>
-                        <input
+                        <Input
                           type='radio'
                           name='newBillingAddress'
                           id='newBillingAddress'
@@ -148,7 +153,13 @@ export const BillingAddress = () => {
                             <label htmlFor='title' className={styles.label}>
                               Title
                             </label>
-                            <select
+                            <SelectComp
+                              placeholder="Title"
+                              label="Select Title"
+                              options={titleOptions}
+                              onChange={handleTitleChange}
+                            />
+                            {/* <select
                               name='title'
                               id='title'
                               className={styles.select}
@@ -167,14 +178,14 @@ export const BillingAddress = () => {
                               <option value='mrs'>Mrs.</option>
                               <option value='miss'>Miss</option>
                               <option value='ms'>Ms</option>
-                            </select>
+                            </select> */}
                           </div>
 
                           <div>
                             <label htmlFor='firstname' className={styles.label}>
                               Firstname
                             </label>
-                            <input
+                            <Input
                               type='text'
                               id='firstname'
                               name='firstname'
@@ -188,7 +199,7 @@ export const BillingAddress = () => {
                             <label htmlFor='lastname' className={styles.label}>
                               Lastname
                             </label>
-                            <input
+                            <Input
                               type='text'
                               id='lastname'
                               name='lastname'
@@ -237,7 +248,7 @@ export const BillingAddress = () => {
                             <label htmlFor='zipcode' className={styles.label}>
                               Zip code
                             </label>
-                            <input
+                            <Input
                               type='text'
                               id='zipcode'
                               name='zipcode'
@@ -255,7 +266,7 @@ export const BillingAddress = () => {
                             >
                               Address Line 1
                             </label>
-                            <input
+                            <Input
                               type='text'
                               id='AddressLine1'
                               name='addressLine1'
@@ -273,7 +284,7 @@ export const BillingAddress = () => {
                             >
                               Address Line 2
                             </label>
-                            <input
+                            <Input
                               type='text'
                               id='AddressLine2'
                               name='addressLine2'
@@ -285,7 +296,7 @@ export const BillingAddress = () => {
                           </div>
 
                           <div className='col-span-full flex items-center gap-x-4'>
-                            <input
+                            <Input
                               type='checkbox'
                               className=''
                               name='default'

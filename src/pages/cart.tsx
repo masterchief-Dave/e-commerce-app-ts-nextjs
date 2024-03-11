@@ -8,17 +8,16 @@ import { useState } from 'react'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
 import { useGetCart } from "@/lib/hooks/user/user.hook"
 import { CartSkeleton } from "@/components/skeleton"
-import type { CartProducts } from "@/lib/types/user/user.type"
+import type { CartProducts, UserCart, UserCartInterface } from "@/lib/types/user/user.type"
 import type { GetServerSideProps } from "next"
 import { getCookie } from "cookies-next"
 import UserService from "@/lib/services/user/user.service"
+import useAuth from "@/lib/hooks/useAuth"
 
 type Props = {}
 
 const Cart = (props: Props) => {
   const { data, isLoading } = useGetCart()
-
-  console.log(data)
 
   return (
     <Layout>
@@ -34,7 +33,7 @@ const Cart = (props: Props) => {
                   return <CartSkeleton key={index + 1} />
                 })}
               </div>
-            ) : data && data.data.length >= 1 ? <ItemInCart cart={data.products} /> : <NoItemInCart />}
+            ) : data && data.data.length >= 1 ? <ItemInCart cart={data.data} /> : <NoItemInCart />}
 
           </section>
         </main>
@@ -68,33 +67,35 @@ const NoItemInCart = () => {
   )
 }
 
-const ItemInCart = ({ cart }: { cart: CartProducts[] }) => {
-
+const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
+  const { isAuthenticated } = useAuth()
   const router = useRouter()
   const [openModal, setOpenModal] = useState(false)
+  // const totalPrice = 0
 
-  const totalPrice = 0
+  console.log(cart)
+  const totalPrice = cart.reduce((acc, item) => {
+    return item.price + acc
+  }, 0)
 
   const handleProceedToCheckout = () => {
-    // if (user === 'unauthenticated') {
-    //   // bring up auth modal and save the redirect because the user should be redirected to the /checkout page
-    //   return setOpenModal(true)
-    // }
+    if (isAuthenticated === false) {
+      // bring up auth modal and save the redirect because the user should be redirected to the /checkout page
+      return setOpenModal(true)
+    }
 
     router.push('/checkout')
   }
 
-  console.log({ cart })
-
   return (
     <>
       <div className='px-12'>
-        {cart?.map((item: CartProducts) => {
+        {cart?.map((item: UserCart) => {
           return (
             <CheckoutProduct
               key={item._id}
-              id={item._id}
-              img={item.images[0].url}
+              id={item.id}
+              img={item.image}
               name={item.name}
               price={item.price}
               cartQuantity={item.quantity}
@@ -103,13 +104,13 @@ const ItemInCart = ({ cart }: { cart: CartProducts[] }) => {
         })}
       </div>
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
-        <div className='flex items-center justify-between font-semibold'>
+        <div className='flex items-center justify-between font-medium'>
           <p>Total</p>
           <p>${totalPrice.toFixed(2)}</p>
         </div>
         <Button
           onClick={handleProceedToCheckout}
-          className='rounded-md flex items-center justify-center h-[5rem] bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.6rem]'>
+          className='rounded-md flex items-center justify-center h-[5rem] bg-primary-blue-500 px-24 py-4 text-[1rem] font-medium text-white hover:bg-primary-blue-300 lg:text-[1.6rem]'>
           Proceed to checkout
         </Button>
       </section>

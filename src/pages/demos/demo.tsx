@@ -14,6 +14,7 @@ import { useUserStore } from "@/lib/hooks/useUserStore"
 import { apiService } from "@/helpers/apiService"
 import useAuth from "@/lib/hooks/useAuth"
 import useAxiosPrivate from "@/lib/hooks/useAxios.hook"
+import PaginationComp from "@/components/pagination"
 // import getUser from "@/hooks/getUser"
 
 const NavigationMenuDemoExample = () => {
@@ -100,6 +101,7 @@ const NavigationMenuDemoExample = () => {
       {/* <PaystackHook price={20000} /> */}
       <Button className='' onClick={handleClick}>test the endpoint</Button>
 
+      {/* <PaginationComp /> */}
     </div>
   )
 }

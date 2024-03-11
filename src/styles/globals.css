@@ -19,6 +19,7 @@
   [type='reset'],
   [type='submit'] {
     appearance: button;
+    background-color: unset;
     /* background-color: unset;
     background-image: unset; */
   }
@@ -60,6 +61,7 @@
     margin-right: 2rem;
     outline: none;
     height: 100%;
+    font-size: 1.6rem;
     /* color: #edab56; */
     /* color: #3b82f6; */
   }

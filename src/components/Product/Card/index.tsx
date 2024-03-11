@@ -23,7 +23,7 @@ export const ProductCard = ({ page, data }: Props) => {
   const { trigger, isMutating } = useLikeProduct(page)
   const cartQuery = useAddToCart(page)
   const userQuery = useGetLikedProducts()
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
   const [authModal, setAuthModal] = useState(false)
 
   const userFavorites = userQuery?.data?.data
@@ -31,12 +31,12 @@ export const ProductCard = ({ page, data }: Props) => {
     return cart.id
   })
 
-  const isAuthenticated = user && user?._id.length > 1 ? true : false
+  // const isAuthenticated = user && user?._id.length > 1 ? true : false
 
   const handleLikeProduct = () => {
     // is the user authenticated ?
     if (!isAuthenticated) {
-      setAuthModal(true)
+      return setAuthModal(true)
     }
     trigger({ id: data?._id, page: page }, {
       optimisticData: userFavorites && ([userFavorites.includes(data?._id) ? userFavorites?.filter((fav) => fav !== data?._id) : [...userFavorites, data._id]]),
@@ -48,7 +48,7 @@ export const ProductCard = ({ page, data }: Props) => {
   const handleAddToCart = () => {
     // is the user authenticated
     if (!isAuthenticated) {
-      setAuthModal(true)
+      return setAuthModal(true)
     }
     if (!data) return
 

@@ -24,7 +24,7 @@ export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
   const params = useSearchParams()
   const { user, setUser } = useAuth()
-  console.log({ user })
+  console.log({ pageIndex })
 
   // CREATE USE-EFFECT TO CAPTURE THE DATA COMING FROM THE SERVER
   useEffect(() => {
