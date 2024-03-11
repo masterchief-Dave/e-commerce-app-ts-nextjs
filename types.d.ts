@@ -219,8 +219,7 @@ declare global {
     country: string
     zipcode: string
     addressLine1: string
-    addressLine2: string
-    default?: Boolean
+    saveAsDefault: Boolean
   }
 }
 

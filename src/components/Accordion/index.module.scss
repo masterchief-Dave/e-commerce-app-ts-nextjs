@@ -3,7 +3,7 @@
  }
 
  .cardText {
-   @apply text-xl font-light
+   @apply text-[1.6rem] font-medium
  }
 
  .cardInput {
@@ -31,7 +31,7 @@
  }
 
  .option {
-   @apply text-[1.2rem] font-medium text-primary-grey-300
+   @apply text-[1.6rem] font-medium text-primary-grey-300
  }
 
  .accordionHeader {

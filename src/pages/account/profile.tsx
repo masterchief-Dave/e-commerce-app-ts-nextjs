@@ -10,6 +10,10 @@ import { AccountLayout } from '@/components/Layout/Account'
 import { getUpdatePassword } from '@/utils/updatePassword'
 import { fetchDataFromExpressServer } from '@/utils/fetchOrder'
 import { getToken } from 'next-auth/jwt'
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import useAuth from "@/lib/hooks/useAuth"
+import { useRouter } from "next/router"
 
 type Props = Pick<User, "user">
 
@@ -18,9 +22,11 @@ const User = (props: Props) => {
   const [canEdit, setCanEdit] = useState<boolean>(false)
   const oldPasswordRef = useRef<HTMLInputElement | null>(null)
 
+  console.log(props)
+
   const styles = {
     label: `block text-[1.6rem] text-primary-grey-100 font-medium`,
-    input: `p-4 w-full px-4 text-xl lg:text-[1.6rem] border font-medium`,
+    input: `p-4 w-full h-[4rem] px-4 text-xl lg:text-[1.6rem] border font-medium`,
     editBtn: `px-8 py-2 lg:text-[1.6rem] font-medium text-xl text-white rounded-md`,
   }
 
@@ -81,14 +87,14 @@ const User = (props: Props) => {
                 {' '}
                 Firstname{' '}
               </label>
-              <input className={styles.input} placeholder={firstName} disabled />
+              <Input className={styles.input} placeholder={firstName} disabled />
             </div>
 
             <div>
               <label htmlFor='lastname' className={styles.label}>
                 Last name{' '}
               </label>
-              <input className={styles.input} placeholder="" disabled />
+              <Input className={styles.input} placeholder="" disabled />
             </div>
 
             <div>
@@ -96,7 +102,7 @@ const User = (props: Props) => {
                 {' '}
                 Email Address{' '}
               </label>
-              <input className={styles.input} placeholder={props.user?.email} disabled />
+              <Input className={styles.input} placeholder={props.user?.email} disabled />
             </div>
 
             <div>
@@ -104,7 +110,7 @@ const User = (props: Props) => {
                 {' '}
                 Old Password
               </label>
-              <input
+              <Input
                 type='password'
                 className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`}
                 disabled={canEdit ? false : true}
@@ -122,7 +128,7 @@ const User = (props: Props) => {
                 {' '}
                 New Password{' '}
               </label>
-              <input
+              <Input
                 type='password'
                 className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`}
                 placeholder='********'
@@ -133,9 +139,9 @@ const User = (props: Props) => {
               />
               {formik.errors.newPassword && <span>{formik.errors.newPassword}</span>}
             </div>
-            <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
+            <Button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
               Update Information
-            </button>
+            </Button>
           </form>
         </div>
       </AccountLayout>
@@ -147,13 +153,8 @@ const User = (props: Props) => {
 export default User
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-
-  // before a user can access this page check if the user has been authenticated or is authorized if there is no user session available then this page should not show to the user, and the user should be redirected back to the '/login' page 
-
-  // move this code into next api route
-  // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
   const session = await getSession({ req: context.req })
-  // console.log(session)
+
   let data
 
   if (!session) {

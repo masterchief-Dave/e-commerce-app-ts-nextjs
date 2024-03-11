@@ -1,14 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import {
   UserCircleIcon,
   WalletIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
-import { useSession } from 'next-auth/react'
 // import { useRouter } from 'next/navigation'
 
 import BreadCrumb from '@/components/BreadCrumb'
@@ -17,70 +16,86 @@ import useMediaQuery from '@/lib/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
 import Loader from '@/components/Shell/Loader'
 import useAuth from "@/lib/hooks/useAuth"
+import { Layout } from ".."
 
 type Props = {
   children?: JSX.Element
   user?: User | null
 }
 
-type ServerProps = {
-  user: User | null
-}
 
 export const AccountLayout = ({ children }: Props) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false)
   const isAboveMediaQuery = useMediaQuery('(min-width: 900px)')
   const router = useRouter()
-  const { user } = useAuth()
+  const { isAuthenticated } = useAuth()
+  const [breadcrumbs, setBreadcrumbs] = useState<{ title: string, path: string }[]>([])
+  const { route } = router
 
-  const { data: session, status } = useSession()
+  if (!isAuthenticated) {
+    router.push('/auth/login')
+  }
 
-  // if (user?._id === 'loading') {
-  //   return <Loader />
-  // }
+  // implementing breadcrumbs
+  useEffect(() => {
+    const updateBreadcrumbs = () => {
+      const newBreadcrumbs = [
+        { title: 'Account', path: '/account/profile' },
+        { title: route.split('/')[2] as string, path: `${route}` },
+      ]
+      setBreadcrumbs(newBreadcrumbs)
+    }
 
-  // if (status === 'unauthenticated') {
-  //   router.push('/auth/login')
-  //   return <Loader />
-  // }
-
+    updateBreadcrumbs()
+  }, [router.query])
 
   return (
-    <div className='mx-auto w-full max-w-screen-2xl '>
-      <DashboardNavbar
-        setShowMobileSidebar={setShowMobileSidebar}
-        showMobileSidebar={showMobileSidebar}
-      />
-      <BreadCrumb />
+    <Layout>
+      {isAuthenticated ? (
+        <>
+          <DashboardNavbar
+            setShowMobileSidebar={setShowMobileSidebar}
+            showMobileSidebar={showMobileSidebar}
+          />
 
-      {isAboveMediaQuery ? (
-        <div className='relative grid grid-cols-12 py-16'>
-          <section className='col-start-2 col-end-5'>
-            <SideBar />
+          <section className="grid grid-cols-12 py-24">
+            <div className="col-start-2 col-end-12">
+              <BreadCrumb breadcrumbs={breadcrumbs} />
+            </div>
           </section>
 
-          <section className='col-start-6 col-end-12 min-h-screen'>
-            <main className='h-fit rounded-xl border'>
-              {children}
-            </main>
-          </section>
-        </div>
-      ) : (
-        <div className='grid grid-cols-12 py-24'>
-          <section className='col-start-2 col-end-12 mx-auto w-full rounded-[1rem] border'>
-            {children}
-          </section>
-          {showMobileSidebar ? (
-            <MobileSideBar
-              setShowMobileSidebar={setShowMobileSidebar}
-              showMobileSidebar={showMobileSidebar}
-            />
+          {isAboveMediaQuery ? (
+            <div className='relative grid grid-cols-12 py-16'>
+              <section className='col-start-2 col-end-5'>
+                <SideBar />
+              </section>
+
+              <section className='col-start-6 col-end-12 min-h-screen'>
+                <main className='h-fit rounded-xl border'>
+                  {children}
+                </main>
+              </section>
+            </div>
           ) : (
-            ''
+            <div className='grid grid-cols-12 py-24'>
+              <section className='col-start-2 col-end-12 mx-auto w-full rounded-[1rem] border'>
+                {children}
+              </section>
+              {showMobileSidebar ? (
+                <MobileSideBar
+                  setShowMobileSidebar={setShowMobileSidebar}
+                  showMobileSidebar={showMobileSidebar}
+                />
+              ) : (
+                ''
+              )}
+            </div>
           )}
-        </div>
+        </>
+      ) : (
+        <main className="min-h-screen h-screen w-full bg-white/70"></main>
       )}
-    </div>
+    </Layout>
   )
 }
 
@@ -88,16 +103,16 @@ export const SideBar = () => {
   const router = useRouter()
 
   const styles = {
-    header: `font-bold text-[1.8rem]`,
-    active: `text-primary-red-100 text-[1.3rem] font-normal`,
-    link: `text-[1.3rem] font-normal`,
+    header: `font-medium text-[2rem]`,
+    active: `text-primary-red-100 text-[1.6rem] font-normal`,
+    link: `text-[1.6rem] font-normal`,
   }
 
   return (
     <div className='sticky top-[10rem] w-full space-y-4 divide-y rounded-[1rem] border '>
       <section className='flex gap-x-8 p-8'>
         <div>
-          <UserCircleIcon className='h-8 w-8' />
+          <UserCircleIcon className='h-12 w-12' />
         </div>
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Profile</h2>
@@ -131,7 +146,7 @@ export const SideBar = () => {
 
       <section className='flex gap-x-8 p-8 py-4'>
         <div>
-          <ShoppingBagIcon className='h-8 w-8' />
+          <ShoppingBagIcon className='h-12 w-12' />
         </div>
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Orders</h2>
@@ -164,7 +179,7 @@ export const SideBar = () => {
 
       <section className='flex gap-x-8 p-8 py-4'>
         <div>
-          <WalletIcon className='h-8 w-8' />
+          <WalletIcon className='h-12 w-12' />
         </div>
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Wallet</h2>

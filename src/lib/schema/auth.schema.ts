@@ -30,4 +30,24 @@ export const titleOptions: { label: string, value: string }[] = [
   { label: 'Mrs', value: 'mrs' },
   // { label: '', value: '' },
   // { label: '', value: '' }
-] 
+]
+
+export const billingAddressVal: yup.InferType<typeof billingAddressSchema> = {
+  title: '',
+  firstname: '',
+  lastname: '',
+  addressLine1: '',
+  country: '',
+  zipcode: '',
+  default: false
+}
+
+export const billingAddressSchema = yup.object().shape({
+  title: yup.string().required('Field is required'),
+  firstname: yup.string().required('Field is required'),
+  lastname: yup.string().required(),
+  addressLine1: yup.string().required(),
+  country: yup.string().required(),
+  zipcode: yup.string().required(),
+  default: yup.boolean()
+})

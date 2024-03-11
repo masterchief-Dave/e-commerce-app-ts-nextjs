@@ -62,6 +62,8 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
     setOpenModal(false)
   }
 
+  console.log(router.asPath)
+
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center" />
@@ -159,17 +161,6 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                       />
                     </Button>
                   </div>
-                  {/* <div>
-                    <p className='text-center'>Or continue with</p>
-                  </div> */}
-
-                  {/* <div className='flex items-center justify-around gap-x-24'>
-                    <LogosFacebook className='h-12 w-12' />
-                    <Fa6BrandsSquareXTwitter className='h-12 w-12' />
-                    <CibApple className='h-12 w-12' />
-                    <LogosRedditIcon className='h-12 w-12' />
-                  </div> */}
-
                   <div>
                     <p className='text-[1.4rem] font-normal'>
                       By registering for an Sage-Warehouse account, you agree that you have read and accepted our Sage-Warehouse Free Membership Agreement and <Link className='text-blue-500' href='/legal/privacy-policy'>Privacy Policy</Link>.

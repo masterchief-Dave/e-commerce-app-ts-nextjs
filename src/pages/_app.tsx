@@ -24,7 +24,7 @@ export default function App({
 }: AppProps<{ session: Session }>) {
   const refreshToken = useRefreshToken()
   const { user } = useAuth()
-  const staticPaths = ['/legal/terms-and-condition']
+  const staticPaths = ['/legal/terms-and-condition', '/auth/login', '/auth']
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(staticPaths.includes(router.asPath) ? false : true)
 

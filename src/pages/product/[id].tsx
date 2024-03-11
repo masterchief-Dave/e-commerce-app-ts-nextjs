@@ -47,8 +47,8 @@ const ProductSlug = ({ product }: Props) => {
   const likeQuery = useLikeProduct(1)
   const { user, isAuthenticated } = useAuth()
 
-  const isItemInWishlist = getWishlistQuery?.data?.data.findIndex((item) => item === product._id)
-  const isItemInCart = getCartQuery?.data?.data.findIndex((item) => item.id === product._id)
+  const isItemInWishlist = getWishlistQuery?.data?.data.some((item) => item === product._id)
+  const isItemInCart = getCartQuery?.data?.data.some((item) => item.id === product._id)
   console.log({ isItemInCart })
 
   const handleBuyNow = () => {
@@ -199,11 +199,11 @@ const ProductSlug = ({ product }: Props) => {
                   {/* add to wishlist  */}
                   <button
                     disabled={likeQuery.isMutating}
-                    className={`flex h-[4rem] gap-x-4 items-center justify-center px-6 rounded-md text-white text-[1.2rem] ${isItemInWishlist === 0 ? 'bg-[#FF0000]' : 'bg-[#000]'}`}
+                    className={`flex h-[4rem] gap-x-4 items-center justify-center px-6 rounded-md text-white text-[1.2rem] ${isItemInWishlist ? 'bg-[#FF0000]' : 'bg-[#000]'}`}
                     onClick={handleAddToWishlist}>
                     <HeartIcon className='h-8 w-8' />
                     <p className="font-medium text-[1.5rem]">
-                      {isItemInWishlist === 0 ? 'Remove from wishlist' : 'Add to Wishlist'}
+                      {isItemInWishlist ? 'Remove from wishlist' : 'Add to Wishlist'}
                     </p>
                   </button>
                 </div>
@@ -230,7 +230,7 @@ const ProductSlug = ({ product }: Props) => {
                   disabled={cartQuery.isMutating}
                   onClick={handleAddToCart}
                   className={`w-[20rem] h-[4rem] flex items-center justify-center text-[1.5rem] rounded-md bg-black font-semibold text-white`}>
-                  {isItemInCart === 0 ? 'Remove from cart' : 'Add to Cart'}
+                  {isItemInCart ? 'Remove from cart' : 'Add to Cart'}
                 </button>
               </div>
             </article>

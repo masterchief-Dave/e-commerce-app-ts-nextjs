@@ -16,11 +16,13 @@ import useAuth from '@/lib/hooks/useAuth'
 import useLogout from '@/lib/hooks/useLogout'
 import { UserAccountDropdown } from '../Dropdown/Account'
 import { Button } from '../ui/button'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
+import type { UserCart } from "@/lib/types/user/user.type"
 
 type Props = {
   session: UserLoginSession | null
   isTop: boolean
-  cartItems: Cart[]
+  cart: UserCart[]
   handleSignOut: () => void
   isLoggedIn: boolean
   user: Omit<UserSession, 'success'> | null
@@ -42,6 +44,7 @@ export const Navbar = () => {
   const { isTop } = useStickyNavbar()
   const { data } = useSession()
   const { user } = useAuth()
+  const cart = useGetCart()
 
   return (
     <div className=''>
@@ -52,14 +55,14 @@ export const Navbar = () => {
           isLoggedIn={false}
           user={user}
           data={data}
-          cartItems={[]}
+          cart={cart?.data?.data || []}
         />
       </div>
 
       <div className='hidden lg:block'>
         <Desktop
           isTop={isTop}
-          cartItems={[]}
+          cart={cart?.data?.data || []}
           handleSignOut={logout}
           data={data}
           session={null}
@@ -73,7 +76,7 @@ export const Navbar = () => {
 
 
 
-const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data }: Props) => {
+const Desktop = ({ session, isTop, cart, handleSignOut, isLoggedIn, user, data }: Props) => {
   const router = useRouter()
 
   const formik = useFormik<Search>({
@@ -95,7 +98,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
 
   // move the items in the cart into the searchurl params
   const onCartClick = () => {
-    const cartIds = cartItems.map((product) => product._id)
+    const cartIds = cart.map((product) => product._id)
 
     router.push('/cart', {
       pathname: '/cart',
@@ -158,7 +161,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
             <Button className='relative bg-transparent border-0' onClick={onCartClick}>
               <ShoppingBagIcon className='h-12 w-12 text-white' />
               <span className='absolute top-0 left-[30px] flex h-[2rem] w-[2rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
-                {cartItems.length}
+                {cart?.length}
               </span>
             </Button>
           </li>
@@ -168,7 +171,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
   )
 }
 
-const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
+const MobileNavbar = ({ handleSignOut, cart }: MobileProps) => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
   const barIconRef = useRef<HTMLLIElement | null>(null)

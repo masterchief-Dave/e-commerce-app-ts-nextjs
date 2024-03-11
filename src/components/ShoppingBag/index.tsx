@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
 
-type Props = {}
+export const ShoppingFixedBag = () => {
+  const cart = useGetCart()
 
-export const ShoppingFixedBag = (props: Props) => {
-
-  const itemsInCart = 0
+  const itemsInCart = cart?.data?.data.length || 0
 
   return (
     <Link

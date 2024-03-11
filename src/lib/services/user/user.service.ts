@@ -26,6 +26,30 @@ class UserService {
 
     // return await apiService(`/user/cart`, 'GET', {})
   }
+
+  static async createBillingAddress({ title, firstname, lastname, country, zipcode, addressLine1, saveAsDefault }: BillingAddress) {
+    try {
+      return apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/shipping`, 'POST', {
+        title: title,
+        firstname,
+        lastname,
+        country,
+        zipcode,
+        addressLine1,
+        default: saveAsDefault
+      })
+    } catch (err) {
+      error(err as unknown as any)
+    }
+  }
+
+  static async getBillingAddress() {
+    try {
+      return apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/`, 'GET')
+    } catch (err) {
+      error(err as unknown as any)
+    }
+  }
 }
 
 export default UserService

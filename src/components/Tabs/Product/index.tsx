@@ -12,7 +12,7 @@ type Props = {
   product: Product
 }
 const styles = {
-  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer flex items-center justify-center`,
+  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer flex items-center justify-center outline-0 border-0`,
   productDetails: {
     title: `font-semibold`,
     description: `font-medium`
