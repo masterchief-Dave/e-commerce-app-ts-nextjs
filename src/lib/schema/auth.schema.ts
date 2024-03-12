@@ -1,6 +1,12 @@
 import * as yup from 'yup'
 import { LoginInterface } from "../types/auth-type"
 
+const defaultMessage = 'Field is required'
+function customMessage(custom: boolean, field?: string, message?: string) {
+  if (custom) return message
+  return `${field} is required`
+}
+
 export const loginVal: yup.InferType<typeof loginSchema> = {
   email: "",
   password: ""
@@ -50,4 +56,14 @@ export const billingAddressSchema = yup.object().shape({
   country: yup.string().required(),
   zipcode: yup.string().required(),
   default: yup.boolean()
+})
+
+export const updatePasswordVal: yup.InferType<typeof updatePasswordSchema> = {
+  currentPassword: '',
+  newPassword: ''
+}
+
+export const updatePasswordSchema = yup.object().shape({
+  currentPassword: yup.string().required('Field is required').min(5),
+  newPassword: yup.string().required(defaultMessage).min(5)
 })

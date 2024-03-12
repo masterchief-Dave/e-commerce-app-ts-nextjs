@@ -300,7 +300,7 @@ interface Register {
 
 declare global {
 
-  type UpdatePasswordProps = {
+  interface UpdatePasswordInterface {
     password: string
     newPassword: string
   }

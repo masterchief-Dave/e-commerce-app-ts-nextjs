@@ -8,13 +8,10 @@ import {
   WalletIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
-// import { useRouter } from 'next/navigation'
-
 import BreadCrumb from '@/components/BreadCrumb'
 import { DashboardNavbar } from '@/components/Navbar/dashboardNavbar'
 import useMediaQuery from '@/lib/hooks/useMediaQuery'
 import { MobileSideBar } from './sidebar'
-import Loader from '@/components/Shell/Loader'
 import useAuth from "@/lib/hooks/useAuth"
 import { Layout } from ".."
 

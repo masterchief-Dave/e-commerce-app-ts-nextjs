@@ -41,7 +41,7 @@ const Login = ({ myCookieValue, data }: Props) => {
           photo: response.user.photo,
           token: response.user.token
         })
-        router.push('/')
+        return router.push('/')
       }
 
       setError({ state: true, message: response?.statusText })

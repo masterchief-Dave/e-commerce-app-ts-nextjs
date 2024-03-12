@@ -23,12 +23,12 @@ const BreadCrumb = (props: Props) => {
         <BreadcrumbSeparator />
         {props.breadcrumbs.map((breadcrumb, index, arr) => {
           return (
-            <>
+            <section key={`${breadcrumb} + ${index}`} className="flex items-center">
               <BreadcrumbItem>
                 <BreadcrumbLink href={breadcrumb.path}> {formatString(breadcrumb.title)}</BreadcrumbLink>
               </BreadcrumbItem>
               {index === arr.length - 1 ? null : (<BreadcrumbSeparator />)}
-            </>
+            </section>
           )
         })}
       </BreadcrumbList>

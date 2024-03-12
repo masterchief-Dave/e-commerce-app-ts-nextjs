@@ -27,9 +27,16 @@ class UserService {
     // return await apiService(`/user/cart`, 'GET', {})
   }
 
+  static async updatePassword(currentPassword: string, newPassword: string) {
+    return await apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/auth/updatepassword`, 'PATCH', {
+      password: currentPassword,
+      newPassword
+    })
+  }
+
   static async createBillingAddress({ title, firstname, lastname, country, zipcode, addressLine1, saveAsDefault }: BillingAddress) {
     try {
-      return apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/shipping`, 'POST', {
+      return await apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/shipping`, 'POST', {
         title: title,
         firstname,
         lastname,
@@ -45,7 +52,7 @@ class UserService {
 
   static async getBillingAddress() {
     try {
-      return apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/`, 'GET')
+      return await apiService(`${process.env.NEXT_PUBLIC_API_SERVER}/`, 'GET')
     } catch (err) {
       error(err as unknown as any)
     }
