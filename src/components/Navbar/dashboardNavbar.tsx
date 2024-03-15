@@ -28,7 +28,7 @@ export const DashboardNavbar = ({
     <nav
       className={`grid w-full grid-cols-12 bg-primary-blue-100 py-4 `}
     >
-      <ul className='col-start-2 col-end-12 mx-auto flex w-full max-w-[144rem] items-center justify-between gap-x-8'>
+      <ul className='col-start-2 col-end-12 mx-auto flex w-full items-center justify-between gap-x-8'>
         <li>
           <Link href='/'>
             <h1 className='text-[2rem] font-bold text-white'>
@@ -39,10 +39,12 @@ export const DashboardNavbar = ({
 
         {isAboveMediaQuery ? (
           <div className='flex items-center gap-x-4'>
-            <p className='text-[1.1rem] font-semibold text-white lg:text-[1.6rem]'>
-              Aloha 👋,{' '}
-              {/* <span className='text-[1.5rem] lg:text-[2rem]'>{user?.name}</span> */}
-            </p>
+            <div className="flex flex-col">
+              <span className='text-[1.5rem] lg:text-[2rem] text-white'>Aloha 👋,</span>
+              <p className='text-[1.1rem] font-semibold text-white lg:text-[1.6rem]'>
+                {user?.name}
+              </p>
+            </div>
             <UserAccountDropdown photo={user?.photo} alt={user?.name + 'photo'} fallback="e.k" />
             {/* <div className='h-16 w-16 rounded-full'>
               <Image src={session?.data?.user?.image!} alt='photo' width={1000} height={1000} className='rounded-full' />

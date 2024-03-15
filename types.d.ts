@@ -213,13 +213,13 @@ declare global {
 
 declare global {
   interface BillingAddress {
-    title: string
     firstname: string
     lastname: string
     country: string
     zipcode: string
-    addressLine1: string
-    saveAsDefault: Boolean
+    address: string
+    default: boolean
+    phoneNumber: string
   }
 }
 
@@ -235,30 +235,73 @@ declare global {
   }
 }
 
+// declare global {
+//   interface UserOrderInterface {
+//     _id?: Types.ObjectId
+//     cartQuantity?: number
+//     shippingInfo: BillingAddress
+//     user: User
+//     orderItems: {
+//       quantity: number
+//       price: number
+//       product: Product
+//     }[]
+//     paymentInfo: {
+//       status: string
+//       reference: string
+//       message: string
+//       transaction: string
+//     }
+//     taxPrice: number
+//     shippingPrice: number
+//     totalPrice: number
+//     paidAt: Date
+//     orderStatus: string
+//     deliveredAt: Date
+//     createdAt: Date
+//   }
+// }
+
 declare global {
-  interface IOrder {
-    _id?: Types.ObjectId
-    cartQuantity?: number
-    shippingInfo: BillingAddress
-    user: User
-    orderItems: {
-      quantity: number
-      price: number
-      product: Product
-    }[]
+
+  interface UserOrderInterface {
+    shippingInfo: {
+      firstname: string
+      lastname: string
+      country: string
+      zipcode: string
+      address: string
+    }
     paymentInfo: {
       status: string
       reference: string
       message: string
       transaction: string
     }
+    _id: string
+    user: {
+      _id: string
+      name: string
+      email: string
+    }
+    orderItems: {
+      quantity: number
+      price: number
+      product: string
+      name: string
+      image: string
+      _id: string
+    }[]
     taxPrice: number
+    itemsPrice: number
     shippingPrice: number
     totalPrice: number
-    paidAt: Date
+    paidAt: string
     orderStatus: string
-    deliveredAt: Date
-    createdAt: Date
+    deliveredAt: string | null
+    createdAt: string
+    updated_at: string
+    __v: number
   }
 }
 

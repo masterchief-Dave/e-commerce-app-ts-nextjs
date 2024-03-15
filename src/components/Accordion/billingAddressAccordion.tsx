@@ -14,16 +14,29 @@ import { countryCode } from '@/globals/countries'
 import { Input } from "../ui/input"
 import SelectComp from "../molecules/selectComp"
 import { billingAddressSchema, billingAddressVal, titleOptions } from "@/lib/schema/auth.schema"
+import { AddressForm } from "../Account/Address/addressForm"
+import { useGetDefaultBillingAddress } from "@/lib/hooks/user/user.hook"
+import addBillingAddressHelper from "@/utils/addBillingAddress.helper"
+import { useToast } from "../ui/use-toast"
+import useShippingAddress from "@/lib/store/shipping.store"
 
+interface BillingAddressAccordionInterface {
+  billingAddress: string
+  setBillingAddress: React.Dispatch<React.SetStateAction<string>>
 
-export const BillingAddress = () => {
+}
+
+export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAddressAccordionInterface) => {
   const [mounted, setMounted] = useState<boolean>(false)
-  const [billingAddress, setBillingAddress] = useState<string>('')
-
-  const countries = useMemo(() => {
-    const countries = countryCode.map((country) => ({ label: country.country, value: country.country }))
-    return countries
-  }, [countryCode])
+  const billingAddressQuery = useGetDefaultBillingAddress()
+  // const [isSavedBillingAddress, setIsSavedBillingAddress] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
+  const { setAddress } = useShippingAddress()
+  // const countries = useMemo(() => {
+  //   const countries = countryCode.map((country) => ({ label: country.country, value: country.country }))
+  //   return countries
+  // }, [countryCode])
 
 
   useEffect(() => {
@@ -35,19 +48,48 @@ export const BillingAddress = () => {
     initialValues: billingAddressVal,
     validationSchema: billingAddressSchema,
     onSubmit: (values, formikHelpers) => {
-
+      // add the billing address global state here
+      setAddress({
+        address: values.address,
+        country: values.country,
+        default: values.default,
+        firstname: values.firstname,
+        lastname: values.lastname,
+        phoneNumber: values.phoneNumber,
+        zipcode: values.zipcode
+      })
+      addBillingAddressHelper({ values, formik, setLoading, toast, reset: false })
     },
   })
 
-  const handleTitleChange = (e: any) => {
-    formik.setFieldValue('title', e)
+  function renderSavedBillingAddress() {
+    if (billingAddressQuery.data && billingAddressQuery.data?.address.length > 1 && billingAddressQuery.data?.country.length > 1 && billingAddressQuery.data?.zipcode.length > 1) {
+      return (
+        <section className='grid grid-cols-12 gap-4 text-left font-medium'>
+          <div className='col-start-1 col-end-8'>
+            <h5 className={styles.cardTitle}>Address</h5>
+            <p className={`${styles.cardText} text-[1.6rem]`}>
+              {billingAddressQuery.data?.address}
+            </p>
+          </div>
+          <div className='col-start-8 col-end-10'>
+            <h5 className={styles.cardTitle}>City</h5>
+            <p className={`${styles.cardText} text-[1.6rem]`}>{billingAddressQuery.data?.country}</p>
+          </div>
+          <div className='col-start-10 col-end-13'>
+            <h5 className={styles.cardTitle}>Postcode</h5>
+            <p className={`${styles.cardText} text-[1.6rem]`}>{billingAddressQuery.data?.zipcode}</p>
+          </div>
+        </section>
+      )
+    } else {
+      return (
+        <section className="">
+          <p> No Saved Billing Address. </p>
+        </section>
+      )
+    }
   }
-
-  const handleCountryChange = (e: any) => {
-    formik.setFieldValue('country', e)
-  }
-
-  console.log(formik.values)
 
   return (
     <div className='py-10 w-[80%]  text-[1.6rem]'>
@@ -81,23 +123,7 @@ export const BillingAddress = () => {
                     </h2>
                     <AccordionPanel>
                       <div className='space-y-8 px-8 py-8'>
-                        <section className='grid grid-cols-12 gap-4 text-left font-medium'>
-                          <div className='col-start-1 col-end-8'>
-                            <h5 className={styles.cardTitle}>Address</h5>
-                            <p className={`${styles.cardText} text-[1.6rem]`}>
-                              Osborne Foreshore Estate, 1A 2nd St, Ikoyi 106104,
-                              Lagos
-                            </p>
-                          </div>
-                          <div className='col-start-8 col-end-10'>
-                            <h5 className={styles.cardTitle}>City</h5>
-                            <p className={`${styles.cardText} text-[1.6rem]`}>Lagos</p>
-                          </div>
-                          <div className='col-start-10 col-end-13'>
-                            <h5 className={styles.cardTitle}>Postcode</h5>
-                            <p className={`${styles.cardText} text-[1.6rem]`}>122024</p>
-                          </div>
-                        </section>
+                        {renderSavedBillingAddress()}
                       </div>
                     </AccordionPanel>
                   </>
@@ -130,126 +156,7 @@ export const BillingAddress = () => {
                     </AccordionButton>
                     <AccordionPanel>
                       <div className='space-y-8 px-2 py-8 lg:px-8'>
-                        <form
-                          action=''
-                          className='grid grid-cols-2 gap-12 p-4'
-                          onSubmit={formik.handleSubmit}
-                        >
-                          <div className='col-span-full'>
-                            <label htmlFor='title' className={styles.label}>
-                              Title
-                            </label>
-                            <SelectComp
-                              placeholder="Title"
-                              label="Select Title"
-                              options={titleOptions}
-                              onChange={handleTitleChange}
-                              name="title"
-                            />
-                          </div>
-
-                          <div>
-                            <label htmlFor='firstname' className={styles.label}>
-                              Firstname
-                            </label>
-                            <Input
-                              type='text'
-                              id='firstname'
-                              name='firstname'
-                              onChange={formik.handleChange}
-                              value={formik.values.firstname as string}
-                              placeholder='First Name'
-                              className={styles.input}
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor='lastname' className={styles.label}>
-                              Lastname
-                            </label>
-                            <Input
-                              type='text'
-                              id='lastname'
-                              name='lastname'
-                              onChange={formik.handleChange}
-                              value={formik.values.lastname as string}
-                              placeholder='Last Name'
-                              className={styles.input}
-                            />
-                          </div>
-
-                          <div className='max-h-full'>
-                            <label htmlFor='country' className={styles.label}>
-                              Country
-                            </label>
-
-                            <SelectComp
-                              placeholder="Select Country"
-                              label="Billing Address Country"
-                              options={countries}
-                              name="country"
-                              onChange={handleCountryChange}
-                            />
-                          </div>
-
-                          <div>
-                            <label htmlFor='zipcode' className={styles.label}>
-                              Zip code
-                            </label>
-                            <Input
-                              type='text'
-                              id='zipcode'
-                              name='zipcode'
-                              onChange={formik.handleChange}
-                              value={formik.values.zipcode as string}
-                              placeholder='Zip code'
-                              className={styles.input}
-                            />
-                          </div>
-
-                          <div className='col-span-full'>
-                            <label
-                              htmlFor='AddressLine1'
-                              className={styles.label}
-                            >
-                              Address Line 1
-                            </label>
-                            <Input
-                              type='text'
-                              id='AddressLine1'
-                              name='addressLine1'
-                              onChange={formik.handleChange}
-                              value={formik.values.addressLine1 as string}
-                              placeholder='Address Line 1'
-                              className={styles.input}
-                            />
-                          </div>
-
-                          <div className='col-span-full flex items-center gap-x-4'>
-                            <Input
-                              type='checkbox'
-                              className='w-fit'
-                              name='default'
-                            />
-                            <span className='text-[1.6rem]'>
-                              Make this my default delivery address
-                            </span>
-                          </div>
-
-                          {/* <div className='col-span-full flex items-center gap-x-4'>
-                            <input type='checkbox' className='' />
-                            <span className='text-[1.2rem]'>
-                              Make this my default billing address
-                            </span>
-                          </div> */}
-
-                          <div className='w-[1/2]'>
-                            <button
-                              type='submit'
-                              className={styles.btn}>
-                              Save
-                            </button>
-                          </div>
-                        </form>
+                        <AddressForm formik={formik} loading={loading} />
                       </div>
                     </AccordionPanel>
                   </>

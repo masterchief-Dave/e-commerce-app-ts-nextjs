@@ -1,31 +1,74 @@
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import axios from 'axios'
-
+import { getCookie } from 'cookies-next'
 import { AddressBox } from '@/components/Account/Address/addressBox'
 import { Footer } from '@/components/Footer'
 import { AccountLayout } from '@/components/Layout/Account'
-import { getCookie } from 'cookies-next'
+import { useGetBillingAddress } from "@/lib/hooks/user/user.hook"
+import { BillingInfoSkeleton } from "@/components/skeleton"
+import Link from "next/link"
 
 type Props = {
   address: IDelivery[] | null
 }
 
 const DeliveryAddress = (props: Props) => {
+  const { data, isLoading } = useGetBillingAddress()
+
   return (
-    <div className=''>
+    <div>
       <AccountLayout>
         <>
-          {props.address?.map((address) => {
-            return <AddressBox
-              key={address._id}
-              street={address.street}
-              city={address.city}
-              country={address.country}
-              state={address.state}
-              zipCode={address.zipCode}
-            />
-          })}
+          {data?.length === 0 ? (
+            <div className="flex flex-col gap-4 items-center justify-center h-[20rem]">
+              <p className="text-[1.6rem] font-medium">No Billing Information available</p>
+              <Link
+                href='/account/add-billing-address'
+                className="text-blue-500 text-[1.6rem] underline underline-offset-2"
+              >
+                Add Billing Address
+              </Link>
+            </div>
+          ) : (
+            isLoading ? (
+              <div className="flex items-center justify-center">
+                <BillingInfoSkeleton />
+              </div>
+            ) : (
+              <section>
+                <header>
+                  <header className='flex items-center justify-between border-b p-8'>
+                    <h1 className='text-3xl font-semibold'>Delivery Address</h1>
+                    <Link
+                      href='/account/add-billing-address'
+                      className='h-fit w-fit rounded-md bg-blue-500 px-4 py-2 text-[1.6rem] font-semibold text-white'
+                      id='newAddress'
+                    >
+                      {' '}
+                      Add new Address{' '}
+                    </Link>
+                  </header>
+                </header>
+                <div className="grid grid-cols-2 gap-12 p-8">
+                  {data?.map((address) => {
+                    return (
+                      <AddressBox
+                        key={address._id}
+                        _id={address._id}
+                        firstname={address.firstname}
+                        lastname={address.lastname}
+                        country={address.country}
+                        zipcode={address.zipcode}
+                        address={address.address}
+                        phoneNumber={address.phoneNumber}
+                      />
+                    )
+                  })}
+                </div>
+              </section>
+            )
+          )}
         </>
       </AccountLayout>
       <Footer />
@@ -35,14 +78,16 @@ const DeliveryAddress = (props: Props) => {
 
 export default DeliveryAddress
 
+
+/*
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const session = await getSession({ req: context.req })
   const request = context.req
   const resp = context.res
 
   const auth_cookie = getCookie('Authorization', { req: request, res: resp })
+  console.log({ auth_cookie })
 
-  // console.log({ request })
   let data
 
   if (!session) {
@@ -62,3 +107,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     }
   }
 }
+*/

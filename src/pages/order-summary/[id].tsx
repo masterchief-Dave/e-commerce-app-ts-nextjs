@@ -1,30 +1,37 @@
-import { fetchUserOrder } from '@/utils/fetchUserOrder'
+import Spinner from "@/components/molecules/spinner"
+import { OrderSummarySkeleton } from "@/components/skeleton"
+import { useGetOrderSummary } from "@/lib/hooks/user/user.hook"
 import { CheckIcon } from '@heroicons/react/24/outline'
-import axios from 'axios'
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useParams } from "next/navigation"
 import Logo from 'public/assets/celebrate.svg'
 
 type Props = {
-  order: IOrder
+  order: any
 }
 
 const OrderSummary = ({ order }: Props) => {
-  const total = Number(order.totalPrice.toFixed(2))
-  const tax = Number(order.taxPrice.toFixed(2))
-  const shipping = Number(order.shippingPrice.toFixed(2))
-  const result = total - tax - shipping
+  const params = useParams()
 
-  const trackingId: string = order._id as unknown as string
+  const { data, isLoading } = useGetOrderSummary(params?.id as string)
+
+  if (isLoading) {
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        {/* <Spinner /> */}
+        <OrderSummarySkeleton />
+      </div>
+    )
+  }
 
   return (
     <div className=''>
       <Head>
         <title>Thank you! - Sage-Warehouse</title>
-        <link rel='icon' href='/favicon.ico' />
       </Head>
+
       <main className='grid grid-cols-12 min-h-screen'>
         <section className='col-start-1 col-end-8 py-32 px-24 space-y-12'>
           <h1 className='text-[2.5rem] font-bold'>Sage-Warehouse</h1>
@@ -36,7 +43,7 @@ const OrderSummary = ({ order }: Props) => {
               <h3 className='font-medium text-[1.6rem]'>Thank You!</h3>
               <div className='flex items-center gap-x-2'>
                 <p className='font-medium text-[1.6rem]'>Order</p>
-                <span className='text-[1.6rem] text-primary-grey-300'>#{order.paymentInfo.reference}</span>
+                <span className='text-[1.6rem] text-primary-grey-300'>#{data?.paymentInfo?.reference}</span>
               </div>
             </div>
           </div>
@@ -48,7 +55,7 @@ const OrderSummary = ({ order }: Props) => {
             </div>
             <div className='py-6 space-y-4 text-[1.6rem]'>
               <h3 className='font-medium text-primary-grey-300'>Order Tracking Number</h3>
-              <p>{trackingId}</p>
+              {data?._id}
             </div>
           </div>
 
@@ -65,33 +72,27 @@ const OrderSummary = ({ order }: Props) => {
           </div>
         </section>
         <section className='col-start-8 col-end-13 py-32 px-24 bg-[#FAFAFA] sticky top-0 left-0 right-0'>
-          <div className='flex items-center justify-center mb-12'>
+          <div className='flex items-center justify-start mb-12'>
             <Image src={Logo} className='object-cover' alt='success' />
           </div>
 
           <div className='col-start-3 col-end-11'>
-            <h2 className='mb-8 text-[2rem] font-bold'>Summary</h2>
-            <article className='mb-[5rem] space-y-8'>
+            <h2 className='mb-8 text-[2.5rem] font-bold'>Summary</h2>
+            <article className='mb-[5rem] space-y-8 w-[60%]'>
               <div className='border-b space-y-3 py-4'>
-                <div className='text-former-price-text flex justify-between'>
-                  <p className='text-[1.4rem] text-primary-grey-300'>Original Price</p>
-                  <p className='text-[1.5rem] font-semibold'>
-                    ${result.toFixed(2)}
-                  </p>
-                </div>
                 <div className='flex items-center justify-between'>
                   <p className='text-[1.4rem] text-primary-grey-300'>Shipping</p>
-                  <p className='text-[1.5rem] font-semibold'>${order.shippingPrice.toFixed(2)}</p>
+                  <p className='text-[2rem] font-medium'>{data?.shippingPrice.toFixed(2)}</p>
                 </div>
                 <div className='flex items-center justify-between'>
                   <p className='text-[1.4rem] text-primary-grey-300'>Tax</p>
-                  <p className='text-[1.5rem] font-semibold'>${order.taxPrice.toFixed(2)}</p>
+                  <p className='text-[2rem] font-medium'>{data?.taxPrice.toFixed(2)}</p>
                 </div>
               </div>
 
               <div className='flex justify-between'>
                 <p className='text-[1.4rem] text-primary-grey-300'>Total</p>
-                <p className='text-[1.5rem] font-semibold'>${order.totalPrice.toFixed(2)}</p>
+                <p className='text-[2rem] font-semibold'>{data?.totalPrice.toFixed(2)}</p>
               </div>
             </article>
           </div>
@@ -103,13 +104,18 @@ const OrderSummary = ({ order }: Props) => {
 
 export default OrderSummary
 
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const { id } = context.query
-  const order = await fetchUserOrder(id as string, context.req)
+// export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+//   const { id } = context.query
+//   const req = context.req
+//   const token = getCookie('Authorization')
 
-  return {
-    props: {
-      order: order
-    }
-  }
-}
+//   console.log(token)
+//   // const order = await fetchUserOrder(id as string, token.Authorization)
+//   // console.log({ order })
+
+//   return {
+//     props: {
+//       order: []
+//     }
+//   }
+// }

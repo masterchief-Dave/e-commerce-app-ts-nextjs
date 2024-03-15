@@ -8,7 +8,7 @@ export const fetchOrder = async (req: any) => {
     }
   })
 
-  const data: IOrder[] = response.data.data
+  const data: UserOrderInterface[] = response.data.data
   return data
 }
 

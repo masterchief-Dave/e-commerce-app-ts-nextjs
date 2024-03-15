@@ -39,23 +39,23 @@ export const titleOptions: { label: string, value: string }[] = [
 ]
 
 export const billingAddressVal: yup.InferType<typeof billingAddressSchema> = {
-  title: '',
   firstname: '',
   lastname: '',
-  addressLine1: '',
+  phoneNumber: "",
+  address: '',
   country: '',
   zipcode: '',
   default: false
 }
 
 export const billingAddressSchema = yup.object().shape({
-  title: yup.string().required('Field is required'),
   firstname: yup.string().required('Field is required'),
-  lastname: yup.string().required(),
-  addressLine1: yup.string().required(),
-  country: yup.string().required(),
-  zipcode: yup.string().required(),
-  default: yup.boolean()
+  lastname: yup.string().required(defaultMessage),
+  phoneNumber: yup.string().required(defaultMessage),
+  address: yup.string().required(defaultMessage),
+  country: yup.string().required(defaultMessage),
+  zipcode: yup.string().required(defaultMessage),
+  default: yup.boolean().default(false).required()
 })
 
 export const updatePasswordVal: yup.InferType<typeof updatePasswordSchema> = {

@@ -1,15 +1,10 @@
 import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import { useFormik } from 'formik'
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
 import { AccountLayout } from '@/components/Layout/Account'
-import { fetchDataFromExpressServer } from '@/utils/fetchOrder'
-import { getToken } from 'next-auth/jwt'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import useAuth from "@/lib/hooks/useAuth"
-import { useRouter } from "next/router"
 import { updatePasswordSchema, updatePasswordVal } from "@/lib/schema/auth.schema"
 import { ErrorLabel } from "@/components/ui/errorLabel"
 import UserService from "@/lib/services/user/user.service"
@@ -55,12 +50,10 @@ const User = (props: Props) => {
     onSubmit: async (values) => {
       setLoading(true)
       try {
-        // const response = await postUpdatePassword({ data })
         const response = await UserService.updatePassword(values.currentPassword, values.newPassword)
-        console.log('response from update password endpoint', response)
         if (response?.success) {
           toast({
-            variant: 'default',
+            variant: 'success',
             title: 'Password Updated',
             description: "You can login in with your updated password next time"
           })
@@ -89,8 +82,6 @@ const User = (props: Props) => {
       // console.log(response)
     }
   })
-
-  console.log(formik.values)
 
   return (
     <div>
@@ -196,7 +187,7 @@ const User = (props: Props) => {
               </InputContainer>
               {formik.errors.newPassword && formik.touched.newPassword && <ErrorLabel text={formik.errors.newPassword} />}
             </div>
-            <Button disabled={canEdit ? false : true} type='submit' className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white flex items-center justify-center'>
+            <Button disabled={canEdit ? false : true} type='submit' className='h-fit w-full rounded-md bg-primary-blue-300 btn py-4 text-[1.6rem] font-semibold text-white flex items-center justify-center'>
               {loading && <Spinner className="h-10 w-10" />}
               <span>
                 Update Information
@@ -212,6 +203,7 @@ const User = (props: Props) => {
 
 export default User
 
+/*
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const session = await getSession({ req: context.req })
 
@@ -243,10 +235,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     // console.log(err)
   }
 
-  /**
-   *  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
-   * i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart 
-   * */
+
+  //  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
+  // i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart comment created 6 months ago, updated 12 march 2024
+
 
   return {
     props: {
@@ -254,3 +246,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     }
   }
 }
+*/

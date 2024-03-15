@@ -1,12 +1,15 @@
+import { apiService } from "@/helpers/apiService"
+import axios from "axios"
+
 export const fetchUserOrder = async (id: string, req: any) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/get-order/${id}`, {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}/order/${id}`, {
     headers: {
-      cookie: req.headers.cookie || ''
+      'Authorization': req.headers.get('Authorization')
     }
   })
 
-  const data = await res.json()
-  const order: IOrder = data.data
+  const data = await response.data
+  console.log({ data })
 
-  return order
+  return []
 }

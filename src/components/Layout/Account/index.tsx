@@ -68,14 +68,14 @@ export const AccountLayout = ({ children }: Props) => {
               </section>
 
               <section className='col-start-6 col-end-12 min-h-screen'>
-                <main className='h-fit rounded-xl border'>
+                <main className='h-fit rounded-xl border min-h-[20rem]'>
                   {children}
                 </main>
               </section>
             </div>
           ) : (
             <div className='grid grid-cols-12 py-24'>
-              <section className='col-start-2 col-end-12 mx-auto w-full rounded-[1rem] border'>
+              <section className='col-start-2 col-end-12 mx-auto w-full rounded-[1rem] border min-h-[20rem]'>
                 {children}
               </section>
               {showMobileSidebar ? (
@@ -180,6 +180,17 @@ export const SideBar = () => {
         </div>
         <ul className='space-y-4'>
           <h2 className={styles.header}>My Wallet</h2>
+          <li>
+            <Link
+              href="/account/add-billing-address"
+              className={
+                router.pathname === '/account/add-billing-address'
+                  ? styles.active
+                  : styles.link
+              }>
+              Add Billing Address
+            </Link>
+          </li>
           <li>
             <Link
               href='/account/add-payment'

@@ -7,7 +7,7 @@ import { AccountLayout } from '@/components/Layout/Account'
 import { fetchOrder } from '@/utils/fetchOrder'
 
 type Props = {
-  order: IOrder[] | null
+  order: UserOrderInterface[] | null
 }
 
 const OrderSlug = (props: Props) => {

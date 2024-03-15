@@ -14,7 +14,7 @@ export function UserAccountDropdown({ photo, alt, fallback }: { photo?: string, 
 
 
   const styles = {
-    list: `block`
+    list: `block text-left`
   }
 
   const links = [
@@ -29,13 +29,13 @@ export function UserAccountDropdown({ photo, alt, fallback }: { photo?: string, 
       <Menu.Button className='relative block'>
         <AvatarComp src={photo} alt={alt} fallback={fallback} />
       </Menu.Button>
-      <Menu.Items className='absolute p-2 top-[5.7rem] rounded-xl border bg-white'>
+      <Menu.Items className='absolute p-2 w-80 top-[7rem] rounded-xl border bg-white'>
         {links.map((link) => {
           return (
             <Menu.Item as='li' className={styles.list} key={link.id}>
               {({ active }) => (
                 <Link
-                  className={`${active && 'bg-blue-500'} py-2 block px-12 hover:rounded-md hover:text-white`}
+                  className={`${active && 'bg-blue-500'} text-left py-2 block px-8 hover:rounded-md hover:text-white`}
                   href={link.link}
                 >
                   {link.name}
@@ -49,7 +49,7 @@ export function UserAccountDropdown({ photo, alt, fallback }: { photo?: string, 
           {({ active }) => {
             return (
               <button
-                className={`${active && 'bg-blue-500'} text-left py-2 block px-12 hover:rounded-md hover:text-white w-full`}
+                className={`${active && 'bg-blue-500'} text-left py-2 block px-8 hover:rounded-md hover:text-white w-full`}
                 onClick={() =>
                   logout()
                 }>

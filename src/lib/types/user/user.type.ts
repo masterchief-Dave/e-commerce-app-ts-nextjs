@@ -30,3 +30,18 @@ export interface UserCartInterface {
   }[]
   products: CartProducts[]
 }
+
+export interface UserBillingInfo {
+  _id: string
+  firstname: string
+  lastname: string
+  phoneNumber: string
+  address: string
+  country: string
+  default: boolean
+  updated_at: Date
+  zipcode: string
+  __v: number
+}
+
+export type BillingAddressInterface = Omit<UserBillingInfo, '_id' | '__v' | 'created_at' | 'updated_at'>

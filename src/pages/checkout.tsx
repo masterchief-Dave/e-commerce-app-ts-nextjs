@@ -11,8 +11,9 @@ import Image from 'next/image'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
-import { useGetCart } from "@/lib/hooks/user/user.hook"
+import { useGetCart, useGetDefaultBillingAddress } from "@/lib/hooks/user/user.hook"
 import type { UserCart } from "@/lib/types/user/user.type"
+import useShippingAddress from "@/lib/store/shipping.store"
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
@@ -22,23 +23,32 @@ const styles = {
 
 const Checkout = () => {
   const [disable, setDisable] = useState(true)
+  const [billingAddress, setBillingAddress] = useState<string>('')
   const router = useRouter()
-  const shippingAddress = null
   const getCartQuery = useGetCart()
-  // check if item is in cart
-
-
-  const totalPrice = 0
-
-  // console.log({ totalPrice })
+  const { shippingAddress } = useShippingAddress()
+  const { data } = useGetDefaultBillingAddress()
+  const totalPrice = getCartQuery.data?.data.reduce((acc, cart) => {
+    return acc + cart.price
+  }, 0)
   const shippingFee = 10
   const taxFee = 10
-  const amount = totalPrice + shippingFee + taxFee
+  const amount = (totalPrice as number) + shippingFee + taxFee
 
+  /**
+   * THE billing address can either be in the global state or the shipping address the user has created earlier,
+   * how to choose => 
+   * 
+   */
 
 
   // get shipping address, check to see if shipping address is present and 
   // console.log({ shippingAddress })
+  const checkoutAddress = billingAddress === 'savedAddress' ? data : shippingAddress
+
+  console.log({ checkoutAddress })
+
+  console.log('some')
 
   return (
     <div>
@@ -55,7 +65,7 @@ const Checkout = () => {
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
-              <BillingAddress />
+              <BillingAddress setBillingAddress={setBillingAddress} billingAddress={billingAddress} />
             </div>
 
             {/* the beginning of payment methods */}
@@ -76,8 +86,9 @@ const Checkout = () => {
 
 
             <div className='space-y-4'>
-              <h2 className={styles.sectionHeader}>Order Details</h2>
+              <h2 className={styles.sectionHeader}>Your Shopping Cart</h2>
               <div>
+                {/* check if item is in cart */}
                 {getCartQuery.data?.data.map((item: UserCart) => {
                   return (
                     <CheckoutProduct
@@ -101,7 +112,7 @@ const Checkout = () => {
                 <div className='border-b space-y-3 py-4'>
                   <div className='text-former-price-text flex justify-between'>
                     <p className='text-[1.6rem]'>Original Price</p>
-                    <p className='text-[1.5rem] font-semibold'> ${totalPrice.toFixed(2)}</p>
+                    <p className='text-[1.5rem] font-semibold'> ${totalPrice?.toFixed(2)}</p>
                   </div>
                   <div className='flex items-center justify-between'>
                     <p className='text-[1.6rem]'>Shipping</p>
@@ -123,13 +134,12 @@ const Checkout = () => {
                   and condition
                 </p>
 
-                {/* <PaystackHook
+                <PaystackHook
                   price={amount}
-                  orders={cart}
-                  loading={false}
-                  shippingAddress={shippingAddress}
+                  orders={getCartQuery?.data?.data || []}
+                  shippingAddress={checkoutAddress}
                   isDisabled={disable}
-                /> */}
+                />
 
                 <div className='flex items-center gap-x-8'>
                   <p className='text-former-price-text w-full text-center text-[1.3rem]'>

@@ -1,6 +1,12 @@
 import Image from 'next/image'
 
-type Props = {}
+type Props = {
+  date: string
+  price: string
+  address: string
+  image: string
+  orderNo: string
+}
 
 export const Order = (props: Props) => {
   return (

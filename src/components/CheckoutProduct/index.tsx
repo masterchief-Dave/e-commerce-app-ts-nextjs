@@ -47,7 +47,7 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) =
 
   return (
     <div className='flex items-center justify-between gap-x-4 lg:gap-x-12 border-b py-8'>
-      <section className='flex w-full items-start justify-between gap-x-4 lg:gap-x-12'>
+      <section className='grid grid-cols-[1fr_5fr_1fr_1.5fr] w-full items-start justify-between gap-x-4 lg:gap-x-12'>
         <div className='relative h-44 w-44'>
           <Image
             src={img}
@@ -57,8 +57,8 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) =
             className='h-full object-cover'
           />
         </div>
-        <div className='grow-[2] flex-col justify-between gap-x-8 text-xl lg:text-2xl'>
-          <h2 className='mb-4 font-semibold'>{name}</h2>
+        <div className='grow-[2] flex-col justify-between gap-x-8 text-3xl'>
+          <h2 className='mb-4 font-normal'>{name}</h2>
           <div className='flex items-center text-text-primary-link'>
             <button
               className='text-xl font-medium lg:text-2xl'
@@ -79,7 +79,7 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) =
             </span>
           </div>
         </div>
-        <div className='flex grow items-center gap-x-2 lg:gap-x-4 text-xl font-semibold lg:text-2xl'>
+        <div className='flex grow items-center gap-x-2 lg:gap-x-4 text-3xl'>
           <p>{cartQuantity}</p>
           <div className='flex flex-col items-center justify-center gap-2 lg:gap-4 text-text-primary-link'>
             {/* when the quanity is 1 then disable the button from going lower */}
@@ -100,8 +100,8 @@ const CheckoutProduct = ({ img, name, price, cartQuantity, id, stock }: Props) =
           {/* <span className='text-[1.3rem] font-normal text-primary-red-100'> toast {message}</span> */}
         </div>
 
-        <section className='space-y-4 text-xl lg:text-2xl'>
-          <p className='text-xl lg:text-[2.5rem] font-bold mb-4'>${price.toFixed(2)}</p>
+        <section className='space-y-4 text-xl flex flex-col items-end justify-end lg:text-2xl'>
+          <p className='text-3xl font-normal mb-4'>${price.toFixed(2)}</p>
           <button
             className='cursor-pointer justify-self-end text-right font-medium text-primary-red-100 hover:underline hover:underline-offset-4'
             onClick={handleRemoveItemFromCart}>

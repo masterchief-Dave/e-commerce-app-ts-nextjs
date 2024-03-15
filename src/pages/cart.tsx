@@ -73,7 +73,6 @@ const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
   const [openModal, setOpenModal] = useState(false)
   // const totalPrice = 0
 
-  console.log(cart)
   const totalPrice = cart.reduce((acc, item) => {
     return item.price + acc
   }, 0)
@@ -104,7 +103,7 @@ const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
         })}
       </div>
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
-        <div className='flex items-center justify-between font-medium'>
+        <div className='flex items-center justify-between font-medium text-4xl'>
           <p>Total</p>
           <p>${totalPrice.toFixed(2)}</p>
         </div>
@@ -119,6 +118,7 @@ const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
   )
 }
 
+/*
 export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }) => {
 
   try {
@@ -134,7 +134,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }
 
     const cart = await response.json()
 
-    console.log({ obj: cart.products })
+    // console.log({ obj: cart.products })
   } catch (err) {
     // some code
   }
@@ -143,3 +143,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }
     props: {}
   }
 }
+*/

@@ -31,7 +31,7 @@ export default function EditUserAddressModal({ state, setState }: Props) {
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center">
-       
+
       </div>
 
       <Transition appear show={state} as={Fragment}>
@@ -49,7 +49,7 @@ export default function EditUserAddressModal({ state, setState }: Props) {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto font-jost">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex min-h-full items-center justify-center p-12 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -59,13 +59,13 @@ export default function EditUserAddressModal({ state, setState }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-8">
+                <Dialog.Panel className="w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all p-12">
                   <Dialog.Title
                     as="div"
                     className="text-4xl mb-12 font-medium leading-6 text-gray-900 flex items-center justify-between"
                   >
                     <h3>Edit Address</h3>
-                    <PencilIcon className='h-8 w-8'/>
+                    <PencilIcon className='h-8 w-8' />
                   </Dialog.Title>
                   <form className="mt-2 space-y-4 grid grid-cols-2 gap-8">
                     <div className='col-span-full'>
