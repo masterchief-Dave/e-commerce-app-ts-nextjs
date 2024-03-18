@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 import { LockClosedIcon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 
@@ -6,14 +5,15 @@ import { Navbar } from '@/components/Navbar'
 import PaymentAccordion from '@/components/Accordion/paymentAccordion'
 import { BillingAddress } from '@/components/Accordion/billingAddressAccordion'
 import { PaystackHook } from '@/helpers/paystack'
-import { useCart } from '@/hooks/useCart'
-import { RootState } from '@/app/store'
-import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
+import { useGetCart, useGetDefaultBillingAddress } from "@/lib/hooks/user/user.hook"
+import type { BillingAddressInterface, UserBillingInfo, UserCart } from "@/lib/types/user/user.type"
+import useShippingAddress from "@/lib/store/shipping.store"
 
 const styles = {
   sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
@@ -23,37 +23,29 @@ const styles = {
 
 const Checkout = () => {
   const [disable, setDisable] = useState(true)
-  const router = useRouter()
-  const { cart } = useCart()
-  const shippingAddress = useSelector((state: RootState) => {
-    return state.shipping.value
-  })
-
-  // check if item is in cart
-  useEffect(() => {
-    if (cart.length < 1) {
-      router.push('/')
-    }
-  }, [cart])
-
-  const totalPrice = useSelector((state: RootState) => {
-    return selectorCartTotalAmount(state)
-  })
-
-  // console.log({ totalPrice })
+  const [billingAddress, setBillingAddress] = useState<string>('')
+  const getCartQuery = useGetCart()
+  const { shippingAddress } = useShippingAddress()
+  const { data } = useGetDefaultBillingAddress()
+  const totalPrice = getCartQuery.data?.data.reduce((acc, cart) => {
+    return acc + cart.price
+  }, 0)
   const shippingFee = 10
   const taxFee = 10
-  const amount = totalPrice + shippingFee + taxFee
+  const amount = (totalPrice as number) + shippingFee + taxFee
 
-  // get shipping address, check to see if shipping address is present and 
-  // console.log({ shippingAddress })
-
+  /**
+   * THE billing address can either be in the global state or the shipping address the user has created earlier,
+   * how to choose => 
+   * 
+   */
+  const checkoutAddress = billingAddress === 'savedAddress' ? data as UserBillingInfo : shippingAddress
   return (
     <div>
       <header className='grid grid-cols-12 border-b py-4'>
         <h1 className='font-bold text-[2.5rem] col-span-full px-24'>
           <Link href='/'>
-            <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
+            <Image src={SWLogo} alt='Brand Logo' height={50} width={50} />
           </Link>
         </h1>
       </header>
@@ -63,7 +55,7 @@ const Checkout = () => {
             <h1 className='text-[2rem] font-bold'>Checkout</h1>
             <div className='space-y-4'>
               <h2 className={styles.sectionHeader}>Billing Address</h2>
-              <BillingAddress />
+              <BillingAddress setBillingAddress={setBillingAddress} billingAddress={billingAddress} />
             </div>
 
             {/* the beginning of payment methods */}
@@ -84,17 +76,18 @@ const Checkout = () => {
 
 
             <div className='space-y-4'>
-              <h2 className={styles.sectionHeader}>Order Details</h2>
+              <h2 className={styles.sectionHeader}>Your Shopping Cart</h2>
               <div>
-                {cart.map((item: Cart) => {
+                {/* check if item is in cart */}
+                {getCartQuery.data?.data.map((item: UserCart) => {
                   return (
                     <CheckoutProduct
                       key={item._id}
                       id={item._id}
-                      img={item.images[0].url}
+                      img={item.image}
                       name={item.name}
                       price={item.price}
-                      cartQuantity={item.cartQuantity}
+                      cartQuantity={item.quantity}
                     />)
                 })}
               </div>
@@ -108,34 +101,33 @@ const Checkout = () => {
               <article className='mb-[5rem] space-y-8'>
                 <div className='border-b space-y-3 py-4'>
                   <div className='text-former-price-text flex justify-between'>
-                    <p className='text-[1.6rem] lg:text-[1.2rem]'>Original Price</p>
-                    <p className='text-[1.5rem] font-semibold'> ${totalPrice.toFixed(2)}</p>
+                    <p className='text-[1.6rem]'>Original Price</p>
+                    <p className='text-[1.5rem] font-semibold'> ${totalPrice?.toFixed(2)}</p>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <p className='text-[1.6rem] lg:text-[1.2rem]'>Shipping</p>
+                    <p className='text-[1.6rem]'>Shipping</p>
                     <p className='text-[1.5rem] font-semibold'>${shippingFee.toFixed(2)}</p>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <p className='text-[1.6rem] lg:text-[1.2rem]'>Tax</p>
+                    <p className='text-[1.6rem]'>Tax</p>
                     <p className='text-[1.5rem] font-semibold'>${taxFee.toFixed(2)}</p>
                   </div>
                 </div>
 
                 <div className='flex justify-between'>
-                  <p className='text-[1.6rem] lg:text-[1.2rem]'>Total</p>
+                  <p className='text-[1.6rem]'>Total</p>
                   <p className='text-[1.5rem] font-semibold'>${amount}</p>
                 </div>
 
-                <p className='text-former-price-text font-light'>
+                <p className='text-former-price-text font-normal'>
                   By completing your purchase you agree to these Cobraine term
                   and condition
                 </p>
 
                 <PaystackHook
                   price={amount}
-                  orders={cart}
-                  loading={false}
-                  shippingAddress={shippingAddress}
+                  orders={getCartQuery?.data?.data || []}
+                  shippingAddress={checkoutAddress}
                   isDisabled={disable}
                 />
 

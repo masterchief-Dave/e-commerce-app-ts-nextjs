@@ -11,17 +11,18 @@ import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
 
-import { useStickyNavbar } from '@/hooks/useStickyNavbar'
-import { useCart } from '@/hooks/useCart'
-import useAuth from '@/hooks/useAuth'
-import useLogout from '@/hooks/useLogout'
+import { useStickyNavbar } from '@/lib/hooks/useStickyNavbar'
+import useAuth from '@/lib/hooks/useAuth'
+import useLogout from '@/lib/hooks/useLogout'
 import { UserAccountDropdown } from '../Dropdown/Account'
 import { Button } from '../ui/button'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
+import type { UserCart } from "@/lib/types/user/user.type"
 
 type Props = {
   session: UserLoginSession | null
   isTop: boolean
-  cartItems: Cart[]
+  cart: UserCart[]
   handleSignOut: () => void
   isLoggedIn: boolean
   user: Omit<UserSession, 'success'> | null
@@ -43,8 +44,7 @@ export const Navbar = () => {
   const { isTop } = useStickyNavbar()
   const { data } = useSession()
   const { user } = useAuth()
-  const { cart } = useCart()
-
+  const cart = useGetCart()
 
   return (
     <div className=''>
@@ -55,14 +55,14 @@ export const Navbar = () => {
           isLoggedIn={false}
           user={user}
           data={data}
-          cartItems={cart}
+          cart={cart.data?.message === 'success' ? cart?.data?.data : []}
         />
       </div>
 
       <div className='hidden lg:block'>
         <Desktop
           isTop={isTop}
-          cartItems={cart}
+          cart={cart.data?.message === 'success' ? cart?.data?.data : []}
           handleSignOut={logout}
           data={data}
           session={null}
@@ -76,10 +76,8 @@ export const Navbar = () => {
 
 
 
-const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, data }: Props) => {
+const Desktop = ({ session, isTop, cart, handleSignOut, isLoggedIn, user, data }: Props) => {
   const router = useRouter()
-
-  console.log({ user })
 
   const formik = useFormik<Search>({
     initialValues: {
@@ -100,7 +98,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
 
   // move the items in the cart into the searchurl params
   const onCartClick = () => {
-    const cartIds = cartItems.map((product) => product._id)
+    const cartIds = cart.map((product) => product._id)
 
     router.push('/cart', {
       pathname: '/cart',
@@ -119,7 +117,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
         <li>
           <h1>
             <Link href='/' className='text-[2rem] font-bold text-white'>
-              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
+              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} />
             </Link>
           </h1>
         </li>
@@ -134,7 +132,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
               onChange={formik.handleChange}
             />
             <div className='flex h-full w-[10%] cursor-pointer items-center justify-center  '>
-              <button type='submit' className='w-fit rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
+              <button type='submit' className='w-fit bg-transparent rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300'>
                 <MagnifyingGlassIcon className='h-8 w-8 hover:text-white' />
               </button>
             </div>
@@ -163,7 +161,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
             <Button className='relative bg-transparent border-0' onClick={onCartClick}>
               <ShoppingBagIcon className='h-12 w-12 text-white' />
               <span className='absolute top-0 left-[30px] flex h-[2rem] w-[2rem] items-center justify-center rounded-full bg-primary-yellow-200 text-white'>
-                {cartItems.length}
+                {cart?.length}
               </span>
             </Button>
           </li>
@@ -173,7 +171,7 @@ const Desktop = ({ session, isTop, cartItems, handleSignOut, isLoggedIn, user, d
   )
 }
 
-const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
+const MobileNavbar = ({ handleSignOut, cart }: MobileProps) => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
   const barIconRef = useRef<HTMLLIElement | null>(null)
@@ -217,7 +215,7 @@ const MobileNavbar = ({ handleSignOut, cartItems }: MobileProps) => {
         <li>
           <h1>
             <Link href='/' className='text-lg font-bold text-white'>
-              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} objectFit='cover' />
+              <Image src={SWLogo} alt='Brand Logo' height={50} width={50} />
             </Link>
           </h1>
         </li>

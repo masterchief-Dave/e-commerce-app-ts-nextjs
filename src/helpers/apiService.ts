@@ -46,7 +46,7 @@ export const globalAxios = axios.create({
 //   return err
 // })
 
-export const apiService = (url: string, method?: string, data?: any): Promise<any> => {
+export const apiService = (url: string, method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT', data?: any): Promise<any> => {
   return new Promise((resolve) => {
     console.log(url)
     globalAxios({

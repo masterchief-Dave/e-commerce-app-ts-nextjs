@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import useSWR from 'swr'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 
@@ -11,53 +10,47 @@ import { Footer } from '@/components/Footer'
 import { CategoryCard } from '@/components/Card/Category'
 import { ProductCard } from '@/components/Product/Card'
 import { ShoppingFixedBag } from '@/components/ShoppingBag'
-import { ProductCardSkeleton } from '@/components/SkeletonLoading'
-import { electronicsData, gamingData, computerData } from '@/globals/category'
+import { CategorySkeleton, ProductCardSkeleton } from '@/components/SkeletonLoading'
 import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
 import { landingPageFeatures } from '@/globals/home'
 import { FeaturesCard } from '@/components/Card'
 import Testimonials from "@/components/Testimonial"
-import useAuth from "@/hooks/useAuth"
+import { useSearchParams } from "next/navigation"
+import axios from "axios"
+import useAuth from "@/lib/hooks/useAuth"
+import { useGetCategories, useGetProducts } from "@/lib/hooks/product/product.hook"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
+  const params = useSearchParams()
+  const { user, setUser } = useAuth()
 
-  const { user } = useAuth()
-  console.log({ user })
+  // CREATE USE-EFFECT TO CAPTURE THE DATA COMING FROM THE SERVER
+  useEffect(() => {
+    const name = params?.get('name')
+    const email = params?.get('email')
+    const token = params?.get('token')
+    const id = params?.get('id')
+    const photo = params?.get('photo')
+    const role = params?.get('role')
 
-  //{{url}}/products?page=1
+    if (name !== undefined && name?.length! > 1) {
+      axios.defaults.headers.common["Authorization"] = token
+      return setUser({
+        email: email ?? '',
+        _id: id ?? '',
+        name: name ?? '',
+        photo: photo ?? '',
+        token: token ?? '',
+        role: role as 'USER' | 'NO USER' | 'ADMIN' ?? 'NO USER'
+      })
+    }
+  }, [])
 
-  //const { data: user } = useSWR(['/api/user', token], ([url, token]) => fetchWithToken(url, token))
+  const { data: categories, isLoading: categoriesLoading } = useGetCategories()
+  // console.log(categories?.data.data)
 
-  // https://sage-warehouse-backend.onrender.com/api/v1/products?page=${page}
-
-  // const {
-  //   data,
-  //   error: productError,
-  //   isLoading,
-  // } = useSWR([`/api/products/getProducts`, pageIndex], ([url, pageIndex]) =>
-  //   fetchProducts(pageIndex)
-  // )
-
-  // const fetcher = (...args: any) => fetch(...args).then((res) => res.json())
-  // @ts-ignore
-  const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
-  const {
-    data,
-    error: productError,
-    isLoading,
-  } = useSWR(
-    [
-      `https://sage-warehouse-backend.onrender.com/api/v1/products?page=${pageIndex}`,
-      pageIndex,
-    ],
-    ([url, pageIndex]) => fetcher(url)
-  )
-
-  const styles = {
-    productContainer: `flex justify-center`,
-  }
+  const { isLoading: isAllProductsLoading, data: allProductsData, error: productFetchingError } = useGetProducts({ page: pageIndex })
 
   const handlePrevButton = () => {
     if (pageIndex === 1) {
@@ -97,9 +90,19 @@ export default function Home() {
                     Product Categories
                   </h2>
                   <div className='sm:flex sm:flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12'>
-                    <CategoryCard data={electronicsData} />
-                    <CategoryCard data={computerData} />
-                    <CategoryCard data={gamingData} />
+                    {!categoriesLoading ? (
+                      <>
+                        <CategoryCard products={categories?.data?.data?.[0]?.products} category={categories?.data?.data?.[0]?.name} />
+                        <CategoryCard products={categories?.data?.data?.[1]?.products} category={categories?.data?.data?.[1]?.name} />
+                        <CategoryCard products={categories?.data?.data?.[2]?.products} category={categories?.data?.data?.[2]?.name} />
+                      </>
+                    ) : (
+                      <>
+                        {new Array(3).fill(3).map((_, index) => {
+                          return <CategorySkeleton key={index + 1} />
+                        })}
+                      </>
+                    )}
 
                     {/* show this section only in the lg screen size */}
                     <div className='hidden lg:block lg:space-y-4 xl:hidden'>
@@ -117,25 +120,25 @@ export default function Home() {
                 </section>
 
                 <section className='products-component space-y-12 bg-white py-12'>
-                  {productError ? (
+                  {productFetchingError ? (
                     <p className='px-8  text-2xl font-medium text-primary-grey-300'>
                       Error fetching products at this time try again later 😞
                     </p>
                   ) : (
                     <section className='flex justify-center px-8'>
                       <div className='grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4'>
-                        {isLoading
+                        {isAllProductsLoading
                           ? new Array(8).fill(2).map((_, index) => {
                             return <ProductCardSkeleton key={index} />
                           })
-                          : data?.data.products.map(
-                            (product: Product, index: number) => {
+                          : allProductsData?.data?.products?.map(
+                            (product: Product) => {
                               return (
                                 <div
                                   key={product._id}
-                                  className={styles.productContainer}
+                                  className="flex justify-center"
                                 >
-                                  <ProductCard data={product} />
+                                  <ProductCard data={product} page={pageIndex} />
                                 </div>
                               )
                             }

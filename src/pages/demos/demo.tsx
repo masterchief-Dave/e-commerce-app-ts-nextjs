@@ -4,17 +4,17 @@
 // import { Button } from '@chakra-ui/react'
 import axios from 'axios'
 import { PaystackHook } from '@/helpers/paystack'
-import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
 import { useSelector } from 'react-redux'
 // import { RootState } from '@/app/store'
 import { Button } from '@chakra-ui/react'
 import { UserAccountDropdown } from '@/components/Dropdown/Account'
 import { useSession } from 'next-auth/react'
 import { getUser } from "@/lib"
-import { useUserStore } from "@/hooks/useUserStore"
+import { useUserStore } from "@/lib/hooks/useUserStore"
 import { apiService } from "@/helpers/apiService"
-import useAuth from "@/hooks/useAuth"
-import useAxiosPrivate from "@/hooks/useAxios.hook"
+import useAuth from "@/lib/hooks/useAuth"
+import useAxiosPrivate from "@/lib/hooks/useAxios.hook"
+import PaginationComp from "@/components/pagination"
 // import getUser from "@/hooks/getUser"
 
 const NavigationMenuDemoExample = () => {
@@ -26,9 +26,7 @@ const NavigationMenuDemoExample = () => {
 
   // console.log(session)
 
-  const totalPrice = useSelector((state) => {
-    return selectorCartTotalAmount(state)
-  })
+  const totalPrice = 0
 
   // console.log({ totalPrice })
   const fn = async () => {
@@ -103,6 +101,7 @@ const NavigationMenuDemoExample = () => {
       {/* <PaystackHook price={20000} /> */}
       <Button className='' onClick={handleClick}>test the endpoint</Button>
 
+      {/* <PaginationComp /> */}
     </div>
   )
 }

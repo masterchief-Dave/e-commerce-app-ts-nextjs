@@ -1,27 +1,35 @@
 import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import { useFormik } from 'formik'
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
-import * as Yup from 'yup'
-import toast from 'react-hot-toast'
-
 import { AccountLayout } from '@/components/Layout/Account'
-import { getUpdatePassword } from '@/utils/updatePassword'
-import { fetchDataFromExpressServer } from '@/utils/fetchOrder'
-import { getToken } from 'next-auth/jwt'
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import useAuth from "@/lib/hooks/useAuth"
+import { updatePasswordSchema, updatePasswordVal } from "@/lib/schema/auth.schema"
+import { ErrorLabel } from "@/components/ui/errorLabel"
+import UserService from "@/lib/services/user/user.service"
+import Spinner from "@/components/molecules/spinner"
+import { InputContainer } from "@/components/Form"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { useToast } from "@/components/ui/use-toast"
+import { setCookie } from 'cookies-next'
 
 type Props = Pick<User, "user">
 
 const User = (props: Props) => {
-  const [firstName, lastName] = props.user.name.split(' ')
   const [canEdit, setCanEdit] = useState<boolean>(false)
   const oldPasswordRef = useRef<HTMLInputElement | null>(null)
+  const { user } = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [toggleCurrentPassword, setToggleCurrentPassword] = useState(false)
+  const [toggleNewPassword, setToggleNewPassword] = useState(false)
+  const { toast } = useToast()
 
   const styles = {
     label: `block text-[1.6rem] text-primary-grey-100 font-medium`,
-    input: `p-4 w-full px-4 text-xl lg:text-[1.6rem] border font-medium`,
+    input: `p-4 w-full h-[4rem] px-4 text-xl lg:text-[1.6rem] border font-medium`,
     editBtn: `px-8 py-2 lg:text-[1.6rem] font-medium text-xl text-white rounded-md`,
+    icon: `${canEdit ? 'block' : 'hidden'} h-8 w-8 cursor-pointer`
   }
 
   const handleCanEditToggle = () => {
@@ -36,29 +44,40 @@ const User = (props: Props) => {
   }, [canEdit])
 
 
-  const formik = useFormik<UpdatePasswordProps>({
-    initialValues: {
-      password: '',
-      newPassword: ''
-    },
-    validationSchema: Yup.object({
-      password: Yup.string().required().min(5),
-      newPassword: Yup.string().required().min(5)
-    }),
+  const formik = useFormik({
+    initialValues: updatePasswordVal,
+    validationSchema: updatePasswordSchema,
     onSubmit: async (values) => {
-      // update the password from here
-      const data = {
-        password: values.password,
-        newPassword: values.newPassword
-      }
-
+      setLoading(true)
       try {
-        const response = await getUpdatePassword({ data })
-        if (response.status === 200) {
-          toast.success('Password updated')
+        const response = await UserService.updatePassword(values.currentPassword, values.newPassword)
+        if (response?.success) {
+          toast({
+            variant: 'success',
+            title: 'Password Updated',
+            description: "You can login in with your updated password next time"
+          })
+          setLoading(false)
+          axios.defaults.headers.common["Authorization"] = response.user.token
+          // SET THE HEADER COOKIE HERE FOR THE SERVER SIDE PROPS
+          // setCookie('Authorization', response.user.token)
+        } else {
+          toast({
+            variant: 'destructive',
+            title: 'Password Not Updated',
+            description: "Try again! with correct credentials"
+          })
+          formik.resetForm()
+          setLoading(false)
         }
       } catch (err) {
-        toast.error('user info could not be updated')
+        // toast.error('user info could not be updated')
+        toast({
+          variant: 'destructive',
+          title: 'Error Updating Password',
+          description: "An Error occured while processing your request, Please try again!."
+        })
+        setLoading(false)
       }
       // console.log(response)
     }
@@ -69,7 +88,7 @@ const User = (props: Props) => {
       <AccountLayout>
         <div>
           <header className='flex items-center justify-between border-b p-8'>
-            <h1 className='text-xl font-bold lg:text-2xl'>
+            <h1 className='text-3xl font-semibold'>
               Account Information
             </h1>
 
@@ -81,14 +100,14 @@ const User = (props: Props) => {
                 {' '}
                 Firstname{' '}
               </label>
-              <input className={styles.input} placeholder={firstName} disabled />
+              <Input className={styles.input} value={user?.name.split(' ')[0]} disabled />
             </div>
 
             <div>
               <label htmlFor='lastname' className={styles.label}>
                 Last name{' '}
               </label>
-              <input className={styles.input} placeholder={lastName} disabled />
+              <Input className={styles.input} placeholder="" disabled value={user?.name.split(' ')[1]} />
             </div>
 
             <div>
@@ -96,7 +115,7 @@ const User = (props: Props) => {
                 {' '}
                 Email Address{' '}
               </label>
-              <input className={styles.input} placeholder={props.user?.email} disabled />
+              <Input className={styles.input} placeholder={props.user?.email} disabled value={user?.email} />
             </div>
 
             <div>
@@ -104,17 +123,35 @@ const User = (props: Props) => {
                 {' '}
                 Old Password
               </label>
-              <input
-                type='password'
-                className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`}
-                disabled={canEdit ? false : true}
-                placeholder='********'
-                ref={oldPasswordRef}
-                onChange={formik.handleChange}
-                name='password'
-                value={formik.values.password}
-              />
-              {formik.errors.password && <span>{formik.errors.password}</span>}
+              <InputContainer className="h-[4rem]">
+                <Input
+                  type={canEdit && toggleCurrentPassword ? 'text' : 'password'}
+                  className={`
+                  ${styles.input} 
+                  ${canEdit ? '' : ''}
+                  border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0 h-[3.7rem]
+                  `}
+                  disabled={canEdit ? false : true}
+                  placeholder='********'
+                  ref={oldPasswordRef}
+                  onChange={formik.handleChange}
+                  name='currentPassword'
+                  value={formik.values.currentPassword}
+                />
+                {toggleCurrentPassword ? (
+                  <EyeOffIcon
+                    className={styles.icon}
+                    onClick={() => setToggleCurrentPassword(!toggleCurrentPassword)}
+                  />
+                ) : (
+                  <EyeIcon
+                    className={styles.icon}
+                    onClick={() => setToggleCurrentPassword(!toggleCurrentPassword)}
+                  />
+                )}
+              </InputContainer>
+
+              {formik.errors.currentPassword && formik.touched.currentPassword && <ErrorLabel text={formik.errors.currentPassword} />}
             </div>
 
             <div>
@@ -122,20 +159,40 @@ const User = (props: Props) => {
                 {' '}
                 New Password{' '}
               </label>
-              <input
-                type='password'
-                className={`${styles.input} ${canEdit ? 'border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white' : ''}`}
-                placeholder='********'
-                disabled={canEdit ? false : true}
-                name='newPassword'
-                onChange={formik.handleChange}
-                value={formik.values.newPassword}
-              />
-              {formik.errors.newPassword && <span>{formik.errors.newPassword}</span>}
+              <InputContainer className="h-[4rem]">
+                <Input
+                  type={canEdit && toggleNewPassword ? 'text' : 'password'}
+                  className={`
+                  ${styles.input} 
+                  ${canEdit ? '' : ''}
+                    border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0 h-[3.7rem]
+                  `}
+                  placeholder='********'
+                  disabled={canEdit ? false : true}
+                  name='newPassword'
+                  onChange={formik.handleChange}
+                  value={formik.values.newPassword}
+                />
+                {toggleNewPassword ? (
+                  <EyeOffIcon
+                    className={styles.icon}
+                    onClick={() => setToggleNewPassword(!toggleNewPassword)}
+                  />
+                ) : (
+                  <EyeIcon
+                    className={styles.icon}
+                    onClick={() => setToggleNewPassword(!toggleNewPassword)}
+                  />
+                )}
+              </InputContainer>
+              {formik.errors.newPassword && formik.touched.newPassword && <ErrorLabel text={formik.errors.newPassword} />}
             </div>
-            <button className='h-fit w-full rounded-md bg-primary-blue-300 py-4 text-[1.6rem] font-semibold text-white '>
-              Update Information
-            </button>
+            <Button disabled={canEdit ? false : true} type='submit' className='h-fit w-full rounded-md bg-primary-blue-300 btn py-4 text-[1.6rem] font-semibold text-white flex items-center justify-center'>
+              {loading && <Spinner className="h-10 w-10" />}
+              <span>
+                Update Information
+              </span>
+            </Button>
           </form>
         </div>
       </AccountLayout>
@@ -146,14 +203,10 @@ const User = (props: Props) => {
 
 export default User
 
+/*
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-
-  // before a user can access this page check if the user has been authenticated or is authorized if there is no user session available then this page should not show to the user, and the user should be redirected back to the '/login' page 
-
-  // move this code into next api route
-  // const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/products/${id}`)
   const session = await getSession({ req: context.req })
-  // console.log(session)
+
   let data
 
   if (!session) {
@@ -165,7 +218,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   }
   //note: i cannot use localhost here because server side props does not run on the browser but on the server side, what i have to do is move this code to util and call it from there
   try {
-    const response = await axios.get(`https://sage-warehouse-backend.onrender.com/api/v1/user/profile/${session._id}`)
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}/user/profile/${session._id}`)
     data = await response.data
 
     const token = await getToken({
@@ -182,10 +235,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     // console.log(err)
   }
 
-  /**
-   *  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
-   * i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart 
-   * */
+
+  //  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
+  // i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart comment created 6 months ago, updated 12 march 2024
+
 
   return {
     props: {
@@ -193,3 +246,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     }
   }
 }
+*/

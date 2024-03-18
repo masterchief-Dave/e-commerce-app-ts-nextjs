@@ -1,15 +1,12 @@
 import Link from 'next/link'
 
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
-import { useCart } from '@/hooks/useCart'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
 
-type Props = {}
+export const ShoppingFixedBag = () => {
+  const { data, error, isLoading } = useGetCart()
 
-export const ShoppingFixedBag = (props: Props) => {
-  const { cart } = useCart()
-
-
-  const itemsInCart = cart?.length || 0
+  const itemsInCart = data?.message === 'success' ? data?.data?.length : 0
 
   return (
     <Link

@@ -7,12 +7,13 @@ import { ReturnPolicy } from "@/components/Product/Tabs/returnPolicy"
 import { Reviews } from "@/components/Product/Tabs/reviews"
 import { Shipping } from "@/components/Product/Tabs/shipping"
 import { Warranty } from "@/components/Product/Tabs/warranty"
+import { useGetUserOrders } from "@/lib/hooks/user/user.hook"
 
 type Props = {
   product: Product
 }
 const styles = {
-  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer`,
+  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer flex items-center justify-center outline-0 border-0`,
   productDetails: {
     title: `font-semibold`,
     description: `font-medium`
@@ -20,6 +21,11 @@ const styles = {
 }
 
 export const ProductTab = ({ product }: Props) => {
+  const orderQuery = useGetUserOrders()
+  const hasUserPurchasedThisItem = orderQuery.data?.map((order) => order.orderItems)
+    .flat()
+    .findIndex((item) => item._id === product._id)
+
   const [categories] = useState([
     {
       id: 1,
@@ -49,7 +55,11 @@ export const ProductTab = ({ product }: Props) => {
     {
       id: 6,
       title: 'Reviews',
-      component: <Reviews />
+      component: (
+        <Reviews
+          productId={product._id}
+          hasPurchasedProduct={hasUserPurchasedThisItem!}
+        />)
     }
   ])
   return (
@@ -60,19 +70,19 @@ export const ProductTab = ({ product }: Props) => {
             <Tab as={Fragment} key={category.id}>
               {({ selected }) => (
                 /* Use the `selected` state to conditionally style the selected tab. */
-                <button
+                <div
                   className={
                     selected ? `bg-blue-500 text-white ${styles.tabHeader} py-4` : `bg-white text-black ${styles.tabHeader}`
                   }
                 >
                   {category.title}
-                </button>
+                </div>
               )}
             </Tab>
           )
         })}
       </Tab.List>
-      <Tab.Panels className='p-4'>
+      <Tab.Panels className='p-4 min-h-[20rem]'>
         {categories.map((category) => {
           return <Tab.Panel key={category.id}>
             {category.component}

@@ -145,21 +145,27 @@ declare global {
     token: string | null
     _id?: string | Types.ObjectId
     user: {
-      avatar: {
-        public_id: string
-        url: string
-      }
+      avatar: string
       _id: string
+      role: string
+      createdAt: Date
+      deliveryAddress: string[]
+      creditCards: any[]
       name: string
       email: string
-      password: string,
-      role: string
+      __v: number
+      order: string[]
       passwordChangedAt: Date
-      createdAt: Date
-      __v?: number
+      shippingAddress: ShippingAddress[]
+      cart: UserCart[]
+      favorites: string[]
+      orders: string[]
+      updated_at: Date
+      reviews: string[]
     }
   }
 }
+
 
 declare global {
   interface AuthUser {
@@ -197,6 +203,7 @@ declare global {
     email: string
     success: boolean
     token: string | null
+    role: 'USER' | 'ADMIN' | 'NO USER'
   }
 }
 
@@ -213,14 +220,13 @@ declare global {
 
 declare global {
   interface BillingAddress {
-    title: string
     firstname: string
     lastname: string
     country: string
     zipcode: string
-    addressLine1: string
-    addressLine2: string
-    default?: Boolean
+    address: string
+    default: boolean
+    phoneNumber: string
   }
 }
 
@@ -236,30 +242,47 @@ declare global {
   }
 }
 
+
 declare global {
-  interface IOrder {
-    _id?: Types.ObjectId
-    cartQuantity?: number
-    shippingInfo: BillingAddress
-    user: User
-    orderItems: {
-      quantity: number
-      price: number
-      product: Product
-    }[]
+
+  interface UserOrderInterface {
+    shippingInfo: {
+      firstname: string
+      lastname: string
+      country: string
+      zipcode: string
+      address: string
+    }
     paymentInfo: {
       status: string
       reference: string
       message: string
       transaction: string
     }
+    _id: string
+    user: {
+      _id: string
+      name: string
+      email: string
+    }
+    orderItems: {
+      quantity: number
+      price: number
+      product: Product
+      name: string
+      image: string
+      _id: string
+    }[]
     taxPrice: number
+    itemsPrice: number
     shippingPrice: number
     totalPrice: number
-    paidAt: Date
+    paidAt: string
     orderStatus: string
-    deliveredAt: Date
-    createdAt: Date
+    deliveredAt: string | null
+    createdAt: string
+    updated_at: string
+    __v: number
   }
 }
 
@@ -301,7 +324,7 @@ interface Register {
 
 declare global {
 
-  type UpdatePasswordProps = {
+  interface UpdatePasswordInterface {
     password: string
     newPassword: string
   }

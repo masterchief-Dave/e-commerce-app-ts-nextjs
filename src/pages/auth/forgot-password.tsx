@@ -91,14 +91,14 @@ const ForgotPassword = (props: Props) => {
                 <Input
                   type='text'
                   placeholder='Email'
-                  className='mb-4 h-[5.6rem] text-[1.6rem] w-full rounded-md border px-4 font-normal focus:ring-1'
+                  className='mb-4 h-[4rem] text-[1.6rem] w-full rounded-md border px-4 font-normal focus:ring-1'
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
 
                 <Button
                   type='submit'
-                  className='h-[5.6rem] text-[1.6rem] w-full rounded-md bg-blue-500 text-white hover:bg-primary-blue-300'
+                  className='h-[4rem] btn text-[1.6rem] w-full rounded-md'
                   onClick={handleAuthClick}
                 >
                   Submit

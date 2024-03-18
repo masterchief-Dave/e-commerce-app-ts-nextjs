@@ -3,31 +3,42 @@ import { Order } from '@/components/Account/Order/order'
 import { AccountLayout } from '@/components/Layout/Account'
 import { GetServerSideProps } from 'next'
 import { fetchDataFromExpressServer, fetchOrder } from '@/utils/fetchOrder'
+import { useGetUserOrders } from "@/lib/hooks/user/user.hook"
+import { OrderSkeleton } from "@/components/skeleton"
 
 type Props = {
-  orders: IOrder[] | null
+  orders: null
 }
 
-const Orders = ({orders}: Props) => {
-  const [step, setStep] = useState(1)
-  console.log(orders)
- 
+const Orders = ({ orders }: Props) => {
+  const { data, isLoading } = useGetUserOrders()
+
   return (
     <div>
       <AccountLayout>
         <div>
           <header className='border-b p-8'>
-            <h1 className='text-xl font-bold lg:text-2xl'>My Orders</h1>
+            <h1 className='font-semibold text-3xl'>My Orders</h1>
           </header>
 
-          <section className='max-h-[50rem] divide-y overflow-y-auto'>
-            {/* {orders?.map((order) => {
-              // console.log({order})
-              return  <Order />
-            })}
-            */}
-         
-          </section>
+          {isLoading ? (
+            <OrderSkeleton />
+          ) : (
+            <section className='max-h-[50rem] divide-y overflow-y-auto'>
+              {data?.map((order) => {
+                return (
+                  <Order
+                    key={order._id as unknown as string}
+                    address={order.shippingInfo.address}
+                    date={order.createdAt}
+                    orderNo={order.orderStatus}
+                    price={order.totalPrice.toString()}
+                    orderItems={order.orderItems}
+                  />
+                )
+              })}
+            </section>
+          )}
         </div>
       </AccountLayout>
     </div>
@@ -35,10 +46,12 @@ const Orders = ({orders}: Props) => {
 }
 
 export default Orders
+
+/*
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  try{
+  try {
     const orders = await fetchOrder(context.req)
-    
+
     return {
       props: {
         orders: orders
@@ -46,8 +59,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     }
 
     // api calling express server
-  
-  }catch(err){
+
+  } catch (err) {
     return {
       props: {
         orders: null
@@ -55,3 +68,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     }
   }
 }
+*/

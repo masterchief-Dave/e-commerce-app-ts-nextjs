@@ -1,4 +1,4 @@
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from "@/components/ui/toaster"
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'react-redux'
 import { SessionProvider } from 'next-auth/react'
@@ -10,41 +10,68 @@ import '@/styles/globals.css'
 import './demos/demo.scss'
 import '../components/Dropdown/dropdown.scss'
 import '@/styles/main.scss'
-import { store } from '@/app/store'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
-import useRefreshToken from "@/hooks/useRefreshToken"
-import useAuth from "@/hooks/useAuth"
+import useRefreshToken from "@/lib/hooks/useRefreshToken"
+import useAuth from "@/lib/hooks/useAuth"
+import SWRProvider from "@/SWRProvider"
+import Spinner from "@/components/molecules/spinner"
+import { useRouter } from "next/router"
+import '@smastrom/react-rating/style.css'
 
 export default function App({
   Component,
-  pageProps: { loading, session, ...pageProps },
-}: AppProps<{ session: Session, loading: boolean }>) {
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   const refreshToken = useRefreshToken()
   const { user } = useAuth()
+  const staticPaths = ['/legal/terms-and-condition', '/auth/login', '/auth']
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(staticPaths.includes(router.asPath) ? false : true)
 
   useEffect(() => {
+    let isMounted = true
     const verifyRefreshToken = async () => {
+
       try {
         await refreshToken()
       } catch (err) {
         console.log(err)
+        setIsLoading(false)
+      } finally {
+        isMounted && setIsLoading(false)
       }
     }
 
-    !user?.token && verifyRefreshToken()
+    !user?.token ? verifyRefreshToken() : setIsLoading(false)
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   return (
-    <Provider store={store}>
-      <SessionProvider session={session}>
-        <ChakraProvider>
+    <SessionProvider session={session}>
+      <ChakraProvider>
+        <SWRProvider>
           <div className='font-rubik max-w-[2560px] mx-auto'>
-            <Component {...pageProps} />
-            <Toaster />
+            {isLoading ? (
+              <div className="flex items-center justify-center h-screen">
+                <Spinner className="h-[40px] w-[40px]" />
+              </div>
+            ) : (
+              <>
+                <Component {...pageProps} />
+                <Toaster />
+              </>
+            )}
+            {/* <>
+              <Component {...pageProps} />
+              <Toaster />
+            </> */}
           </div>
-        </ChakraProvider>
-      </SessionProvider>
-    </Provider>
+        </SWRProvider>
+      </ChakraProvider>
+    </SessionProvider>
   )
 }

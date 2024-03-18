@@ -1,33 +1,23 @@
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
-
-import { RootState } from '@/app/store'
 import CheckoutProduct from '@/components/CheckoutProduct'
 import { Layout } from '@/components/Layout'
 import { Navbar } from '@/components/Navbar'
-import { useCart } from '@/hooks/useCart'
-import { selectorCartTotalAmount } from '@/features/cart/cartSlice'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AuthenticatedModal from '@/components/Modal/AuthenticatedModal'
-import { useSearchParams } from 'next/navigation'
+import { useGetCart } from "@/lib/hooks/user/user.hook"
+import { CartSkeleton } from "@/components/skeleton"
+import type { CartProducts, UserCart, UserCartInterface } from "@/lib/types/user/user.type"
+import type { GetServerSideProps } from "next"
+import { getCookie } from "cookies-next"
+import UserService from "@/lib/services/user/user.service"
+import useAuth from "@/lib/hooks/useAuth"
 
 type Props = {}
 
 const Cart = (props: Props) => {
-  // const { cart } = useCart()
-  const searchParams = useSearchParams()
-
-  const cartItems = searchParams?.getAll('id')
-
-  console.log({ cartItems })
-
-  useEffect(() => {
-    // get the items in the url search params and populate the page, 
-
-  }, [cartItems])
+  const { data, isLoading } = useGetCart()
 
   return (
     <Layout>
@@ -37,7 +27,14 @@ const Cart = (props: Props) => {
           <section className='col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16'>
             <h1 className='text-[2rem] font-bold uppercase'>Cart</h1>
             {/* cart product design layout and design*/}
-            {/* {cart.length >= 1 ? <ItemInCart /> : <NoItemInCart />} */}
+            {isLoading ? (
+              <div className="flex flex-col">
+                {new Array(3).fill(3).map((_, index) => {
+                  return <CartSkeleton key={index + 1} />
+                })}
+              </div>
+            ) : data && data.data.length >= 1 ? <ItemInCart cart={data.data} /> : <NoItemInCart />}
+
           </section>
         </main>
       </div>
@@ -70,18 +67,18 @@ const NoItemInCart = () => {
   )
 }
 
-const ItemInCart = () => {
-  const { cart } = useCart()
-  const session = useSession()
+const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
+  const { isAuthenticated } = useAuth()
   const router = useRouter()
   const [openModal, setOpenModal] = useState(false)
+  // const totalPrice = 0
 
-  const totalPrice = useSelector((state: RootState) => {
-    return selectorCartTotalAmount(state)
-  })
+  const totalPrice = cart.reduce((acc, item) => {
+    return item.price + acc
+  }, 0)
 
   const handleProceedToCheckout = () => {
-    if (session.status === 'unauthenticated') {
+    if (isAuthenticated === false) {
       // bring up auth modal and save the redirect because the user should be redirected to the /checkout page
       return setOpenModal(true)
     }
@@ -89,33 +86,30 @@ const ItemInCart = () => {
     router.push('/checkout')
   }
 
-  /**
-   * in this cart page move all the items in my cart to the url query params style, and then when a user clicks on the auth link and the page refreshes the content of the cart can be retrieved from the url search params and the user can proceed to checkout
-   */
-
   return (
     <>
       <div className='px-12'>
-        {cart.map((item: Cart) => {
+        {cart?.map((item: UserCart) => {
           return (
             <CheckoutProduct
               key={item._id}
-              id={item._id}
-              img={item.images[0].url}
+              id={item.id}
+              img={item.image}
               name={item.name}
               price={item.price}
-              cartQuantity={item.cartQuantity}
+              cartQuantity={item.quantity}
+              stock={item.stock}
             />)
         })}
       </div>
       <section className='ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl'>
-        <div className='flex items-center justify-between font-semibold'>
+        <div className='flex items-center justify-between font-medium text-4xl'>
           <p>Total</p>
           <p>${totalPrice.toFixed(2)}</p>
         </div>
         <Button
           onClick={handleProceedToCheckout}
-          className='rounded-md flex items-center justify-center h-[5rem] bg-primary-blue-500 px-24 py-4 text-[1rem] font-semibold text-white hover:bg-primary-blue-300 lg:text-[1.6rem]'>
+          className='rounded-md flex items-center justify-center h-[5rem] bg-primary-blue-500 px-24 py-4 text-[1rem] font-medium text-white hover:bg-primary-blue-300 lg:text-[1.6rem]'>
           Proceed to checkout
         </Button>
       </section>
@@ -123,3 +117,30 @@ const ItemInCart = () => {
     </>
   )
 }
+
+/*
+export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }) => {
+
+  try {
+    const token = getCookie('Authorization', { req, res })
+
+    console.log({ token })
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/user/cart`, {
+      method: 'GET',
+      headers: {
+        'Authorization': token!
+      }
+    })
+
+    const cart = await response.json()
+
+    // console.log({ obj: cart.products })
+  } catch (err) {
+    // some code
+  }
+
+  return {
+    props: {}
+  }
+}
+*/

@@ -7,6 +7,15 @@ class AuthService {
       password
     })
   }
+
+  static async register({ name, email, password, confirmPassword }: { name: string, email: string, password: string, confirmPassword: string }) {
+    return apiService(`auth/register`, 'POST', {
+      name,
+      email,
+      password,
+      confirmPassword
+    })
+  }
 }
 
 export default AuthService
