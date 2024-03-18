@@ -54,10 +54,6 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
           })
           // router.push('/')
           setOpenModal(false)
-
-          setTimeout(() => {
-            window.location.reload()
-          }, 1000)
         }
       } catch (err: any) {
         setIsLoading(false)
