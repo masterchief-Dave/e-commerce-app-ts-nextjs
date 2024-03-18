@@ -4,9 +4,9 @@ import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { useGetCart } from "@/lib/hooks/user/user.hook"
 
 export const ShoppingFixedBag = () => {
-  const cart = useGetCart()
+  const { data, error, isLoading } = useGetCart()
 
-  const itemsInCart = cart?.data?.data.length || 0
+  const itemsInCart = data?.message === 'success' ? data?.data?.length : 0
 
   return (
     <Link

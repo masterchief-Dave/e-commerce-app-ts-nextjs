@@ -3,45 +3,53 @@ import type { UserBillingInfo, UserCartInterface, UserWishlistInterface } from "
 import useSWR from "swr"
 import useAuth from "../useAuth"
 import useSWRMutation from "swr/mutation"
-import CheckoutService from "@/lib/services/checkout/checkout.service"
 
 export const useGetLikedProducts = () => {
   const { user } = useAuth()
-  return useSWR<UserWishlistInterface>(user && user._id.length > 1 ? '/user/wishlist' : [], () => UserService.getWishlist())
+  return useSWR<UserWishlistInterface>(user && user.role.toUpperCase() === 'USER' ? '/user/wishlist' : [], () => UserService.getWishlist())
 }
 
 export const useGetCart = () => {
   const { user } = useAuth()
 
-  return useSWR<UserCartInterface>(user && user._id.length > 1 ? `/user/cart` : [], () => UserService.getCart(user?.token as string))
+  return useSWR<UserCartInterface>(user && user.role.toUpperCase() === 'USER' ? `/user/cart` : null, UserService.getCart)
 }
 
 export const useGetBillingAddress = () => {
   const { user } = useAuth()
 
-  return useSWR<UserBillingInfo[]>(`/shipping/${user?._id}`, () => UserService.getBillingAddress(user?._id as string))
+  return useSWR<UserBillingInfo[]>(
+    `/shipping/${user?._id}`,
+    () => UserService.getBillingAddress(user?._id as string))
 }
 
 export const useGetDefaultBillingAddress = () => {
-  return useSWR<UserBillingInfo>(`/shipping`, () => UserService.getDefaultBillingAddress())
+  return useSWR<UserBillingInfo>(
+    `/shipping`,
+    () => UserService.getDefaultBillingAddress())
 }
 
 export const useDeleteBillingAddress = () => {
   const { mutate } = useGetBillingAddress()
-  return useSWRMutation(`/shipping`, UserService.removeBillingAddress, {
-    onError() {
-      // 
-    },
-    onSuccess: () => {
-      mutate()
-    }
-  })
+  return useSWRMutation(
+    `/shipping`,
+    UserService.removeBillingAddress,
+    {
+      onError() {
+        // 
+      },
+      onSuccess: () => {
+        mutate()
+      }
+    })
 }
 
 export const useGetUserOrders = () => {
-  return useSWR<UserOrderInterface[]>('/order', () => UserService.getUserOrder())
+  return useSWR<UserOrderInterface[]>(
+    '/order',
+    () => UserService.getUserOrder())
 }
 
-export const useGetOrderSummary = (id: string) => {
-  return useSWR<UserOrderInterface>(`/order/${id}`, () => CheckoutService.getOrder(id))
-}
+// export const useGetOrderSummary = (id: string) => {
+//   return useSWR<UserOrderInterface>(`/order/${id}`, () => CheckoutService.getOrder(id))
+// }

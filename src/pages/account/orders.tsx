@@ -4,6 +4,7 @@ import { AccountLayout } from '@/components/Layout/Account'
 import { GetServerSideProps } from 'next'
 import { fetchDataFromExpressServer, fetchOrder } from '@/utils/fetchOrder'
 import { useGetUserOrders } from "@/lib/hooks/user/user.hook"
+import { OrderSkeleton } from "@/components/skeleton"
 
 type Props = {
   orders: null
@@ -11,8 +12,6 @@ type Props = {
 
 const Orders = ({ orders }: Props) => {
   const { data, isLoading } = useGetUserOrders()
-  const [step, setStep] = useState(1)
-  console.log('user orders', data)
 
   return (
     <div>
@@ -22,21 +21,24 @@ const Orders = ({ orders }: Props) => {
             <h1 className='font-semibold text-3xl'>My Orders</h1>
           </header>
 
-          <section className='max-h-[50rem] divide-y overflow-y-auto'>
-            {data?.map((order) => {
-              // console.log({order})
-              return (
-                <Order
-                  key={order._id as unknown as string}
-                  address={order.shippingInfo.address}
-                  date={''}
-                  orderNo={order.orderStatus}
-                  price={order.totalPrice.toString()}
-                  image=""
-                />
-              )
-            })}
-          </section>
+          {isLoading ? (
+            <OrderSkeleton />
+          ) : (
+            <section className='max-h-[50rem] divide-y overflow-y-auto'>
+              {data?.map((order) => {
+                return (
+                  <Order
+                    key={order._id as unknown as string}
+                    address={order.shippingInfo.address}
+                    date={order.createdAt}
+                    orderNo={order.orderStatus}
+                    price={order.totalPrice.toString()}
+                    orderItems={order.orderItems}
+                  />
+                )
+              })}
+            </section>
+          )}
         </div>
       </AccountLayout>
     </div>

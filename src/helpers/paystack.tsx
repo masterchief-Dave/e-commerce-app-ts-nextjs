@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import useAuth from "@/lib/hooks/useAuth"
 import CheckoutService from "@/lib/services/checkout/checkout.service"
-import type { UserCart } from "@/lib/types/user/user.type"
+import type { BillingAddressInterface, UserCart } from "@/lib/types/user/user.type"
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from "react"
@@ -13,7 +13,7 @@ type Props = {
   orders: UserCart[]
   price: number
   isDisabled: boolean
-  shippingAddress: any
+  shippingAddress: BillingAddressInterface
 }
 
 const config = {
@@ -50,7 +50,7 @@ export const PaystackHook = ({ orders, price, shippingAddress, isDisabled = true
     // console.log(reference)
     try {
       // `http://localhost:8100/api/v1/payment/checkout-session/${reference?.reference}`
-      CheckoutService.checkout({ orders, price, reference: config.reference, shippingAddress, shippingPrice: 10, taxPrice: 10, userId })
+      CheckoutService.checkout({ orders, price, reference: config.reference, shippingAddress: shippingAddress, shippingPrice: 10, taxPrice: 10, userId })
         .then((response) => {
           if (response.message === 'success') {
             setLoading(false)
@@ -87,7 +87,7 @@ export const PaystackHook = ({ orders, price, shippingAddress, isDisabled = true
   return (
     <Button
       className='h-[4rem] bg-blue-500 text-white text-[1.6rem] font-medium rounded-md px-8 flex items-center justify-center w-full'
-      disabled={loading}
+      disabled={loading || shippingAddress.address.length <= 1}
       onClick={() => {
         setLoading(true)
         initializePayment(onSuccess, onClose)

@@ -26,9 +26,9 @@ const ProductSlug = ({ products }: Props) => {
             <BreadCrumb />
           </div> */}
 
-          <section className='mb-12 col-start-2 col-end-12 flex justify-end'>
-            <div className='col-start-2 col-end-12 flex justify-end'>
-              <div className=''>
+          <section className='mb-12 col-start-2 col-end-12 w-full flex justify-end'>
+            <div className='flex justify-end w-full'>
+              <div className='w-full'>
                 <Sorting />
               </div>
             </div>
@@ -65,12 +65,11 @@ export default ProductSlug
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const { productname } = context.query
-  let response
 
   // response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products/search?productname=${productname}`)
   // move this code into next api route
   // {{url}}/products?keyword=apple&sort=-price
-  response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products?keyword=${productname}`)
+  const response = await axios.get(`http://sage-warehouse-backend.onrender.com/api/v1/products?keyword=${productname}`)
 
   const data = await response.data
 

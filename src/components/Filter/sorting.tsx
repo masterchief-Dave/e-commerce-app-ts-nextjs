@@ -20,7 +20,7 @@ export const Sorting = () => {
   // {{url}}/products?categoryname=laptops&sort=-price&sort=price
 
   const sortAsc = () => {
-    if(pathname === 'search'){
+    if (pathname === 'search') {
       const buildpath = `/search/${productname}&sort=price`
       return router.push(buildpath)
     }
@@ -29,7 +29,7 @@ export const Sorting = () => {
   }
 
   const sortDesc = () => {
-    if(pathname === 'search'){
+    if (pathname === 'search') {
       const buildpath = `/search/${productname}&sort=-price`
       return router.push(buildpath)
     }
@@ -38,12 +38,12 @@ export const Sorting = () => {
   }
 
   return (
-    <div className="flex items-center gap-x-2 divide-x">
+    <div className="flex items-center w-full justify-end gap-x-2 divide-x">
       <p className="text-[1.6rem] font-medium">Sort By: </p>
-      <Button className="text-[1.4rem] font-medium h-12"onClick={() => sortDesc()}>
+      <Button className="text-[1.4rem] w-max font-medium h-12" onClick={() => sortDesc()}>
         Price - High to Low
       </Button>
-      <Button className="text-[1.4rem] font-medium h-12" onClick={() => sortAsc()}>
+      <Button className="text-[1.4rem] w-fit font-medium h-12" onClick={() => sortAsc()}>
         Price - Low to High
       </Button>
     </div>

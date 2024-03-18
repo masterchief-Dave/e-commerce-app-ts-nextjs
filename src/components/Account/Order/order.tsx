@@ -1,10 +1,11 @@
+import getFormatDate from "@/helpers/formatDate"
 import Image from 'next/image'
 
 type Props = {
   date: string
   price: string
   address: string
-  image: string
+  orderItems: { image: string, name: string, product: Product, price: number, quantity: number, _id: string }[]
   orderNo: string
 }
 
@@ -15,36 +16,42 @@ export const Order = (props: Props) => {
         <div className='w-full'>
           <header className='flex w-full items-center justify-between'>
             <h2 className='font-semibold'>
-              Order Date: <span className='font-light'> 29 Sept 2023</span>
+              Order Date: <span className='font-light'> {getFormatDate(props?.date as string)} </span>
             </h2>
-            <button className='h-fit w-fit bg-primary-black-100 px-4 py-2 text-[1.6rem] font-semibold text-white'>
-              View Details
-            </button>
           </header>
         </div>
 
         <div className='flex justify-between'>
           <div>
-            <p>Total: #67,300</p>
-            <p>Order No: F75A715AH</p>
-            <p></p>
-          </div>
-
-          <div>
             <h3>Delivery Address</h3>
-            <p>Ekiti state</p>
+            <p>{props.address}</p>
           </div>
         </div>
 
-        <div>
-          <Image
-            src='/assets/img/airpod-landscape-1.png'
-            alt='printer'
-            className='h-[10rem] w-[10rem] object-cover'
-            width={1000}
-            height={1000}
-          />
-        </div>
+        {props.orderItems.map((item) => {
+          return (
+            <>
+              <div className="grid grid-cols-2">
+                <section>
+                  <p>Total: NGN {item.price}</p>
+                  <p>Order No: {item._id.slice(-8)}</p>
+                  <p></p>
+                </section>
+                <section>
+                  <div>
+                    <Image
+                      src={item.image}
+                      alt='printer'
+                      className='h-[10rem] w-[10rem] object-cover'
+                      width={1000}
+                      height={1000}
+                    />
+                  </div>
+                </section>
+              </div>
+            </>
+          )
+        })}
       </section>
     </div>
   )

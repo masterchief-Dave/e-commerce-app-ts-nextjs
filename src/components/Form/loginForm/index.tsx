@@ -11,6 +11,7 @@ import { signIn } from 'next-auth/react'
 import Link from "next/link"
 import FormError from "../form-error"
 import Image from "next/image"
+import Spinner from "@/components/molecules/spinner"
 
 
 const styles = {
@@ -21,9 +22,10 @@ const styles = {
 interface FormProps {
   handleSubmit: (email: string, password: string) => void
   error?: { state: boolean, message: string }
+  isLoading: boolean
 }
 
-function LoginForm({ handleSubmit, error }: FormProps) {
+function LoginForm({ handleSubmit, error, isLoading }: FormProps) {
   const [show, setShow] = useState(false)
 
   const router = useRouter()
@@ -98,11 +100,15 @@ function LoginForm({ handleSubmit, error }: FormProps) {
           {error?.state && <FormError message={error.message || "Invalid Credentials"} />}
 
           <Button
-            className={`h-[5rem] text-white`}
+            className={`h-[5rem] w-full text-white btn rounded-md fle] items-center justify-center`}
             type='submit'
+            disabled={isLoading}
             variant={"primary"}
           >
-            Submit
+            {isLoading && (<Spinner className="h-10 w-10 text-white" />)}
+            <span>
+              Submit
+            </span>
           </Button>
 
           <div className='mb-8 text-[1.6rem] flex justify-between'>
@@ -136,9 +142,10 @@ function LoginForm({ handleSubmit, error }: FormProps) {
 
         <div className='space-y-4 col-start-2 col-end-12'>
           <Button
-            className={`h-[5rem] flex items-center justify-center gap-x-4 bg-white text-black hover:bg-black  hover:text-white`}
+            className={`h-[5rem] border flex items-center justify-center gap-x-4 bg-white text-black hover:bg-black  hover:text-white`}
             type='submit'
             variant='primary'
+            disabled={isLoading}
             onClick={(e) => {
               e.preventDefault()
               router.push(`${process.env.NEXT_PUBLIC_API_SERVER}/auth/google`)

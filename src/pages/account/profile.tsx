@@ -60,7 +60,7 @@ const User = (props: Props) => {
           setLoading(false)
           axios.defaults.headers.common["Authorization"] = response.user.token
           // SET THE HEADER COOKIE HERE FOR THE SERVER SIDE PROPS
-          setCookie('Authorization', response.user.token)
+          // setCookie('Authorization', response.user.token)
         } else {
           toast({
             variant: 'destructive',

@@ -23,15 +23,13 @@ export const ProductCard = ({ page, data }: Props) => {
   const { trigger, isMutating } = useLikeProduct(page)
   const cartQuery = useAddToCart(page)
   const userQuery = useGetLikedProducts()
-  const { user, isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth()
   const [authModal, setAuthModal] = useState(false)
 
-  const userFavorites = userQuery?.data?.data
-  const userCartIds = getCartQuery?.data?.data.map((cart) => {
+  const userFavorites = userQuery?.data?.message === 'success' ? userQuery?.data?.data : []
+  const userCartIds = getCartQuery?.data?.message === 'success' ? getCartQuery?.data?.data?.map((cart) => {
     return cart.id
-  })
-
-  // const isAuthenticated = user && user?._id.length > 1 ? true : false
+  }) : []
 
   const handleLikeProduct = () => {
     // is the user authenticated ?

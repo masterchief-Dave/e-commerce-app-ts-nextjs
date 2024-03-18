@@ -55,14 +55,14 @@ export const Navbar = () => {
           isLoggedIn={false}
           user={user}
           data={data}
-          cart={cart?.data?.data || []}
+          cart={cart.data?.message === 'success' ? cart?.data?.data : []}
         />
       </div>
 
       <div className='hidden lg:block'>
         <Desktop
           isTop={isTop}
-          cart={cart?.data?.data || []}
+          cart={cart.data?.message === 'success' ? cart?.data?.data : []}
           handleSignOut={logout}
           data={data}
           session={null}

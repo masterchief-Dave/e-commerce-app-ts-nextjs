@@ -7,6 +7,7 @@ import { ReturnPolicy } from "@/components/Product/Tabs/returnPolicy"
 import { Reviews } from "@/components/Product/Tabs/reviews"
 import { Shipping } from "@/components/Product/Tabs/shipping"
 import { Warranty } from "@/components/Product/Tabs/warranty"
+import { useGetUserOrders } from "@/lib/hooks/user/user.hook"
 
 type Props = {
   product: Product
@@ -20,6 +21,11 @@ const styles = {
 }
 
 export const ProductTab = ({ product }: Props) => {
+  const orderQuery = useGetUserOrders()
+  const hasUserPurchasedThisItem = orderQuery.data?.map((order) => order.orderItems)
+    .flat()
+    .findIndex((item) => item._id === product._id)
+
   const [categories] = useState([
     {
       id: 1,
@@ -49,7 +55,11 @@ export const ProductTab = ({ product }: Props) => {
     {
       id: 6,
       title: 'Reviews',
-      component: <Reviews />
+      component: (
+        <Reviews
+          productId={product._id}
+          hasPurchasedProduct={hasUserPurchasedThisItem!}
+        />)
     }
   ])
   return (

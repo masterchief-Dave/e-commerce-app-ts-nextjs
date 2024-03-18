@@ -17,6 +17,7 @@ import useAuth from "@/lib/hooks/useAuth"
 import SWRProvider from "@/SWRProvider"
 import Spinner from "@/components/molecules/spinner"
 import { useRouter } from "next/router"
+import '@smastrom/react-rating/style.css'
 
 export default function App({
   Component,

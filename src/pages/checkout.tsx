@@ -12,7 +12,7 @@ import CheckoutProduct from '@/components/CheckoutProduct'
 import { useRouter } from 'next/router'
 import SWLogo from 'public/assets/logo/svg/logo-no-background.svg'
 import { useGetCart, useGetDefaultBillingAddress } from "@/lib/hooks/user/user.hook"
-import type { UserCart } from "@/lib/types/user/user.type"
+import type { BillingAddressInterface, UserBillingInfo, UserCart } from "@/lib/types/user/user.type"
 import useShippingAddress from "@/lib/store/shipping.store"
 
 const styles = {
@@ -24,7 +24,6 @@ const styles = {
 const Checkout = () => {
   const [disable, setDisable] = useState(true)
   const [billingAddress, setBillingAddress] = useState<string>('')
-  const router = useRouter()
   const getCartQuery = useGetCart()
   const { shippingAddress } = useShippingAddress()
   const { data } = useGetDefaultBillingAddress()
@@ -40,16 +39,7 @@ const Checkout = () => {
    * how to choose => 
    * 
    */
-
-
-  // get shipping address, check to see if shipping address is present and 
-  // console.log({ shippingAddress })
-  const checkoutAddress = billingAddress === 'savedAddress' ? data : shippingAddress
-
-  console.log({ checkoutAddress })
-
-  console.log('some')
-
+  const checkoutAddress = billingAddress === 'savedAddress' ? data as UserBillingInfo : shippingAddress
   return (
     <div>
       <header className='grid grid-cols-12 border-b py-4'>

@@ -1,5 +1,5 @@
 import { apiService } from "@/helpers/apiService"
-import { error } from "@/lib/utils/logger"
+import { errorLogger } from "@/lib/utils/logger"
 import axios from "axios"
 
 class UserService {
@@ -7,23 +7,7 @@ class UserService {
     return await apiService(`/user/wishlist`)
   }
 
-  static async getCart(token: string) {
-    // try {
-    //   const response = await axios(`/user/cart`, {
-    //     headers: {
-    //       'Authorization': token
-    //     }
-    //   })
-
-    //   if (!response.data) {
-    //     return null
-    //   }
-
-    //   return response.data
-    // } catch (err) {
-    //   error(err as unknown as any)
-    // }
-
+  static async getCart() {
     return await apiService(`/user/cart`, 'GET')
   }
 
@@ -46,7 +30,7 @@ class UserService {
         default: defaultValue
       })
     } catch (err) {
-      error(err as unknown as any)
+      errorLogger(err as unknown as any)
     }
   }
 
@@ -55,7 +39,7 @@ class UserService {
       const response = await apiService(`/shipping/${id}`, 'GET')
       return response.address
     } catch (err) {
-      error(err as unknown as any)
+      errorLogger(err as unknown as any)
     }
   }
 

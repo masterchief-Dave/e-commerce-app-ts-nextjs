@@ -17,16 +17,22 @@ import AuthService from "@/lib/services/auth.service"
 import axios from "axios"
 import useAuth from "@/lib/hooks/useAuth"
 import Spinner from "../molecules/spinner"
+import { EyeIcon, EyeOffIcon, FingerprintIcon, UserIcon } from "lucide-react"
 
 type Props = {
   openModal: boolean
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+const styles = {
+  input: `text-[1.6rem] border-0 ring-0 focus: outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`
+}
+
 const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const { setUser } = useAuth()
   const router = useRouter()
+  const [show, setShow] = useState(false)
   const formik = useFormik({
     initialValues: loginVal,
     validationSchema: loginSchema,
@@ -43,7 +49,8 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
             _id: response.user._id,
             name: response.user.name,
             photo: response.user.photo,
-            token: response.user.token
+            token: response.user.token,
+            role: response.user.role
           })
           // router.push('/')
           setOpenModal(false)
@@ -61,8 +68,9 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
   const handleCloseModal = () => {
     setOpenModal(false)
   }
-
-  console.log(router.asPath)
+  const toggle = () => {
+    setShow(!show)
+  }
 
   return (
     <>
@@ -111,22 +119,50 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                   <section>
                     <form className="flex flex-col gap-8" onSubmit={formik.handleSubmit}>
                       <div>
-                        <Input placeholder="Email" className="h-[4rem] text-[1.6rem]" value={formik.values.email} name="email" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                        <InputContainer className="mb-2 h-[4rem]">
+                          <UserIcon className="h-8 w-8" />
+                          <Input
+                            type="text"
+                            placeholder="Email"
+                            className={styles.input}
+                            value={formik.values.email}
+                            name="email"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          />
+                        </InputContainer>
                         {formik.touched.email && formik.errors.email && <ErrorLabel text={formik.errors.email} className="text-[1.4rem]" />}
                       </div>
                       <div>
-                        <Input placeholder="Password" className="h-[4rem] text-[1.6rem]" value={formik.values.password} name="password" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                        <InputContainer className="mb-2 h-[4rem]">
+                          <FingerprintIcon />
+                          <Input
+                            type={show ? 'text' : 'password'}
+                            placeholder="Password"
+                            className={styles.input}
+                            value={formik.values.password}
+                            name="password"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                          />
+                          {show ? (
+                            <EyeOffIcon className="h-8 w-8 cursor-pointer" onClick={toggle} />
+                          ) : (
+                            <EyeIcon className="h-8 w-8 cursor-pointer" onClick={toggle} />
+                          )}
+                        </InputContainer>
                         {formik.touched.password && formik.errors.password && <ErrorLabel text={formik.errors.password} className="text-[1.4rem]" />}
                       </div>
 
                       <Button
                         type="submit"
+                        disabled={isLoading}
                         className="h-[4rem] text-[1.6rem] bg-black text-white btn">
-                        {isLoading ? (
+                        {isLoading && (
                           <Spinner className="text-white" />
-                        ) : (
-                          <span>Login</span>
                         )}
+                        <span>Login</span>
+
                       </Button>
                     </form>
                   </section>

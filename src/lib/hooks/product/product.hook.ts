@@ -30,7 +30,7 @@ export const useLikeProduct = (page: number) => {
 
 export const useAddToCart = (page: number) => {
   const { mutate } = useGetProducts({ page })
-  const userQuery = useGetCart()
+  const cartQuery = useGetCart()
 
   return useSWRMutation('/products/add-to-cart', ProductService.addToCart, {
     onError() {
@@ -38,7 +38,7 @@ export const useAddToCart = (page: number) => {
     },
     onSuccess: (data) => {
       mutate()
-      userQuery.mutate()
+      cartQuery.mutate()
     }
   })
 }

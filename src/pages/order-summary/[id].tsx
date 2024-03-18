@@ -1,6 +1,5 @@
-import Spinner from "@/components/molecules/spinner"
 import { OrderSummarySkeleton } from "@/components/skeleton"
-import { useGetOrderSummary } from "@/lib/hooks/user/user.hook"
+import { useGetOrderSummary } from "@/lib/hooks/checkout/checkout.hook"
 import { CheckIcon } from '@heroicons/react/24/outline'
 import Head from 'next/head'
 import Image from 'next/image'

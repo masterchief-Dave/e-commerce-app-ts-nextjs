@@ -16,7 +16,8 @@ const useUserStore = create<State & Actions>((set) => ({
     _id: '',
     name: '',
     photo: '',
-    token: ''
+    token: '',
+    role: 'NO USER'
   },
   setUser: (data) => set((state) => ({ user: data }))
 }))

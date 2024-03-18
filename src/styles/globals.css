@@ -34,7 +34,16 @@
 
   .btn {
     background-color: black !important;
+    outline: none;
+    border: none;
+    @apply rounded-md;
   }
+
+  .shadcn-btn {
+    border-radius: 6px !important;
+    @apply rounded-md border-0;
+  }
+
 
   li {
     list-style: none !important;
@@ -95,4 +104,7 @@
   }
 
   /* toaster */
+  .btn-red {
+    background-color: rgb(239 68 68) !important;
+  }
 }

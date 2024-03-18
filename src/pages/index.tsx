@@ -24,7 +24,6 @@ export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
   const params = useSearchParams()
   const { user, setUser } = useAuth()
-  console.log({ pageIndex })
 
   // CREATE USE-EFFECT TO CAPTURE THE DATA COMING FROM THE SERVER
   useEffect(() => {
@@ -33,6 +32,7 @@ export default function Home() {
     const token = params?.get('token')
     const id = params?.get('id')
     const photo = params?.get('photo')
+    const role = params?.get('role')
 
     if (name !== undefined && name?.length! > 1) {
       axios.defaults.headers.common["Authorization"] = token
@@ -41,7 +41,8 @@ export default function Home() {
         _id: id ?? '',
         name: name ?? '',
         photo: photo ?? '',
-        token: token ?? ''
+        token: token ?? '',
+        role: role as 'USER' | 'NO USER' | 'ADMIN' ?? 'NO USER'
       })
     }
   }, [])

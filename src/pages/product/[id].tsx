@@ -18,7 +18,7 @@ import { ProductTab } from '@/components/Tabs/Product'
 import useAuth from "@/lib/hooks/useAuth"
 import { HeartIcon } from "lucide-react"
 import { useAddToCart, useLikeProduct } from "@/lib/hooks/product/product.hook"
-import { useGetCart, useGetLikedProducts } from "@/lib/hooks/user/user.hook"
+import { useGetCart, useGetLikedProducts, useGetUserOrders } from "@/lib/hooks/user/user.hook"
 import fetchProduct from "@/utils/fetchProduct"
 
 type Props = {
@@ -45,11 +45,10 @@ const ProductSlug = ({ product }: Props) => {
  */
   const cartQuery = useAddToCart(1)
   const likeQuery = useLikeProduct(1)
-  const { user, isAuthenticated } = useAuth()
-
-  const isItemInWishlist = getWishlistQuery?.data?.data.some((item) => item === product._id)
-  const isItemInCart = getCartQuery?.data?.data.some((item) => item.id === product._id)
-  console.log({ isItemInCart })
+  const { isAuthenticated } = useAuth()
+  const isItemInWishlist = getWishlistQuery?.data?.message === 'success' ? getWishlistQuery?.data?.data.some((item) => item === product._id) : false
+  const isItemInCart = getCartQuery.data?.message === 'success' ? getCartQuery?.data?.data.some((item) => item.id === product._id) : false
+  const orderQuery = useGetUserOrders()
 
   const handleBuyNow = () => {
     if (!isAuthenticated) {
@@ -74,6 +73,7 @@ const ProductSlug = ({ product }: Props) => {
     }
     likeQuery.trigger({ id: product._id, page: 1 }, {})
   }
+
 
   return (
     // <Layout>
@@ -209,14 +209,6 @@ const ProductSlug = ({ product }: Props) => {
                 </div>
               </div>
 
-              {
-                /**
-                 * check if the user is authenticated, if not bring up authentication and redirect them to the billing address part, or they should have filled in billing address before they click on buy now I suppose
-                 * 
-                 * 
-               */
-              }
-
               <div className='flex items-center gap-x-8 py-4'>
                 {/* open paystack modal here to make payment for this item right here in the slug */}
                 <button
@@ -239,14 +231,20 @@ const ProductSlug = ({ product }: Props) => {
 
         {/* product breakdown tab */}
         <div className='col-span-full col-start-2 col-end-12 bg-[#f6f6f6] py-2'>
-          {product && <ProductTab product={product} />}
+          {product && (
+            <ProductTab
+              product={product}
+            />)}
         </div>
 
       </main>
       <Footer />
       <ShoppingFixedBag />
+
       {/* modal */}
-      {openModal && <AuthenticatedModal openModal={openModal} setOpenModal={setOpenModal} />}
+      {openModal && (
+        <AuthenticatedModal openModal={openModal} setOpenModal={setOpenModal} />
+      )}
     </>
     // </Layout>
   )

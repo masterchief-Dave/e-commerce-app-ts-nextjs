@@ -12,7 +12,7 @@ interface ErrorProp {
   err: Error
 }
 
-export const error = ({ url, message, err }: ErrorProp) => {
+export const errorLogger = ({ url, message, err }: ErrorProp) => {
   if (process.env.NODE_ENV === 'test') {
     return
   }

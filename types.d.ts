@@ -145,21 +145,27 @@ declare global {
     token: string | null
     _id?: string | Types.ObjectId
     user: {
-      avatar: {
-        public_id: string
-        url: string
-      }
+      avatar: string
       _id: string
+      role: string
+      createdAt: Date
+      deliveryAddress: string[]
+      creditCards: any[]
       name: string
       email: string
-      password: string,
-      role: string
+      __v: number
+      order: string[]
       passwordChangedAt: Date
-      createdAt: Date
-      __v?: number
+      shippingAddress: ShippingAddress[]
+      cart: UserCart[]
+      favorites: string[]
+      orders: string[]
+      updated_at: Date
+      reviews: string[]
     }
   }
 }
+
 
 declare global {
   interface AuthUser {
@@ -197,6 +203,7 @@ declare global {
     email: string
     success: boolean
     token: string | null
+    role: 'USER' | 'ADMIN' | 'NO USER'
   }
 }
 
@@ -235,32 +242,6 @@ declare global {
   }
 }
 
-// declare global {
-//   interface UserOrderInterface {
-//     _id?: Types.ObjectId
-//     cartQuantity?: number
-//     shippingInfo: BillingAddress
-//     user: User
-//     orderItems: {
-//       quantity: number
-//       price: number
-//       product: Product
-//     }[]
-//     paymentInfo: {
-//       status: string
-//       reference: string
-//       message: string
-//       transaction: string
-//     }
-//     taxPrice: number
-//     shippingPrice: number
-//     totalPrice: number
-//     paidAt: Date
-//     orderStatus: string
-//     deliveredAt: Date
-//     createdAt: Date
-//   }
-// }
 
 declare global {
 
@@ -287,7 +268,7 @@ declare global {
     orderItems: {
       quantity: number
       price: number
-      product: string
+      product: Product
       name: string
       image: string
       _id: string

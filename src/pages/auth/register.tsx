@@ -14,9 +14,10 @@ import { InputContainer } from "@/components/Form"
 import { EyeIcon, EyeOffIcon, FingerprintIcon, MailIcon, UserIcon } from "lucide-react"
 import { registerSchema, registerVal } from "@/lib/schema/auth.schema"
 import { useState } from "react"
-import { error, info } from "@/lib/utils/logger"
+import { errorLogger, info } from "@/lib/utils/logger"
 import useAuth from "@/lib/hooks/useAuth"
 import AuthService from "@/lib/services/auth.service"
+import Spinner from "@/components/molecules/spinner"
 
 interface FormData {
   name: string
@@ -27,6 +28,7 @@ interface FormData {
 
 const Register = () => {
   const { setUser } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const [show, setShow] = useState({
     password: false,
@@ -50,6 +52,7 @@ const Register = () => {
 
   const handleSubmit = async ({ name, email, password, confirmPassword }: FormData) => {
     try {
+      setIsLoading(true)
       const response = await AuthService.register({
         name: name,
         email: email,
@@ -58,6 +61,7 @@ const Register = () => {
       })
 
       if (response.data.success) {
+        setIsLoading(false)
         // save user in session
         const loginResponse = await loginUser({ email, password })
 
@@ -73,16 +77,17 @@ const Register = () => {
             name: response.data.user.name,
             email: response.data.user.email,
             photo: response.data.user.photo,
-            token: response.data.user.token
+            token: response.data.user.token,
+            role: response.data.user.role
           })
           router.push('/')
           toast.success('Register Successful')
         }
       }
     } catch (err: any) {
-      // console.log(err)
+      setIsLoading(false)
       toast.error('An Error Occured')
-      error({ url: router.asPath, message: 'An error occured in the register page', err })
+      errorLogger({ url: router.asPath, message: 'An error occured in the register page', err })
     }
   }
 
@@ -199,7 +204,14 @@ const Register = () => {
             {formik.touched.confirmPassword && formik.errors.confirmPassword ? <ErrorLabel text={formik.errors.confirmPassword} /> : null}
           </div>
 
-          <Button type='submit' variant="primary" className='h-[5rem]'>Submit</Button>
+          <Button
+            type='submit'
+            variant="primary"
+            className='h-[5rem] btn flex items-center justify-center'
+            disabled={isLoading}
+          >
+            {isLoading && <Spinner className="h-10 w-10 text-white" />} <span>Submit</span>
+          </Button>
 
           {/* <div>
               <p>

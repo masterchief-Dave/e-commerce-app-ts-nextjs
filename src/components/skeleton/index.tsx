@@ -70,3 +70,42 @@ export const OrderSummarySkeleton = () => {
     </section>
   )
 }
+
+export const OrderSkeleton = () => {
+  return (
+    <section className="p-8 space-y-8">
+      <div>
+        <Skeleton className="h-10 w-52" />
+      </div>
+
+      <div>
+        <Skeleton className="h-10 w-full" />
+      </div>
+
+      <section className="grid grid-cols-2 gap-8">
+        <div className="space-y-2">
+          <Skeleton className="h-10 w-1/2" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+        <div>
+          <Skeleton className="h-32 w-32" />
+        </div>
+      </section>
+    </section>
+  )
+}
+
+export const ReviewSkeleton = () => {
+  return (
+    <section className="grid grid-cols-[5rem_1fr] gap-8">
+      <Skeleton className="rounded-full w-[200px]" />
+      <div className="flex flex-col gap-8 w-full">
+        <Skeleton className="h-10 w-full" />
+        <div className="flex flex-col gap-4 w-full">
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+      </div>
+    </section>
+  )
+}
