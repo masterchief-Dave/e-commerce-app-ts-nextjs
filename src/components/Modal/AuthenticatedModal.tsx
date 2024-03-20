@@ -3,8 +3,6 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
-import { signIn } from 'next-auth/react'
-
 import { Button } from '../ui/button'
 import { CibApple, Fa6BrandsSquareXTwitter, LogosFacebook, LogosRedditIcon } from '@/globals/icons'
 import { InputContainer } from "../Form"

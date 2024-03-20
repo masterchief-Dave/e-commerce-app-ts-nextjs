@@ -3,7 +3,6 @@ import type { NextRequest } from "next/server"
 import { fetchRefresh } from "./utils/fetchRefresh"
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("sage_warehouse_token")?.value || ""
 
   // const response = await fetchRefresh()
   // const data = await response

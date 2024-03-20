@@ -1,7 +1,6 @@
 import { Types } from "mongoose"
 import { string } from "yup"
 
-
 declare global {
   interface Header {
     id: number
@@ -56,6 +55,8 @@ declare global {
     }[]
     user: string
     createdAt: Date
+    discount: number
+    discountedPrice: number
   }
 }
 declare global {
@@ -103,7 +104,6 @@ declare global {
   }
 }
 
-
 declare global {
   interface IUser {
     id: string
@@ -112,7 +112,7 @@ declare global {
     googleId: string
     email: string
     // password: string
-    avatar: string,
+    avatar: string
     role: string
     createdAt: Date
     resetPasswordToken: string
@@ -166,7 +166,6 @@ declare global {
   }
 }
 
-
 declare global {
   interface AuthUser {
     avatar: {
@@ -203,7 +202,7 @@ declare global {
     email: string
     success: boolean
     token: string | null
-    role: 'USER' | 'ADMIN' | 'NO USER'
+    role: "USER" | "ADMIN" | "NO USER"
   }
 }
 
@@ -242,9 +241,7 @@ declare global {
   }
 }
 
-
 declare global {
-
   interface UserOrderInterface {
     shippingInfo: {
       firstname: string
@@ -323,7 +320,6 @@ interface Register {
  */
 
 declare global {
-
   interface UpdatePasswordInterface {
     password: string
     newPassword: string
