@@ -14,34 +14,28 @@ const Wishlist = (props: Props) => {
   const [breadcrumbs, setBreadcrumbs] = useState<
     { title: string; path: string }[]
   >([
-    { title: "Product", path: "/product" },
-    { title: "", path: "" },
+    { title: "Wishlist", path: "/wishlist" },
+    // { title: "", path: "" },
   ])
 
   return (
     <Layout>
       <div>
         <Navbar />
-        <BreadCrumb breadcrumbs={[]} />
         <main className="grid grid-cols-12 space-y-12 py-16 min-h-screen">
           <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12">
+            <BreadCrumb breadcrumbs={breadcrumbs} />
             <h1 className="text-5xl font-semibold">Wishlist</h1>
             {isLoading ? (
               <WishlistSkeleton />
-            ) : data && data?.data?.length >= 1 ? (
-              <>
-                {data?.data?.map((product) => {
-                  return (
-                    <ProductCard data={product} page={1} key={product._id} />
-                  )
-                })}
-              </>
+            ) : data && data?.message === "success" ? (
+              data?.data?.map((product) => {
+                return <ProductCard data={product} page={1} key={product._id} />
+              })
             ) : (
-              <>
-                <div className="">
-                  <NoItemInWishList />
-                </div>
-              </>
+              <div className="">
+                <NoItemInWishList />
+              </div>
             )}
           </section>
         </main>
