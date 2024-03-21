@@ -1,7 +1,6 @@
 import { Button } from "../ui/button"
 import { Skeleton } from "../ui/skeleton"
 
-
 export const CartSkeleton = () => {
   return (
     <div className="flex items-center mb-24 w-full gap-12">
@@ -106,6 +105,26 @@ export const ReviewSkeleton = () => {
           <Skeleton className="h-10 w-full" />
         </div>
       </div>
+    </section>
+  )
+}
+
+export const WishlistSkeleton = () => {
+  return (
+    <section className="grid grid-cols-4 gap-12">
+      {new Array(4).fill(1).map((_, index) => {
+        return (
+          <div className="space-y-4 p-8 rounded-lg border" key={index + 1}>
+            <Skeleton className="h-44 w-full" />
+            <Skeleton className="h-10 w-full" />
+            <div className="flex space-y-2 flex-col items-center justify-center">
+              <Skeleton className="h-10 w-1/2" />
+              <Skeleton className="h-10 w-1/2" />
+            </div>
+            <Skeleton className="h-10 w-full border" />
+          </div>
+        )
+      })}
     </section>
   )
 }

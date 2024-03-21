@@ -1,5 +1,4 @@
 import AuthWrapper from "./Auth/authWrapper"
-
 type Props = {
   children: JSX.Element
 }
