@@ -20,7 +20,7 @@ function AuthWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-auto w-full  max-w-screen-4xl min-h-screen">
       {isAuthenticated ? (
-        <>{children}</>
+        children
       ) : (
         <div className="h-screen w-full flex items-center justify-center">
           <Spinner className="h-[40px] w-[40px]" />

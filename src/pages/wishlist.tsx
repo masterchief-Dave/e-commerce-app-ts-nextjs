@@ -26,12 +26,18 @@ const Wishlist = (props: Props) => {
           <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12">
             <BreadCrumb breadcrumbs={breadcrumbs} />
             <h1 className="text-5xl font-semibold">Wishlist</h1>
+            <div></div>
+
             {isLoading ? (
               <WishlistSkeleton />
             ) : data && data?.message === "success" ? (
-              data?.data?.map((product) => {
-                return <ProductCard data={product} page={1} key={product._id} />
-              })
+              <div className="grid grid-cols-4 gap-12">
+                {data?.data?.map((product) => {
+                  return (
+                    <ProductCard data={product} page={1} key={product._id} />
+                  )
+                })}
+              </div>
             ) : (
               <div className="">
                 <NoItemInWishList />
