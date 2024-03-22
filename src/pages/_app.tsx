@@ -70,10 +70,6 @@ export default function App({
                 <Toaster />
               </>
             )}
-            {/* <>
-              <Component {...pageProps} />
-              <Toaster />
-            </> */}
           </div>
         </SWRProvider>
       </ChakraProvider>

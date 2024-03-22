@@ -1,5 +1,5 @@
 export const info = (...params: any[]) => {
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === "test") {
     return
   }
 
@@ -7,13 +7,13 @@ export const info = (...params: any[]) => {
 }
 
 interface ErrorProp {
-  url: string,
-  message: string,
-  err: Error
+  url: string
+  message: string
+  err: Error | null
 }
 
 export const errorLogger = ({ url, message, err }: ErrorProp) => {
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === "test") {
     return
   }
 
