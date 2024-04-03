@@ -1,27 +1,38 @@
-import getFormatDate from "@/helpers/formatDate"
-import Image from 'next/image'
+import getFormatDate from "@/lib/helpers/formatDate"
+import Image from "next/image"
 
 type Props = {
   date: string
   price: string
   address: string
-  orderItems: { image: string, name: string, product: Product, price: number, quantity: number, _id: string }[]
+  orderItems: {
+    image: string
+    name: string
+    product: Product
+    price: number
+    quantity: number
+    _id: string
+  }[]
   orderNo: string
 }
 
 export const Order = (props: Props) => {
   return (
-    <div className='w-full p-8 text-[1.6rem]'>
-      <section className='space-y-8'>
-        <div className='w-full'>
-          <header className='flex w-full items-center justify-between'>
-            <h2 className='font-semibold'>
-              Order Date: <span className='font-light'> {getFormatDate(props?.date as string)} </span>
+    <div className="w-full p-8 text-[1.6rem]">
+      <section className="space-y-8">
+        <div className="w-full">
+          <header className="flex w-full items-center justify-between">
+            <h2 className="font-semibold">
+              Order Date:{" "}
+              <span className="font-light">
+                {" "}
+                {getFormatDate(props?.date as string)}{" "}
+              </span>
             </h2>
           </header>
         </div>
 
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <div>
             <h3>Delivery Address</h3>
             <p>{props.address}</p>
@@ -41,8 +52,8 @@ export const Order = (props: Props) => {
                   <div>
                     <Image
                       src={item.image}
-                      alt='printer'
-                      className='h-[10rem] w-[10rem] object-cover'
+                      alt="printer"
+                      className="h-[10rem] w-[10rem] object-cover"
                       width={1000}
                       height={1000}
                     />

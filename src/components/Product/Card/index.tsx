@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ShoppingBagIcon } from "@heroicons/react/24/solid"
-import { RenderRating } from "@/helpers/renderRating"
+import { RenderRating } from "@/lib/helpers/renderRating"
 import Link from "next/link"
 import { useAddToCart, useLikeProduct } from "@/lib/hooks/product/product.hook"
 import { HeartIcon } from "lucide-react"
@@ -79,8 +79,6 @@ export const ProductCard = ({ page, data }: Props) => {
       }
     )
   }
-
-  console.log(data)
 
   return (
     <>

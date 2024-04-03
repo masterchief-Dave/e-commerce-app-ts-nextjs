@@ -1,19 +1,29 @@
-import { apiService } from "@/helpers/apiService"
+import { apiService } from "@/lib/helpers/apiService"
 
 class AuthService {
-  static async login({ email, password }: { email: string, password: string }) {
-    return apiService(`auth/login`, 'POST', {
+  static async login({ email, password }: { email: string; password: string }) {
+    return apiService(`auth/login`, "POST", {
       email,
-      password
+      password,
     })
   }
 
-  static async register({ name, email, password, confirmPassword }: { name: string, email: string, password: string, confirmPassword: string }) {
-    return apiService(`auth/register`, 'POST', {
+  static async register({
+    name,
+    email,
+    password,
+    confirmPassword,
+  }: {
+    name: string
+    email: string
+    password: string
+    confirmPassword: string
+  }) {
+    return apiService(`auth/register`, "POST", {
       name,
       email,
       password,
-      confirmPassword
+      confirmPassword,
     })
   }
 }

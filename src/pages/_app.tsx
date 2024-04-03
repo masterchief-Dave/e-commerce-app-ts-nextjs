@@ -18,6 +18,7 @@ import SWRProvider from "@/SWRProvider"
 import Spinner from "@/components/molecules/spinner"
 import { useRouter } from "next/router"
 import "@smastrom/react-rating/style.css"
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 
 export default function App({
   Component,
@@ -34,6 +35,7 @@ export default function App({
   const [isLoading, setIsLoading] = useState(
     staticPaths.includes(router.asPath) ? false : true
   )
+  const client = new QueryClient()
 
   useEffect(() => {
     let isMounted = true
@@ -56,23 +58,25 @@ export default function App({
   }, [])
 
   return (
-    <SessionProvider session={session}>
-      <ChakraProvider>
-        <SWRProvider>
-          <div className="font-rubik max-w-[2560px] mx-auto">
-            {isLoading ? (
-              <div className="flex items-center justify-center h-screen">
-                <Spinner className="h-[40px] w-[40px]" />
-              </div>
-            ) : (
-              <>
-                <Component {...pageProps} />
-                <Toaster />
-              </>
-            )}
-          </div>
-        </SWRProvider>
-      </ChakraProvider>
-    </SessionProvider>
+    <QueryClientProvider client={client}>
+      <SessionProvider session={session}>
+        <ChakraProvider>
+          <SWRProvider>
+            <div className="font-rubik max-w-[2560px] mx-auto">
+              {isLoading ? (
+                <div className="flex items-center justify-center h-screen">
+                  <Spinner className="h-[40px] w-[40px]" />
+                </div>
+              ) : (
+                <>
+                  <Component {...pageProps} />
+                  <Toaster />
+                </>
+              )}
+            </div>
+          </SWRProvider>
+        </ChakraProvider>
+      </SessionProvider>
+    </QueryClientProvider>
   )
 }

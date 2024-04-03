@@ -1,4 +1,4 @@
-import { globalAxios } from "@/helpers/apiService"
+import { globalAxios } from "@/lib/helpers/apiService"
 import useAuth from "./useAuth"
 import { setCookie } from "cookies-next"
 

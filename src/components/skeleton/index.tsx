@@ -128,3 +128,5 @@ export const WishlistSkeleton = () => {
     </section>
   )
 }
+
+export const CategoryPageSkeleton = () => {}

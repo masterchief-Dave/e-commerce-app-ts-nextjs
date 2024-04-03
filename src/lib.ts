@@ -1,7 +1,7 @@
-import { SignJWT, jwtVerify } from 'jose'
-import { cookies } from 'next/headers'
+import { SignJWT, jwtVerify } from "jose"
+import { cookies } from "next/headers"
 // const { cookies } = require('next/headers').headers()
-import { apiService } from "@/helpers/apiService"
+import { apiService } from "@/lib/helpers/apiService"
 
 const secretKey = "secret"
 const key = new TextEncoder().encode(secretKey)
@@ -22,17 +22,16 @@ export async function decrypt(input: string): Promise<any> {
 }
 
 export async function handleLogin(email: string, password: string) {
-
-  const response = await apiService(`/auth/login`, 'POST', {
+  const response = await apiService(`/auth/login`, "POST", {
     email: email,
-    password: password
+    password: password,
   })
 
   if (response.success) {
     const expires = new Date(Date.now() + 60 * 60 * 24 * 1000)
     const session = await encrypt({ user: response?.user, expires })
 
-    cookies().set('session', session, { expires, httpOnly: true })
+    cookies().set("session", session, { expires, httpOnly: true })
     return { message: "", status: true }
   } else {
     return { message: "", status: false }
@@ -46,7 +45,7 @@ export async function getSession() {
 }
 
 export const getUser = async () => {
-  const response = await apiService('/user')
+  const response = await apiService("/user")
 
   // console.log((response.data))
   return response.data

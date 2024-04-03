@@ -1,4 +1,4 @@
-import { apiService } from "@/helpers/apiService"
+import { apiService } from "@/lib/helpers/apiService"
 import { errorLogger } from "@/lib/utils/logger"
 import axios from "axios"
 

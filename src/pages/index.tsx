@@ -107,15 +107,15 @@ export default function Home() {
                       <>
                         <CategoryCard
                           products={categories?.data?.data?.[0]?.products}
-                          category={categories?.data?.data?.[0]?.name}
+                          category={categories?.data?.data?.[0]?.name as string}
                         />
                         <CategoryCard
                           products={categories?.data?.data?.[1]?.products}
-                          category={categories?.data?.data?.[1]?.name}
+                          category={categories?.data?.data?.[1]?.name as string}
                         />
                         <CategoryCard
                           products={categories?.data?.data?.[2]?.products}
-                          category={categories?.data?.data?.[2]?.name}
+                          category={categories?.data?.data?.[2]?.name as string}
                         />
                       </>
                     ) : (
