@@ -129,4 +129,19 @@ export const WishlistSkeleton = () => {
   )
 }
 
-export const CategoryPageSkeleton = () => {}
+export const CategoryPageSkeleton = () => {
+  return (
+    <section className="grid grid-cols-12 gap-12 p-32">
+      <section className="col-start-1 col-end-3 space-y-8">
+        {new Array(7).fill(0).map((_n, index) => {
+          return <Skeleton className="h-10 w-full" key={index + 1 + "filter"} />
+        })}
+      </section>
+      <section className="col-start-4 col-end-13 grid grid-cols-4 gap-12">
+        {new Array(12).fill(0).map((_n, index) => {
+          return <Skeleton className="h-80 w-full" key={index + 1} />
+        })}
+      </section>
+    </section>
+  )
+}

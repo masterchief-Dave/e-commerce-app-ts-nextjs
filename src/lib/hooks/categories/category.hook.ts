@@ -1,12 +1,6 @@
 import CategoryService from "@/lib/services/category/category.service"
+import type { CategoryParamInterface } from "@/lib/types/product"
 import { useQuery, UseQueryOptions, useQueries } from "@tanstack/react-query"
-
-interface CategoryParamInterface {
-  page: number
-  rating: string
-  price: string
-  name: string
-}
 
 export const useGetCategory = ({
   page,

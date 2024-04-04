@@ -1,7 +1,7 @@
-import { Fragment } from 'react'
+import { Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import Link from 'next/link'
+import Link from "next/link"
 
 type Props = {
   isOpen: boolean
@@ -17,7 +17,7 @@ export const PasswordResetSuccess = ({ isOpen, setIsOpen }: Props) => {
     setIsOpen(true)
   }
   return (
-    <div className='z-[99999999]'>
+    <div className="z-[99999999]">
       <div className="fixed inset-0 flex items-center justify-center" />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -45,32 +45,39 @@ export const PasswordResetSuccess = ({ isOpen, setIsOpen }: Props) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-1/3 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all space-y-8">
-                  <header className='flex items-center justify-between'>
+                  <header className="flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
                       className="text-[2rem] font-medium leading-6 text-gray-900"
                     >
                       Email sent successful
                     </Dialog.Title>
-                    <div onClick={closeModal} className='cursor-pointer rounded-full p-1 bg-[#EFEFEF]'>
-                      <XMarkIcon className='h-10 w-10' />
+                    <div
+                      onClick={closeModal}
+                      className="cursor-pointer rounded-full p-1 bg-[#EFEFEF]"
+                    >
+                      <XMarkIcon className="h-10 w-10" />
                     </div>
                   </header>
 
                   <div className="mt-2">
-                    <p className="text-[1.6rem] font-normal text-gray-500">
-                      Your Password has been reset successfully. You can now close this page.
+                    <p className=" font-normal text-gray-500">
+                      Your Password has been reset successfully. You can now
+                      close this page.
                     </p>
                   </div>
 
                   <div className="mt-4 flex items-center gap-x-8">
-                    <Link href='/auth/login' className='text-[1.6rem] delay-75 transition-all font-medium rounded-md px-4 py-2 hover:bg-primary-blue-500 hover:text-white'>
+                    <Link
+                      href="/auth/login"
+                      className=" delay-75 transition-all font-medium rounded-md px-4 py-2 hover:bg-primary-blue-500 hover:text-white"
+                    >
                       Return to Sign in
                     </Link>
 
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-[1.6rem] font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2  font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Got it, thanks!

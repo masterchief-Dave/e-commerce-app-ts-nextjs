@@ -2,16 +2,16 @@
   a {
     text-decoration: none;
     color: black;
-    font-size: 1.2rem;
+    font-size: 1.2px;
     padding: 14px 16px;
   }
 
   .navbar {
     display: flex;
-    gap: 4rem;
+    gap: 4px;
     background-color: #333;
     // overflow: hidden;
-    height: 3rem;
+    height: 3px;
     align-items: center;
     /* backdrop-filter: blur(4px); */
   }
@@ -24,10 +24,10 @@
     outline: none;
     background-color: transparent;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.2px;
     padding: 14px 16px;
     cursor: pointer;
-    height: 4rem;
+    height: 4px;
     height: 100%;
     background-color: #f80000;
   }
@@ -49,13 +49,13 @@
     display: none;
     /* visibility: hidden; */
 
-    width: 10rem;
+    width: 10px;
     box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
     z-index: 1;
     /* transition: all linear 0.1s; */
     transition: all linear 0.2s;
     transition-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
-    border-radius: 1rem;
+    border-radius: 1px;
 
     /* display: none; */
   }
@@ -63,8 +63,8 @@
   .dropdown-content p {
     cursor: pointer;
     color: #f9f9f9;
-    padding: 0.5rem 0.3rem;
-    border-radius: 0.3rem;
+    padding: 0.5px 0.3px;
+    border-radius: 0.3px;
   }
 
   .dropdown-content p:hover {
@@ -75,22 +75,22 @@
     display: block;
     /* visibility: visible; */
     text-align: left;
-    width: 10rem;
+    width: 10px;
     z-index: 1;
     margin-top: -0.91px;
     /* transition: all ease 0.3s; */
-    padding: 0rem 0.2rem;
+    padding: 0px 0.2px;
   }
 }
 
 .AnotherNavbar {
-  margin-top: 10rem;
-  padding: 0 5rem;
+  margin-top: 10px;
+  padding: 0 5px;
   a {
-    width: 8rem;
+    width: 8px;
   }
   .btn {
-    height: 4rem;
+    height: 4px;
   }
 
   .dropdown-container {
@@ -101,11 +101,11 @@
   .dropdown-container:hover .dropdown-content {
     display: block;
     position: absolute;
-    margin-top: -0.9rem;
-    width: 50rem;
+    margin-top: -0.9px;
+    width: 50px;
     background-color: orange;
-    border-radius: 0.8rem;
-    padding: 2rem 3rem;
+    border-radius: 0.8px;
+    padding: 2px 3px;
     // top: 10;
   }
 }
@@ -133,7 +133,7 @@
   .nav-links li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.5px;
     font-weight: 400;
     padding: 9px 15px;
     transition: all 0.2s ease;
@@ -220,7 +220,7 @@
 
   .content .row header {
     color: #f2f2f2;
-    font-size: 2rem;
+    font-size: 2px;
   }
 
   .content .row .mega-links {
@@ -239,7 +239,7 @@
   .row .mega-links li a {
     padding: 0 20px;
     color: #d9d9d9;
-    font-size: 1.4rem;
+    font-size: 1.4px;
     display: block;
   }
 }

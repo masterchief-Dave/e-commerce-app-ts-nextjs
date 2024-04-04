@@ -5,9 +5,17 @@ interface ErrorLabelProps extends React.HTMLProps<HTMLParagraphElement> {
   text?: string
 }
 
-export const ErrorLabel = ({ className, text, children, ...props }: ErrorLabelProps) => {
+export const ErrorLabel = ({
+  className,
+  text,
+  children,
+  ...props
+}: ErrorLabelProps) => {
   return (
-    <p className={twMerge('text-red-500 text-[1.6rem] font-normal', className)} {...props}>
+    <p
+      className={twMerge("text-red-500 text-sm font-normal", className)}
+      {...props}
+    >
       {text ? text : children}
     </p>
   )

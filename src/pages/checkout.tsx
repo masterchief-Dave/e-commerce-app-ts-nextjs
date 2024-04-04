@@ -23,9 +23,9 @@ import type {
 import useShippingAddress from "@/lib/store/shipping.store"
 
 const styles = {
-  sectionHeader: `font-semibold text-[1.3rem] lg:text-[1.8rem]`,
-  priceHeader: `font-medium lg:text-[1.6rem] text-[0.8rem]`,
-  priceText: `font-normal lg:text-[1.6rem] text-[0.8rem]`,
+  sectionHeader: `font-semibold text-lg`,
+  priceHeader: `font-medium text-sm`,
+  priceText: `font-normal text-sm`,
 }
 
 const Checkout = () => {
@@ -53,7 +53,7 @@ const Checkout = () => {
   return (
     <div>
       <header className="grid grid-cols-12 border-b py-4">
-        <h1 className="font-bold text-[2.5rem] col-span-full px-24">
+        <h1 className="font-bold text-xl col-span-full px-24">
           <Link href="/">
             <Image src={SWLogo} alt="Brand Logo" height={50} width={50} />
           </Link>
@@ -62,7 +62,7 @@ const Checkout = () => {
       <div className="relative grid grid-cols-12">
         <div className="col-start-1 col-end-13 min-h-screen grid grid-cols-12 py-24 md:col-start-1 md:col-end-8">
           <div className="col-start-2 col-end-12 space-y-12 p-2">
-            <h1 className="text-[2rem] font-bold">Checkout</h1>
+            <h1 className="text-2xl font-bold">Checkout</h1>
             <div className="space-y-4">
               <h2 className={styles.sectionHeader}>Billing Address</h2>
               <BillingAddress
@@ -114,34 +114,34 @@ const Checkout = () => {
               <article className="mb-[5rem] space-y-8">
                 <div className="border-b space-y-3 py-4">
                   <div className="text-former-price-text flex justify-between">
-                    <p className="text-[1.6rem]">Original Price</p>
-                    <p className="text-[1.5rem] font-semibold">
+                    <p className="">Original Price</p>
+                    <p className="text-base font-semibold">
                       {" "}
                       ${totalPrice?.toFixed(2)}
                     </p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-[1.6rem]">Shipping</p>
-                    <p className="text-[1.5rem] font-semibold">
+                    <p className="">Shipping</p>
+                    <p className="text-base font-semibold">
                       ${shippingFee.toFixed(2)}
                     </p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-[1.6rem]">Tax</p>
-                    <p className="text-[1.5rem] font-semibold">
+                    <p className="">Tax</p>
+                    <p className="text-base font-semibold">
                       ${taxFee.toFixed(2)}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex justify-between">
-                  <p className="text-[1.6rem]">Total</p>
-                  <p className="text-[1.5rem] font-semibold">${amount}</p>
+                  <p className="">Total</p>
+                  <p className="text-base font-semibold">${amount}</p>
                 </div>
 
-                <p className="text-former-price-text font-normal">
-                  By completing your purchase you agree to these Cobraine term
-                  and condition
+                <p className="text-sm font-normal text-justify">
+                  By completing your purchase you agree to these Sage-Warehouse
+                  terms and condition
                 </p>
 
                 <PaystackHook
@@ -152,7 +152,7 @@ const Checkout = () => {
                 />
 
                 <div className="flex items-center gap-x-8">
-                  <p className="text-former-price-text w-full text-center text-[1.3rem]">
+                  <p className="text-former-price-text w-full text-center text-sm">
                     30 days money back guarantee
                   </p>
                   <LockClosedIcon className="h-8 w-8" />

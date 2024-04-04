@@ -1,10 +1,10 @@
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
-import axios from 'axios'
-import { getCookie } from 'cookies-next'
-import { AddressBox } from '@/components/Account/Address/addressBox'
-import { Footer } from '@/components/Footer'
-import { AccountLayout } from '@/components/Layout/Account'
+import { GetServerSideProps } from "next"
+import { getSession } from "next-auth/react"
+import axios from "axios"
+import { getCookie } from "cookies-next"
+import { AddressBox } from "@/components/Account/Address/addressBox"
+import { Footer } from "@/components/Footer"
+import { AccountLayout } from "@/components/Layout/Account"
 import { useGetBillingAddress } from "@/lib/hooks/user/user.hook"
 import { BillingInfoSkeleton } from "@/components/skeleton"
 import Link from "next/link"
@@ -16,42 +16,44 @@ type Props = {
 const DeliveryAddress = (props: Props) => {
   const { data, isLoading } = useGetBillingAddress()
 
+  console.log({ data })
+
   return (
     <div>
       <AccountLayout>
         <>
           {data?.length === 0 ? (
-            <div className="flex flex-col gap-4 items-center justify-center h-[20rem]">
-              <p className="text-[1.6rem] font-medium">No Billing Information available</p>
+            <div className="flex flex-col gap-4 items-center justify-center h-[200px]">
+              <p className=" font-medium">No Billing Information available</p>
               <Link
-                href='/account/add-billing-address'
-                className="text-blue-500 text-[1.6rem] underline underline-offset-2"
+                href="/account/add-billing-address"
+                className="text-blue-500  underline underline-offset-2"
               >
                 Add Billing Address
               </Link>
             </div>
+          ) : isLoading ? (
+            <div className="flex items-center justify-center">
+              <BillingInfoSkeleton />
+            </div>
           ) : (
-            isLoading ? (
-              <div className="flex items-center justify-center">
-                <BillingInfoSkeleton />
-              </div>
-            ) : (
-              <section>
-                <header>
-                  <header className='flex items-center justify-between border-b p-8'>
-                    <h1 className='text-3xl font-semibold'>Delivery Address</h1>
-                    <Link
-                      href='/account/add-billing-address'
-                      className='h-fit w-fit rounded-md bg-blue-500 px-4 py-2 text-[1.6rem] font-semibold text-white'
-                      id='newAddress'
-                    >
-                      {' '}
-                      Add new Address{' '}
-                    </Link>
-                  </header>
+            <section>
+              <header>
+                <header className="flex items-center justify-between border-b p-4">
+                  <h1 className="text-xl font-semibold">Delivery Address</h1>
+                  <Link
+                    href="/account/add-billing-address"
+                    className="h-fit w-fit rounded-md bg-blue-500 px-4 py-2 font-semibold text-white"
+                    id="newAddress"
+                  >
+                    {" "}
+                    Add new Address{" "}
+                  </Link>
                 </header>
-                <div className="grid grid-cols-2 gap-12 p-8">
-                  {data?.map((address) => {
+              </header>
+              <div className="grid grid-cols-2 gap-12 p-8">
+                {data?.length! >= 1 &&
+                  data?.map((address) => {
                     return (
                       <AddressBox
                         key={address._id}
@@ -65,9 +67,8 @@ const DeliveryAddress = (props: Props) => {
                       />
                     )
                   })}
-                </div>
-              </section>
-            )
+              </div>
+            </section>
           )}
         </>
       </AccountLayout>
@@ -77,7 +78,6 @@ const DeliveryAddress = (props: Props) => {
 }
 
 export default DeliveryAddress
-
 
 /*
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {

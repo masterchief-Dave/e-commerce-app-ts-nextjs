@@ -29,7 +29,7 @@ type Props = {
 }
 
 const styles = {
-  input: `text-[1.6rem] border-0 ring-0 focus: outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+  input: ` border-0 ring-0 focus: outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
 }
 
 const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
@@ -83,7 +83,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
       <Transition appear show={openModal} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-10 text-[1.6rem] font-rubik"
+          className="relative z-10  font-rubik"
           onClose={handleCloseModal}
         >
           <Transition.Child
@@ -113,7 +113,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                   <div className="relative flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
-                      className="text-[1.6rem] font-bold leading-6 text-gray-900"
+                      className=" font-bold leading-6 text-gray-900"
                     >
                       <section className="flex items-center justify-between">
                         <h1 className="font-medium text-3xl">Sign in</h1>
@@ -183,7 +183,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="h-[4rem] text-[1.6rem] bg-black text-white btn"
+                        className="h-[4rem]  bg-black text-white btn"
                       >
                         {isLoading && <Spinner className="text-white" />}
                         <span>Login</span>
@@ -198,13 +198,13 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                   </div>
 
                   {/* <div className="mt-2">
-                    <p className="text-[1.6rem] text-gray-500">
+                    <p className=" text-gray-500">
                       Join Sage-Warehouse with just 1-click!
                     </p>
                   </div> */}
                   <div className="space-y-4 col-start-2 col-end-12">
                     <Button
-                      className={`h-[4rem] w-full hover:bg-primary-blue-300  text-[1.6rem] rounded-md flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
+                      className={`h-[4rem] w-full hover:bg-primary-blue-300   rounded-md flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault()

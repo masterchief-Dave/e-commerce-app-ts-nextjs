@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from "next/link"
+import { useRouter } from "next/router"
 
-import { Navbar } from '../Navbar'
+import { Navbar } from "../Navbar"
 
 type Props = {
   children: JSX.Element
@@ -9,23 +9,21 @@ type Props = {
 
 export const LegalLayout = ({ children }: Props) => {
   return (
-    <div className='Legal mx-auto w-full max-w-screen-4xl'>
+    <div className="Legal mx-auto w-full max-w-screen-4xl">
       <Navbar />
-      <header className='Legal_Header'>
-        <section className='flex h-full w-full items-center'>
-          <h3 className='mt-[-14.5rem] pl-[14.5rem] text-[3rem] font-bold'>
+      <header className="Legal_Header">
+        <section className="flex h-full w-full items-center">
+          <h3 className="mt-[-14.5rem] pl-[14.5rem] text-[3rem] font-bold">
             Legal
           </h3>
         </section>
       </header>
 
-      <main className='grid grid-cols-12 py-20'>
-        <section className='col-start-2 col-end-4'>
+      <main className="grid grid-cols-12 py-20">
+        <section className="col-start-2 col-end-4">
           <SideNav />
         </section>
-        <section className='col-start-5 col-end-12  text-[1.6rem]'>
-          {children}
-        </section>
+        <section className="col-start-5 col-end-12  ">{children}</section>
       </main>
     </div>
   )
@@ -35,25 +33,25 @@ const SideNav = () => {
   const router = useRouter()
 
   return (
-    <aside className='Legal Legal_Sidebar h-[20rem] '>
+    <aside className="Legal Legal_Sidebar h-[20rem] ">
       <div>
-        <h3 className='mb-[3rem] text-[2rem] text-[#222]'>ON THIS PAGE</h3>
-        <nav className='flex flex-col gap-x-[1rem]'>
+        <h3 className="mb-[3rem] text-[2rem] text-[#222]">ON THIS PAGE</h3>
+        <nav className="flex flex-col gap-x-[1rem]">
           <Link
-            href='/legal/terms-and-condition'
+            href="/legal/terms-and-condition"
             className={`${
-              router.pathname === '/legal/terms-and-condition'
-                ? 'Legal_active'
-                : ''
+              router.pathname === "/legal/terms-and-condition"
+                ? "Legal_active"
+                : ""
             } link`}
           >
             Terms and condition
           </Link>
 
           <Link
-            href='/legal/privacy-policy'
+            href="/legal/privacy-policy"
             className={`${
-              router.pathname === '/legal/privacy-policy' ? 'Legal_active' : ''
+              router.pathname === "/legal/privacy-policy" ? "Legal_active" : ""
             } link`}
           >
             Privacy policy

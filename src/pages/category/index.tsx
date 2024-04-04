@@ -9,6 +9,9 @@ import { ProductCard } from "@/components/Product/Card"
 import useCategoryStore from "@/lib/store/category.store"
 import { useSearchParams } from "next/navigation"
 import { useGetCategory } from "@/lib/hooks/categories/category.hook"
+import { CategoryPageSkeleton } from "@/components/skeleton"
+import type { CategoryProductInterface } from "@/lib/types/product"
+import Filtering from "@/components/Filter/filtering"
 
 type Props = {
   products: Product[]
@@ -31,10 +34,11 @@ const CategorySlug: React.FC<Props> = ({ products }) => {
 
   // show loading skeleton
   if (isLoading) {
-    return <></>
+    return <CategoryPageSkeleton />
   }
 
-  console.log({ data })
+  const categories = (data?.data as CategoryProductInterface[]) || []
+  console.log({ categories })
 
   return (
     <Layout>
@@ -43,22 +47,21 @@ const CategorySlug: React.FC<Props> = ({ products }) => {
         <main className="mx-auto grid w-full grid-cols-12 space-y-12 py-32 overflow-hidden">
           <section className="mb-12 col-start-2 col-end-12 flex justify-end">
             <div className="col-start-2 col-end-12 flex justify-end">
-              <div className="w-full">
+              <div className="w-full flex items-center gap-x-8">
                 <Sorting />
+                <Filtering />
               </div>
             </div>
           </section>
 
-          {products?.length < 1 || isError ? (
+          {categories?.length < 1 || isError ? (
             <NoItemFound />
           ) : (
             <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
-              <div className="col-start-1 col-end-3">
-                <Filter />
-              </div>
-              <div className="col-start-3 col-end-13">
-                <section className="grid grid-cols-4 justify-items-end gap-12">
-                  {products?.map((product: Product): React.ReactElement => {
+              {/* <div className="col-start-1 col-end-3"><Filter /></div> */}
+              <div className="col-start-1 col-end-13">
+                <section className="grid grid-cols-4 justify-items-center gap-12">
+                  {categories?.map((product) => {
                     return (
                       <div key={product._id}>
                         <ProductCard data={product} page={1} />

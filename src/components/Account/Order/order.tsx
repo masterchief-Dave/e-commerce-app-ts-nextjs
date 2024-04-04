@@ -18,7 +18,7 @@ type Props = {
 
 export const Order = (props: Props) => {
   return (
-    <div className="w-full p-8 text-[1.6rem]">
+    <div className="w-full p-8 ">
       <section className="space-y-8">
         <div className="w-full">
           <header className="flex w-full items-center justify-between">

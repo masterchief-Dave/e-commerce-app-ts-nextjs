@@ -1,19 +1,23 @@
-'use client'
+"use client"
 
 import {
   Accordion,
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-} from '@chakra-ui/react'
-import { GlobeAltIcon } from '@heroicons/react/24/outline'
-import { useEffect, useMemo, useState } from 'react'
-import { useFormik } from 'formik'
-import styles from './index.module.scss'
-import { countryCode } from '@/globals/countries'
+} from "@chakra-ui/react"
+import { GlobeAltIcon } from "@heroicons/react/24/outline"
+import { useEffect, useMemo, useState } from "react"
+import { useFormik } from "formik"
+import styles from "./index.module.scss"
+import { countryCode } from "@/globals/countries"
 import { Input } from "../ui/input"
 import SelectComp from "../molecules/selectComp"
-import { billingAddressSchema, billingAddressVal, titleOptions } from "@/lib/schema/auth.schema"
+import {
+  billingAddressSchema,
+  billingAddressVal,
+  titleOptions,
+} from "@/lib/schema/auth.schema"
 import { AddressForm } from "../Account/Address/addressForm"
 import { useGetDefaultBillingAddress } from "@/lib/hooks/user/user.hook"
 import addBillingAddressHelper from "@/utils/addBillingAddress.helper"
@@ -23,10 +27,12 @@ import useShippingAddress from "@/lib/store/shipping.store"
 interface BillingAddressAccordionInterface {
   billingAddress: string
   setBillingAddress: React.Dispatch<React.SetStateAction<string>>
-
 }
 
-export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAddressAccordionInterface) => {
+export const BillingAddress = ({
+  billingAddress,
+  setBillingAddress,
+}: BillingAddressAccordionInterface) => {
   const [mounted, setMounted] = useState<boolean>(false)
   const billingAddressQuery = useGetDefaultBillingAddress()
   // const [isSavedBillingAddress, setIsSavedBillingAddress] = useState(true)
@@ -38,12 +44,11 @@ export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAdd
   //   return countries
   // }, [countryCode])
 
-
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // handle the form for the billingAddress 
+  // handle the form for the billingAddress
   const formik = useFormik({
     initialValues: billingAddressVal,
     validationSchema: billingAddressSchema,
@@ -56,29 +61,44 @@ export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAdd
         firstname: values.firstname,
         lastname: values.lastname,
         phoneNumber: values.phoneNumber,
-        zipcode: values.zipcode
+        zipcode: values.zipcode,
       })
-      addBillingAddressHelper({ values, formik, setLoading, toast, reset: false })
+      addBillingAddressHelper({
+        values,
+        formik,
+        setLoading,
+        toast,
+        reset: false,
+      })
     },
   })
 
   function renderSavedBillingAddress() {
-    if (billingAddressQuery.data && billingAddressQuery.data?.address.length > 1 && billingAddressQuery.data?.country.length > 1 && billingAddressQuery.data?.zipcode.length > 1) {
+    if (
+      billingAddressQuery.data &&
+      billingAddressQuery.data?.address.length > 1 &&
+      billingAddressQuery.data?.country.length > 1 &&
+      billingAddressQuery.data?.zipcode.length > 1
+    ) {
       return (
-        <section className='grid grid-cols-12 gap-4 text-left font-medium'>
-          <div className='col-start-1 col-end-8'>
+        <section className="grid grid-cols-12 gap-4 text-left font-medium">
+          <div className="col-start-1 col-end-8">
             <h5 className={styles.cardTitle}>Address</h5>
-            <p className={`${styles.cardText} text-[1.6rem]`}>
+            <p className={`${styles.cardText} `}>
               {billingAddressQuery.data?.address}
             </p>
           </div>
-          <div className='col-start-8 col-end-10'>
+          <div className="col-start-8 col-end-10">
             <h5 className={styles.cardTitle}>City</h5>
-            <p className={`${styles.cardText} text-[1.6rem]`}>{billingAddressQuery.data?.country}</p>
+            <p className={`${styles.cardText} `}>
+              {billingAddressQuery.data?.country}
+            </p>
           </div>
-          <div className='col-start-10 col-end-13'>
+          <div className="col-start-10 col-end-13">
             <h5 className={styles.cardTitle}>Postcode</h5>
-            <p className={`${styles.cardText} text-[1.6rem]`}>{billingAddressQuery.data?.zipcode}</p>
+            <p className={`${styles.cardText} `}>
+              {billingAddressQuery.data?.zipcode}
+            </p>
           </div>
         </section>
       )
@@ -92,8 +112,8 @@ export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAdd
   }
 
   return (
-    <div className='py-10 w-[80%]  text-[1.6rem]'>
-      <div className='border-l border-r '>
+    <div className="py-10 w-[80%]">
+      <div className="border-l border-r ">
         {mounted && (
           <Accordion allowToggle>
             <AccordionItem>
@@ -101,28 +121,28 @@ export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAdd
                 return (
                   <>
                     <h2>
-                      <AccordionButton className='flex justify-between bg-[#f7f9fa] text-[1.6rem] lg:text-[1.5rem] w-full'>
-                        <div className='flex items-center justify-start gap-8 w-full'>
+                      <AccordionButton className="flex justify-between bg-[#f7f9fa] text-base w-full">
+                        <div className="flex items-center justify-start gap-8 w-full">
                           <Input
-                            type='radio'
-                            name='savedAddress'
-                            value='savedAddress'
-                            checked={billingAddress === 'savedAddress'}
+                            type="radio"
+                            name="savedAddress"
+                            value="savedAddress"
+                            checked={billingAddress === "savedAddress"}
                             onChange={(e) => setBillingAddress(e.target.value)}
                             className="w-fit"
                           />
-                          <div className='rounded-md border p-2'>
-                            <GlobeAltIcon className='h-8 w-16' />
+                          <div className="rounded-md border p-2">
+                            <GlobeAltIcon className="h-6 w-12" />
                           </div>
                           <p className={`${styles.accordionHeader}`}>
-                            {' '}
-                            Saved Billing Address{' '}
+                            {" "}
+                            Saved Billing Address{" "}
                           </p>
                         </div>
                       </AccordionButton>
                     </h2>
                     <AccordionPanel>
-                      <div className='space-y-8 px-8 py-8'>
+                      <div className="space-y-8 px-8 py-2">
                         {renderSavedBillingAddress()}
                       </div>
                     </AccordionPanel>
@@ -135,19 +155,19 @@ export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAdd
               {({ isExpanded }) => {
                 return (
                   <>
-                    <AccordionButton className='flex justify-between bg-[#f7f9fa] text-[1.1rem] lg:text-[1.6rem]'>
-                      <div className='flex items-center gap-8 w-full justify-start'>
+                    <AccordionButton className="flex justify-between bg-[#f7f9fa] text-sm">
+                      <div className="flex items-center gap-8 w-full justify-start">
                         <Input
-                          type='radio'
-                          name='newBillingAddress'
-                          id='newBillingAddress'
-                          value='newBillingAddress'
-                          checked={billingAddress === 'newBillingAddress'}
+                          type="radio"
+                          name="newBillingAddress"
+                          id="newBillingAddress"
+                          value="newBillingAddress"
+                          checked={billingAddress === "newBillingAddress"}
                           onChange={(e) => setBillingAddress(e.target.value)}
                           className="w-fit"
                         />
-                        <div className='rounded-md border p-2'>
-                          <GlobeAltIcon className='h-8 w-16' />
+                        <div className="rounded-md border p-2">
+                          <GlobeAltIcon className="h-6 w-12" />
                         </div>
                         <p className={`${styles.accordionHeader}`}>
                           Billing Address
@@ -155,7 +175,7 @@ export const BillingAddress = ({ billingAddress, setBillingAddress }: BillingAdd
                       </div>
                     </AccordionButton>
                     <AccordionPanel>
-                      <div className='space-y-8 px-2 py-8 lg:px-8'>
+                      <div className="space-y-8 px-2 py-2 lg:px-4">
                         <AddressForm formik={formik} loading={loading} />
                       </div>
                     </AccordionPanel>

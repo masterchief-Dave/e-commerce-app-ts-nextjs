@@ -5,9 +5,12 @@ import { Button } from "../ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Filter } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const SORT_OPTIONS = [
@@ -53,15 +56,23 @@ export const Sorting = () => {
   }
 
   return (
-    <div className="flex items-center w-full justify-end gap-x-2 divide-x">
+    <div className="flex items-center w-full justify-end gap-x-2">
       <DropdownMenu>
-        <DropdownMenuTrigger className="group inline-flex justify-center text-[1.6rem] font-medium text-gray-700 hover:text-gray-900">
-          Sort By:{" "}
-          <ChevronDown className="-mr-1 ml-1 h-10 w-10 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
+        <DropdownMenuTrigger className="group inline-flex justify-center  font-medium text-gray-700 hover:text-gray-900">
+          <Button
+            variant="default"
+            className="w-max h-[4rem] px-4 bg-transparent text-gray-500 border"
+            size="lg"
+          >
+            Sort
+            <ChevronDown className="-mr-1 ml-1 h-10 w-10 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
+          </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="start" className="p-1 min-w-[200px]">
+          <DropdownMenuLabel className="">Sort by</DropdownMenuLabel>
+          <DropdownMenuSeparator />
           {SORT_OPTIONS.map((option) => (
-            <Button
+            <DropdownMenuItem
               key={option.value}
               onClick={() => {
                 setFilter((prev) => {
@@ -72,7 +83,7 @@ export const Sorting = () => {
                 })
               }}
               className={cn(
-                "text-left w-full block px-6 py-4 text-[1.6rem] bg-transparent hover:text-black",
+                "text-left w-full block px-6 py-4  bg-transparent hover:text-black",
                 {
                   "text-gray-900 bg-gray-100": option.value === filter.sort,
                   "text-gray-500": option.value !== filter.sort,
@@ -80,12 +91,14 @@ export const Sorting = () => {
               )}
             >
               {option.name}
-            </Button>
+            </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Button className="-m-2 ml-4 p-2 text-gray-400 w-fit"></Button>
+      {/* <Button className="-m-2 ml-4 p-2 text-gray-400 w-fit bg-transparent rounded-md hover:bg-transparent hover:text-gray-700">
+        <Filter />
+      </Button> */}
     </div>
   )
 }

@@ -99,7 +99,7 @@ export default function Home() {
             <div className="col-span-full mx-auto grid w-full grid-cols-12">
               <div className="col-start-2 col-end-12 space-y-12">
                 <section>
-                  <h2 className="mb-8 text-[1.6rem] font-bold uppercase text-primary-black-200 lg:text-[2rem]">
+                  <h2 className="mb-8 font-bold uppercase text-primary-black-200 text-xl">
                     Product Categories
                   </h2>
                   <div className="sm:flex sm:flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12">
@@ -128,10 +128,10 @@ export default function Home() {
 
                     {/* show this section only in the lg screen size */}
                     <div className="hidden lg:block lg:space-y-4 xl:hidden">
-                      <h3 className="font-semibold text-[2rem] text-center">
+                      <h3 className="font-semibold text-[20px] text-center">
                         Browse our Category
                       </h3>
-                      <p className="text-[1.6rem] font-normal text-center text-primary-grey-100">
+                      <p className=" font-normal text-center text-primary-grey-100">
                         Discover endless possibilities. Explore our diverse
                         categories now.
                       </p>
@@ -179,23 +179,21 @@ export default function Home() {
 
                   <div className="flex items-center justify-end gap-x-4 px-8">
                     <button
-                      className="rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.6rem]"
+                      className="rounded-md border px-8 py-2 text-sm font-medium"
                       onClick={() => handlePrevButton()}
                     >
                       Prev
                     </button>
-                    <button className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-blue-300 text-xl font-medium text-white lg:text-[1.6rem]">
+                    <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-blue-300 text-sm font-medium text-white">
                       {pageIndex}
                     </button>
-                    <button className="text-xl font-medium lg:text-[1.6rem]">
+                    <button className="text-sm font-normal">
                       {pageIndex + 1}
                     </button>
                     <p>...</p>
-                    <button className="text-xl font-medium lg:text-[1.6rem]">
-                      10
-                    </button>
+                    <button className="text-sm">10</button>
                     <button
-                      className="rounded-md border px-8 py-2 text-xl font-medium lg:text-[1.6rem]"
+                      className="rounded-md border px-8 py-2 text-sm font-medium"
                       onClick={() => handleNextButton()}
                     >
                       Next

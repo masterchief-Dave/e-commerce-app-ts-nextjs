@@ -107,14 +107,14 @@ export const PaystackHook = ({
 
   return (
     <Button
-      className="h-[4rem] bg-blue-500 text-white text-[1.6rem] font-medium rounded-md px-8 flex items-center justify-center w-full"
+      className="h-[40px] bg-blue-500 text-white font-medium rounded-md px-8 flex items-center justify-center w-full text-base"
       disabled={loading || shippingAddress.address.length <= 1}
       onClick={() => {
         setLoading(true)
         initializePayment(onSuccess, onClose)
       }}
     >
-      {loading && <Spinner className="h-10 w-10 text-white" />}
+      {loading && <Spinner className="h-6 w-6 text-white" />}
       <span>Place Order</span>
     </Button>
   )

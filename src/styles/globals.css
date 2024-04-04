@@ -5,7 +5,7 @@
 
 @layer base {
   html {
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
     scroll-behavior: smooth;
     /* font-family: jost; */
     font-family: rubik;
@@ -50,7 +50,7 @@
   }
 
   .auth-btn {
-    @apply h-[4rem] w-fit rounded-md px-8 font-medium flex items-center justify-center text-[1.6rem] border-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0;
+    @apply h-[40px] w-fit rounded-md px-4 font-medium flex items-center justify-center  border-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0;
   }
 
   input:focus-within,

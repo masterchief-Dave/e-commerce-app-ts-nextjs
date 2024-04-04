@@ -24,7 +24,7 @@ const PaginationComp = ({ count, totalCount }: PaginationProps) => {
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#" size="lg">
-            <span className="text-[1.6rem]">1</span>
+            <span className="">1</span>
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>

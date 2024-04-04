@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { useState, useRef } from "react"
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 
-import Slider from 'react-slick'
-import { bestDeals } from '@/globals/bestDeals'
+import Slider from "react-slick"
+import { bestDeals } from "@/globals/bestDeals"
 
-import { DealCard } from './DealCard'
+import { DealCard } from "./DealCard"
 
 type Props = {}
 
@@ -13,9 +13,9 @@ export const WeeklyDeals = (props: Props) => {
   const sliderRef = useRef<Slider | null>(null)
 
   const styles = {
-    iconContainer: `h-[3rem] w-[3rem] bg-primary-white-500 flex items-center justify-center cursor-pointer`,
+    iconContainer: `h-[30px] w-[30px] bg-primary-white-500 flex items-center justify-center cursor-pointer`,
     icon: `h-6 w-6 text-primary-grey-400`,
-    weeklyDealsTimeHead: `font-roboto font-bold text-[#999]`,
+    weeklyDealsTimeHead: `font-roboto font-normal text-sm text-[#999]`,
     weeklyDealsTimeText: `flex text-white font-bold`,
   }
 
@@ -67,48 +67,48 @@ export const WeeklyDeals = (props: Props) => {
   }
 
   return (
-    <div className='py-2 '>
-      <header className='flex items-end justify-between border-b px-4 py-3 lg:items-center'>
-        <div className='flex flex-col items-center gap-4 lg:flex-row'>
-          <h2 className='w-full text-left text-[1.6rem] font-bold uppercase text-primary-black-200 lg:text-[2rem]'>
+    <div className="py-2">
+      <header className="flex items-end justify-between border-b px-4 py-3 lg:items-center">
+        <div className="flex flex-col items-center gap-4 lg:flex-row">
+          <h2 className="w-full text-left font-bold uppercase text-primary-black-200 text-xl">
             Flash Sales
           </h2>
-          <div className='flex gap-x-4'>
+          <div className="flex gap-x-4">
             <div>
               <span className={styles.weeklyDealsTimeHead}>Days</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className='bg-primary-yellow-200 p-2'>0</span>
-                <span className='bg-primary-yellow-300 p-2'>0</span>
+                <span className="bg-primary-yellow-200 p-2">0</span>
+                <span className="bg-primary-yellow-300 p-2">0</span>
               </div>
             </div>
 
             <div>
               <span className={styles.weeklyDealsTimeHead}>Hours</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className='bg-primary-yellow-200 p-2'>0</span>
-                <span className='bg-primary-yellow-300 p-2'>0</span>
+                <span className="bg-primary-yellow-200 p-2">0</span>
+                <span className="bg-primary-yellow-300 p-2">0</span>
               </div>
             </div>
 
             <div>
               <span className={styles.weeklyDealsTimeHead}>Mins</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className='bg-primary-yellow-200 p-2'>0</span>
-                <span className='bg-primary-yellow-300 p-2'>0</span>
+                <span className="bg-primary-yellow-200 p-2">0</span>
+                <span className="bg-primary-yellow-300 p-2">0</span>
               </div>
             </div>
 
             <div>
               <span className={styles.weeklyDealsTimeHead}>Secs</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className='bg-primary-yellow-200 p-2'>0</span>
-                <span className='bg-primary-yellow-300 p-2'>0</span>
+                <span className="bg-primary-yellow-200 p-2">0</span>
+                <span className="bg-primary-yellow-300 p-2">0</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className='flex h-full items-end justify-end gap-2 lg:items-center'>
+        <div className="flex h-full items-end justify-end gap-2 lg:items-center">
           <div className={styles.iconContainer} onClick={handlePrev}>
             <ChevronLeftIcon className={styles.icon} />
           </div>

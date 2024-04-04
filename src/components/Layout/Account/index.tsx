@@ -14,6 +14,7 @@ import useMediaQuery from "@/lib/hooks/useMediaQuery"
 import { MobileSideBar } from "./sidebar"
 import useAuth from "@/lib/hooks/useAuth"
 import { Layout } from ".."
+import { ShoppingBag, UserCircle, Wallet } from "lucide-react"
 
 type Props = {
   children?: JSX.Element
@@ -56,19 +57,19 @@ export const AccountLayout = ({ children }: Props) => {
             showMobileSidebar={showMobileSidebar}
           />
 
-          <section className="grid grid-cols-12 py-24">
+          <section className="grid grid-cols-12 py-12">
             <div className="col-start-2 col-end-12">
               <BreadCrumb breadcrumbs={breadcrumbs} />
             </div>
           </section>
 
           {isAboveMediaQuery ? (
-            <div className="relative grid grid-cols-12 py-16">
-              <section className="col-start-2 col-end-5">
+            <div className="relative grid grid-cols-12 py-10">
+              <section className="col-start-2 col-end-4">
                 <SideBar />
               </section>
 
-              <section className="col-start-6 col-end-12 min-h-screen">
+              <section className="col-start-5 col-end-12 min-h-screen">
                 <main className="h-fit rounded-xl border min-h-[20rem]">
                   {children}
                 </main>
@@ -101,16 +102,16 @@ export const SideBar = () => {
   const router = useRouter()
 
   const styles = {
-    header: `font-medium text-[2rem]`,
-    active: `text-primary-red-100 text-[1.6rem] font-normal`,
-    link: `text-[1.6rem] font-normal`,
+    header: `font-medium text-lg`,
+    active: `text-gray-900  font-normal`,
+    link: ` font-normal text-gray-400`,
   }
 
   return (
-    <div className="sticky top-[10rem] w-full space-y-4 divide-y rounded-[1rem] border ">
+    <div className="sticky top-[100px] w-full space-y-4 divide-y rounded-[1rem] border">
       <section className="flex gap-x-8 p-8">
         <div>
-          <UserCircleIcon className="h-12 w-12" />
+          <UserCircle />
         </div>
         <ul className="space-y-4">
           <h2 className={styles.header}>My Profile</h2>
@@ -146,7 +147,7 @@ export const SideBar = () => {
 
       <section className="flex gap-x-8 p-8 py-4">
         <div>
-          <ShoppingBagIcon className="h-12 w-12" />
+          <ShoppingBag />
         </div>
         <ul className="space-y-4">
           <h2 className={styles.header}>My Orders</h2>
@@ -179,7 +180,7 @@ export const SideBar = () => {
 
       <section className="flex gap-x-8 p-8 py-4">
         <div>
-          <WalletIcon className="h-12 w-12" />
+          <Wallet />
         </div>
         <ul className="space-y-4">
           <h2 className={styles.header}>My Wallet</h2>

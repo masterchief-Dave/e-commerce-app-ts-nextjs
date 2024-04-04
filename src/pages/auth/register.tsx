@@ -51,10 +51,10 @@ const Register = () => {
   })
 
   const styles = {
-    label: `text-[1.6rem] font-normal block mb-2`,
-    input: `text-[1.6rem] border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
-    btn: `h-[5rem] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium text-[1.6rem] rounded-md`,
-    icon: `cursor-pointer w-8 h-8`,
+    label: ` font-normal block mb-2 text-`,
+    input: ` border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+    btn: `h-[5px] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium  rounded-md`,
+    icon: `cursor-pointer`,
   }
 
   const handleSubmit = async ({
@@ -123,7 +123,7 @@ const Register = () => {
         >
           <header className="mb-8">
             <h1 className="text-left text-[2rem] font-semibold">Sign up</h1>
-            <p className="text-[1.6rem] text-primary-grey-100 font-normal">
+            <p className=" text-primary-grey-100 font-normal">
               Choose your preferred sign in method
             </p>
           </header>
@@ -241,10 +241,10 @@ const Register = () => {
           <Button
             type="submit"
             variant="primary"
-            className="h-[5rem] btn flex items-center justify-center"
+            className="h-[50px] btn flex items-center justify-center"
             disabled={isLoading}
           >
-            {isLoading && <Spinner className="h-10 w-10 text-white" />}{" "}
+            {isLoading && <Spinner className="h-6 w-6 text-white" />}{" "}
             <span>Submit</span>
           </Button>
 
@@ -259,7 +259,7 @@ const Register = () => {
               </p>
             </div> */}
 
-          <div className="text-[1.6rem]">
+          <div className="">
             <p>
               Already have an account{" "}
               <span>

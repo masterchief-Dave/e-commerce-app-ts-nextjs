@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Order } from '@/components/Account/Order/order'
-import { AccountLayout } from '@/components/Layout/Account'
-import { GetServerSideProps } from 'next'
-import { fetchDataFromExpressServer, fetchOrder } from '@/utils/fetchOrder'
+import { useState } from "react"
+import { Order } from "@/components/Account/Order/order"
+import { AccountLayout } from "@/components/Layout/Account"
+import { GetServerSideProps } from "next"
+import { fetchDataFromExpressServer, fetchOrder } from "@/utils/fetchOrder"
 import { useGetUserOrders } from "@/lib/hooks/user/user.hook"
 import { OrderSkeleton } from "@/components/skeleton"
 
@@ -17,14 +17,14 @@ const Orders = ({ orders }: Props) => {
     <div>
       <AccountLayout>
         <div>
-          <header className='border-b p-8'>
-            <h1 className='font-semibold text-3xl'>My Orders</h1>
+          <header className="border-b p-4">
+            <h1 className="font-semibold text-xl">My Orders</h1>
           </header>
 
           {isLoading ? (
             <OrderSkeleton />
           ) : (
-            <section className='max-h-[50rem] divide-y overflow-y-auto'>
+            <section className="max-h-[50rem] divide-y overflow-y-auto">
               {data?.map((order) => {
                 return (
                   <Order

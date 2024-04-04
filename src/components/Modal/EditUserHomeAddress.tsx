@@ -1,9 +1,9 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { PencilIcon } from 'lucide-react'
+import { Fragment, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { PencilIcon } from "lucide-react"
 
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
 
 type Props = {
   state: boolean
@@ -23,16 +23,14 @@ export default function EditUserAddressModal({ state, setState }: Props) {
 
   const styles = {
     form: {
-      input: `h-[4rem] w-full text-[1.6rem] font-normal`,
-      label: `block text-[1.6rem] font-normal mb-1`
-    }
+      input: `h-[4rem] w-full  font-normal`,
+      label: `block  font-normal mb-1`,
+    },
   }
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center">
-
-      </div>
+      <div className="fixed inset-0 flex items-center justify-center"></div>
 
       <Transition appear show={state} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -65,39 +63,73 @@ export default function EditUserAddressModal({ state, setState }: Props) {
                     className="text-4xl mb-12 font-medium leading-6 text-gray-900 flex items-center justify-between"
                   >
                     <h3>Edit Address</h3>
-                    <PencilIcon className='h-8 w-8' />
+                    <PencilIcon className="h-8 w-8" />
                   </Dialog.Title>
                   <form className="mt-2 space-y-4 grid grid-cols-2 gap-8">
-                    <div className='col-span-full'>
-                      <label htmlFor="street" className={styles.form.label}>Street</label>
-                      <Input id='street' className={styles.form.input} placeholder='' />
+                    <div className="col-span-full">
+                      <label htmlFor="street" className={styles.form.label}>
+                        Street
+                      </label>
+                      <Input
+                        id="street"
+                        className={styles.form.input}
+                        placeholder=""
+                      />
                     </div>
 
                     <div>
-                      <label htmlFor='city' className={styles.form.label}>City</label>
-                      <Input id='city' className={styles.form.input} placeholder='' />
+                      <label htmlFor="city" className={styles.form.label}>
+                        City
+                      </label>
+                      <Input
+                        id="city"
+                        className={styles.form.input}
+                        placeholder=""
+                      />
                     </div>
 
                     <div>
-                      <label htmlFor='phone-number' className={styles.form.label}>Phone Number</label>
-                      <Input id='phone-number' className={styles.form.input} placeholder='' />
+                      <label
+                        htmlFor="phone-number"
+                        className={styles.form.label}
+                      >
+                        Phone Number
+                      </label>
+                      <Input
+                        id="phone-number"
+                        className={styles.form.input}
+                        placeholder=""
+                      />
                     </div>
 
                     <div>
-                      <label htmlFor='zip-code' className={styles.form.label}>Zip Code</label>
-                      <Input id='zip-code' className={styles.form.input} placeholder='' />
+                      <label htmlFor="zip-code" className={styles.form.label}>
+                        Zip Code
+                      </label>
+                      <Input
+                        id="zip-code"
+                        className={styles.form.input}
+                        placeholder=""
+                      />
                     </div>
 
                     <div>
-                      <label htmlFor='country' className={styles.form.label}>Country</label>
-                      <Input id='country' className={styles.form.input} placeholder='' />
+                      <label htmlFor="country" className={styles.form.label}>
+                        Country
+                      </label>
+                      <Input
+                        id="country"
+                        className={styles.form.input}
+                        placeholder=""
+                      />
                     </div>
 
-                    <div className='col-span-full'>
-                      <Button className='h-[4rem] bg-blue-500 w-full text-[1.6rem] font-medium'>Edit</Button>
+                    <div className="col-span-full">
+                      <Button className="h-[4rem] bg-blue-500 w-full  font-medium">
+                        Edit
+                      </Button>
                     </div>
                   </form>
-
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -116,7 +148,6 @@ export default function EditUserAddressModal({ state, setState }: Props) {
         zipCode: req.body.zipCode,
         country: req.body.country
  */
-
 
 /**
  *  
