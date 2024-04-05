@@ -77,32 +77,32 @@ export const WeeklyDeals = (props: Props) => {
             <div>
               <span className={styles.weeklyDealsTimeHead}>Days</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className="bg-primary-yellow-200 p-2">0</span>
-                <span className="bg-primary-yellow-300 p-2">0</span>
+                <span className="bg-primary-yellow-200 p-1">0</span>
+                <span className="bg-primary-yellow-300 p-1">0</span>
               </div>
             </div>
 
             <div>
               <span className={styles.weeklyDealsTimeHead}>Hours</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className="bg-primary-yellow-200 p-2">0</span>
-                <span className="bg-primary-yellow-300 p-2">0</span>
+                <span className="bg-primary-yellow-200 p-1">0</span>
+                <span className="bg-primary-yellow-300 p-1">0</span>
               </div>
             </div>
 
             <div>
               <span className={styles.weeklyDealsTimeHead}>Mins</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className="bg-primary-yellow-200 p-2">0</span>
-                <span className="bg-primary-yellow-300 p-2">0</span>
+                <span className="bg-primary-yellow-200 p-1">0</span>
+                <span className="bg-primary-yellow-300 p-1">0</span>
               </div>
             </div>
 
             <div>
               <span className={styles.weeklyDealsTimeHead}>Secs</span>
               <div className={styles.weeklyDealsTimeText}>
-                <span className="bg-primary-yellow-200 p-2">0</span>
-                <span className="bg-primary-yellow-300 p-2">0</span>
+                <span className="bg-primary-yellow-200 p-1">0</span>
+                <span className="bg-primary-yellow-300 p-1">0</span>
               </div>
             </div>
           </div>

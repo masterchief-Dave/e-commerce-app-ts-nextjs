@@ -43,9 +43,9 @@ export const Footer = (props: Props) => {
 
   return (
     <>
-      <footer className="mx-auto grid w-full grid-cols-12 border-t mt-12">
+      <footer className="mx-auto grid w-full grid-cols-12 border-t">
         <div className="col-span-full grid grid-cols-12 bg-white py-8">
-          <section className="col-start-2 col-end-12 mb-10 sm:flex sm:flex-col gap-8 md:grid lg:grid-cols-4">
+          <section className="col-start-2 col-end-12 mb-5 sm:flex sm:flex-col gap-8 md:grid lg:grid-cols-5">
             <div className="space-y-8">
               <h4 className=" font-semibold text-black text-sm">Warehouse</h4>
               <div className="flex items-center gap-6">
@@ -87,6 +87,23 @@ export const Footer = (props: Props) => {
             </div>
 
             <div className="space-y-8">
+              <h4 className={styles.footerHeader}>Socials</h4>
+              <div className="space-y-6 text-sm">
+                <div>
+                  <Link href="https://github.com/davieoba">Github</Link>
+                </div>
+                <div>
+                  <Link href="https://twitter.com/bodunrindavid">Twitter</Link>
+                </div>
+                <div>
+                  <Link href="https://www.linkedin.com/in/david-bodunrin-oluwaseun/">
+                    Linkedin
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-8">
               <h4 className={styles.footerHeader}>Company</h4>
               <ul className="grid grid-cols-2 items-center gap-4 font-normal text-black lg:block lg:gap-0 lg:space-y-6 text-sm">
                 <li>
@@ -97,7 +114,8 @@ export const Footer = (props: Props) => {
                 <li>
                   <Link href="/company/refund-policy"> Refund Policy </Link>
                 </li>
-                <div className="flex w-full items-start gap-6 lg:items-center">
+
+                {/* <div className="flex w-full items-start gap-6 lg:items-center">
                   <Link href="https://github.com/davieoba">
                     <GithubIcon className={styles.socialMediaIcons} />
                   </Link>
@@ -107,7 +125,7 @@ export const Footer = (props: Props) => {
                   <Link href="https://www.linkedin.com/in/david-bodunrin-oluwaseun/">
                     <LinkedinIcon className={styles.socialMediaIcons} />
                   </Link>
-                </div>
+                </div> */}
 
                 {/* <li>
               <Link href='#'>Faq</Link>
@@ -150,40 +168,15 @@ export const Footer = (props: Props) => {
         </div>
 
         <section className="col-span-full col-start-1 border-t bg-white text-sm font-medium text-black">
-          <div className="grid grid-cols-12">
+          <div className="grid grid-cols-12 py-4">
             <div className="col-start-2 col-end-12 flex sm:flex-col items-center justify-between lg:flex-row">
-              <p className="text-sm font-normal">
-                Copyright &copy; {new Date().getFullYear()} Bodunrin. All rights
-                reserved.
-              </p>
+              <p className="text-sm font-normal">Built by David Bodunrin.</p>
+            </div>
 
-              <div className="flex items-center gap-x-6">
-                <Image
-                  src={masterCard}
-                  alt="master card"
-                  className={styles.footerCardIcons}
-                />
-                <Image
-                  src={visaCard}
-                  alt="visa card"
-                  className={styles.footerCardIcons}
-                />
-                <Image
-                  src={paypalCard}
-                  alt="paypal card"
-                  className={styles.footerCardIcons}
-                />
-                <Image
-                  src={americanExpressCard}
-                  alt="american express card"
-                  className={styles.footerCardIcons}
-                />
-                <Image
-                  src={discoverCard}
-                  alt="disover card"
-                  className={styles.footerCardIcons}
-                />
-              </div>
+            <div>
+              <Link href="https://github.com/davieoba">
+                <GithubIcon />
+              </Link>
             </div>
           </div>
         </section>
