@@ -131,7 +131,7 @@ export const ProductCard = ({ page, data }: Props) => {
           </div>
         </div>
 
-        <div className="space-y-8 py-2 ">
+        <div className="space-y-4 py-2">
           <Link
             href={`/product/${data._id}`}
             className="max-w-[200px] block truncate text-center font-normal"
@@ -162,14 +162,14 @@ export const ProductCard = ({ page, data }: Props) => {
             {/* <span className=''>{data.ratings}</span> */}
           </div>
           <button
-            className={`flex h-[35px] w-full items-center justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${
+            className={`flex h-[35px] w-full items-center text-sm justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${
               userCartIds?.includes(data._id)
                 ? "text-[#FF0000] hover:bg-[#FF0000] hover:text-white"
                 : "bg-white hover:bg-primary-blue-300 hover:text-white "
             }`}
             onClick={handleAddToCart}
           >
-            <ShoppingBagIcon className="h-8 w-8" />
+            <ShoppingBagIcon className="h-4 w-4" />
             {userCartIds?.includes(data?._id) ? (
               <span className="capitalize ">
                 {cartQuery.isMutating ? <Spinner /> : "Remove from cart"}

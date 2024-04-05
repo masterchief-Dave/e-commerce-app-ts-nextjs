@@ -14,7 +14,7 @@ import {
   CategorySkeleton,
   ProductCardSkeleton,
 } from "@/components/SkeletonLoading"
-import { NavigationMenuDemo } from "@/components/Dropdown/NavigationDropdownMenu"
+import { NavigationMenuComp } from "@/components/Dropdown/NavigationDropdownMenu"
 import { landingPageFeatures } from "@/globals/home"
 import { FeaturesCard } from "@/components/Card"
 import Testimonials from "@/components/Testimonial"
@@ -92,7 +92,7 @@ export default function Home() {
         <>
           <Navbar />
           <div className="w-full flex items-center justify-center">
-            <NavigationMenuDemo />
+            {/* <NavigationMenuComp /> */}
           </div>
           <Header />
           <main className="grid grid-cols-12 space-y-12 bg-primary-white py-12">

@@ -53,27 +53,27 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 // home, all demos, pages, categories, blog
-export function NavigationMenuDemo() {
+export function NavigationMenuComp() {
   return (
-    <NavigationMenu className="h-[4rem]">
+    <NavigationMenu className="h-[40px]">
       <NavigationMenuList>
         <NavigationMenuItem className="h-full ">
-          <NavigationMenuTrigger className=" h-full font-medium">
+          <NavigationMenuTrigger className="h-full font-medium bg-transparent">
             Home
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr]">
+          <NavigationMenuContent className="text-sm">
+            <ul className="grid gap-3 p-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
-                    <div className="mb-2 mt-4 text-[1.8rem] font-medium">
+                    <div className="mb-2 mt-4 text-sm font-medium">
                       Sage Warehouse
                     </div>
-                    <p className=" leading-tight text-muted-foreground">
+                    <p className="leading-tight text-muted-foreground">
                       "Indulge in a seamless shopping experience with our
                       beautifully designed e-commerce app, where every detail is
                       crafted for your convenience. Discover a world where
@@ -99,11 +99,11 @@ export function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className=" h-full font-medium">
+          <NavigationMenuTrigger className=" h-full font-medium bg-transparent">
             Shop
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-sm">
               {components.map((component) => (
                 <ListItem
                   key={component.title}
@@ -116,12 +116,21 @@ export function NavigationMenuDemo() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
+        <NavigationMenuItem className="bg-none">
+          <Link href="#" legacyBehavior passHref>
             <NavigationMenuLink
-              className={`${navigationMenuTriggerStyle()} h-full `}
+              className={`${navigationMenuTriggerStyle()} bg-none`}
             >
               Blog
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href="#" legacyBehavior passHref>
+            <NavigationMenuLink
+              className={`${navigationMenuTriggerStyle()} h-full bg-transparent bg-none`}
+            >
+              About
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

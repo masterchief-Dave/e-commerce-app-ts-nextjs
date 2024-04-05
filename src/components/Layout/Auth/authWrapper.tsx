@@ -22,7 +22,7 @@ function AuthWrapper({ children }: { children: React.ReactNode }) {
       {isAuthenticated ? (
         children
       ) : (
-        <div className="h-screen w-full flex items-center justify-center">
+        <div className="w-full flex items-center justify-center">
           <Spinner className="h-[40px] w-[40px]" />
         </div>
       )}

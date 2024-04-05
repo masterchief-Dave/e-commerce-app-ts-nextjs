@@ -43,7 +43,7 @@ export const Footer = (props: Props) => {
 
   return (
     <>
-      <footer className="mx-auto grid  w-full grid-cols-12">
+      <footer className="mx-auto grid w-full grid-cols-12">
         <div className="col-span-full grid grid-cols-12 bg-primary-blue-100 py-8">
           <section className="col-start-2 col-end-12 mb-10 sm:flex sm:flex-col gap-8 md:grid  lg:grid-cols-3">
             <div className="space-y-8">
