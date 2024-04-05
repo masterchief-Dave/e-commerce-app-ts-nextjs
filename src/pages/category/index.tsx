@@ -27,7 +27,7 @@ const CategorySlug: React.FC<Props> = ({ products }) => {
   // Search params
   const rating = searchParams.get("rating") ?? "none"
   const price = searchParams.get("price") === "asc" ? "asc" : "desc" ?? "asc"
-  const name = searchParams.get("name") ?? ""
+  const name = searchParams.get("name") ?? "all"
   const page = Number(searchParams.get("page")) ?? 1
 
   // Create query string
@@ -80,10 +80,14 @@ const CategorySlug: React.FC<Props> = ({ products }) => {
     <Layout>
       <section className="">
         <Navbar />
-        <main className="mx-auto grid w-full grid-cols-12 space-y-12 py-32 overflow-hidden">
-          <section className="mb-12 col-start-2 col-end-12 flex justify-end">
-            <div className="col-start-2 col-end-12 flex justify-end">
-              <div className="w-full flex items-center gap-x-8">
+        <main className="mx-auto grid w-full grid-cols-12 space-y-12 py-12 overflow-hidden">
+          <section className="mb-12 col-start-2 col-end-12 space-y-4">
+            <div>
+              <h1 className="text-2xl font-medium">Categories</h1>
+              <p>Browse through categories</p>
+            </div>
+            <div className="">
+              <div className="w-full flex items-center gap-x-2">
                 <Sorting />
                 <Filtering />
               </div>

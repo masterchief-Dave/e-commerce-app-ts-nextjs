@@ -12,7 +12,7 @@ interface Actions {
 const useCategoryStore = create<Actions & State>((set): State & Actions => ({
   params: {
     limit: 10,
-    name: "",
+    name: "all",
     page: 1,
     price: "asc",
     rating: "none",

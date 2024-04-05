@@ -15,7 +15,7 @@ import Spinner from "@/components/molecules/spinner"
 
 const styles = {
   label: ` font-normal block mb-2 text-sm`,
-  input: ` border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+  input: `border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
   btn: `h-[50px] w-full bg-primary-blue-500 font-medium  rounded-md`,
 }
 interface FormProps {

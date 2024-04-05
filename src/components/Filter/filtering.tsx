@@ -54,14 +54,14 @@ function Filtering() {
         <SheetHeader className="px-2">
           <SheetTitle>Filters</SheetTitle>
         </SheetHeader>
-        <div className="border rounded-md p-4 space-y-2">
+        <div className="border rounded-md p-4 space-y-4">
           <p>Change Product Category</p>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="">
+              <button className="border text-black rounded-md text-left w-full flex items-center h-[40px] px-4 justify-between">
                 Select Category{" "}
-                <ChevronDownIcon className="-mr-1 ml-1 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
-              </Button>
+                <ChevronDownIcon className="-mr-1 ml-1 flex-shrink-0 text-gray-400 group-hover:text-gray-500 w-5 h-5" />
+              </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="z-[999] w-80">
               <DropdownMenuLabel>Product Categories</DropdownMenuLabel>

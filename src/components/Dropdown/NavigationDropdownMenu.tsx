@@ -70,7 +70,7 @@ export function NavigationMenuComp() {
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
-                    <div className="mb-2 mt-4 text-sm font-medium">
+                    <div className="mb-2 text-sm font-medium">
                       Sage Warehouse
                     </div>
                     <p className="leading-tight text-muted-foreground">

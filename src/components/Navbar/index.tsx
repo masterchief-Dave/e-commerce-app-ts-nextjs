@@ -85,6 +85,7 @@ const Desktop = ({
   data,
 }: Props) => {
   const router = useRouter()
+  const { isAuthenticated } = useAuth()
 
   const formik = useFormik<Search>({
     initialValues: {
@@ -125,16 +126,16 @@ const Desktop = ({
 
   return (
     <nav
-      className={cn("grid grid-cols-12 bg-white border-b py-4", {
-        "fixed top-0 right-0 z-[99] w-full bg-black/20 backdrop-blur-xl":
+      className={cn("grid grid-cols-12 bg-white border-b py-2", {
+        "fixed top-0 right-0 z-[99] w-full bg-white backdrop-blur-xl":
           isTop && router.pathname === "/",
       })}
     >
       <ul className="col-start-2 col-end-12 mx-auto flex w-full items-center justify-between gap-x-8">
         <li>
-          <Link href="/" className="text-xl font-bold text-black">
+          <Link href="/" className="text-lg font-medium text-black">
             <h1 className="flex items-center gap-x-2">
-              <Image src={SWLogo} alt="Brand Logo" height={50} width={50} />
+              <Image src={SWLogo} alt="Brand Logo" height={35} width={35} />
               Sage-Warehouse
             </h1>
           </Link>
@@ -142,40 +143,16 @@ const Desktop = ({
         <li>
           <NavigationMenuComp />
         </li>
-        {/* <li className="">
-          <form
-            className="flex h-[40px] w-full px-2 items-center rounded-md border bg-white hover:ring-2"
-            onSubmit={formik.handleSubmit}
-          >
-            <div className="flex h-full w-[10%] cursor-pointer items-center justify-center">
-              <button
-                type="submit"
-                className="w-fit bg-transparent rounded-md p-1 transition-all delay-75 hover:bg-primary-blue-300"
-              >
-                <MagnifyingGlassIcon className="h-5 w-5 hover:text-white" />
-              </button>
-            </div>
-            <input
-              type="text"
-              placeholder="Search Products..."
-              className="h-full w-[90%] rounded-md border-0 bg-transparent px-4 outline-0 focus:outline-0"
-              name="productName"
-              value={formik.values.productName}
-              onChange={formik.handleChange}
-            />
-            <div>Ctrl+k</div>
-          </form>
-        </li> */}
-
         <div className="flex items-center gap-x-4 ">
           <form
-            className="flex h-[40px] w-full px-2 items-center rounded-md border bg-white hover:ring-2"
+            className="flex h-[40px] w-full pl-2 pr-1 items-center rounded-md border bg-white hover:ring-1 ring-black"
             onSubmit={formik.handleSubmit}
+            autoComplete="off"
           >
             <div className="flex h-full w-[10%] cursor-pointer items-center justify-center">
               <button
                 type="submit"
-                className="w-fit bg-transparent rounded-md p-1 transition-all delay-75 hover:bg-primary-blue-300"
+                className="w-fit bg-transparent rounded-md p-1 transition-all delay-75 hover:bg-black"
               >
                 <MagnifyingGlassIcon className="h-5 w-5 hover:text-white" />
               </button>
@@ -188,15 +165,11 @@ const Desktop = ({
               value={formik.values.productName}
               onChange={formik.handleChange}
             />
-            <div>Ctrl+k</div>
-            {/* <div className="flex h-full w-[10%] cursor-pointer items-center justify-center">
-              <button
-                type="submit"
-                className="w-fit bg-transparent rounded-md p-1 transition-all delay-75 hover:bg-primary-blue-300"
-              >
-                <MagnifyingGlassIcon className="h-5 w-5 hover:text-white" />
-              </button>
-            </div> */}
+            <div className="p-2">
+              <span className="block bg-black text-white font-medium rounded-md px-2 py-1 text-[13px]">
+                Ctrl+k
+              </span>
+            </div>
           </form>
 
           {user?._id ? (
@@ -210,7 +183,7 @@ const Desktop = ({
               <li>
                 <Link
                   href="/auth/login"
-                  className="auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white"
+                  className="auth-btn bg-black text-white transition-all delay-75 border hover:text-black hover:bg-white"
                 >
                   Login
                 </Link>
@@ -226,17 +199,19 @@ const Desktop = ({
             </div>
           )}
 
-          <li>
-            <Button
-              className="relative bg-transparent border-0"
-              onClick={onCartClick}
-            >
-              <ShoppingBagIcon className="h-8 w-8 text-black" />
-              <span className="absolute top-0 left-[30px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary-yellow-200 text-white">
-                {cart?.length}
-              </span>
-            </Button>
-          </li>
+          {isAuthenticated && (
+            <li>
+              <Button
+                className="relative bg-transparent border-0"
+                onClick={onCartClick}
+              >
+                <ShoppingBagIcon className="h-8 w-8 text-black" />
+                <span className="absolute top-0 left-[30px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary-yellow-200 text-white">
+                  {cart?.length}
+                </span>
+              </Button>
+            </li>
+          )}
         </div>
       </ul>
     </nav>
