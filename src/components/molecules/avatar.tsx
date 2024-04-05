@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 interface Props {
   src: string
@@ -8,7 +8,7 @@ interface Props {
 
 function AvatarComp({ src, alt, fallback }: Props) {
   return (
-    <Avatar className="h-20 w-20">
+    <Avatar className="h-12 w-12">
       <AvatarImage src={src} alt={alt} />
       <AvatarFallback>{fallback}</AvatarFallback>
     </Avatar>

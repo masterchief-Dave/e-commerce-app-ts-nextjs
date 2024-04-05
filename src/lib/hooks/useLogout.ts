@@ -1,16 +1,15 @@
 import useAuth from "./useAuth"
-import { globalAxios } from "@/helpers/apiService"
-
+import { globalAxios } from "@/lib/helpers/apiService"
 
 const useLogout = () => {
   const { setUser } = useAuth()
 
   const handleLogout = async () => {
-    localStorage.removeItem('user')
+    localStorage.removeItem("user")
     setUser(null)
 
     try {
-      await globalAxios.post('/auth/logout', {}, { withCredentials: true })
+      await globalAxios.post("/auth/logout", {}, { withCredentials: true })
     } catch (err) {
       console.log(err)
     }

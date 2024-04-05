@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import { usePaymentInputs } from 'react-payment-inputs'
+import { useState } from "react"
+import { usePaymentInputs } from "react-payment-inputs"
 
 export const AddPaymentMethodForm = () => {
   const [formData, setFormData] = useState<PaymentFormInput>({
-    userName: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvc: '',
+    userName: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvc: "",
   })
 
   const { meta, getCardNumberProps, getExpiryDateProps, getCVCProps } =
@@ -28,31 +28,31 @@ export const AddPaymentMethodForm = () => {
   const styles = {
     cardTitle: `font-semibold`,
     cardText: `font-light`,
-    cardInput: `h-[4rem] lg:text-[1.6rem] text-[1rem] w-full border px-4`,
+    cardInput: `h-[40px] text-base w-full border px-4 rounded-md`,
     cardImage: `h-12 w-12`,
-    label: `block text-[1.3rem] font-semibold`,
-    accordionHeader: `text-[1.1rem] lg:text-[1.6rem] font-semibold`,
+    label: `block text-base font-normal`,
+    accordionHeader: `text-[1.1rem] lg: font-semibold`,
   }
 
   return (
-    <form className='grid grid-cols-12 gap-4 space-y-4 text-left'>
-      <div className='col-span-full col-start-1'>
-        <label htmlFor='username' className={styles.label}>
+    <form className="grid grid-cols-12 gap-4 space-y-4 text-left">
+      <div className="col-span-full col-start-1">
+        <label htmlFor="username" className={styles.label}>
           Name on card
         </label>
         <input
-          type='text'
-          id='username'
-          name='userName'
+          type="text"
+          id="username"
+          name="userName"
           className={styles.cardInput}
-          placeholder='Name on card'
+          placeholder="Name on card"
           onChange={handleForm}
           value={formData.userName}
         />
       </div>
 
-      <div className='col-span-full col-start-1'>
-        <label htmlFor='cardNumber' className={styles.label}>
+      <div className="col-span-full col-start-1">
+        <label htmlFor="cardNumber" className={styles.label}>
           Card Number
         </label>
 
@@ -69,9 +69,9 @@ export const AddPaymentMethodForm = () => {
         />
       </div>
 
-      <div className='col-span-full grid grid-cols-2 gap-4'>
-        <div className='w-full'>
-          <label htmlFor='CVV' className={styles.label}>
+      <div className="col-span-full grid grid-cols-2 gap-4">
+        <div className="w-full">
+          <label htmlFor="CVV" className={styles.label}>
             CVC/CVV
           </label>
           <input
@@ -83,8 +83,8 @@ export const AddPaymentMethodForm = () => {
             value={formData.cvc}
           />
         </div>
-        <div className='w-full'>
-          <label htmlFor='expiryDate' className={styles.label}>
+        <div className="w-full">
+          <label htmlFor="expiryDate" className={styles.label}>
             Expiry Date
           </label>
           <input
@@ -101,8 +101,8 @@ export const AddPaymentMethodForm = () => {
         </div>
       </div>
 
-      <div className='item-center col-span-full flex w-full gap-4'>
-        <button className='bg-black px-8 py-2 text-xl font-medium text-white lg:text-[1.6rem]'>
+      <div className="item-center col-span-full flex w-full gap-4">
+        <button className="bg-black px-8 py-2 text-base font-medium text-white rounded-md">
           Save
         </button>
       </div>

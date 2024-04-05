@@ -1,7 +1,7 @@
 .Legal {
   &_Header {
     background-image: linear-gradient(to right bottom, #2c3635, #5b6365, #8f9396, #c7c8ca, #ffffff);
-    height: 35rem;
+    height: 35px;
     font-weight: 600;
     color: white;
   }
@@ -12,16 +12,16 @@
   }
 
   nav .link {
-    padding-left: 2rem;
-    padding-bottom: 1rem;
+    padding-left: 2px;
+    padding-bottom: 1px;
     border-left: 2px solid rgb(128, 128, 128);
     margin-bottom: 0;
-    font-size: 1.6rem;
+    font-size: 1.6px;
     color: rgb(128, 128, 128);
   }
 
   &_Sidebar {
     position: sticky;
-    top: 10rem;
+    top: 10px;
   }
 }

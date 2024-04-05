@@ -1,12 +1,12 @@
 import AvatarComp from "@/components/molecules/avatar"
 import RatingComp from "@/components/molecules/ratingComp"
-import getFormatDate from "@/helpers/formatDate"
-import { RenderRatingComp } from "@/helpers/renderRating"
+import getFormatDate from "@/lib/helpers/formatDate"
+import { RenderRatingComp } from "@/lib/helpers/renderRating"
 import type { ProductReviewResponseInterface } from "@/lib/types/review/review.type"
 
 interface UsersReviewType {
   subject: string
-  user: Omit<User, "token" | "success">['user']
+  user: Omit<User, "token" | "success">["user"]
   rating: number
   review: string
   createdAt: Date
@@ -17,7 +17,7 @@ const UserReviewComp = ({
   rating,
   review,
   subject,
-  user
+  user,
 }: UsersReviewType) => {
   return (
     <section className="grid grid-cols-[5rem_1fr] gap-8">
@@ -32,7 +32,9 @@ const UserReviewComp = ({
               {/* <RatingComp rating={rating as number} onChange={() => { }} fixed={true} /> */}
               <RenderRatingComp rating={rating} color="#EEB012" />
             </div>
-            <p className="text-[#cecece]">{getFormatDate(createdAt as unknown as string)}</p>
+            <p className="text-[#cecece]">
+              {getFormatDate(createdAt as unknown as string)}
+            </p>
           </div>
         </div>
         <div className="max-w-4xl space-y-4">

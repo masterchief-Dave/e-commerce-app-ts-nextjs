@@ -1,5 +1,8 @@
-import { create } from 'zustand'
-import type { BillingAddressInterface, UserBillingInfo } from "../types/user/user.type"
+import { create } from "zustand"
+import type {
+  BillingAddressInterface,
+  UserBillingInfo,
+} from "../types/user/user.type"
 
 interface State {
   shippingAddress: BillingAddressInterface
@@ -11,15 +14,15 @@ interface Actions {
 
 const useShippingAddress = create<State & Actions>((set): State & Actions => ({
   shippingAddress: {
-    address: '',
-    country: '',
+    address: "",
+    country: "",
     default: false,
-    firstname: '',
-    lastname: '',
-    phoneNumber: '',
-    zipcode: ''
+    firstname: "",
+    lastname: "",
+    phoneNumber: "",
+    zipcode: "",
   },
-  setAddress: (data) => set((state) => ({ shippingAddress: data }))
+  setAddress: (data) => set((state) => ({ shippingAddress: data })),
 }))
 
 export default useShippingAddress

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ShoppingBagIcon } from "@heroicons/react/24/solid"
-import { RenderRating } from "@/helpers/renderRating"
+import { RenderRating } from "@/lib/helpers/renderRating"
 import Link from "next/link"
 import { useAddToCart, useLikeProduct } from "@/lib/hooks/product/product.hook"
 import { HeartIcon } from "lucide-react"
@@ -80,26 +80,24 @@ export const ProductCard = ({ page, data }: Props) => {
     )
   }
 
-  console.log(data)
-
   return (
     <>
-      <div className="max-w-[25rem] rounded-lg space-y-8 p-4 shadow-sm border">
-        <div className="relative max-h-[20rem]">
+      <div className="max-w-[250px] rounded-lg space-y-4 p-2 shadow-sm border">
+        <div className="relative max-h-[200px]">
           <Link
             href={`/product/${data._id}`}
-            className="block h-[20rem] max-h-[15rem] object-contain"
+            className="block h-[200px] max-h-[150px] object-contain"
           >
             <Image
               width={1000}
               height={1000}
               src={data?.images?.[0]?.url}
               alt={data?.images?.[0]?.public_id}
-              className="h-[20rem] max-h-[15rem] object-contain"
+              className="h-[200px] max-h-[150px] object-contain"
             />
           </Link>
           <div className="absolute top-5 left-5 z-10">
-            <div className="bg-primary-red-100 px-2 text-[1.6rem] text-white lg:text-[1.2rem]">
+            <div className="bg-primary-red-100 px-2 text-white text-sm">
               25%
             </div>
           </div>
@@ -113,7 +111,7 @@ export const ProductCard = ({ page, data }: Props) => {
               <button
                 disabled={isMutating || userQuery.isValidating}
                 onClick={handleLikeProduct}
-                className="h-14 w-14 rounded-full bg-white flex items-center justify-center"
+                className="h-10 w-10 rounded-full bg-white flex items-center justify-center"
               >
                 <HeartIcon
                   aria-disabled={isMutating || userQuery.isValidating}
@@ -136,12 +134,12 @@ export const ProductCard = ({ page, data }: Props) => {
         <div className="space-y-8 py-2 ">
           <Link
             href={`/product/${data._id}`}
-            className="max-w-[20rem] block truncate text-center text-[1.6rem] font-normal lg:text-[1.6rem]"
+            className="max-w-[200px] block truncate text-center font-normal"
           >
             {data.name}
           </Link>
           <div className="flex items-center justify-center gap-6 font-semibold">
-            <h5 className="text-primary-green-100 font-bold text-[1.6rem]">
+            <h5 className="text-primary-green-100 font-bold ">
               ${data.price.toFixed(2)}
             </h5>
             {/* <h6 className='text-[#e94560] font-medium text-[1.3rem] line-through'>$550</h6> */}
@@ -161,10 +159,10 @@ export const ProductCard = ({ page, data }: Props) => {
                   )
                 })}
             </div>
-            {/* <span className='text-[1.6rem]'>{data.ratings}</span> */}
+            {/* <span className=''>{data.ratings}</span> */}
           </div>
           <button
-            className={`flex h-[3.5rem] w-full items-center justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${
+            className={`flex h-[35px] w-full items-center justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${
               userCartIds?.includes(data._id)
                 ? "text-[#FF0000] hover:bg-[#FF0000] hover:text-white"
                 : "bg-white hover:bg-primary-blue-300 hover:text-white "
@@ -173,11 +171,11 @@ export const ProductCard = ({ page, data }: Props) => {
           >
             <ShoppingBagIcon className="h-8 w-8" />
             {userCartIds?.includes(data?._id) ? (
-              <span className="capitalize text-[1.6rem]">
+              <span className="capitalize ">
                 {cartQuery.isMutating ? <Spinner /> : "Remove from cart"}
               </span>
             ) : (
-              <span className="capitalize text-[1.6rem]">
+              <span className="capitalize ">
                 {cartQuery.isMutating ? <Spinner /> : "Add to cart"}
               </span>
             )}

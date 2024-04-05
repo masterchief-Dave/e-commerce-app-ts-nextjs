@@ -13,58 +13,60 @@ type Props = {
   product: Product
 }
 const styles = {
-  tabHeader: `text-lg font-semibold lg:text-2xl cursor-pointer flex items-center justify-center outline-0 border-0`,
+  tabHeader: `text-base font-semibold cursor-pointer flex items-center justify-center outline-0 border-0`,
   productDetails: {
     title: `font-semibold`,
-    description: `font-medium`
-  }
+    description: `font-medium`,
+  },
 }
 
 export const ProductTab = ({ product }: Props) => {
   const orderQuery = useGetUserOrders()
-  const hasUserPurchasedThisItem = orderQuery.data?.map((order) => order.orderItems)
+  const hasUserPurchasedThisItem = orderQuery.data
+    ?.map((order) => order.orderItems)
     .flat()
     .findIndex((item) => item._id === product._id)
 
   const [categories] = useState([
     {
       id: 1,
-      title: 'Oveview',
-      component: <Overview />
+      title: "Oveview",
+      component: <Overview />,
     },
     {
       id: 2,
-      title: 'Description',
-      component: <Description data={product.description} />
+      title: "Description",
+      component: <Description data={product.description} />,
     },
     {
       id: 3,
-      title: 'Return Policy',
-      component: <ReturnPolicy />
+      title: "Return Policy",
+      component: <ReturnPolicy />,
     },
     {
       id: 4,
-      title: 'Shipping',
-      component: <Shipping />
+      title: "Shipping",
+      component: <Shipping />,
     },
     {
       id: 5,
-      title: 'Warranty',
-      component: <Warranty />
+      title: "Warranty",
+      component: <Warranty />,
     },
     {
       id: 6,
-      title: 'Reviews',
+      title: "Reviews",
       component: (
         <Reviews
           productId={product._id}
           hasPurchasedProduct={hasUserPurchasedThisItem!}
-        />)
-    }
+        />
+      ),
+    },
   ])
   return (
     <Tab.Group>
-      <Tab.List className='grid grid-cols-6 px-4 border-b py-4'>
+      <Tab.List className="grid grid-cols-6 px-4 border-b py-4">
         {categories.map((category: any) => {
           return (
             <Tab as={Fragment} key={category.id}>
@@ -72,7 +74,9 @@ export const ProductTab = ({ product }: Props) => {
                 /* Use the `selected` state to conditionally style the selected tab. */
                 <div
                   className={
-                    selected ? `bg-blue-500 text-white ${styles.tabHeader} py-4` : `bg-white text-black ${styles.tabHeader}`
+                    selected
+                      ? `bg-blue-500 text-white ${styles.tabHeader} py-4`
+                      : `bg-white text-black ${styles.tabHeader}`
                   }
                 >
                   {category.title}
@@ -82,11 +86,9 @@ export const ProductTab = ({ product }: Props) => {
           )
         })}
       </Tab.List>
-      <Tab.Panels className='p-4 min-h-[20rem]'>
+      <Tab.Panels className="p-4 min-h-[200px]">
         {categories.map((category) => {
-          return <Tab.Panel key={category.id}>
-            {category.component}
-          </Tab.Panel>
+          return <Tab.Panel key={category.id}>{category.component}</Tab.Panel>
         })}
       </Tab.Panels>
     </Tab.Group>

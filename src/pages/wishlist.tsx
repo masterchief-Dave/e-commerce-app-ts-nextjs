@@ -57,7 +57,7 @@ const NoItemInWishList = () => {
   return (
     <section className="min-h-screen">
       <div className="border rounded-lg p-12 max-w-fit">
-        <p className="text-[1.6rem]">No items in your wishlist yet</p>
+        <p className="">No items in your wishlist yet</p>
       </div>
     </section>
   )

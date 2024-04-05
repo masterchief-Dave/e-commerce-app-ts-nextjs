@@ -9,14 +9,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import {
   useCreateProductReview,
-  useGetProuctReview
+  useGetProuctReview,
 } from "@/lib/hooks/review/review.hook"
 import useAuth from "@/lib/hooks/useAuth"
 import { useGetUserOrders } from "@/lib/hooks/user/user.hook"
-import {
-  reviewSchema,
-  reviewVal
-} from "@/lib/schema/review.schema"
+import { reviewSchema, reviewVal } from "@/lib/schema/review.schema"
 import usePageTracker from "@/lib/store/tracker.store"
 import { errorLogger } from "@/lib/utils/logger"
 import { useFormik } from "formik"
@@ -38,18 +35,23 @@ export const Reviews = (props: Props) => {
   const router = useRouter()
   const { toast } = useToast()
   const { trigger, isMutating } = useCreateProductReview()
-  const { data, isLoading: isReviewsLoading } = useGetProuctReview(props.productId)
+  const { data, isLoading: isReviewsLoading } = useGetProuctReview(
+    props.productId
+  )
   const orderQuery = useGetUserOrders()
-  const hasUserPurchasedThisItem = orderQuery.data?.map((order) => order.orderItems)
+  const hasUserPurchasedThisItem = orderQuery.data
+    ?.map((order) => order.orderItems)
     .flat()
     .findIndex((product) => product?.product?._id === props.productId)
-  const [hasPurchasedProduct, setHasPurchasedProduct] = useState(hasUserPurchasedThisItem)
+  const [hasPurchasedProduct, setHasPurchasedProduct] = useState(
+    hasUserPurchasedThisItem
+  )
   const formik = useFormik({
     initialValues: reviewVal,
     validationSchema: reviewSchema,
     onSubmit: () => {
       handleAddReview()
-    }
+    },
   })
   const handleReview = () => {
     if (isAuthenticated) {
@@ -66,38 +68,38 @@ export const Reviews = (props: Props) => {
         id: props.productId,
         rating: formik.values.rating,
         review: formik.values.review,
-        subject: formik.values.subject
+        subject: formik.values.subject,
       })
-      if (response?.message === 'success') {
+      if (response?.message === "success") {
         setIsLoading(false)
         toast({
-          variant: 'success',
+          variant: "success",
           title: "Review Created",
-          description: "You have created a review!."
+          description: "You have created a review!.",
         })
       }
     } catch (err) {
-      errorLogger({ url: '', message: '', err: err as unknown as Error })
+      errorLogger({ url: "", message: "", err: err as unknown as Error })
       setIsLoading(false)
       toast({
-        variant: 'destructive',
+        variant: "destructive",
         title: "Review not Created",
-        description: "Review was not created. Try again!"
+        description: "Review was not created. Try again!",
       })
     }
   }
   // Catch Rating value
   const handleRating = (rate: number) => {
-    formik.setFieldValue('rating', rate)
+    formik.setFieldValue("rating", rate)
     setRating(rate)
   }
 
-  console.log({ hasPurchasedProduct })
+  // console.log({ hasPurchasedProduct })
 
   // console.log(orderQuery.data)
 
   return (
-    <section className="text-[1.6rem]">
+    <section className="">
       <h1 className="font-bold text-3xl mb-12">Reviews</h1>
 
       <div className="space-y-12">
@@ -106,27 +108,27 @@ export const Reviews = (props: Props) => {
             <>
               <ReviewSkeleton />
             </>
+          ) : data && data?.data.reviews.length >= 1 ? (
+            data?.data.reviews.map((review) => {
+              return (
+                <UserReviewComp
+                  key={review._id}
+                  createdAt={review.createdAt}
+                  rating={review.rating}
+                  review={review.review}
+                  subject={review.subject}
+                  user={review.user}
+                />
+              )
+            })
           ) : (
-            data && data?.data.reviews.length >= 1 ? (
-              data?.data.reviews.map((review) => {
-                return (
-                  <UserReviewComp
-                    key={review._id}
-                    createdAt={review.createdAt}
-                    rating={review.rating}
-                    review={review.review}
-                    subject={review.subject}
-                    user={review.user}
-                  />
-                )
-              })
-            ) : (
-              <p className="text-slate-600">No comment(s) yet on this product.</p>
-            )
+            <p className="text-slate-600">No comment(s) yet on this product.</p>
           )}
         </div>
         {hasUserPurchasedThisItem === -1 ? (
-          <p className="text-slate-500">Buy this product before you can leave a review.</p>
+          <p className="text-slate-500">
+            Buy this product before you can leave a review.
+          </p>
         ) : (
           <section>
             <h3 className="font-medium mb-4"> Review this product </h3>
@@ -134,27 +136,46 @@ export const Reviews = (props: Props) => {
             {/* if the customer has purhcased this product then they can leave a review */}
             <div className="space-y-8">
               <Button
-                className="w-fit h-[4rem] rounded-md outline-0 border-0"
+                className="w-fit rounded-md outline-0 border-0"
                 disabled={showReview || isReviewsLoading}
-                onClick={handleReview}>
+                onClick={handleReview}
+              >
                 Write a customer review
               </Button>
 
               {showReview && (
                 <div className="space-y-8">
-                  <h4 className="font-medium underline underline-offset-2">Leave your Review</h4>
+                  <h4 className="font-medium underline underline-offset-2">
+                    Leave your Review
+                  </h4>
                   <div className="flex items-center gap-x-4">
                     <h5>Your Rating: </h5>
                     <RatingComp rating={rating} onChange={handleRating} />
                   </div>
-                  <form action="" className="w-2/5 space-y-8" onSubmit={formik.handleSubmit}>
+                  <form
+                    action=""
+                    className="w-2/5 space-y-8"
+                    onSubmit={formik.handleSubmit}
+                  >
                     <div>
                       <label htmlFor="subject">Subject</label>
-                      <Input className="h-[4rem]" placeholder="Subject" id="subject" onChange={formik.handleChange} name="subject" />
+                      <Input
+                        className="h-[4rem]"
+                        placeholder="Subject"
+                        id="subject"
+                        onChange={formik.handleChange}
+                        name="subject"
+                      />
                     </div>
                     <div>
                       <label htmlFor="review">Review</label>
-                      <Textarea placeholder="Not less than 20 characters" id="review" className="h-[4rem] text-[1.6rem] border" name="review" onChange={formik.handleChange} />
+                      <Textarea
+                        placeholder="Not less than 20 characters"
+                        id="review"
+                        className="h-[4rem]  border"
+                        name="review"
+                        onChange={formik.handleChange}
+                      />
                     </div>
                     <div className="flex items-center gap-x-8">
                       <Button
@@ -170,10 +191,10 @@ export const Reviews = (props: Props) => {
                         disabled={isLoading || isMutating}
                         type="submit"
                       >
-                        {isLoading && <Spinner className="h-10 w-10 text-white" />}
-                        <span>
-                          Save
-                        </span>
+                        {isLoading && (
+                          <Spinner className="h-6 w-6 text-white" />
+                        )}
+                        <span>Save</span>
                       </Button>
                     </div>
                   </form>
@@ -182,15 +203,16 @@ export const Reviews = (props: Props) => {
             </div>
           </section>
         )}
-
       </div>
-      {authModal && <AuthenticatedModal openModal={authModal} setOpenModal={setAuthModal} />}
+      {authModal && (
+        <AuthenticatedModal openModal={authModal} setOpenModal={setAuthModal} />
+      )}
     </section>
   )
 }
 
 /**
  * Fantastic
- * 
- * This product lived up to my expectations, I am not disappointed. Overall quality and durable product. 
+ *
+ * This product lived up to my expectations, I am not disappointed. Overall quality and durable product.
  */

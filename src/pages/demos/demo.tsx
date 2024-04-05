@@ -1,17 +1,16 @@
-
 // import { NavigationMenuDemo } from '@/components/Dropdown/NavigationDropdownMenu'
 // import ResetEmailSentModal from '@/components/Modal/ResetEmailSent'
 // import { Button } from '@chakra-ui/react'
-import axios from 'axios'
-import { PaystackHook } from '@/helpers/paystack'
-import { useSelector } from 'react-redux'
+import axios from "axios"
+import { PaystackHook } from "@/lib/helpers/paystack"
+import { useSelector } from "react-redux"
 // import { RootState } from '@/app/store'
-import { Button } from '@chakra-ui/react'
-import { UserAccountDropdown } from '@/components/Dropdown/Account'
-import { useSession } from 'next-auth/react'
+import { Button } from "@chakra-ui/react"
+import { UserAccountDropdown } from "@/components/Dropdown/Account"
+import { useSession } from "next-auth/react"
 import { getUser } from "@/lib"
 import { useUserStore } from "@/lib/hooks/useUserStore"
-import { apiService } from "@/helpers/apiService"
+import { apiService } from "@/lib/helpers/apiService"
 import useAuth from "@/lib/hooks/useAuth"
 import useAxiosPrivate from "@/lib/hooks/useAxios.hook"
 import PaginationComp from "@/components/pagination"
@@ -33,7 +32,7 @@ const NavigationMenuDemoExample = () => {
     try {
       ///api/order/get-my-orders
       // const response = await axios.get('/api/order/get-my-orders')
-      console.log('the btn was clicked')
+      console.log("the btn was clicked")
       // const response = await axios.get('/api/gettest')
       // const response = await axios.get('http://localhost:8100/api/v1/user/admin', { withCredentials: true })
       // const data = await response.data
@@ -63,7 +62,6 @@ const NavigationMenuDemoExample = () => {
       // )
       // console.log(userResponse)
 
-
       // get the user from my own server
       // fetchAuth()
       // const response = await axiosPrivate.get('/user', {
@@ -71,13 +69,12 @@ const NavigationMenuDemoExample = () => {
       //     'Authorization': user?.token
       //   }
       // })
-      const response = await apiService('/user')
-      console.log('response from the demo page', response)
+      const response = await apiService("/user")
+      console.log("response from the demo page", response)
       // const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/user`, {
       //   credentials: 'include',
 
       // })
-
     } catch (err) {
       console.log(err)
     }
@@ -95,17 +92,17 @@ const NavigationMenuDemoExample = () => {
 
   return (
     // <NavigationMenuDemo />
-    <div className='flex p-24'>
+    <div className="flex p-24">
       {/* <Button variant={'solid'} onClick={() => fn()}>simulate post request</Button> */}
       {/* <ResetEmailSentModal /> */}
       {/* <PaystackHook price={20000} /> */}
-      <Button className='' onClick={handleClick}>test the endpoint</Button>
+      <Button className="" onClick={handleClick}>
+        test the endpoint
+      </Button>
 
       {/* <PaginationComp /> */}
     </div>
   )
 }
-
-
 
 export default NavigationMenuDemoExample

@@ -21,9 +21,9 @@ const Cart = (props: Props) => {
     <Layout>
       <div>
         <Navbar />
-        <main className="grid grid-cols-12  ">
-          <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16">
-            <h1 className="text-5xl font-bold uppercase">Cart</h1>
+        <main className="grid grid-cols-12">
+          <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-8 py-12">
+            <h1 className="text-3xl font-bold uppercase">Cart</h1>
             {/* cart product design layout and design*/}
             {isLoading ? (
               <div className="flex flex-col">
@@ -49,14 +49,14 @@ const NoItemInCart = () => {
   return (
     <div>
       <main className="grid grid-cols-12">
-        <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-12 py-16">
-          <div className="w-[30rem] space-y-8 rounded-[1rem] border bg-[#dedede] p-12">
+        <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-8 py-12">
+          <div className="w-[300px] space-y-8 rounded-[1rem] border bg-[#dedede] p-12">
             <h1 className="text-1xl font-semibold lg:text-2xl">
               Your shopping cart is empty
             </h1>
 
             <Link
-              className="h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2 text-[1.6rem] font-semibold text-white"
+              className="h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2  font-semibold text-white"
               href="/"
             >
               Continue Shopping
@@ -104,14 +104,14 @@ const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
           )
         })}
       </div>
-      <section className="ml-auto max-w-3xl space-y-8 px-12 text-xl font-normal lg:text-2xl">
-        <div className="flex items-center justify-between font-medium text-4xl">
+      <section className="ml-auto max-w-xl space-y-8 px-12 text-base font-normal">
+        <div className="flex items-center justify-between font-medium text-xl">
           <p>Total</p>
           <p>${totalPrice.toFixed(2)}</p>
         </div>
         <Button
           onClick={handleProceedToCheckout}
-          className="rounded-md flex items-center justify-center h-[5rem] bg-primary-blue-500 px-24 py-4 text-[1rem] font-medium text-white hover:bg-primary-blue-300 lg:text-[1.6rem]"
+          className="rounded-md flex items-center justify-center h-[50px] bg-primary-blue-500 px-24 py-4 text-[1rem] font-medium text-white hover:bg-primary-blue-300"
         >
           Proceed to checkout
         </Button>

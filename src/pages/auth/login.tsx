@@ -1,4 +1,4 @@
-import AuthLayout from '@/components/Layout/Auth'
+import AuthLayout from "@/components/Layout/Auth"
 import LoginForm from "@/components/Form/loginForm"
 import AuthService from "@/lib/services/auth.service"
 import axios from "axios"
@@ -8,7 +8,7 @@ import { useState } from "react"
 import { errorLogger, info } from "@/lib/utils/logger"
 
 type Props = {
-  myCookieValue: string,
+  myCookieValue: string
   data: string
 }
 
@@ -18,7 +18,7 @@ const Login = ({ myCookieValue, data }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState({
     state: false,
-    message: ''
+    message: "",
   })
 
   const handleSubmit = async (email: string, password: string) => {
@@ -38,7 +38,7 @@ const Login = ({ myCookieValue, data }: Props) => {
           name: response.user.name,
           photo: response.user.photo,
           token: response.user.token,
-          role: response.user.role
+          role: response.user.role,
         })
         return router.back()
       }
@@ -47,16 +47,24 @@ const Login = ({ myCookieValue, data }: Props) => {
       setError({ state: true, message: response?.statusText })
     } catch (err: any) {
       setIsLoading(false)
-      errorLogger({ url: router.asPath, message: 'An error occured in the login page', err })
+      errorLogger({
+        url: router.asPath,
+        message: "An error occured in the login page",
+        err,
+      })
     }
   }
 
   return (
     <AuthLayout>
-      <section className='h-fit w-full grid grid-cols-12'>
-        <LoginForm handleSubmit={handleSubmit} error={error} isLoading={isLoading} />
+      <section className="h-fit w-full grid grid-cols-12">
+        <LoginForm
+          handleSubmit={handleSubmit}
+          error={error}
+          isLoading={isLoading}
+        />
       </section>
-    </AuthLayout >
+    </AuthLayout>
   )
 }
 

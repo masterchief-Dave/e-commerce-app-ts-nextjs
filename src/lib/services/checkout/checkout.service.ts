@@ -1,20 +1,30 @@
-import { apiService } from "@/helpers/apiService"
-import type { BillingAddressInterface, UserCart } from "@/lib/types/user/user.type"
-
+import { apiService } from "@/lib/helpers/apiService"
+import type {
+  BillingAddressInterface,
+  UserCart,
+} from "@/lib/types/user/user.type"
 
 interface CheckoutServiceProp {
-  orders: UserCart[],
-  reference: string,
-  userId: string,
-  shippingAddress: BillingAddressInterface,
-  price: number,
-  shippingPrice: number,
+  orders: UserCart[]
+  reference: string
+  userId: string
+  shippingAddress: BillingAddressInterface
+  price: number
+  shippingPrice: number
   taxPrice: number
 }
 
 class CheckoutService {
-  static async checkout({ orders, price, reference, shippingAddress, shippingPrice, taxPrice, userId }: CheckoutServiceProp) {
-    return await apiService(`/order/new`, 'POST', {
+  static async checkout({
+    orders,
+    price,
+    reference,
+    shippingAddress,
+    shippingPrice,
+    taxPrice,
+    userId,
+  }: CheckoutServiceProp) {
+    return await apiService(`/order/new`, "POST", {
       orders,
       reference,
       userId,

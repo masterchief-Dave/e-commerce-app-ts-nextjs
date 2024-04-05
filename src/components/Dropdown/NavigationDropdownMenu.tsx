@@ -36,7 +36,8 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Accessories",
     href: "/category/accessories",
-    description: "Explore a world of accessories that complement your devices, ensuring convenience and enhancing functionality.",
+    description:
+      "Explore a world of accessories that complement your devices, ensuring convenience and enhancing functionality.",
   },
   {
     title: "Headphones",
@@ -56,8 +57,10 @@ export function NavigationMenuDemo() {
   return (
     <NavigationMenu className="h-[4rem]">
       <NavigationMenuList>
-        <NavigationMenuItem className="h-full text-[1.6rem]">
-          <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Home</NavigationMenuTrigger>
+        <NavigationMenuItem className="h-full ">
+          <NavigationMenuTrigger className=" h-full font-medium">
+            Home
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr]">
               <li className="row-span-3">
@@ -70,10 +73,15 @@ export function NavigationMenuDemo() {
                     <div className="mb-2 mt-4 text-[1.8rem] font-medium">
                       Sage Warehouse
                     </div>
-                    <p className="text-[1.6rem] leading-tight text-muted-foreground">
-                      "Indulge in a seamless shopping experience with our beautifully designed e-commerce app, where every detail is crafted for your convenience. Discover a world where buying whatever you want is effortless, thanks to our user-friendly interface and intuitive features. Shop confidently with secure transactions, and elevate your online shopping journey with us."
-
-                      Built With Next.js Tailwind CSS, Shadcn UI.
+                    <p className=" leading-tight text-muted-foreground">
+                      "Indulge in a seamless shopping experience with our
+                      beautifully designed e-commerce app, where every detail is
+                      crafted for your convenience. Discover a world where
+                      buying whatever you want is effortless, thanks to our
+                      user-friendly interface and intuitive features. Shop
+                      confidently with secure transactions, and elevate your
+                      online shopping journey with us." Built With Next.js
+                      Tailwind CSS, Shadcn UI.
                     </p>
                   </Link>
                 </NavigationMenuLink>
@@ -91,7 +99,9 @@ export function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-[1.6rem] h-full font-medium">Shop</NavigationMenuTrigger>
+          <NavigationMenuTrigger className=" h-full font-medium">
+            Shop
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
@@ -108,7 +118,9 @@ export function NavigationMenuDemo() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={`${navigationMenuTriggerStyle()} h-full text-[1.6rem]`}>
+            <NavigationMenuLink
+              className={`${navigationMenuTriggerStyle()} h-full `}
+            >
               Blog
             </NavigationMenuLink>
           </Link>
@@ -133,8 +145,8 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-[1.6rem] font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-[1.6rem] leading-snug text-muted-foreground">
+          <div className=" font-medium leading-none">{title}</div>
+          <p className="line-clamp-2  leading-snug text-muted-foreground">
             {children}
           </p>
         </a>

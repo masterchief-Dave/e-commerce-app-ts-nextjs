@@ -53,7 +53,7 @@ export default async function handler(
       }
     })
 
-    console.log('this is the query after removing,', query)
+    console.log('this is the query after pxoving,', query)
 
     await connectToMongoDB()
     // @ts-ignore
