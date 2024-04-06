@@ -11,6 +11,8 @@ export interface CategoryParamInterface {
   name?: string
 }
 
+export interface ProductParamInterface extends CategoryParamInterface {}
+
 export interface CategoryProductInterface {
   discount: number
   updated_at: string
@@ -35,3 +37,5 @@ export interface CategoryProductInterface {
   discountedPrice: number
   __v: number
 }
+
+export interface ProductSearchInterface extends CategoryProductInterface {}

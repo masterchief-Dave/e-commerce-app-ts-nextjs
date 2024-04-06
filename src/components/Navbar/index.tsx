@@ -20,6 +20,8 @@ import { useGetCart } from "@/lib/hooks/user/user.hook"
 import type { UserCart } from "@/lib/types/user/user.type"
 import { cn } from "@/lib/utils"
 import { NavigationMenuComp } from "../Dropdown/NavigationDropdownMenu"
+import { useSearchParams } from "next/navigation"
+import useProductStore from "@/lib/store/product.store"
 
 type Props = {
   session: UserLoginSession | null
@@ -86,7 +88,7 @@ const Desktop = ({
 }: Props) => {
   const router = useRouter()
   const { isAuthenticated } = useAuth()
-
+  const { params } = useProductStore((state) => state)
   const formik = useFormik<Search>({
     initialValues: {
       productName: "",
@@ -104,7 +106,15 @@ const Desktop = ({
 
   const onSubmit = ({ productName }: Search) => {
     // i want to change to the product search page and then the product search should make use of this data to populate the page
-    router.push(`/search/${productName}`)
+    router.push(`/search`, {
+      pathname: "/search",
+      query: {
+        name: productName,
+        page: params.page,
+        price: params.price,
+        rating: params.rating,
+      },
+    })
   }
 
   // move the items in the cart into the searchurl params

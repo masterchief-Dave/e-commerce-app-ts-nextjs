@@ -1,4 +1,5 @@
 import { apiService } from "@/lib/helpers/apiService"
+import type { ProductParamInterface } from "@/lib/types/product"
 
 class ProductService {
   static async getAllCategories() {
@@ -52,6 +53,10 @@ class ProductService {
     return await apiService("/products/remove-item-in-cart", "POST", {
       id: arg.id,
     })
+  }
+
+  static async getProducts(params: ProductParamInterface) {
+    return await apiService(`/products/search?name=${params.name}`)
   }
 }
 
