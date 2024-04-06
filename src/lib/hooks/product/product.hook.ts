@@ -107,7 +107,7 @@ export const useSearchProducts = ({
   rating,
 }: ProductParamInterface) => {
   return useQuery({
-    queryKey: [],
+    queryKey: [name, page, price, rating],
     queryFn: () => ProductService.getProducts({ page, rating, price, name }),
   })
 }
