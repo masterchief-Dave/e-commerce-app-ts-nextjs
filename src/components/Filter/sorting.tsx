@@ -12,6 +12,7 @@ import {
 } from "../ui/dropdown-menu"
 import { ChevronDown, Filter } from "lucide-react"
 import { cn } from "@/lib/utils"
+import useCategoryStore from "@/lib/store/category.store"
 
 const SORT_OPTIONS = [
   { name: "None", value: "none" },
@@ -21,51 +22,27 @@ const SORT_OPTIONS = [
 
 export const Sorting = () => {
   const path = useRouter().asPath
-  const pathname = path.split("/")[1]
-  const productname = path.split("/")[2]
-  const categoryname = path.split("")[2]
-  const router = useRouter()
+  const { setParams, params } = useCategoryStore((state) => state)
 
   const [filter, setFilter] = useState({
     sort: "none",
   })
 
-  // /category/accessories
-  // /api/products/getmyproducts?minPrice=2000&minRating=4&productname=apple&sort=-price
-  // http://sage-warehouse-backend.onrender.com/api/v1/products/category?categoryname=${categoryname}
-  // let buildpath = `/api/products/getmyproducts/category?categoryname=${categoryname}&sort=${}`
-
-  // {{url}}/products?categoryname=laptops&sort=-price&sort=price
-
-  const sortAsc = () => {
-    if (pathname === "search") {
-      const buildpath = `/search/${productname}&sort=price`
-      return router.push(buildpath)
-    }
-    const buildpath = `/category/${categoryname}&sort=price`
-    router.push(buildpath)
-  }
-
-  const sortDesc = () => {
-    if (pathname === "search") {
-      const buildpath = `/search/${productname}&sort=-price`
-      return router.push(buildpath)
-    }
-    const buildpath = `/category/${categoryname}&sort=-price`
-    router.push(buildpath)
-  }
-
   return (
-    <div className="flex items-center w-full justify-end gap-x-2">
+    <div className="">
       <DropdownMenu>
-        <DropdownMenuTrigger className="group inline-flex justify-center  font-medium text-gray-700 hover:text-gray-900">
+        <DropdownMenuTrigger
+          className="group inline-flex justify-center font-medium text-gray-700 hover:text-gray-900"
+          asChild
+        >
           <Button
+            aria-label="Sort Categories"
             variant="default"
-            className="w-max h-[4rem] px-4 bg-transparent text-gray-500 border"
+            className="w-max h-[40px] px-4 bg-transparent text-gray-500 border"
             size="lg"
           >
             Sort
-            <ChevronDown className="-mr-1 ml-1 h-10 w-10 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
+            <ChevronDown className="-mr-1 ml-1 h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="p-1 min-w-[200px]">
@@ -75,6 +52,7 @@ export const Sorting = () => {
             <DropdownMenuItem
               key={option.value}
               onClick={() => {
+                setParams({ price: option.value })
                 setFilter((prev) => {
                   return {
                     ...prev,
@@ -83,7 +61,7 @@ export const Sorting = () => {
                 })
               }}
               className={cn(
-                "text-left w-full block px-6 py-4  bg-transparent hover:text-black",
+                "text-left w-full block px-4 py-2  bg-transparent hover:text-black",
                 {
                   "text-gray-900 bg-gray-100": option.value === filter.sort,
                   "text-gray-500": option.value !== filter.sort,

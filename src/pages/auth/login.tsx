@@ -40,7 +40,7 @@ const Login = ({ myCookieValue, data }: Props) => {
           token: response.user.token,
           role: response.user.role,
         })
-        return router.back()
+        return router.push("/")
       }
 
       setIsLoading(false)

@@ -1,15 +1,15 @@
 import { create } from "zustand"
-import type { CategoryRequestInterface } from "../types/request-model.type"
+import type { CategoryRequestInterface as RequestInterface } from "../types/request-model.type"
 
 interface State {
-  params: CategoryRequestInterface
+  params: RequestInterface
 }
 
 interface Actions {
   setParams: (params: State["params"]) => void
 }
 
-const useCategoryStore = create<Actions & State>((set): State & Actions => ({
+const useProductStore = create<Actions & State>((set): State & Actions => ({
   params: {
     limit: 10,
     name: "all",
@@ -22,4 +22,4 @@ const useCategoryStore = create<Actions & State>((set): State & Actions => ({
   },
 }))
 
-export default useCategoryStore
+export default useProductStore

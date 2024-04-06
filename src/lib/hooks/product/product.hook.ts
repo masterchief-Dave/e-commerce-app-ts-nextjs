@@ -1,5 +1,8 @@
 import ProductService from "@/lib/services/products/product.service"
-import type { CategoryInterface } from "@/lib/types/product"
+import type {
+  CategoryInterface,
+  ProductParamInterface,
+} from "@/lib/types/product"
 import useSWR from "swr"
 import useSWRMutation from "swr/mutation"
 import {
@@ -7,6 +10,7 @@ import {
   useGetLikedProducts,
   useGetUserPopulatedWishlist,
 } from "../user/user.hook"
+import { useQuery } from "@tanstack/react-query"
 
 export const useGetCategories = () => {
   return useSWR<CategoryInterface>("/products/category/all")
@@ -94,4 +98,16 @@ export const useRemoveItemIncart = () => {
       },
     }
   )
+}
+
+export const useSearchProducts = ({
+  name,
+  page,
+  price,
+  rating,
+}: ProductParamInterface) => {
+  return useQuery({
+    queryKey: [],
+    queryFn: () => ProductService.getProducts({ page, rating, price, name }),
+  })
 }

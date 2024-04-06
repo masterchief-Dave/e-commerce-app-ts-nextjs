@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
 import { ShoppingCartIcon } from "@heroicons/react/24/outline"
-
-import { Layout } from "@/components/Layout"
 import { Navbar } from "@/components/Navbar"
 import { Header } from "@/components/Header"
 import { WeeklyDeals } from "@/components/Deals"
@@ -14,7 +12,6 @@ import {
   CategorySkeleton,
   ProductCardSkeleton,
 } from "@/components/SkeletonLoading"
-import { NavigationMenuDemo } from "@/components/Dropdown/NavigationDropdownMenu"
 import { landingPageFeatures } from "@/globals/home"
 import { FeaturesCard } from "@/components/Card"
 import Testimonials from "@/components/Testimonial"
@@ -91,9 +88,7 @@ export default function Home() {
       <HomeWrapper>
         <>
           <Navbar />
-          <div className="w-full flex items-center justify-center">
-            <NavigationMenuDemo />
-          </div>
+          <div className="w-full flex items-center justify-center"></div>
           <Header />
           <main className="grid grid-cols-12 space-y-12 bg-primary-white py-12">
             <div className="col-span-full mx-auto grid w-full grid-cols-12">

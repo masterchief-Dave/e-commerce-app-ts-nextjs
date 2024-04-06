@@ -68,10 +68,10 @@ export default function App({
                   <Spinner className="h-[40px] w-[40px]" />
                 </div>
               ) : (
-                <>
+                <div className="antialiased">
                   <Component {...pageProps} />
                   <Toaster />
-                </>
+                </div>
               )}
             </div>
           </SWRProvider>

@@ -80,7 +80,7 @@ export const Header = (props: Props) => {
                       {""}
                       <span className="font-thin">{data.nameNormal}</span>
                     </h1>
-                    <p className="max-w-[45rem] text-[0.8rem] font-light lg:text-[1.5rem]">
+                    <p className="max-w-[45rem] text-xl font-light lg:text-xl leading-10">
                       {data.description}
                     </p>
                   </div>
@@ -91,14 +91,14 @@ export const Header = (props: Props) => {
                   className="flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white ring-primary-yellow-100 hover:ring-2"
                   onClick={handleLeftSlide}
                 >
-                  <ChevronLeftIcon className="h-8 w-8 text-white" />
+                  <ChevronLeftIcon className="h-10 w-10 text-white" />
                 </div>
 
                 <div
                   className="flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full bg-[#222] p-4 text-white ring-primary-yellow-100 hover:ring-2"
                   onClick={handleRightSlide}
                 >
-                  <ChevronRightIcon className="h-8 w-8 text-white" />
+                  <ChevronRightIcon className="h-10 w-10 text-white" />
                 </div>
               </div>
             </div>

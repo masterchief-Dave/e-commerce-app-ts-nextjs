@@ -1,22 +1,35 @@
-import React, { startTransition } from "react"
-import { Navbar } from "@/components/Navbar"
-import { Layout } from "@/components/Layout"
-import NoItemFound from "@/components/Shell/NoItemFound"
-// import { Filter } from "@/components/Filter"
-import { Sorting } from "@/components/Filter/sorting"
-import { ProductCard } from "@/components/Product/Card"
-import useCategoryStore from "@/lib/store/category.store"
-import { useSearchParams } from "next/navigation"
-import { useGetCategory } from "@/lib/hooks/categories/category.hook"
-import { CategoryPageSkeleton } from "@/components/skeleton"
-import type { CategoryProductInterface } from "@/lib/types/product"
-import Filtering from "@/components/Filter/filtering"
-import { useRouter } from "next/router"
+import { GetServerSideProps } from "next"
+import axios from "axios"
 
-const CategorySlug: React.FC = () => {
+import { Layout } from "@/components/Layout"
+// import BreadCrumb from '@/components/BreadCrumb'
+import { Navbar } from "@/components/Navbar"
+import { ShoppingFixedBag } from "@/components/ShoppingBag"
+import { Footer } from "@/components/Footer"
+import { ProductCard } from "@/components/Product/Card"
+import { Filter } from "@/components/Filter"
+import { Sorting } from "@/components/Filter/sorting"
+import NoItemFound from "@/components/Shell/NoItemFound"
+import Filtering from "@/components/Filter/filtering"
+import {
+  useGetProducts,
+  useSearchProducts,
+} from "@/lib/hooks/product/product.hook"
+import useProductStore from "@/lib/store/product.store"
+import { useSearchParams } from "next/navigation"
+import { useRouter } from "next/router"
+import React, { startTransition } from "react"
+import { CategoryPageSkeleton } from "@/components/skeleton"
+import type { ProductSearchInterface } from "@/lib/types/product"
+
+type Props = {
+  products: Product[]
+}
+
+const ProductSlug = () => {
   const router = useRouter()
   const pathname = router.pathname
-  const { params } = useCategoryStore((state) => state)
+  const { params } = useProductStore((state) => state)
   const searchParams = useSearchParams()
 
   // Search params
@@ -37,13 +50,12 @@ const CategorySlug: React.FC = () => {
           newSearchParams.set(key, String(value))
         }
       }
-
       return newSearchParams.toString()
     },
     [searchParams]
   )
 
-  // Category filter
+  // Product filter
   React.useEffect(() => {
     startTransition(() => {
       const newQueryString = createQueryString({
@@ -57,11 +69,11 @@ const CategorySlug: React.FC = () => {
     })
   }, [params.name, params.price])
 
-  const { isLoading, data, isError } = useGetCategory({
+  const { isLoading, data, isError } = useSearchProducts({
+    rating,
     name,
     page,
     price,
-    rating,
   })
 
   // show loading skeleton
@@ -69,19 +81,19 @@ const CategorySlug: React.FC = () => {
     return <CategoryPageSkeleton />
   }
 
-  const categories = (data?.data as CategoryProductInterface[]) || []
+  const products = (data?.data as ProductSearchInterface[]) || []
 
   return (
     <Layout>
       <section className="">
         <Navbar />
-        <main className="mx-auto grid w-full grid-cols-12 space-y-12 py-12 overflow-hidden">
-          <section className="mb-12 col-start-2 col-end-12 space-y-4">
-            <div>
-              <h1 className="text-2xl font-medium">Categories</h1>
-              <p>Browse through categories</p>
-            </div>
-            <div className="">
+        <main className="mx-auto grid w-full grid-cols-12 space-y-8 py-12">
+          {/* <div className='col-span-full'>
+            <BreadCrumb />
+          </div> */}
+
+          <section className="mb-12 col-start-2 col-end-12 w-full flex justify-end">
+            <div className="flex justify-end w-full">
               <div className="w-full flex items-center gap-x-2">
                 <Sorting />
                 <Filtering />
@@ -89,14 +101,16 @@ const CategorySlug: React.FC = () => {
             </div>
           </section>
 
-          {categories?.length < 1 || isError ? (
+          {products?.length < 1 || isError ? (
             <NoItemFound />
           ) : (
             <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
-              {/* <div className="col-start-1 col-end-3"><Filter /></div> */}
+              {/* <div className="col-start-1 col-end-3">
+                <Filter />
+              </div> */}
               <div className="col-start-2 col-end-12">
-                <section className="grid grid-cols-4 justify-items-center gap-12">
-                  {categories?.map((product) => {
+                <section className="grid grid-cols-4 justify-items-end gap-12">
+                  {products.map((product) => {
                     return (
                       <div key={product._id}>
                         <ProductCard data={product} page={1} />
@@ -108,9 +122,11 @@ const CategorySlug: React.FC = () => {
             </div>
           )}
         </main>
+
+        <ShoppingFixedBag />
       </section>
     </Layout>
   )
 }
 
-export default CategorySlug
+export default ProductSlug

@@ -4,18 +4,15 @@ import { Pill } from "./Pill"
 const NoItemFound = () => {
   return (
     <div className="col-start-2 col-end-12 flex items-center justify-center w-full h-full">
-      <div className="border rounded-2xl w-fit space-y-8 py-24 px-8 shadow-sm">
+      <div className="border rounded-2xl w-fit space-y-8 p-8 shadow-sm">
         <div className="flex justify-center">
-          <MaterialSymbolsRemoveShoppingCart className="w-24 h-24" />
+          <MaterialSymbolsRemoveShoppingCart className="w-8 h-8" />
         </div>
 
-        <article className="flex flex-col items-center justify-center">
-          <h4 className="font-medium text-[2rem]">
-            We couldn't find what you were looking for.
-          </h4>
-          <p className=" text-center font-normal text-primary-grey-100">
-            Keep calm and try searching for more general terms or shop from
-            categories below
+        <article className="flex flex-col items-center justify-center max-w-sm">
+          <h4 className="font-medium text-[24px]">No Products found</h4>
+          <p className="text-base text-center font-normal text-primary-grey-100">
+            Try changing your filters, or check back later for new products
           </p>
         </article>
 

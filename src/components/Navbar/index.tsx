@@ -18,6 +18,10 @@ import { UserAccountDropdown } from "../Dropdown/Account"
 import { Button } from "../ui/button"
 import { useGetCart } from "@/lib/hooks/user/user.hook"
 import type { UserCart } from "@/lib/types/user/user.type"
+import { cn } from "@/lib/utils"
+import { NavigationMenuComp } from "../Dropdown/NavigationDropdownMenu"
+import { useSearchParams } from "next/navigation"
+import useProductStore from "@/lib/store/product.store"
 
 type Props = {
   session: UserLoginSession | null
@@ -83,7 +87,8 @@ const Desktop = ({
   data,
 }: Props) => {
   const router = useRouter()
-
+  const { isAuthenticated } = useAuth()
+  const { params } = useProductStore((state) => state)
   const formik = useFormik<Search>({
     initialValues: {
       productName: "",
@@ -101,7 +106,15 @@ const Desktop = ({
 
   const onSubmit = ({ productName }: Search) => {
     // i want to change to the product search page and then the product search should make use of this data to populate the page
-    router.push(`/search/${productName}`)
+    router.push(`/search`, {
+      pathname: "/search",
+      query: {
+        name: productName,
+        page: params.page,
+        price: params.price,
+        rating: params.rating,
+      },
+    })
   }
 
   // move the items in the cart into the searchurl params
@@ -115,46 +128,60 @@ const Desktop = ({
       },
     })
   }
+  /**
+   *  className={`grid grid-cols-12 bg-primary-blue-100/30 py-4  ${
+        isTop ? "fixed top-0 right-0 z-[99] w-full backdrop-blur-xl" : ""
+      }`}
+   */
 
   return (
     <nav
-      className={`grid grid-cols-12 bg-primary-blue-100/30 py-4  ${
-        isTop ? "fixed top-0 right-0 z-[99] w-full backdrop-blur-xl" : ""
-      }`}
+      className={cn("grid grid-cols-12 bg-white border-b py-2", {
+        "fixed top-0 right-0 z-[99] w-full bg-white backdrop-blur-xl":
+          isTop && router.pathname === "/",
+      })}
     >
       <ul className="col-start-2 col-end-12 mx-auto flex w-full items-center justify-between gap-x-8">
         <li>
-          <h1>
-            <Link href="/" className="text-[2rem] font-bold text-white">
-              <Image src={SWLogo} alt="Brand Logo" height={50} width={50} />
-            </Link>
-          </h1>
+          <Link href="/" className="text-lg font-medium text-black">
+            <h1 className="flex items-center gap-x-2">
+              <Image src={SWLogo} alt="Brand Logo" height={35} width={35} />
+              Sage-Warehouse
+            </h1>
+          </Link>
         </li>
-        <li className="lg:w-[30%] xl:w-[40%]">
+        <li>
+          <NavigationMenuComp />
+        </li>
+        <div className="flex items-center gap-x-4 ">
           <form
-            className="flex h-[40px] w-full items-center rounded-sm bg-white hover:ring-2"
+            className="flex h-[40px] w-full pl-2 pr-1 items-center rounded-md border bg-white hover:ring-1 ring-black"
             onSubmit={formik.handleSubmit}
+            autoComplete="off"
           >
+            <div className="flex h-full w-[10%] cursor-pointer items-center justify-center">
+              <button
+                type="submit"
+                className="w-fit bg-transparent rounded-md p-1 transition-all delay-75 hover:bg-black"
+              >
+                <MagnifyingGlassIcon className="h-5 w-5 hover:text-white" />
+              </button>
+            </div>
             <input
               type="text"
-              placeholder="search"
-              className="h-full w-[90%] rounded-lg border-0 bg-transparent px-4  outline-0 focus:outline-0"
+              placeholder="Search Products..."
+              className="h-full w-[90%] rounded-md border-0 bg-transparent px-4 outline-0 focus:outline-0"
               name="productName"
               value={formik.values.productName}
               onChange={formik.handleChange}
             />
-            <div className="flex h-full w-[10%] cursor-pointer items-center justify-center  ">
-              <button
-                type="submit"
-                className="w-fit bg-transparent rounded-md p-2 transition-all delay-75 hover:bg-primary-blue-300"
-              >
-                <MagnifyingGlassIcon className="h-8 w-8 hover:text-white" />
-              </button>
+            <div className="p-2">
+              <span className="block bg-black text-white font-medium rounded-md px-2 py-1 text-[13px]">
+                Ctrl+k
+              </span>
             </div>
           </form>
-        </li>
 
-        <div className="flex items-center gap-x-4 ">
           {user?._id ? (
             <UserAccountDropdown
               photo={user.photo}
@@ -166,7 +193,7 @@ const Desktop = ({
               <li>
                 <Link
                   href="/auth/login"
-                  className="auth-btn bg-white text-primary-blue-100 transition-all delay-75 hover:bg-primary-blue-300 hover:text-white"
+                  className="auth-btn bg-black text-white transition-all delay-75 border hover:text-black hover:bg-white"
                 >
                   Login
                 </Link>
@@ -182,17 +209,19 @@ const Desktop = ({
             </div>
           )}
 
-          <li>
-            <Button
-              className="relative bg-transparent border-0"
-              onClick={onCartClick}
-            >
-              <ShoppingBagIcon className="h-8 w-8 text-white" />
-              <span className="absolute top-0 left-[30px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary-yellow-200 text-white">
-                {cart?.length}
-              </span>
-            </Button>
-          </li>
+          {isAuthenticated && (
+            <li>
+              <Button
+                className="relative bg-transparent border-0"
+                onClick={onCartClick}
+              >
+                <ShoppingBagIcon className="h-8 w-8 text-black" />
+                <span className="absolute top-0 left-[30px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary-yellow-200 text-white">
+                  {cart?.length}
+                </span>
+              </Button>
+            </li>
+          )}
         </div>
       </ul>
     </nav>

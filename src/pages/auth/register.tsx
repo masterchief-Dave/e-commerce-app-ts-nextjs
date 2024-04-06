@@ -52,7 +52,7 @@ const Register = () => {
 
   const styles = {
     label: ` font-normal block mb-2 text-`,
-    input: ` border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+    input: ` border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0 text-base`,
     btn: `h-[5px] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium  rounded-md`,
     icon: `cursor-pointer`,
   }
@@ -122,7 +122,7 @@ const Register = () => {
           onSubmit={formik.handleSubmit}
         >
           <header className="mb-8">
-            <h1 className="text-left text-[2rem] font-semibold">Sign up</h1>
+            <h1 className="text-left text-xl font-semibold">Sign up</h1>
             <p className=" text-primary-grey-100 font-normal">
               Choose your preferred sign in method
             </p>
@@ -133,7 +133,7 @@ const Register = () => {
               Full Name
             </label>
             <InputContainer className="mb-2">
-              <UserIcon className="h-8 w-8" />
+              <UserIcon />
               <Input
                 type="text"
                 placeholder="Firstname Lastname"
@@ -155,7 +155,7 @@ const Register = () => {
               Email Address
             </label>
             <InputContainer className="mb-2">
-              <MailIcon className="h-8 w-8" />
+              <MailIcon />
               <Input
                 type="text"
                 placeholder="Email Address"
@@ -177,7 +177,7 @@ const Register = () => {
               Password
             </label>
             <InputContainer className="mb-2">
-              <FingerprintIcon className="h-8 w-8" />
+              <FingerprintIcon />
               <Input
                 type={show.password ? "text" : "password"}
                 placeholder="Password"
@@ -210,7 +210,7 @@ const Register = () => {
               Confirm Password
             </label>
             <InputContainer className="mb-2">
-              <FingerprintIcon className="h-8 w-8" />
+              <FingerprintIcon />
               <Input
                 type={show.confirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
@@ -259,7 +259,7 @@ const Register = () => {
               </p>
             </div> */}
 
-          <div className="">
+          <div className="text-sm text-center">
             <p>
               Already have an account{" "}
               <span>
