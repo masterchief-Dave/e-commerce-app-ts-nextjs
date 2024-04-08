@@ -29,7 +29,7 @@ type Props = {
 }
 
 const styles = {
-  input: ` border-0 ring-0 focus: outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
+  input: `text-base border-0 ring-0 focus: outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
 }
 
 const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
@@ -109,18 +109,18 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-12 text-left align-middle shadow-xl transition-all space-y-8">
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-12 text-left align-middle shadow-xl transition-all space-y-8">
                   <div className="relative flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
-                      className=" font-bold leading-6 text-gray-900"
+                      className="font-bold leading-6 text-gray-900"
                     >
                       <section className="flex items-center justify-between">
-                        <h1 className="font-medium text-3xl">Sign in</h1>
+                        <h1 className="font-medium text-2xl">Sign in</h1>
                       </section>
                     </Dialog.Title>
                     <div className="cursor-pointer" onClick={handleCloseModal}>
-                      <XMarkIcon className="h-8 w-8" />
+                      <XMarkIcon className="h-5 w-5" />
                     </div>
                   </div>
                   <section>
@@ -129,8 +129,8 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                       onSubmit={formik.handleSubmit}
                     >
                       <div>
-                        <InputContainer className="mb-2 h-[4rem]">
-                          <UserIcon className="h-8 w-8" />
+                        <InputContainer className="mb-2 h-[3rem]">
+                          <UserIcon className="h-5 w-5" />
                           <Input
                             type="text"
                             placeholder="Email"
@@ -144,13 +144,13 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                         {formik.touched.email && formik.errors.email && (
                           <ErrorLabel
                             text={formik.errors.email}
-                            className="text-[1.4rem]"
+                            className="text-sm"
                           />
                         )}
                       </div>
                       <div>
-                        <InputContainer className="mb-2 h-[4rem]">
-                          <FingerprintIcon />
+                        <InputContainer className="mb-2 h-[3rem]">
+                          <FingerprintIcon className="h-5 w-5" />
                           <Input
                             type={show ? "text" : "password"}
                             placeholder="Password"
@@ -162,12 +162,12 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                           />
                           {show ? (
                             <EyeOffIcon
-                              className="h-8 w-8 cursor-pointer"
+                              className="h-5 w-5 cursor-pointer"
                               onClick={toggle}
                             />
                           ) : (
                             <EyeIcon
-                              className="h-8 w-8 cursor-pointer"
+                              className="h-5 w-5 cursor-pointer"
                               onClick={toggle}
                             />
                           )}
@@ -175,7 +175,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                         {formik.touched.password && formik.errors.password && (
                           <ErrorLabel
                             text={formik.errors.password}
-                            className="text-[1.4rem]"
+                            className="text-sm"
                           />
                         )}
                       </div>
@@ -183,7 +183,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="h-[4rem]  bg-black text-white btn"
+                        className="h-[3rem]  bg-black text-white btn"
                       >
                         {isLoading && <Spinner className="text-white" />}
                         <span>Login</span>
@@ -204,7 +204,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                   </div> */}
                   <div className="space-y-4 col-start-2 col-end-12">
                     <Button
-                      className={`h-[4rem] w-full hover:bg-primary-blue-300   rounded-md flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
+                      className={`h-[3rem] w-full hover:bg-primary-blue-300   rounded-md flex items-center justify-center gap-x-4 border bg-white text-primary-blue-100 hover:text-white`}
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault()
@@ -224,7 +224,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                     </Button>
                   </div>
                   <div>
-                    <p className="text-[1.4rem] font-normal">
+                    <p className="text-sm font-normal">
                       By registering for an Sage-Warehouse account, you agree
                       that you have read and accepted our Sage-Warehouse Free
                       Membership Agreement and{" "}
@@ -238,7 +238,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                     </p>
                   </div>
 
-                  <footer className="flex items-center justify-center gap-x-2 text-[1.4rem]">
+                  <footer className="flex items-center justify-center gap-x-2 text-sm">
                     <p>Don't have an account? </p>
                     <Link href="/auth/register" className="underline">
                       Create one

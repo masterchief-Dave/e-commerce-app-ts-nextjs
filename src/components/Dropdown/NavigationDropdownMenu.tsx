@@ -13,49 +13,64 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { useRouter } from "next/router"
+import useCategoryStore from "@/lib/store/category.store"
 
-const components: { title: string; href: string; description: string }[] = [
+const components: {
+  title: string
+  href: string
+  description: string
+  name: string
+}[] = [
   {
     title: "Electronics",
-    href: "/category/electronics",
+    name: "electronics",
+    href: "/category?name=electronics",
     description:
       "Elevate your tech game with cutting-edge electronics that seamlessly blend innovation and style.",
   },
   {
     title: "Gaming Consoles",
-    href: "/category/console",
+    name: "console",
+    href: "/category?name=console",
     description:
       "Immerse yourself in the ultimate gaming experience with our top-tier consoles, delivering unparalleled performance and graphics.",
   },
   {
     title: "Computers",
-    href: "/category/computers",
+    name: "computers",
+    href: "/category?name=computers",
     description:
       "Unleash the power of productivity with our high-performance computers designed to meet all your computing needs.",
   },
   {
     title: "Accessories",
-    href: "/category/accessories",
+    name: "accessories",
+    href: "/category?name=accessories",
     description:
       "Explore a world of accessories that complement your devices, ensuring convenience and enhancing functionality.",
   },
   {
     title: "Headphones",
-    href: "/category/headphones",
+    name: "headphones",
+    href: "/category?name=headphones",
     description:
       "Dive into a realm of crystal-clear sound with our curated selection of headphones that redefine audio excellence.",
   },
   {
     title: "Mobile Phones",
-    href: "/category/mobile-phones",
+    name: "smartphones",
+    href: "/category?=mobile-phones",
     description:
       "Stay connected and up-to-date with the latest mobile phones featuring advanced technology and sleek designs.",
   },
 ]
 // home, all demos, pages, categories, blog
 export function NavigationMenuComp() {
+  const router = useRouter()
+  const { setParams } = useCategoryStore((state) => state)
   return (
-    <NavigationMenu className="h-[40px]">
+    <NavigationMenu className="h-[40px] z-[99]">
       <NavigationMenuList>
         <NavigationMenuItem className="h-full ">
           <NavigationMenuTrigger className="h-full font-medium bg-transparent">
@@ -103,15 +118,36 @@ export function NavigationMenuComp() {
             Shop
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-sm">
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-sm relative">
               {components.map((component) => (
-                <ListItem
+                <div
                   key={component.title}
                   title={component.title}
-                  href={component.href}
+                  // href={component.href}
+                  onClick={() => {
+                    setParams({ name: component.name })
+                    router.push("/category", {
+                      pathname: "/category",
+                      query: {
+                        name: component.name,
+                      },
+                    })
+                  }}
+                  className="flex flex-col cursor-pointer"
                 >
-                  {component.description}
-                </ListItem>
+                  <h4 className="font-medium">{component.title}</h4>
+                  <span>{component.description}</span>
+                </div>
+                // <ListItem
+                //   key={component.title}
+                //   title={component.title}
+                //   href={component.href}
+                //   onClick={() => {
+                //     setParams({ name: component.href })
+                //   }}
+                // >
+                //   {component.description}
+                // </ListItem>
               ))}
             </ul>
           </NavigationMenuContent>

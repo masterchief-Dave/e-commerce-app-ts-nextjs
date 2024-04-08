@@ -175,14 +175,14 @@ const ProductSlug = ({ product }: Props) => {
                 <div className="space-y-4">
                   <div className="flex items-center gap-x-3">
                     <h4 className={styles.productDetails.title}>Reviews:</h4>
-                    <p className="lowercase text-primary-grey-300">4</p>
+                    <p className="lowercase">4</p>
                   </div>
                 </div>
 
                 {/* product availability */}
                 <div className="flex items-center gap-x-2">
                   <h5 className={styles.productDetails.title}>Available:</h5>
-                  <CheckSquareIcon className="h-5 w-5" />
+                  <CheckSquareIcon className="h-5 w-5 text-green-500" />
                 </div>
 
                 {/* product category */}
@@ -196,8 +196,7 @@ const ProductSlug = ({ product }: Props) => {
                 {/* product brand */}
                 <div className="space-y-4">
                   <h5 className={`${styles.productDetails.title}`}>
-                    Product Code:{" "}
-                    <span className="text-primary-grey-100">524162</span>
+                    Product Code: <span className="">524162</span>
                   </h5>
                   <h5 className={styles.productDetails.title}>
                     Brand:{" "}
