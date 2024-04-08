@@ -78,13 +78,19 @@ const ProductSlug = ({ product }: Props) => {
   }
 
   // # check if the item is in the cart
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!isAuthenticated) {
       return setOpenModal(true)
     }
-    cartQuery.trigger({ id: product._id, page: 1 })
+    const res = await cartQuery.trigger({ id: product._id, page: 1 })
+    toast({
+      variant: "success",
+      title: res?.message,
+      description: `${res?.message}`,
+    })
   }
 
+  // Add item to the wishlist
   const handleAddToWishlist = async () => {
     if (likeQuery.isMutating) {
       return
@@ -93,15 +99,12 @@ const ProductSlug = ({ product }: Props) => {
       return setOpenModal(true)
     }
     const res = await likeQuery.trigger({ id: product._id, page: 1 }, {})
-    console.log(res)
     toast({
       variant: "success",
       title: res?.message,
       description: `Product ${res.message}`,
     })
   }
-
-  console.log({ isItemInWishlist })
 
   return (
     // <Layout>

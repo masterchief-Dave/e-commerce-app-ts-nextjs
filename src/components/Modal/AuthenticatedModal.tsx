@@ -4,12 +4,6 @@ import { XMarkIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../ui/button"
-import {
-  CibApple,
-  Fa6BrandsSquareXTwitter,
-  LogosFacebook,
-  LogosRedditIcon,
-} from "@/globals/icons"
 import { InputContainer } from "../Form"
 import { Input } from "../ui/input"
 import { useFormik } from "formik"

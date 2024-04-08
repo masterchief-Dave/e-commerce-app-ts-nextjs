@@ -36,6 +36,7 @@ export const ProductCard = ({ page, data }: Props) => {
   const userQuery = useGetLikedProducts()
   const { isAuthenticated } = useAuth()
   const [authModal, setAuthModal] = useState(false)
+  const { toast } = useToast()
 
   const userFavorites =
     userQuery?.data?.message === "success" ? userQuery?.data?.data : []
@@ -46,12 +47,12 @@ export const ProductCard = ({ page, data }: Props) => {
         })
       : []
 
-  const handleLikeProduct = () => {
+  const handleLikeProduct = async () => {
     // is the user authenticated ?
     if (!isAuthenticated) {
       return setAuthModal(true)
     }
-    trigger(
+    const res = await trigger(
       { id: data?._id, page: page },
       {
         optimisticData: userFavorites && [
@@ -62,22 +63,33 @@ export const ProductCard = ({ page, data }: Props) => {
         rollbackOnError: true,
       }
     )
+
+    toast({
+      variant: "success",
+      title: res?.message,
+      description: `Product ${res?.message}`,
+    })
   }
 
   // cart
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     // is the user authenticated
     if (!isAuthenticated) {
       return setAuthModal(true)
     }
     if (!data) return
-
-    cartQuery.trigger(
+    const res = await cartQuery.trigger(
       { id: data?._id, page: page },
       {
         rollbackOnError: true,
       }
     )
+
+    toast({
+      variant: "success",
+      title: res?.message,
+      description: `Product ${res?.message}`,
+    })
   }
 
   return (
@@ -98,7 +110,7 @@ export const ProductCard = ({ page, data }: Props) => {
           </Link>
           <div className="absolute top-5 left-5 z-10">
             <div className="bg-primary-red-100 px-2 text-white text-sm">
-              25%
+              {data?.discount}%
             </div>
           </div>
 

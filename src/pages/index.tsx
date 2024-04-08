@@ -4,8 +4,7 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { Navbar } from "@/components/Navbar"
 import { Header } from "@/components/Header"
 import { WeeklyDeals } from "@/components/Deals"
-import { Footer } from "@/components/Footer"
-import { CategoryCard } from "@/components/Card/Category"
+import { FeatureCard } from "@/components/Card/Category"
 import { ProductCard } from "@/components/Product/Card"
 import { ShoppingFixedBag } from "@/components/ShoppingBag"
 import {
@@ -23,6 +22,8 @@ import {
   useGetProducts,
 } from "@/lib/hooks/product/product.hook"
 import HomeWrapper from "@/components/Layout/Home"
+import { Card } from "@/components/ui/card"
+import CategoryCard from "@/components/Card/Category/card"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
@@ -86,7 +87,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeWrapper>
-        <>
+        <div>
           <Navbar />
           <div className="w-full flex items-center justify-center"></div>
           <Header />
@@ -94,21 +95,27 @@ export default function Home() {
             <div className="col-span-full mx-auto grid w-full grid-cols-12">
               <div className="col-start-2 col-end-12 space-y-12">
                 <section>
+                  <div>
+                    <CategoryCard />
+                  </div>
+                </section>
+
+                <section>
                   <h2 className="mb-8 font-bold uppercase text-primary-black-200 text-xl">
-                    Product Categories
+                    Featured Categories
                   </h2>
                   <div className="sm:flex sm:flex-col items-center justify-between gap-8 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid xl:grid-cols-3 xl:gap-x-12">
                     {!categoriesLoading ? (
                       <>
-                        <CategoryCard
+                        <FeatureCard
                           products={categories?.data?.data?.[0]?.products}
                           category={categories?.data?.data?.[0]?.name as string}
                         />
-                        <CategoryCard
+                        <FeatureCard
                           products={categories?.data?.data?.[1]?.products}
                           category={categories?.data?.data?.[1]?.name as string}
                         />
-                        <CategoryCard
+                        <FeatureCard
                           products={categories?.data?.data?.[2]?.products}
                           category={categories?.data?.data?.[2]?.name as string}
                         />
@@ -213,8 +220,7 @@ export default function Home() {
           </main>
           {/* testimonial section */}
           <Testimonials />
-          {/* <Footer /> */}
-        </>
+        </div>
       </HomeWrapper>
       <ShoppingFixedBag />
     </>
