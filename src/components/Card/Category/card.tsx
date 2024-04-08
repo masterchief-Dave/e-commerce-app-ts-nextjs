@@ -51,7 +51,7 @@ function CategoryCard() {
       style={{ animationDelay: "0.50s", animationFillMode: "both" }}
     >
       {categories.map((category) => (
-        <Link href={`/category?name=${category.slug}`}>
+        <Link href={`/category?name=${category.slug}`} key={category.id}>
           <Card className="relative flex size-full items-center h-52 w-full flex-col p-4 space-y-12 bg-white transition-colors hover:bg-muted/50">
             <CardTitle className="capitalize text-lg">
               {category.name}
