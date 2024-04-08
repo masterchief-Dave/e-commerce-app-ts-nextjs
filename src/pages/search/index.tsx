@@ -59,8 +59,8 @@ const ProductSlug = () => {
   React.useEffect(() => {
     startTransition(() => {
       const newQueryString = createQueryString({
-        name: params?.name ?? null,
-        price: params?.price ?? null,
+        name: params.name ?? null,
+        price: params.price ?? null,
         rating: params.rating ?? null,
         page: params.page ?? null,
       })

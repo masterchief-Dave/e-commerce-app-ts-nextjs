@@ -108,8 +108,8 @@ export const Reviews = (props: Props) => {
             <>
               <ReviewSkeleton />
             </>
-          ) : data && data?.data.reviews.length >= 1 ? (
-            data?.data.reviews.map((review) => {
+          ) : data && data?.data?.reviews?.length >= 1 ? (
+            data?.data?.reviews?.map((review) => {
               return (
                 <UserReviewComp
                   key={review._id}
