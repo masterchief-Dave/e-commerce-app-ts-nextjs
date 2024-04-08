@@ -88,7 +88,7 @@ const Desktop = ({
 }: Props) => {
   const router = useRouter()
   const { isAuthenticated } = useAuth()
-  const { params } = useProductStore((state) => state)
+  const { params, setParams } = useProductStore((state) => state)
   const formik = useFormik<Search>({
     initialValues: {
       productName: "",
@@ -105,6 +105,8 @@ const Desktop = ({
   })
 
   const onSubmit = ({ productName }: Search) => {
+    // update the global categories params
+    setParams({ name: productName })
     // i want to change to the product search page and then the product search should make use of this data to populate the page
     router.push(`/search`, {
       pathname: "/search",

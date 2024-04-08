@@ -21,6 +21,7 @@ import { useRouter } from "next/router"
 import React, { startTransition } from "react"
 import { CategoryPageSkeleton } from "@/components/skeleton"
 import type { ProductSearchInterface } from "@/lib/types/product"
+import HomeWrapper from "@/components/Layout/Home"
 
 type Props = {
   products: Product[]
@@ -35,7 +36,7 @@ const ProductSlug = () => {
   // Search params
   const rating = searchParams.get("rating") ?? "none"
   const price = searchParams.get("price") === "asc" ? "asc" : "desc" ?? "asc"
-  const name = searchParams.get("name") ?? "all"
+  const name = searchParams.get("name") ?? ""
   const page = Number(searchParams.get("page")) ?? 1
 
   // Create query string
@@ -59,15 +60,16 @@ const ProductSlug = () => {
   React.useEffect(() => {
     startTransition(() => {
       const newQueryString = createQueryString({
-        name: params?.name ?? null,
-        price: params?.price ?? null,
+        // name: params.name ?? null,
+        name: params?.name === "all" ? name : params?.name ?? null,
+        price: params.price ?? null,
         rating: params.rating ?? null,
         page: params.page ?? null,
       })
 
       router.push(`${pathname}?${newQueryString}`)
     })
-  }, [params.name, params.price])
+  }, [params.name, params.price, name])
 
   const { isLoading, data, isError } = useSearchProducts({
     rating,
@@ -84,7 +86,7 @@ const ProductSlug = () => {
   const products = (data?.data as ProductSearchInterface[]) || []
 
   return (
-    <Layout>
+    <HomeWrapper>
       <section className="">
         <Navbar />
         <main className="mx-auto grid w-full grid-cols-12 space-y-8 py-12">
@@ -125,7 +127,7 @@ const ProductSlug = () => {
 
         <ShoppingFixedBag />
       </section>
-    </Layout>
+    </HomeWrapper>
   )
 }
 

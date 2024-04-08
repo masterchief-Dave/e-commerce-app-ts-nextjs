@@ -213,7 +213,7 @@ export default function Home() {
           </main>
           {/* testimonial section */}
           <Testimonials />
-          <Footer />
+          {/* <Footer /> */}
         </>
       </HomeWrapper>
       <ShoppingFixedBag />

@@ -12,6 +12,7 @@ import { CategoryPageSkeleton } from "@/components/skeleton"
 import type { CategoryProductInterface } from "@/lib/types/product"
 import Filtering from "@/components/Filter/filtering"
 import { useRouter } from "next/router"
+import HomeWrapper from "@/components/Layout/Home"
 
 const CategorySlug: React.FC = () => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const CategorySlug: React.FC = () => {
   // Search params
   const rating = searchParams.get("rating") ?? "none"
   const price = searchParams.get("price") === "asc" ? "asc" : "desc" ?? "asc"
-  const name = searchParams.get("name") ?? "all"
+  const name = searchParams.get("name") ?? ""
   const page = Number(searchParams.get("page")) ?? 1
 
   // Create query string
@@ -47,7 +48,7 @@ const CategorySlug: React.FC = () => {
   React.useEffect(() => {
     startTransition(() => {
       const newQueryString = createQueryString({
-        name: params?.name ?? null,
+        name: params?.name === "all" ? name : params?.name ?? null,
         price: params?.price ?? null,
         rating: params.rating ?? null,
         page: params.page ?? null,
@@ -55,7 +56,7 @@ const CategorySlug: React.FC = () => {
 
       router.push(`${pathname}?${newQueryString}`)
     })
-  }, [params.name, params.price])
+  }, [params.name, params.price, name])
 
   const { isLoading, data, isError } = useGetCategory({
     name,
@@ -72,7 +73,7 @@ const CategorySlug: React.FC = () => {
   const categories = (data?.data as CategoryProductInterface[]) || []
 
   return (
-    <Layout>
+    <HomeWrapper>
       <section className="">
         <Navbar />
         <main className="mx-auto grid w-full grid-cols-12 space-y-12 py-12 overflow-hidden">
@@ -109,7 +110,7 @@ const CategorySlug: React.FC = () => {
           )}
         </main>
       </section>
-    </Layout>
+    </HomeWrapper>
   )
 }
 

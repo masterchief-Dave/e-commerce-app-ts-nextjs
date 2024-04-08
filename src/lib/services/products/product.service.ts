@@ -18,7 +18,6 @@ class ProductService {
     const response = await apiService(`/products/like`, "POST", {
       id: arg.id,
     })
-
     return response
   }
 

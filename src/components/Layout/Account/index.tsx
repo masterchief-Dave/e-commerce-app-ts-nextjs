@@ -15,6 +15,7 @@ import { MobileSideBar } from "./sidebar"
 import useAuth from "@/lib/hooks/useAuth"
 import { Layout } from ".."
 import { ShoppingBag, UserCircle, Wallet } from "lucide-react"
+import { Navbar } from "@/components/Navbar"
 
 type Props = {
   children?: JSX.Element
@@ -52,10 +53,11 @@ export const AccountLayout = ({ children }: Props) => {
     <Layout>
       {isAuthenticated ? (
         <>
-          <DashboardNavbar
+          {/* <DashboardNavbar
             setShowMobileSidebar={setShowMobileSidebar}
             showMobileSidebar={showMobileSidebar}
-          />
+          /> */}
+          <Navbar />
 
           <section className="grid grid-cols-12 py-12">
             <div className="col-start-2 col-end-12">
@@ -106,9 +108,9 @@ export const SideBar = () => {
     active: `text-gray-900  font-normal`,
     link: ` font-normal text-gray-400`,
   }
-
+  // sticky top-[100px] w-full space-y-4 divide-y rounded-[1rem] border
   return (
-    <div className="sticky top-[100px] w-full space-y-4 divide-y rounded-[1rem] border">
+    <div className="w-full space-y-4 divide-y rounded-[1rem] border">
       <section className="flex gap-x-8 p-8">
         <div>
           <UserCircle />
@@ -165,7 +167,7 @@ export const SideBar = () => {
           </li>
           <li>
             <Link
-              href="/account/reviews"
+              href="#"
               className={
                 router.pathname === "/account/reviews"
                   ? styles.active

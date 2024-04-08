@@ -29,6 +29,8 @@ import {
   useGetUserOrders,
 } from "@/lib/hooks/user/user.hook"
 import fetchProduct from "@/utils/fetchProduct"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { useToast } from "@/components/ui/use-toast"
 
 type Props = {
   product: Product
@@ -37,13 +39,14 @@ type Props = {
 const styles = {
   tabHeader: `text-lg font-semibold lg:text-xl cursor-pointer`,
   productDetails: {
-    title: `font-semibold`,
-    description: `font-medium`,
+    title: `font-normal text-base`,
+    description: `font-normal`,
   },
 }
 
 const ProductSlug = ({ product }: Props) => {
   const router = useRouter()
+  const { toast } = useToast()
   const getCartQuery = useGetCart()
   const getWishlistQuery = useGetLikedProducts()
   const [productQuantity, setProductQuantity] = useState<number>(1)
@@ -82,12 +85,23 @@ const ProductSlug = ({ product }: Props) => {
     cartQuery.trigger({ id: product._id, page: 1 })
   }
 
-  const handleAddToWishlist = () => {
+  const handleAddToWishlist = async () => {
+    if (likeQuery.isMutating) {
+      return
+    }
     if (!isAuthenticated) {
       return setOpenModal(true)
     }
-    likeQuery.trigger({ id: product._id, page: 1 }, {})
+    const res = await likeQuery.trigger({ id: product._id, page: 1 }, {})
+    console.log(res)
+    toast({
+      variant: "success",
+      title: res?.message,
+      description: `Product ${res.message}`,
+    })
   }
+
+  console.log({ isItemInWishlist })
 
   return (
     // <Layout>
@@ -100,25 +114,36 @@ const ProductSlug = ({ product }: Props) => {
 
         <div className="col-span-full col-start-2 col-end-12 space-y-8 mb-20">
           <section className="grid grid-cols-12">
-            <div className="col-start-1 col-end-6 border">
-              <Image
-                src={product.images[0].url! as string}
-                alt={product.name}
-                width={1000}
-                height={1000}
-                className="object-cover w-full h-full"
-              />
+            <div className="col-start-1 col-end-7">
+              <div className="w-full h-[450px]">
+                <AspectRatio ratio={16 / 16}>
+                  <Image
+                    src={product.images[0].url! as string}
+                    alt={product.name}
+                    width={1000}
+                    height={1000}
+                    className="object-cover h-[450px]"
+                  />
+                </AspectRatio>
+              </div>
             </div>
 
-            <article className="col-start-7 col-end-13 space-y-4">
-              <div className="mb-12">
-                <h1 className=" font-bold leading-relaxed capitalize text-xl">
-                  {product.name}
-                </h1>
+            <article className="col-start-8 col-end-13 space-y-4">
+              <div className="mb-8">
+                <div className="flex items-center gap-x-12">
+                  <h1 className=" font-bold leading-relaxed capitalize text-xl">
+                    {product.name}
+                  </h1>
+                  <div className="flex-shrink-0">
+                    <HeartIcon
+                      onClick={handleAddToWishlist}
+                      className="cursor-pointer"
+                      fill={isItemInWishlist ? "#FF0000" : "transparent"}
+                      stroke="#FF0000"
+                    />
+                  </div>
+                </div>
                 <div className="flex items-center gap-x-1">
-                  {/* {renderRating(data.data.product.ratings, '#EEB012')}
-                      {renderRating(5 - data.data.product.ratings, '')} */}
-
                   <p className="flex items-center gap-x-1">
                     {new Array(Math.floor(product.ratings))
                       .fill(0)
@@ -149,22 +174,16 @@ const ProductSlug = ({ product }: Props) => {
               <div className="uppercase text-base space-y-4">
                 <div className="space-y-4">
                   <div className="flex items-center gap-x-3">
-                    <h4 className="font-semibold">Reviews:</h4>
-                    <p className="lowercase text-primary-grey-300">4</p>
+                    <h4 className={styles.productDetails.title}>Reviews:</h4>
+                    <p className="lowercase">4</p>
                   </div>
                 </div>
 
                 {/* product availability */}
                 <div className="flex items-center gap-x-2">
-                  <h5 className="font-semibold">Available:</h5>
-                  <CheckSquareIcon />
+                  <h5 className={styles.productDetails.title}>Available:</h5>
+                  <CheckSquareIcon className="h-5 w-5 text-green-500" />
                 </div>
-
-                {/* product weight */}
-                {/* <div className='grid grid-cols-productSlug'>
-                    <h5 className={`${styles.productDetails.title}`}>Sku: </h5>
-                    <p></p>
-                  </div> */}
 
                 {/* product category */}
                 <div className="flex items-center gap-x-2">
@@ -177,8 +196,7 @@ const ProductSlug = ({ product }: Props) => {
                 {/* product brand */}
                 <div className="space-y-4">
                   <h5 className={`${styles.productDetails.title}`}>
-                    Product Code:{" "}
-                    <span className="text-primary-grey-100">524162</span>
+                    Product Code: <span className="">524162</span>
                   </h5>
                   <h5 className={styles.productDetails.title}>
                     Brand:{" "}
@@ -225,7 +243,7 @@ const ProductSlug = ({ product }: Props) => {
                     </div> */}
 
                   {/* add to wishlist  */}
-                  <button
+                  {/* <button
                     disabled={likeQuery.isMutating}
                     className={`flex h-[40px] gap-x-4 items-center justify-center px-6 rounded-md text-white text-sm ${
                       isItemInWishlist ? "bg-[#FF0000]" : "bg-[#000]"
@@ -238,27 +256,27 @@ const ProductSlug = ({ product }: Props) => {
                         ? "Remove from wishlist"
                         : "Add to Wishlist"}
                     </p>
+                  </button> */}
+
+                  {/* add to cart / remove from cart */}
+                  <button
+                    disabled={cartQuery.isMutating}
+                    onClick={handleAddToCart}
+                    className={`px-4 h-[40px] w-full flex items-center justify-center text-sm rounded-md bg-black font-semibold text-white`}
+                  >
+                    {isItemInCart ? "Remove from cart" : "Add to Cart"}
                   </button>
                 </div>
               </div>
 
               <div className="flex items-center gap-x-8 py-4">
                 {/* open paystack modal here to make payment for this item right here in the slug */}
-                <button
+                {/* <button
                   onClick={handleBuyNow}
                   className="h-[40px] px-4 flex items-center justify-center text-sm rounded-md bg-primary-blue-300 font-semibold text-white"
                 >
                   Buy now
-                </button>
-
-                {/* add to cart / remove from cart */}
-                <button
-                  disabled={cartQuery.isMutating}
-                  onClick={handleAddToCart}
-                  className={`px-4 h-[40px] flex items-center justify-center text-sm rounded-md bg-black font-semibold text-white`}
-                >
-                  {isItemInCart ? "Remove from cart" : "Add to Cart"}
-                </button>
+                </button> */}
               </div>
             </article>
           </section>
