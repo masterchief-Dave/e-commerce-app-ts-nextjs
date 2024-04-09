@@ -93,8 +93,8 @@ const CategorySlug: React.FC = () => {
               <section className="grid grid-cols-4 justify-items-center gap-8">
                 {isLoading ? (
                   new Array(8).fill(0).map((_, index) => (
-                    <div className="w-full">
-                      <ProductCardSkeleton key={`Category page ${index + 1}`} />
+                    <div className="w-full" key={`Category page ${index + 1}`}>
+                      <ProductCardSkeleton />
                     </div>
                   ))
                 ) : categories?.length < 1 || isError ? (

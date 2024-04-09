@@ -94,8 +94,8 @@ const ProductSlug = () => {
               <section className="grid grid-cols-4 justify-items-end gap-12">
                 {isLoading ? (
                   new Array(8).fill(0).map((_, index) => (
-                    <div className="w-full">
-                      <ProductCardSkeleton key={`Search page ${index + 1}`} />
+                    <div className="w-full" key={`Search page ${index + 1}`}>
+                      <ProductCardSkeleton />
                     </div>
                   ))
                 ) : products?.length < 1 || isError ? (
