@@ -1,12 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { User } from '@/models/user'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import * as crypto from 'crypto'
-import { Resend } from 'resend'
-import { NEXT_PUBLIC_RESEND_API } from '@/utils/config'
+import { User } from "@/models/user"
+import type { NextApiRequest, NextApiResponse } from "next"
+import * as crypto from "crypto"
+import { Resend } from "resend"
+import { NEXT_PUBLIC_RESEND_API } from "@/utils/config"
 
-import SageWarehouseResetPasswordEmail from '@/emails/Resetpassword'
-import { connectToMongoDB } from '@/lib/mongodb'
+import SageWarehouseResetPasswordEmail from "@/emails/Resetpassword"
+import { connectToMongoDB } from "@/lib/mongodb"
 
 type Data = {
   message?: string
@@ -26,9 +26,8 @@ export default async function handler(
   // 4. create a random token and attach it to the email
   // 5. hash the token and save it on my database
   // 6. send the email reset link to the user
-  // 7. 
-  if (req.method === 'POST') {
-
+  // 7.
+  if (req.method === "POST") {
     try {
       await connectToMongoDB()
 
@@ -37,11 +36,16 @@ export default async function handler(
       const user = await User.findOne({ email: email })
 
       if (!user || user === null) {
-        return res.status(404).json({ message: 'invalid user, create an account with sage-warehouse' })
+        return res.status(404).json({
+          message: "invalid user, create an account with sage-warehouse",
+        })
       }
 
-      const resetToken = crypto.randomBytes(32).toString('hex')
-      const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex')
+      const resetToken = crypto.randomBytes(32).toString("hex")
+      const hashedToken = crypto
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex")
 
       const expiryDate = new Date()
       expiryDate.setMinutes(expiryDate.getMinutes() + 10)
@@ -55,25 +59,29 @@ export default async function handler(
 
       // confiure the email sender
       resend.sendEmail({
-        from: 'sage-warehouse@resend.dev',
+        from: "sage-warehouse@resend.dev",
         to: user.email,
-        subject: 'Reset Password,password expiry link will expire after 10 minutes.',
-        react: <SageWarehouseResetPasswordEmail name={user.name} product="Sage-Warehouse" resetPasswordLink={resetLink} />,
+        subject:
+          "Reset Password,password expiry link will expire after 10 minutes.",
+        react: (
+          <SageWarehouseResetPasswordEmail
+            name={user.name}
+            product="Sage-Warehouse"
+            resetPasswordLink={resetLink}
+          />
+        ),
       })
 
-      res.status(200).json({ message: 'Email sent successfully' })
+      res.status(200).json({ message: "Email sent successfully" })
     } catch (err) {
-      res.status(400).json(
-        {
-          message: 'Error encountered sending mail Try again!',
-          status: 400
-        }
-      )
+      res.status(400).json({
+        message: "Error encountered sending mail Try again!",
+        status: 400,
+      })
     }
-  }
-  else {
+  } else {
     res.status(405).json({
-      message: 'Method is not allowed'
+      message: "Method is not allowed",
     })
   }
 }

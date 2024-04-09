@@ -62,8 +62,8 @@ const ResetPassword = (props: Props) => {
         password,
         confirmPassword: passwordConfirm,
       })
-      console.log(response)
-      if (response.status === 200) {
+
+      if (response.success === true) {
         setIsLoading(false)
         toast({
           variant: "success",
@@ -112,7 +112,7 @@ const ResetPassword = (props: Props) => {
       <>
         <div className="py-24 font-rubik">
           <div className="flex items-center justify-center">
-            <section className="max-w-xl w-full space-y-12 rounded-lg border px-8 py-4">
+            <section className="max-w-xl w-full space-y-12 rounded-lg border p-8">
               <header>
                 <h1 className="text-center text-xl font-medium">
                   Reset Password

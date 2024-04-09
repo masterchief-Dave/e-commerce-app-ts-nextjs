@@ -32,10 +32,14 @@ class AuthService {
     query: string,
     { password, confirmPassword }: { password: string; confirmPassword: string }
   ) {
-    return await axios.post(`/api/auth/reset-password/${query}`, {
+    return await apiService(`/auth/reset/${query}`, "POST", {
       password,
       confirmPassword,
     })
+    // return await axios.post(`/api/auth/reset-password/${query}`, {
+    //   password,
+    //   confirmPassword,
+    // })
   }
 
   static async forgotPassword(email: string) {
