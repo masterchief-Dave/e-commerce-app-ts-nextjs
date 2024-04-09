@@ -1,20 +1,12 @@
-import { GetServerSideProps } from "next"
-import axios from "axios"
-
-import { Layout } from "@/components/Layout"
 // import BreadCrumb from '@/components/BreadCrumb'
 import { Navbar } from "@/components/Navbar"
 import { ShoppingFixedBag } from "@/components/ShoppingBag"
-import { Footer } from "@/components/Footer"
 import { ProductCard } from "@/components/Product/Card"
 import { Filter } from "@/components/Filter"
 import { Sorting } from "@/components/Filter/sorting"
 import NoItemFound from "@/components/Shell/NoItemFound"
 import Filtering from "@/components/Filter/filtering"
-import {
-  useGetProducts,
-  useSearchProducts,
-} from "@/lib/hooks/product/product.hook"
+import { useSearchProducts } from "@/lib/hooks/product/product.hook"
 import useProductStore from "@/lib/store/product.store"
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/router"
@@ -22,10 +14,6 @@ import React, { startTransition } from "react"
 import { CategoryPageSkeleton } from "@/components/skeleton"
 import type { ProductSearchInterface } from "@/lib/types/product"
 import HomeWrapper from "@/components/Layout/Home"
-
-type Props = {
-  products: Product[]
-}
 
 const ProductSlug = () => {
   const router = useRouter()
@@ -107,9 +95,6 @@ const ProductSlug = () => {
             <NoItemFound />
           ) : (
             <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
-              {/* <div className="col-start-1 col-end-3">
-                <Filter />
-              </div> */}
               <div className="col-start-2 col-end-12">
                 <section className="grid grid-cols-4 justify-items-end gap-12">
                   {products.map((product) => {

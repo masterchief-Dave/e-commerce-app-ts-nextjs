@@ -5,6 +5,9 @@ import Slider from "react-slick"
 import { bestDeals } from "@/globals/bestDeals"
 
 import { DealCard } from "./DealCard"
+import { Button } from "../ui/button"
+import { MoveRightIcon } from "lucide-react"
+import ContentSection from "../molecules/contentSection"
 
 type Props = {}
 
@@ -67,13 +70,23 @@ export const WeeklyDeals = (props: Props) => {
   }
 
   return (
-    <div className="py-2">
+    <ContentSection
+      title="Featured products"
+      description="Explore the best collection of quality products on sale!"
+      btnText="View featured products"
+      slug="/featured"
+    />
+  )
+}
+
+/**
+ *  <div className="py-2">
       <header className="flex items-end justify-between border-b px-4 py-3 lg:items-center">
         <div className="flex flex-col items-center gap-4 lg:flex-row">
           <h2 className="w-full text-left font-bold uppercase text-primary-black-200 text-xl">
-            Flash Sales
+            Featured products
           </h2>
-          <div className="flex gap-x-4">
+           <div className="flex gap-x-4">
             <div>
               <span className={styles.weeklyDealsTimeHead}>Days</span>
               <div className={styles.weeklyDealsTimeText}>
@@ -105,26 +118,25 @@ export const WeeklyDeals = (props: Props) => {
                 <span className="bg-primary-yellow-300 p-1">0</span>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
 
-        <div className="flex h-full items-end justify-end gap-2 lg:items-center">
+         <div className="flex h-full items-end justify-end gap-2 lg:items-center">
           <div className={styles.iconContainer} onClick={handlePrev}>
             <ChevronLeftIcon className={styles.icon} />
           </div>
           <div className={styles.iconContainer} onClick={handleNext}>
             <ChevronRightIcon className={styles.icon} />
           </div>
-        </div>
+        </div> 
       </header>
 
       <>
-        <Slider {...settings} ref={sliderRef}>
+     <Slider {...settings} ref={sliderRef}>
           {bestDeals.map((data: BestDeals, index) => {
             return <DealCard key={index} data={data} />
           })}
-        </Slider>
+        </Slider> 
       </>
     </div>
-  )
-}
+ */

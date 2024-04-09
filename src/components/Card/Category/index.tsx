@@ -8,7 +8,7 @@ interface Props {
   products: Product[] | undefined
 }
 
-export const CategoryCard = ({ products, category }: Props) => {
+export const FeatureCard = ({ products, category }: Props) => {
   const router = useRouter()
   const { setParams, params } = useCategoryStore((state) => state)
 

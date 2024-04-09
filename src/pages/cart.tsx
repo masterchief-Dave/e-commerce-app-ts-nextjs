@@ -23,7 +23,7 @@ const Cart = (props: Props) => {
         <Navbar />
         <main className="grid grid-cols-12">
           <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-8 py-12">
-            <h1 className="text-3xl font-bold uppercase">Cart</h1>
+            <h1 className="text-3xl font-bold capitalize">Cart</h1>
             {/* cart product design layout and design*/}
             {isLoading ? (
               <div className="flex flex-col">
