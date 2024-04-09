@@ -2,34 +2,26 @@ import Image from "next/image"
 import { MapPinIcon, PhoneIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 
-import visaCard from "public/assets/icons/visa-card.png"
-import americanExpressCard from "public/assets/icons/american-express-card.png"
-import discoverCard from "public/assets/icons/discover-card.png"
-import paypalCard from "public/assets/icons/paypal-card.png"
-import masterCard from "public/assets/icons/master-card.png"
-import instagram from "public/assets/icons/instagram.svg"
-import linkedin from "public/assets/icons/linkedin.svg"
-import twitter from "public/assets/icons/twitter.svg"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 
 import { GithubIcon, TwitterIcon, LinkedinIcon, SendIcon } from "lucide-react"
 import { useState } from "react"
 import AlertDialogComp from "../Alert"
+import { useRouter } from "next/router"
 
-type Props = {}
+export const Footer = () => {
+  const router = useRouter()
+  const [open, setOpen] = useState({
+    state: false,
+    name: "",
+  })
 
-export const Footer = (props: Props) => {
   const styles = {
     footerCardIcons: `lg:h-8 lg:w-8 w-6 h-6`,
     footerHeader: `text-sm font-semibold text-black `,
     socialMediaIcons: `w-5 h-5 cursor-pointer text-black`,
   }
-
-  const [open, setOpen] = useState({
-    state: false,
-    name: "",
-  })
 
   const handleClose = (name: string) => {
     setOpen((prev) => {
@@ -39,6 +31,10 @@ export const Footer = (props: Props) => {
         name: name,
       }
     })
+  }
+
+  if (router.pathname.startsWith("/auth")) {
+    return
   }
 
   return (

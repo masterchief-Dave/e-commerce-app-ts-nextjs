@@ -8,6 +8,11 @@ import { Layout } from "@/components/Layout"
 import ResetEmailSentModal from "@/components/Modal/ResetEmailSent"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import HomeWrapper from "@/components/Layout/Home"
+import AuthService from "@/lib/services/auth/auth.service"
+import { useToast } from "@/components/ui/use-toast"
+import { errorLogger } from "@/lib/utils/logger"
+import Spinner from "@/components/molecules/spinner"
 
 type Props = {}
 
@@ -17,38 +22,51 @@ const ForgotPassword = (props: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [email, setEmail] = useState<string>("")
   const [notification, setNotification] = useState<null | string>("")
+  const [isLoading, setIsLoading] = useState(false)
+  const { toast } = useToast()
 
   const handleAuthClick = async (e: React.MouseEvent) => {
     e.preventDefault()
     setShowModal(false)
 
     try {
-      const response = await axios.post("/api/auth/forgot-password", {
-        email: email,
-      })
+      // const response = await axios.post("/api/auth/forgot-password", {
+      //   email: email,
+      // })
+      setIsLoading(true)
+      const response = await AuthService.forgotPassword(email)
 
       if (response.status === 200) {
+        setIsLoading(false)
         return setShowModal(true)
       } else {
+        setIsLoading(false)
         setShowModal(false)
-        setNotification("Error encountered sending mail Try again!")
-
-        setTimeout(() => {
-          setNotification(null)
-        }, 3000)
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Error encountered sending mail Try again!",
+        })
       }
     } catch (err) {
+      setIsLoading(false)
       setShowModal(false)
-      setNotification("Error encountered sending mail Try again!")
-      setTimeout(() => {
-        setNotification(null)
-      }, 3000)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error encountered sending mail Try again!",
+      })
+      errorLogger({
+        err: err,
+        message: "Error encountered sending mail Try again!",
+        url: router.asPath,
+      })
     }
   }
 
   return (
-    <Layout>
-      <>
+    <HomeWrapper>
+      <div>
         {showModal && (
           <ResetEmailSentModal
             email={email}
@@ -57,7 +75,7 @@ const ForgotPassword = (props: Props) => {
             setIsOpen={setIsOpen}
           />
         )}
-        <div className="space-y-24 py-16 ">
+        <div className="space-y-24 py-16">
           {notification && (
             <div className="fixed left-0 right-0 text-center top-[1rem] flex items-center justify-center">
               <div className="border border-dashed text-red-500 bg-white p-8 space-y-4">
@@ -80,8 +98,8 @@ const ForgotPassword = (props: Props) => {
           </div>
 
           <div className="flex items-center justify-center">
-            <section className="w-[45rem] max-w-[45rem] space-y-8 rounded-xl border px-8 py-12">
-              <h1 className="text-center text-[1.8rem] font-semibold">
+            <section className="w-xl max-w-xl space-y-8 rounded-xl border p-8">
+              <h1 className="text-center text-2xl font-semibold">
                 Trouble Signing in ?
               </h1>
               <p className=" text-primary-grey-300">
@@ -96,29 +114,26 @@ const ForgotPassword = (props: Props) => {
                 <Input
                   type="text"
                   placeholder="Email"
-                  className="mb-4 h-[4rem]  w-full rounded-md border px-4 font-normal focus:ring-1"
+                  className="mb-4 w-full rounded-md border px-4 font-normal focus:ring-1"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
 
                 <Button
                   type="submit"
-                  className="h-[4rem] btn  w-full rounded-md"
+                  className="btn flex items-center justify-center w-full rounded-md gap-x-2"
                   onClick={handleAuthClick}
                 >
-                  Submit
+                  {isLoading && <Spinner className="h-5 w-5 text-white" />}
+                  <span>Submit</span>
                 </Button>
               </form>
             </section>
           </div>
         </div>
-      </>
-    </Layout>
+      </div>
+    </HomeWrapper>
   )
 }
 
 export default ForgotPassword
-
-const ShowModal = () => {
-  return <div>Daddy wan !!!</div>
-}
