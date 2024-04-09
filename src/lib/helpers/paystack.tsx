@@ -7,10 +7,11 @@ import type {
   BillingAddressInterface,
   UserCart,
 } from "@/lib/types/user/user.type"
-import axios from "axios"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { usePaystackPayment } from "react-paystack"
+import { useGetCart } from "../hooks/user/user.hook"
+import { errorLogger } from "../utils/logger"
 
 type Props = {
   orders: UserCart[]
@@ -39,7 +40,7 @@ export const PaystackHook = ({
   const [loading, setLoading] = useState(false)
   const amountToPay = Math.ceil(price)
   const { toast } = useToast()
-
+  const getCartQuery = useGetCart()
   const { user } = useAuth()
   const userId = user?._id as unknown as string
   const data = { ...config, amount: amountToPay }
@@ -52,11 +53,10 @@ export const PaystackHook = ({
     lastname: user?.name.split(" ")[1]!,
     currency: "NGN",
   })
+
   const onSuccess = () => {
     // Implementation for whatever you want to do with reference and after success call.
-    // console.log(reference)
     try {
-      // `http://localhost:8100/api/v1/payment/checkout-session/${reference?.reference}`
       CheckoutService.checkout({
         orders,
         price,
@@ -75,6 +75,8 @@ export const PaystackHook = ({
               description:
                 "You have successfully placed an order!. Check your email",
             })
+            // mutate the getcartquery
+            getCartQuery.mutate()
             return router.push({
               pathname: `/order-summary/${response.data._id}`,
             })
@@ -95,20 +97,28 @@ export const PaystackHook = ({
             description:
               "An Error occured while trying to process checkout. Please try again!",
           })
+          errorLogger({
+            url: "/checkout",
+            message: "Checkout failed",
+            err: err,
+          })
         })
     } catch (err) {
       setLoading(false)
-      console.log(
-        "the order was not successful and u will not be redirected yet!"
-      )
-      console.log(err)
+      toast({
+        variant: "destructive",
+        title: "Checkout Failed!",
+        description:
+          "An Error occured while trying to process checkout. Please try again!",
+      })
+      errorLogger({ url: "/checkout", message: "Checkout failed", err: err })
     }
   }
 
   return (
     <Button
       className="h-[40px] bg-blue-500 text-white font-medium rounded-md px-8 flex items-center justify-center w-full text-base"
-      disabled={loading || shippingAddress.address.length <= 1}
+      disabled={loading || shippingAddress?.address?.length <= 1}
       onClick={() => {
         setLoading(true)
         initializePayment(onSuccess, onClose)

@@ -18,9 +18,9 @@ type Props = {
 
 export const Order = (props: Props) => {
   return (
-    <div className="w-full p-8 ">
+    <div className="w-full p-8">
       <section className="space-y-8">
-        <div className="w-full">
+        <div className="w-full grid grid-cols-2">
           <header className="flex w-full items-center justify-between">
             <h2 className="font-semibold">
               Order Date:{" "}
@@ -30,12 +30,12 @@ export const Order = (props: Props) => {
               </span>
             </h2>
           </header>
-        </div>
 
-        <div className="flex justify-between">
-          <div>
-            <h3>Delivery Address</h3>
-            <p>{props.address}</p>
+          <div className="flex justify-between">
+            <div>
+              <h3>Delivery Address</h3>
+              <p>{props.address}</p>
+            </div>
           </div>
         </div>
 

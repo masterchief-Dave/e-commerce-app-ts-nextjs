@@ -11,7 +11,10 @@ import useProductStore from "@/lib/store/product.store"
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/router"
 import React, { startTransition } from "react"
-import { CategoryPageSkeleton } from "@/components/skeleton"
+import {
+  CategoryPageSkeleton,
+  ProductCardSkeleton,
+} from "@/components/skeleton"
 import type { ProductSearchInterface } from "@/lib/types/product"
 import HomeWrapper from "@/components/Layout/Home"
 
@@ -66,11 +69,6 @@ const ProductSlug = () => {
     price,
   })
 
-  // show loading skeleton
-  if (isLoading) {
-    return <CategoryPageSkeleton />
-  }
-
   const products = (data?.data as ProductSearchInterface[]) || []
 
   return (
@@ -91,23 +89,29 @@ const ProductSlug = () => {
             </div>
           </section>
 
-          {products?.length < 1 || isError ? (
-            <NoItemFound />
-          ) : (
-            <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
-              <div className="col-start-2 col-end-12">
-                <section className="grid grid-cols-4 justify-items-end gap-12">
-                  {products.map((product) => {
+          <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
+            <div className="col-start-2 col-end-12">
+              <section className="grid grid-cols-4 justify-items-end gap-12">
+                {isLoading ? (
+                  new Array(8).fill(0).map((_, index) => (
+                    <div className="w-full" key={`Search page ${index + 1}`}>
+                      <ProductCardSkeleton />
+                    </div>
+                  ))
+                ) : products?.length < 1 || isError ? (
+                  <NoItemFound />
+                ) : (
+                  products?.map((product) => {
                     return (
                       <div key={product._id}>
                         <ProductCard data={product} page={1} />
                       </div>
                     )
-                  })}
-                </section>
-              </div>
+                  })
+                )}
+              </section>
             </div>
-          )}
+          </div>
         </main>
 
         <ShoppingFixedBag />

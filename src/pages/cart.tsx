@@ -9,17 +9,15 @@ import AuthenticatedModal from "@/components/Modal/AuthenticatedModal"
 import { useGetCart } from "@/lib/hooks/user/user.hook"
 import { CartSkeleton } from "@/components/skeleton"
 import type { UserCart } from "@/lib/types/user/user.type"
-
 import useAuth from "@/lib/hooks/useAuth"
+import { Card, CardTitle } from "@/components/ui/card"
 
-type Props = {}
-
-const Cart = (props: Props) => {
+const Cart = () => {
   const { data, isLoading } = useGetCart()
 
   return (
     <Layout>
-      <div>
+      <div className="mb-24">
         <Navbar />
         <main className="grid grid-cols-12">
           <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-8 py-12">
@@ -50,18 +48,18 @@ const NoItemInCart = () => {
     <div>
       <main className="grid grid-cols-12">
         <section className="col-start-2 col-end-12 mx-auto w-full max-w-[144rem] space-y-8 py-12">
-          <div className="w-[300px] space-y-8 rounded-[1rem] border bg-[#dedede] p-12">
-            <h1 className="text-1xl font-semibold lg:text-2xl">
+          <Card className="w-[300px] space-y-8 rounded-[ border bg-[#dedede] p-8">
+            <CardTitle className="text-xl">
               Your shopping cart is empty
-            </h1>
+            </CardTitle>
 
             <Link
-              className="h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2  font-semibold text-white"
+              className="h-fit flex items-center justify-center w-fit rounded-md bg-primary-black-100 px-4 py-2 text-white"
               href="/"
             >
               Continue Shopping
             </Link>
-          </div>
+          </Card>
         </section>
       </main>
     </div>
@@ -122,30 +120,3 @@ const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
     </>
   )
 }
-
-/*
-export const getServerSideProps: GetServerSideProps<Props> = async ({ req, res }) => {
-
-  try {
-    const token = getCookie('Authorization', { req, res })
-
-    console.log({ token })
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/user/cart`, {
-      method: 'GET',
-      headers: {
-        'Authorization': token!
-      }
-    })
-
-    const cart = await response.json()
-
-    // console.log({ obj: cart.products })
-  } catch (err) {
-    // some code
-  }
-
-  return {
-    props: {}
-  }
-}
-*/
