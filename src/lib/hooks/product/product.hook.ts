@@ -111,3 +111,10 @@ export const useSearchProducts = ({
     queryFn: () => ProductService.getProducts({ page, rating, price, name }),
   })
 }
+
+export const useGetFeaturedProducts = () => {
+  return useQuery({
+    queryKey: ["products/featured"],
+    queryFn: () => ProductService.featuredProducts(),
+  })
+}

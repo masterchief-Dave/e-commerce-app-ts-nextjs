@@ -103,7 +103,7 @@ export const ProductCard = ({ page, data }: Props) => {
             <Image
               width={1000}
               height={1000}
-              src={data?.images?.[0]?.url}
+              src={data?.images?.[0]?.url ?? "/assets/product-placeholder.webp"}
               alt={data?.images?.[0]?.public_id}
               className="h-[200px] max-h-[150px] object-contain"
             />
@@ -152,7 +152,7 @@ export const ProductCard = ({ page, data }: Props) => {
           </Link>
           <div className="flex items-center justify-center gap-6 font-semibold">
             <h5 className="text-primary-green-100 font-bold ">
-              ${data.price.toFixed(2)}
+              ${(data?.price - data?.discountedPrice).toFixed(2)}
             </h5>
             {/* <h6 className='text-[#e94560] font-medium text-[1.3rem] line-through'>$550</h6> */}
           </div>

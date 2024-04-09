@@ -74,6 +74,7 @@ export const WeeklyDeals = (props: Props) => {
       title="Featured products"
       description="Explore the best collection of quality products on sale!"
       btnText="View featured products"
+      slug="/featured"
     />
   )
 }

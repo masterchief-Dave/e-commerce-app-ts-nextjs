@@ -6,6 +6,7 @@ function ExploreProducts() {
       title="View Products"
       description="Explore wide variety of products from around the world"
       btnText="Explore products"
+      slug="/products"
     />
   )
 }

@@ -1,13 +1,20 @@
 import { MoveRightIcon } from "lucide-react"
 import { Button } from "../ui/button"
+import Link from "next/link"
 
 interface ContentInterface {
   title: string
   description: string
   btnText: string
+  slug: string
 }
 
-function ContentSection({ title, description, btnText }: ContentInterface) {
+function ContentSection({
+  title,
+  description,
+  btnText,
+  slug,
+}: ContentInterface) {
   return (
     <section>
       <div className="p-4 border rounded-lg">
@@ -18,12 +25,14 @@ function ContentSection({ title, description, btnText }: ContentInterface) {
             </h2>
             <p>{description}</p>
           </div>
-          <Button
-            className="w-fit flex items-center justify-center gap-x-2"
-            variant="default"
-          >
-            {btnText}
-            <MoveRightIcon className="h-5 w-5" />
+          <Button className="w-fit" variant="default">
+            <Link
+              href={slug}
+              className="flex items-center justify-center gap-x-2"
+            >
+              {btnText}
+              <MoveRightIcon className="h-5 w-5" />
+            </Link>
           </Button>
         </header>
       </div>

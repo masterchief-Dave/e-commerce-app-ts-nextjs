@@ -57,6 +57,10 @@ class ProductService {
   static async getProducts(params: ProductParamInterface) {
     return await apiService(`/products/search?name=${params.name}`)
   }
+
+  static async featuredProducts() {
+    return await apiService(`/products/featured`)
+  }
 }
 
 export default ProductService
