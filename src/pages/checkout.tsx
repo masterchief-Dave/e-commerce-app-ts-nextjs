@@ -21,6 +21,7 @@ import type {
   UserCart,
 } from "@/lib/types/user/user.type"
 import useShippingAddress from "@/lib/store/shipping.store"
+import { CheckoutSummarySkeleton } from "@/components/skeleton"
 
 const styles = {
   sectionHeader: `font-semibold text-lg`,
@@ -40,7 +41,7 @@ const Checkout = () => {
   const shippingFee = 10
   const taxFee = 10
   const amount = (totalPrice as number) + shippingFee + taxFee
-
+  const router = useRouter()
   /**
    * THE billing address can either be in the global state or the shipping address the user has created earlier,
    * how to choose =>
@@ -50,6 +51,17 @@ const Checkout = () => {
     billingAddress === "savedAddress"
       ? (data as UserBillingInfo)
       : shippingAddress
+
+  if (getCartQuery.isLoading) {
+    return <CheckoutSummarySkeleton />
+  }
+
+  const checkoutSummary = getCartQuery?.data?.data || []
+
+  if (checkoutSummary.length < 1) {
+    return (window.location.href = "/")
+  }
+
   return (
     <div>
       <header className="grid grid-cols-12 border-b py-4">

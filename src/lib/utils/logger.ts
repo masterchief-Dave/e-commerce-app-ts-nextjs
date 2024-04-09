@@ -9,7 +9,7 @@ export const info = (...params: any[]) => {
 interface ErrorProp {
   url: string
   message: string
-  err: Error | null
+  err: any
 }
 
 export const errorLogger = ({ url, message, err }: ErrorProp) => {

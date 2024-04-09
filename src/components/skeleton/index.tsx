@@ -74,6 +74,41 @@ export const OrderSummarySkeleton = () => {
   )
 }
 
+export const CheckoutSummarySkeleton = () => {
+  return (
+    <section className="grid grid-cols-12 h-screen w-full">
+      <div className="col-start-1 col-end-8 space-y-12 p-32">
+        <div className="flex flex-col gap-8">
+          <Skeleton className="h-10 w-52" />
+          <Skeleton className="h-10 w-40" />
+        </div>
+
+        <div className="space-y-12">
+          <Skeleton className="h-40 w-full" />
+          <Skeleton className="h-40 w-full" />
+          <Skeleton className="h-40 w-full" />
+          <Skeleton className="h-40 w-full" />
+        </div>
+
+        <div className="flex justify-between">
+          <Skeleton className="h-20 w-40" />
+          <Skeleton className="h-20 w-40" />
+        </div>
+      </div>
+      <div className="col-start-8 col-end-13 space-y-8 py-72 px-32 bg-[#FAFAFA]">
+        <div>
+          <Skeleton className="h-40 w-40" />
+        </div>
+        <div className="space-y-4">
+          <Skeleton className="h-20 w-full" />
+          <Skeleton className="h-20 w-full" />
+          <Skeleton className="h-20 w-full" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export const OrderSkeleton = () => {
   return (
     <section className="p-8 space-y-8">
