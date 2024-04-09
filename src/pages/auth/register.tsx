@@ -21,7 +21,7 @@ import { registerSchema, registerVal } from "@/lib/schema/auth.schema"
 import { useState } from "react"
 import { errorLogger, info } from "@/lib/utils/logger"
 import useAuth from "@/lib/hooks/useAuth"
-import AuthService from "@/lib/services/auth.service"
+import AuthService from "@/lib/services/auth/auth.service"
 import Spinner from "@/components/molecules/spinner"
 import { useToast } from "@/components/ui/use-toast"
 
@@ -52,8 +52,8 @@ const Register = () => {
 
   const styles = {
     label: ` font-normal block mb-2 text-`,
-    input: ` border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0 text-base`,
-    btn: `h-[5px] w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium  rounded-md`,
+    input: `border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0 text-base`,
+    btn: `w-full bg-primary-blue-500 hover:bg-primary-blue-300 text-white font-medium  rounded-md`,
     icon: `cursor-pointer`,
   }
 
@@ -241,7 +241,7 @@ const Register = () => {
           <Button
             type="submit"
             variant="primary"
-            className="h-[50px] btn flex items-center justify-center"
+            className="h-[45px] btn flex items-center justify-center"
             disabled={isLoading}
           >
             {isLoading && <Spinner className="h-6 w-6 text-white" />}{" "}

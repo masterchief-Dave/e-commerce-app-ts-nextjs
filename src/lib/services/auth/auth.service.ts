@@ -1,4 +1,5 @@
 import { apiService } from "@/lib/helpers/apiService"
+import axios from "axios"
 
 class AuthService {
   static async login({ email, password }: { email: string; password: string }) {
@@ -25,6 +26,20 @@ class AuthService {
       password,
       confirmPassword,
     })
+  }
+
+  static async resetPassword(
+    query: string,
+    { password, confirmPassword }: { password: string; confirmPassword: string }
+  ) {
+    return await axios.post(`/api/auth/reset-password/${query}`, {
+      password,
+      confirmPassword,
+    })
+  }
+
+  static async forgotPassword(email: string) {
+    return await axios.post(`/api/auth/forgot-password`, { email })
   }
 }
 

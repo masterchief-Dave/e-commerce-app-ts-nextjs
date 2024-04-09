@@ -12,7 +12,7 @@ export const InputContainer = ({
   return (
     <section
       className={twMerge(
-        "flex items-center h-[50px] gap-2 border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white ring-black px-2 rounded-lg focus-within:ring-2 focus-within:ring-black",
+        "flex items-center h-[45px] gap-2 border ring-offset-2 focus:ring-2 focus:outline-none focus:ring-offset-2 ring-offset-white ring-black px-2 rounded-lg focus-within:ring-2 focus-within:ring-black",
         className
       )}
       {...props}

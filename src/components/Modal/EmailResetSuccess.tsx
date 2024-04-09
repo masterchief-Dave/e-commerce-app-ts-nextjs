@@ -17,8 +17,7 @@ export const PasswordResetSuccess = ({ isOpen, setIsOpen }: Props) => {
     setIsOpen(true)
   }
   return (
-    <div className="z-[99999999]">
-      <div className="fixed inset-0 flex items-center justify-center" />
+    <div className="z-[99]">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child

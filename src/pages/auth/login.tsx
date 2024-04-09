@@ -1,6 +1,6 @@
 import AuthLayout from "@/components/Layout/Auth"
 import LoginForm from "@/components/Form/loginForm"
-import AuthService from "@/lib/services/auth.service"
+import AuthService from "@/lib/services/auth/auth.service"
 import axios from "axios"
 import { useRouter } from "next/router"
 import useAuth from "@/lib/hooks/useAuth"

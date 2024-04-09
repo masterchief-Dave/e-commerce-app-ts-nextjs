@@ -16,7 +16,7 @@ import Spinner from "@/components/molecules/spinner"
 const styles = {
   label: ` font-normal block mb-2 text-sm`,
   input: `border-0 outline-0 ring-0 focus:outline-0 focus:ring-0 focus:ring-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:outline-0 focus-visible:border-0 focus-visible:ring-offset-0`,
-  btn: `h-[50px] w-full bg-primary-blue-500 font-medium  rounded-md`,
+  btn: `h-[45px] w-full bg-primary-blue-500 font-medium  rounded-md`,
 }
 interface FormProps {
   handleSubmit: (email: string, password: string) => void
@@ -55,7 +55,7 @@ function LoginForm({ handleSubmit, error, isLoading }: FormProps) {
             Email Address
           </label>
           <InputContainer className="mb-2">
-            <UserIcon />
+            <UserIcon className="h-5 w-5" />
             <Input
               type="text"
               placeholder="Email Address"
@@ -78,7 +78,7 @@ function LoginForm({ handleSubmit, error, isLoading }: FormProps) {
           </label>
           {/* add fingerprint icon, makes it look really cool */}
           <InputContainer className="mb-2">
-            <FingerprintIcon />
+            <FingerprintIcon className="h-5 w-5" />
             <Input
               type={show ? "text" : "password"}
               placeholder="Password"
@@ -90,9 +90,9 @@ function LoginForm({ handleSubmit, error, isLoading }: FormProps) {
               value={formik.values.password}
             />
             {show ? (
-              <EyeOffIcon className="cursor-pointer" onClick={toggle} />
+              <EyeOffIcon className="cursor-pointer h-5 w-5" onClick={toggle} />
             ) : (
-              <EyeIcon className="cursor-pointer" onClick={toggle} />
+              <EyeIcon className="cursor-pointer h-5 w-5" onClick={toggle} />
             )}
           </InputContainer>
           {formik.touched.password && formik.errors.password ? (
@@ -106,7 +106,7 @@ function LoginForm({ handleSubmit, error, isLoading }: FormProps) {
         )}
 
         <Button
-          className={`h-[50px] w-full text-white btn rounded-md flex items-center justify-center`}
+          className={`h-[45px] w-full text-white btn rounded-md flex items-center justify-center`}
           type="submit"
           disabled={isLoading}
           variant={"primary"}
@@ -146,7 +146,7 @@ function LoginForm({ handleSubmit, error, isLoading }: FormProps) {
 
       <div className="space-y-4 col-start-2 col-end-12">
         <Button
-          className={`h-[50px] border flex items-center justify-center gap-x-4 bg-white text-black hover:bg-black  hover:text-white`}
+          className={`h-[45px] border flex items-center justify-center gap-x-4 bg-white text-black hover:bg-black  hover:text-white`}
           type="submit"
           variant="primary"
           disabled={isLoading}
