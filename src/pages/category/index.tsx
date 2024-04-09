@@ -8,7 +8,10 @@ import { ProductCard } from "@/components/Product/Card"
 import useCategoryStore from "@/lib/store/category.store"
 import { useSearchParams } from "next/navigation"
 import { useGetCategory } from "@/lib/hooks/categories/category.hook"
-import { CategoryPageSkeleton } from "@/components/skeleton"
+import {
+  CategoryPageSkeleton,
+  ProductCardSkeleton,
+} from "@/components/skeleton"
 import type { CategoryProductInterface } from "@/lib/types/product"
 import Filtering from "@/components/Filter/filtering"
 import { useRouter } from "next/router"
@@ -65,11 +68,6 @@ const CategorySlug: React.FC = () => {
     rating,
   })
 
-  // show loading skeleton
-  if (isLoading) {
-    return <CategoryPageSkeleton />
-  }
-
   const categories = (data?.data as CategoryProductInterface[]) || []
 
   return (
@@ -90,24 +88,29 @@ const CategorySlug: React.FC = () => {
             </div>
           </section>
 
-          {categories?.length < 1 || isError ? (
-            <NoItemFound />
-          ) : (
-            <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
-              {/* <div className="col-start-1 col-end-3"><Filter /></div> */}
-              <div className="col-start-2 col-end-12">
-                <section className="grid grid-cols-4 justify-items-center gap-12">
-                  {categories?.map((product) => {
+          <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
+            <div className="col-start-2 col-end-12">
+              <section className="grid grid-cols-4 justify-items-center gap-8">
+                {isLoading ? (
+                  new Array(8).fill(0).map((_, index) => (
+                    <div className="w-full">
+                      <ProductCardSkeleton key={`Category page ${index + 1}`} />
+                    </div>
+                  ))
+                ) : categories?.length < 1 || isError ? (
+                  <NoItemFound />
+                ) : (
+                  categories?.map((product) => {
                     return (
                       <div key={product._id}>
                         <ProductCard data={product} page={1} />
                       </div>
                     )
-                  })}
-                </section>
-              </div>
+                  })
+                )}
+              </section>
             </div>
-          )}
+          </div>
         </main>
       </section>
     </HomeWrapper>
