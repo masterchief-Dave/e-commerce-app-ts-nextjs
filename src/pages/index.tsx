@@ -24,6 +24,7 @@ import {
 import HomeWrapper from "@/components/Layout/Home"
 import { Card } from "@/components/ui/card"
 import CategoryCard from "@/components/Card/Category/card"
+import ExploreProducts from "@/components/organisms/explore/explore-products"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
@@ -61,19 +62,19 @@ export default function Home() {
     error: productFetchingError,
   } = useGetProducts({ page: pageIndex })
 
-  const handlePrevButton = () => {
-    if (pageIndex === 1) {
-      return
-    }
-    setPageIndex((prev) => prev - 1)
-  }
+  // const handlePrevButton = () => {
+  //   if (pageIndex === 1) {
+  //     return
+  //   }
+  //   setPageIndex((prev) => prev - 1)
+  // }
 
-  const handleNextButton = () => {
-    if (pageIndex === 5) {
-      return
-    }
-    setPageIndex((prev) => prev + 1)
-  }
+  // const handleNextButton = () => {
+  //   if (pageIndex === 5) {
+  //     return
+  //   }
+  //   setPageIndex((prev) => prev + 1)
+  // }
 
   return (
     <>
@@ -93,14 +94,22 @@ export default function Home() {
           <Header />
           <main className="grid grid-cols-12 space-y-12 bg-primary-white py-12">
             <div className="col-span-full mx-auto grid w-full grid-cols-12">
-              <div className="col-start-2 col-end-12 space-y-12">
+              <div className="col-start-2 col-end-12 space-y-16">
                 <section>
                   <div>
                     <CategoryCard />
                   </div>
                 </section>
 
+                <section className="weekly-deals-component  bg-white">
+                  <WeeklyDeals />
+                </section>
+
                 <section>
+                  <ExploreProducts />
+                </section>
+
+                {/* <section>
                   <h2 className="mb-8 font-bold uppercase text-primary-black-200 text-xl">
                     Featured Categories
                   </h2>
@@ -128,7 +137,7 @@ export default function Home() {
                       </>
                     )}
 
-                    {/* show this section only in the lg screen size */}
+                    
                     <div className="hidden lg:block lg:space-y-4 xl:hidden">
                       <h3 className="font-semibold text-[20px] text-center">
                         Browse our Category
@@ -142,84 +151,35 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </section>
+                </section> */}
 
-                <section className="weekly-deals-component  bg-white">
-                  <WeeklyDeals />
-                </section>
-
-                <section className="products-component space-y-12 bg-white py-12">
-                  {productFetchingError ? (
-                    <p className="px-8  text-2xl font-medium text-primary-grey-300">
-                      Error fetching products at this time try again later 😞
-                    </p>
-                  ) : (
-                    <section className="flex justify-center px-8">
-                      <div className="grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4">
-                        {isAllProductsLoading
-                          ? new Array(8).fill(2).map((_, index) => {
-                              return <ProductCardSkeleton key={index} />
-                            })
-                          : allProductsData?.data?.products?.map(
-                              (product: Product) => {
-                                return (
-                                  <div
-                                    key={product._id}
-                                    className="flex justify-center"
-                                  >
-                                    <ProductCard
-                                      data={product}
-                                      page={pageIndex}
-                                    />
-                                  </div>
-                                )
-                              }
-                            )}
-                      </div>
-                    </section>
-                  )}
-
-                  <div className="flex items-center justify-end gap-x-4 px-8">
-                    <button
-                      className="rounded-md border px-8 py-2 text-sm font-medium"
-                      onClick={() => handlePrevButton()}
-                    >
-                      Prev
-                    </button>
-                    <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-blue-300 text-sm font-medium text-white">
-                      {pageIndex}
-                    </button>
-                    <button className="text-sm font-normal">
-                      {pageIndex + 1}
-                    </button>
-                    <p>...</p>
-                    <button className="text-sm">10</button>
-                    <button
-                      className="rounded-md border px-8 py-2 text-sm font-medium"
-                      onClick={() => handleNextButton()}
-                    >
-                      Next
-                    </button>
+                <section className="pt-24 space-y-4">
+                  <h2 className="font-medium text-xl uppercase">
+                    our services
+                  </h2>
+                  <div className="grid grid-cols-4 gap-24">
+                    {landingPageFeatures.map((feature, index) => {
+                      return (
+                        <FeaturesCard
+                          key={index}
+                          title={feature.title}
+                          description={feature.description}
+                          img={feature.img}
+                        />
+                      )
+                    })}
                   </div>
-                </section>
-
-                <section className="grid grid-cols-4 gap-24">
-                  {landingPageFeatures.map((feature, index) => {
-                    return (
-                      <FeaturesCard
-                        key={index}
-                        title={feature.title}
-                        description={feature.description}
-                        img={feature.img}
-                      />
-                    )
-                  })}
                 </section>
               </div>
             </div>
           </main>
           {/* testimonial section */}
-          <Testimonials />
+          <section className="pt-24">
+            <h2 className="flex items-center justify-center uppercase text-xl font-medium mb-8">
+              Customer Review
+            </h2>
+            <Testimonials />
+          </section>
         </div>
       </HomeWrapper>
       <ShoppingFixedBag />

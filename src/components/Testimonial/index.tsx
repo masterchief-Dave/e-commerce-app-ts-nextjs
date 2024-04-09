@@ -20,7 +20,7 @@ function Testimonials() {
         direction="left"
         reverse={false}
         pauseOnHover={false}
-        className="py-24 gap-24" // pass class to change gap or speed
+        className="pb-24 gap-24" // pass class to change gap or speed
         innerClassName="gap-24" // pass class to change gap or speed
       >
         {testimonials.map((testimonial, i) => (
