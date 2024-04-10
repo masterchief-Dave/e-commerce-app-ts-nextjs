@@ -20,7 +20,7 @@ const useShippingAddress = create<State & Actions>((set): State & Actions => ({
     firstname: "",
     lastname: "",
     phoneNumber: "",
-    zipcode: "",
+    zipCode: "",
   },
   setAddress: (data) => set((state) => ({ shippingAddress: data })),
 }))

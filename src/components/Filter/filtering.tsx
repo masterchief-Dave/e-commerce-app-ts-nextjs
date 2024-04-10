@@ -48,7 +48,7 @@ function Filtering() {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="flex flex-col min-w-[400px] sm:w-[540px] z-[99]"
+        className="flex flex-col min-w-[400px] sm:w-[540px] z-[99] font-rubik"
       >
         {" "}
         <SheetHeader className="px-2">
@@ -58,12 +58,12 @@ function Filtering() {
           <p>Change Product Category</p>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="border text-black rounded-md text-left w-full flex items-center h-[40px] px-4 justify-between">
+              <button className="border text-gray-400 rounded-md text-left w-full flex items-center h-[40px] px-4 justify-between">
                 Select Category{" "}
                 <ChevronDownIcon className="-mr-1 ml-1 flex-shrink-0 text-gray-400 group-hover:text-gray-500 w-5 h-5" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="z-[999] w-80">
+            <DropdownMenuContent className="z-[999] w-80 font-rubik">
               <DropdownMenuLabel>Product Categories</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {CATEGORY_OPTIONS.map((category) => (

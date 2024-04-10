@@ -61,7 +61,7 @@ export const BillingAddress = ({
         firstname: values.firstname,
         lastname: values.lastname,
         phoneNumber: values.phoneNumber,
-        zipcode: values.zipcode,
+        zipCode: values.zipCode,
       })
       addBillingAddressHelper({
         values,
@@ -78,7 +78,7 @@ export const BillingAddress = ({
       billingAddressQuery.data &&
       billingAddressQuery.data?.address.length > 1 &&
       billingAddressQuery.data?.country.length > 1 &&
-      billingAddressQuery.data?.zipcode.length > 1
+      billingAddressQuery.data?.zipCode.length > 1
     ) {
       return (
         <section className="grid grid-cols-12 gap-4 text-left font-medium">
@@ -97,7 +97,7 @@ export const BillingAddress = ({
           <div className="col-start-10 col-end-13">
             <h5 className={styles.cardTitle}>Postcode</h5>
             <p className={`${styles.cardText} `}>
-              {billingAddressQuery.data?.zipcode}
+              {billingAddressQuery.data?.zipCode}
             </p>
           </div>
         </section>

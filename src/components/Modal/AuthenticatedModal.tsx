@@ -103,7 +103,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-12 text-left align-middle shadow-xl transition-all space-y-8">
+                <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all space-y-8">
                   <div className="relative flex items-center justify-between">
                     <Dialog.Title
                       as="h3"
@@ -119,7 +119,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                   </div>
                   <section>
                     <form
-                      className="flex flex-col gap-8"
+                      className="flex flex-col gap-4"
                       onSubmit={formik.handleSubmit}
                     >
                       <div>
@@ -177,7 +177,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="h-[3rem]  bg-black text-white btn"
+                        className="h-[3rem] bg-black text-white btn"
                       >
                         {isLoading && <Spinner className="text-white" />}
                         <span>Login</span>

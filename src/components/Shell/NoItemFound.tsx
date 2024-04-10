@@ -1,30 +1,39 @@
 import { MaterialSymbolsRemoveShoppingCart } from "@/globals/icons"
 import { Pill } from "./Pill"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "../ui/card"
 
 const NoItemFound = () => {
   return (
-    <div className="col-start-2 col-end-12 flex items-center justify-center w-full h-full">
-      <div className="border rounded-2xl w-fit space-y-8 p-8 shadow-sm">
+    <Card className="max-w-xl flex items-center justify-center w-full h-full">
+      <CardContent className="rounded-xl w-fit space-y-8 p-8">
         <div className="flex justify-center">
           <MaterialSymbolsRemoveShoppingCart className="w-8 h-8" />
         </div>
 
         <article className="flex flex-col items-center justify-center max-w-sm">
-          <h4 className="font-medium text-[24px]">No Products found</h4>
-          <p className="text-base text-center font-normal text-primary-grey-100">
+          <CardTitle className="font-medium text-[24px]">
+            No Products found
+          </CardTitle>
+          <CardDescription className="text-base text-center font-normal text-primary-grey-100">
             Try changing your filters, or check back later for new products
-          </p>
+          </CardDescription>
         </article>
 
-        <section className="flex items-center justify-center gap-x-4">
+        <CardFooter className="flex items-center justify-center gap-x-4">
           <Pill content="apple" link="apple" />
           <Pill content="watch" link="watch" />
           <Pill content="usb" link="usb" />
           <Pill content="bose" link="bose" />
           <Pill content="samsung" link="samsung" />
-        </section>
-      </div>
-    </div>
+        </CardFooter>
+      </CardContent>
+    </Card>
   )
 }
 

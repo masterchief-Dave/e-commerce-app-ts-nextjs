@@ -118,11 +118,11 @@ export const AddressForm = ({ formik, loading }: AddressFormInterface) => {
             id="zipCode"
             className={`${styles.input}`}
             placeholder="Zip Code"
-            name="zipcode"
+            name="zipCode"
             onChange={formik.handleChange}
-            value={formik.values.zipcode}
+            value={formik.values.zipCode}
           />
-          {formik.errors.zipcode && <ErrorLabel text={formik.errors.zipcode} />}
+          {formik.errors.zipCode && <ErrorLabel text={formik.errors.zipCode} />}
         </div>
 
         <div className="flex gap-4 items-center">

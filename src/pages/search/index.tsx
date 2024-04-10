@@ -88,26 +88,32 @@ const ProductSlug = () => {
               </div>
             </div>
           </section>
-
+          {/* className="grid grid-cols-4 justify-items-end gap-12" */}
           <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
             <div className="col-start-2 col-end-12">
-              <section className="grid grid-cols-4 justify-items-end gap-12">
+              <section>
                 {isLoading ? (
-                  new Array(8).fill(0).map((_, index) => (
-                    <div className="w-full" key={`Search page ${index + 1}`}>
-                      <ProductCardSkeleton />
-                    </div>
-                  ))
-                ) : products?.length < 1 || isError ? (
-                  <NoItemFound />
-                ) : (
-                  products?.map((product) => {
-                    return (
-                      <div key={product._id}>
-                        <ProductCard data={product} page={1} />
+                  <div className="grid grid-cols-4 justify-items-end gap-12">
+                    {new Array(8).fill(0).map((_, index) => (
+                      <div className="w-full" key={`Search page ${index + 1}`}>
+                        <ProductCardSkeleton />
                       </div>
-                    )
-                  })
+                    ))}
+                  </div>
+                ) : products?.length < 1 || isError ? (
+                  <div className="flex items-center justify-center w-full h-full">
+                    <NoItemFound />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-4 justify-items-end gap-12">
+                    {products?.map((product) => {
+                      return (
+                        <div key={product._id} className="">
+                          <ProductCard data={product} page={1} />
+                        </div>
+                      )
+                    })}
+                  </div>
                 )}
               </section>
             </div>
