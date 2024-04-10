@@ -5,9 +5,9 @@ export const globalAxios = axios.create({
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    Accept: "application/json",
   },
-  withCredentials: true
+  withCredentials: true,
 })
 
 // globalAxios.interceptors.request.use((request) => {
@@ -41,23 +41,27 @@ export const globalAxios = axios.create({
 //     }
 //   }
 
-
 //   sessionStorage.removeItem('user')
 //   return err
 // })
 
-export const apiService = (url: string, method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT', data?: any): Promise<any> => {
+export const apiService = (
+  url: string,
+  method?: "GET" | "POST" | "PATCH" | "DELETE" | "PUT",
+  data?: any
+): Promise<any> => {
   return new Promise((resolve) => {
-    console.log(url)
+    if (process.env.NODE_ENV === "development") {
+      console.log(url)
+    }
     globalAxios({
       url,
       method,
-      data
-    }).
-      then((res) => resolve(res.data))
+      data,
+    })
+      .then((res) => resolve(res.data))
       .catch((err) => {
         resolve(err.response)
       })
   })
 }
-

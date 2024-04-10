@@ -1,6 +1,5 @@
 import { Toaster } from "@/components/ui/toaster"
 import { ChakraProvider } from "@chakra-ui/react"
-import { Provider } from "react-redux"
 import { SessionProvider } from "next-auth/react"
 import type { AppProps } from "next/app"
 import type { Session } from "next-auth"
@@ -18,6 +17,7 @@ import Spinner from "@/components/molecules/spinner"
 import { useRouter } from "next/router"
 import "@smastrom/react-rating/style.css"
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
+import ErrorBoundary from "./error"
 
 export default function App({
   Component,
@@ -61,18 +61,20 @@ export default function App({
       <SessionProvider session={session}>
         <ChakraProvider>
           <SWRProvider>
-            <div className="font-rubik max-w-[2560px] mx-auto">
+            <main className={`font-rubik max-w-[2560px] mx-auto`}>
               {isLoading ? (
                 <div className="flex items-center justify-center h-screen">
                   <Spinner className="h-[40px] w-[40px]" />
                 </div>
               ) : (
-                <div className="antialiased">
-                  <Component {...pageProps} />
-                  <Toaster />
-                </div>
+                <ErrorBoundary>
+                  <div className={`antialiased`}>
+                    <Component {...pageProps} />
+                    <Toaster />
+                  </div>
+                </ErrorBoundary>
               )}
-            </div>
+            </main>
           </SWRProvider>
         </ChakraProvider>
       </SessionProvider>
