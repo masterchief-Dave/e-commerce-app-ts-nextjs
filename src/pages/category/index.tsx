@@ -90,23 +90,32 @@ const CategorySlug: React.FC = () => {
 
           <div className="col-start-2 col-end-12 grid grid-cols-12 gap-12">
             <div className="col-start-2 col-end-12">
-              <section className="grid grid-cols-4 justify-items-center gap-8">
+              <section className="">
                 {isLoading ? (
-                  new Array(8).fill(0).map((_, index) => (
-                    <div className="w-full" key={`Category page ${index + 1}`}>
-                      <ProductCardSkeleton />
-                    </div>
-                  ))
-                ) : categories?.length < 1 || isError ? (
-                  <NoItemFound />
-                ) : (
-                  categories?.map((product) => {
-                    return (
-                      <div key={product._id}>
-                        <ProductCard data={product} page={1} />
+                  <div className="grid grid-cols-4 justify-items-center gap-12">
+                    {new Array(8).fill(0).map((_, index) => (
+                      <div
+                        className="w-full"
+                        key={`Category page ${index + 1}`}
+                      >
+                        <ProductCardSkeleton />
                       </div>
-                    )
-                  })
+                    ))}
+                  </div>
+                ) : categories?.length < 1 || isError ? (
+                  <div className="flex items-center justify-center h-full w-full">
+                    <NoItemFound />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-4 justify-items-center gap-12">
+                    {categories?.map((product) => {
+                      return (
+                        <div key={product._id}>
+                          <ProductCard data={product} page={1} />
+                        </div>
+                      )
+                    })}
+                  </div>
                 )}
               </section>
             </div>

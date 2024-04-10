@@ -1,35 +1,23 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
-import { ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { Navbar } from "@/components/Navbar"
 import { Header } from "@/components/Header"
 import { WeeklyDeals } from "@/components/Deals"
-import { FeatureCard } from "@/components/Card/Category"
-import { ProductCard } from "@/components/Product/Card"
 import { ShoppingFixedBag } from "@/components/ShoppingBag"
-import {
-  CategorySkeleton,
-  ProductCardSkeleton,
-} from "@/components/SkeletonLoading"
 import { landingPageFeatures } from "@/globals/home"
 import { FeaturesCard } from "@/components/Card"
 import Testimonials from "@/components/Testimonial"
 import { useSearchParams } from "next/navigation"
 import axios from "axios"
 import useAuth from "@/lib/hooks/useAuth"
-import {
-  useGetCategories,
-  useGetProducts,
-} from "@/lib/hooks/product/product.hook"
 import HomeWrapper from "@/components/Layout/Home"
-import { Card } from "@/components/ui/card"
 import CategoryCard from "@/components/Card/Category/card"
 import ExploreProducts from "@/components/organisms/explore/explore-products"
 
 export default function Home() {
   const [pageIndex, setPageIndex] = useState<number>(1)
   const params = useSearchParams()
-  const { user, setUser } = useAuth()
+  const { setUser } = useAuth()
 
   // CREATE USE-EFFECT TO CAPTURE THE DATA COMING FROM THE SERVER
   useEffect(() => {
@@ -52,29 +40,6 @@ export default function Home() {
       })
     }
   }, [])
-
-  const { data: categories, isLoading: categoriesLoading } = useGetCategories()
-  // console.log(categories?.data.data)
-
-  const {
-    isLoading: isAllProductsLoading,
-    data: allProductsData,
-    error: productFetchingError,
-  } = useGetProducts({ page: pageIndex })
-
-  // const handlePrevButton = () => {
-  //   if (pageIndex === 1) {
-  //     return
-  //   }
-  //   setPageIndex((prev) => prev - 1)
-  // }
-
-  // const handleNextButton = () => {
-  //   if (pageIndex === 5) {
-  //     return
-  //   }
-  //   setPageIndex((prev) => prev + 1)
-  // }
 
   return (
     <>

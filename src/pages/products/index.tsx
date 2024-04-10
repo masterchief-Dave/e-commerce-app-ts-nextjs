@@ -4,17 +4,17 @@ import { Layout } from "@/components/Layout"
 import HomeWrapper from "@/components/Layout/Home"
 import { Navbar } from "@/components/Navbar"
 import { ProductCard } from "@/components/Product/Card"
+import NoItemFound from "@/components/Shell/NoItemFound"
 import { ProductCardSkeleton } from "@/components/skeleton"
-// import { ProductCardSkeleton } from "@/components/SkeletonLoading"
 import { useGetProducts } from "@/lib/hooks/product/product.hook"
 import { useState } from "react"
 
 function Products() {
   const [pageIndex, setPageIndex] = useState<number>(1)
   const {
-    isLoading: isAllProductsLoading,
+    isLoading,
     data: allProductsData,
-    error: productFetchingError,
+    error,
   } = useGetProducts({ page: pageIndex })
 
   const handlePrevButton = () => {
@@ -30,6 +30,7 @@ function Products() {
     }
     setPageIndex((prev) => prev + 1)
   }
+
   return (
     <HomeWrapper>
       <div>
@@ -46,22 +47,28 @@ function Products() {
             <div className="grid grid-cols-12">
               <div className="col-start-2 col-end-12">
                 <section className="products-component space-y-12 bg-white py-12">
-                  {productFetchingError ? (
-                    <p className="px-8  text-2xl font-medium text-primary-grey-300">
-                      Error fetching products at this time try again later 😞
-                    </p>
-                  ) : (
-                    <section className="flex justify-center px-8">
-                      <div className="grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4">
-                        {isAllProductsLoading
-                          ? new Array(8).fill(2).map((_, index) => {
-                              return (
-                                <ProductCardSkeleton
-                                  key={`Products page ${index + 1}`}
-                                />
-                              )
-                            })
-                          : allProductsData?.data?.products?.map(
+                  <section className="flex justify-center px-8">
+                    <div className="">
+                      {isLoading ? (
+                        <div className="grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4">
+                          {new Array(8).fill(2).map((_, index) => {
+                            return (
+                              <ProductCardSkeleton
+                                key={`Products page ${index + 1}`}
+                              />
+                            )
+                          })}
+                        </div>
+                      ) : allProductsData?.data?.products?.length < 1 ||
+                        error ||
+                        allProductsData === undefined ? (
+                        <div className="flex items-center justify-center w-full h-full">
+                          <NoItemFound />
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4">
+                            {allProductsData?.data?.products?.map(
                               (product: Product) => {
                                 return (
                                   <div
@@ -76,32 +83,33 @@ function Products() {
                                 )
                               }
                             )}
-                      </div>
-                    </section>
-                  )}
-
-                  <div className="flex items-center justify-end gap-x-4 px-8 mt-12">
-                    <button
-                      className="rounded-md border px-8 py-2 text-sm font-medium"
-                      onClick={() => handlePrevButton()}
-                    >
-                      Prev
-                    </button>
-                    <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-blue-300 text-sm font-medium text-white">
-                      {pageIndex}
-                    </button>
-                    <button className="text-sm font-normal">
-                      {pageIndex + 1}
-                    </button>
-                    <p>...</p>
-                    <button className="text-sm">10</button>
-                    <button
-                      className="rounded-md border px-8 py-2 text-sm font-medium"
-                      onClick={() => handleNextButton()}
-                    >
-                      Next
-                    </button>
-                  </div>
+                          </div>
+                          <div className="flex items-center justify-end gap-x-4 px-8 mt-12">
+                            <button
+                              className="rounded-md border px-8 py-2 text-sm font-medium"
+                              onClick={() => handlePrevButton()}
+                            >
+                              Prev
+                            </button>
+                            <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-blue-300 text-sm font-medium text-white">
+                              {pageIndex}
+                            </button>
+                            <button className="text-sm font-normal">
+                              {pageIndex + 1}
+                            </button>
+                            <p>...</p>
+                            <button className="text-sm">10</button>
+                            <button
+                              className="rounded-md border px-8 py-2 text-sm font-medium"
+                              onClick={() => handleNextButton()}
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </section>
                 </section>
               </div>
             </div>
