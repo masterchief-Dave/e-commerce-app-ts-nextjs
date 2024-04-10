@@ -91,25 +91,25 @@ const CheckoutProduct = ({
               <span className="lg:hidden block">Show details</span>
             </button>
             <span>
-              <ChevronRightIcon className="h-6 w-6" />
+              <ChevronRightIcon className="h-4 w-4" />
             </span>
           </div>
         </div>
         <div className="flex grow items-center gap-x-2 lg:gap-x-4 text-base">
           <p>{cartQuantity}</p>
-          <div className="flex flex-col items-center justify-center gap-2 lg:gap-4 text-text-primary-link">
+          <div className="flex flex-col items-center justify-center gap-2 text-text-primary-link">
             {/* when the quanity is 1 then disable the button from going lower */}
             <button
               onClick={handleIncreaseItemQuantity}
               disabled={increaseItemQuery.isMutating || cartQuantity >= stock!}
             >
-              <ChevronUpIcon className="h-8 w-8 cursor-pointer" />
+              <ChevronUpIcon className="h-5 w-5 cursor-pointer" />
             </button>
             <button
               onClick={handleDecreaseItemQuantity}
               disabled={decreaseItemQuery.isMutating || cartQuantity < 1}
             >
-              <ChevronDownIcon className="h-8 w-8 cursor-pointer" />
+              <ChevronDownIcon className="h-5 w-5 cursor-pointer" />
             </button>
           </div>
           {/* I want this message to clear after some time */}
