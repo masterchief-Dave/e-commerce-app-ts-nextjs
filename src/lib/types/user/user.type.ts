@@ -36,11 +36,14 @@ export interface UserBillingInfo {
   firstname: string
   lastname: string
   phoneNumber: string
+  city?: string
+  street?: string
+  state?: string
   address: string
   country: string
   default: boolean
   updated_at: Date
-  zipcode: string
+  zipCode: string
   __v: number
 }
 

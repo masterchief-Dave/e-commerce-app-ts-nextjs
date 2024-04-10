@@ -60,18 +60,18 @@ export const AccountLayout = ({ children }: Props) => {
           <Navbar />
 
           <section className="grid grid-cols-12 py-12">
-            <div className="col-start-2 col-end-12">
+            <div className="col-start-3 col-end-11">
               <BreadCrumb breadcrumbs={breadcrumbs} />
             </div>
           </section>
 
           {isAboveMediaQuery ? (
             <div className="relative grid grid-cols-12 py-10">
-              <section className="col-start-2 col-end-4">
+              <section className="col-start-3 col-end-5">
                 <SideBar />
               </section>
 
-              <section className="col-start-5 col-end-12 min-h-screen">
+              <section className="col-start-6 col-end-11 min-h-screen">
                 <main className="h-fit rounded-xl border min-h-[20rem]">
                   {children}
                 </main>

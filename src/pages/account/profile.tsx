@@ -15,7 +15,6 @@ import Spinner from "@/components/molecules/spinner"
 import { InputContainer } from "@/components/Form"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
-import { setCookie } from "cookies-next"
 
 type Props = Pick<User, "user">
 
@@ -228,7 +227,7 @@ const User = (props: Props) => {
             <Button
               disabled={canEdit ? false : true}
               type="submit"
-              className="h-fit w-full rounded-md bg-primary-blue-300 btn py-4 font-semibold text-white flex items-center justify-center"
+              className="h-fit w-full rounded-md bg-primary-blue-300 btn font-semibold text-white flex items-center justify-center"
             >
               {loading && <Spinner />}
               <span>Update Information</span>
@@ -236,54 +235,8 @@ const User = (props: Props) => {
           </form>
         </div>
       </AccountLayout>
-      {/* <Footer /> */}
     </div>
   )
 }
 
 export default User
-
-/*
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-  const session = await getSession({ req: context.req })
-
-  let data
-
-  if (!session) {
-    return {
-      props: {
-        user: null
-      }
-    }
-  }
-  //note: i cannot use localhost here because server side props does not run on the browser but on the server side, what i have to do is move this code to util and call it from there
-  try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_SERVER}/user/profile/${session._id}`)
-    data = await response.data
-
-    const token = await getToken({
-      req: context.req,
-      secret: process.env.JWT_SECRET,
-    })
-
-    // console.log({ token })
-
-    const expressApiOrders = await fetchDataFromExpressServer(context.req, token!.accessToken as string)
-
-
-  } catch (err) {
-    // console.log(err)
-  }
-
-
-  //  can I check from here if the item is already in the cart already from here, useCart will not work here because this side is server side rendered
-  // i want to persist the cart in the local storage so from there i guess i can check if an item is already in the cart comment created 6 months ago, updated 12 march 2024
-
-
-  return {
-    props: {
-      user: data.user
-    }
-  }
-}
-*/

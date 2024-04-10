@@ -11,12 +11,13 @@ import Spinner from "@/components/molecules/spinner"
 type Props = Omit<UserBillingInfo, "__v" | "default" | "updated_at">
 
 export const AddressBox = ({
-  address,
+  city,
+  street,
   country,
   firstname,
   lastname,
   phoneNumber,
-  zipcode,
+  zipCode,
   _id,
 }: Props) => {
   // const [show, setShow] = useState<boolean>(false)
@@ -61,7 +62,7 @@ export const AddressBox = ({
                   </Button> */}
 
                 <Button
-                  className="h-fit w-fit rounded-md px-4 py-2  font-semibold text-white bg-red-500 flex items-center justify-center"
+                  className="h-fit w-fit rounded-md px-4 py-2 font-semibold text-white bg-red-500 flex items-center justify-center"
                   onClick={handleDeleteBillingAddress}
                   disabled={isMutating}
                 >
@@ -82,12 +83,14 @@ export const AddressBox = ({
 
             <div className="flex items-center gap-x-2">
               <MapPinIcon className="h-6 w-6" />
-              <p className="truncated">{address}</p>
+              <p className="truncated">
+                {street} {city} {country}
+              </p>
             </div>
 
             <div className="flex items-center gap-x-2">
               <PhoneIcon className="h-6 w-6" />
-              <p>{phoneNumber}</p>
+              <p>{zipCode}</p>
             </div>
           </section>
         </div>
