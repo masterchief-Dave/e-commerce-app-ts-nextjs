@@ -18,6 +18,7 @@ import { useRouter } from "next/router"
 import "@smastrom/react-rating/style.css"
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import ErrorBoundary from "./error"
+import { errorLogger } from "@/lib/utils/logger"
 
 export default function App({
   Component,
@@ -42,7 +43,7 @@ export default function App({
       try {
         await refreshToken()
       } catch (err) {
-        console.log(err)
+        errorLogger({ url: router.asPath, message: "", err: err })
         setIsLoading(false)
       } finally {
         isMounted && setIsLoading(false)

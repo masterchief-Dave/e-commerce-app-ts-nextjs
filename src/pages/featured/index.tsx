@@ -1,6 +1,7 @@
 import Filtering from "@/components/Filter/filtering"
 import { Sorting } from "@/components/Filter/sorting"
 import { Layout } from "@/components/Layout"
+import HomeWrapper from "@/components/Layout/Home"
 import { Navbar } from "@/components/Navbar"
 import { ProductCard } from "@/components/Product/Card"
 import { ProductCardSkeleton } from "@/components/skeleton"
@@ -11,7 +12,7 @@ function Featured() {
   const featuredProducts = (data?.data as Product[]) || []
 
   return (
-    <Layout>
+    <HomeWrapper>
       <div>
         <Navbar />
         <div>
@@ -50,7 +51,7 @@ function Featured() {
           </div>
         </div>
       </div>
-    </Layout>
+    </HomeWrapper>
   )
 }
 

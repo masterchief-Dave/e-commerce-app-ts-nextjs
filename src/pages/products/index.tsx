@@ -1,6 +1,7 @@
 import Filtering from "@/components/Filter/filtering"
 import { Sorting } from "@/components/Filter/sorting"
 import { Layout } from "@/components/Layout"
+import HomeWrapper from "@/components/Layout/Home"
 import { Navbar } from "@/components/Navbar"
 import { ProductCard } from "@/components/Product/Card"
 import { ProductCardSkeleton } from "@/components/skeleton"
@@ -30,7 +31,7 @@ function Products() {
     setPageIndex((prev) => prev + 1)
   }
   return (
-    <Layout>
+    <HomeWrapper>
       <div>
         <Navbar />
         <div className="grid grid-cols-12">
@@ -107,7 +108,7 @@ function Products() {
           </div>
         </div>
       </div>
-    </Layout>
+    </HomeWrapper>
   )
 }
 
