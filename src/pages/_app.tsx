@@ -30,6 +30,7 @@ export default function App({
     "/legal/terms-and-condition",
     "/auth/login",
     "/auth/register",
+    "/",
   ]
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(

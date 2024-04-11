@@ -1,4 +1,4 @@
-import { Layout } from "@/components/Layout"
+import AuthLayout from "@/components/Layout/Auth"
 import { useRouter } from "next/router"
 
 type Props = {}
@@ -7,7 +7,7 @@ const ResetPasswordSuccess = (props: Props) => {
   const router = useRouter()
 
   return (
-    <Layout>
+    <AuthLayout>
       <div className="space-y-24 py-16 ">
         <div className="flex items-center justify-center">
           <section className="w-[35rem] max-w-[40rem] space-y-12 rounded-xl border px-8 py-4">
@@ -27,7 +27,7 @@ const ResetPasswordSuccess = (props: Props) => {
           </section>
         </div>
       </div>
-    </Layout>
+    </AuthLayout>
   )
 }
 

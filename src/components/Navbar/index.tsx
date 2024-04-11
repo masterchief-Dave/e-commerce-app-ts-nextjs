@@ -20,15 +20,15 @@ import { useGetCart } from "@/lib/hooks/user/user.hook"
 import type { UserCart } from "@/lib/types/user/user.type"
 import { cn } from "@/lib/utils"
 import { NavigationMenuComp } from "../Dropdown/NavigationDropdownMenu"
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 import useProductStore from "@/lib/store/product.store"
+import Spinner from "../molecules/spinner"
 
 type Props = {
   session: UserLoginSession | null
   isTop: boolean
   cart: UserCart[]
   handleSignOut: () => void
-  isLoggedIn: boolean
   user: Omit<UserSession, "success"> | null
   data: Session | null
   // i am not using these states any more i am using formik to validate and manage the state of the input for searching
@@ -55,7 +55,6 @@ export const Navbar = () => {
         <MobileNavbar
           handleSignOut={logout}
           session={null}
-          isLoggedIn={false}
           user={user}
           data={data}
           cart={cart.data?.message === "success" ? cart?.data?.data : []}
@@ -69,7 +68,6 @@ export const Navbar = () => {
           handleSignOut={logout}
           data={data}
           session={null}
-          isLoggedIn={false}
           user={user}
         />
       </div>
@@ -82,12 +80,11 @@ const Desktop = ({
   isTop,
   cart,
   handleSignOut,
-  isLoggedIn,
   user,
   data,
 }: Props) => {
   const router = useRouter()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, userLoading } = useAuth()
   const { params, setParams } = useProductStore((state) => state)
   const formik = useFormik<Search>({
     initialValues: {
@@ -184,7 +181,40 @@ const Desktop = ({
             </div>
           </form>
 
-          {user?._id ? (
+          {userLoading ? (
+            <Spinner className="h-5 w-5 text-black" />
+          ) : user?._id ? (
+            <UserAccountDropdown
+              photo={user.photo}
+              alt={user.name}
+              fallback={user.name}
+            />
+          ) : (
+            <div
+              className={`flex items-center gap-x-8 ${
+                userLoading ? "hidden" : "block"
+              }`}
+            >
+              <li>
+                <Link
+                  href="/auth/login"
+                  className="auth-btn bg-black text-white transition-all delay-75 border hover:text-black hover:bg-white"
+                >
+                  Login
+                </Link>
+              </li>
+              <li className="hidden">
+                <Link
+                  href="/auth/register"
+                  className="auth-btn bg-primary-yellow-100 text-primary-blue-100"
+                >
+                  Sign up
+                </Link>
+              </li>
+            </div>
+          )}
+
+          {/* {user?._id ? (
             <UserAccountDropdown
               photo={user.photo}
               alt={user.name}
@@ -209,7 +239,7 @@ const Desktop = ({
                 </Link>
               </li>
             </div>
-          )}
+          )} */}
 
           {isAuthenticated && (
             <li>

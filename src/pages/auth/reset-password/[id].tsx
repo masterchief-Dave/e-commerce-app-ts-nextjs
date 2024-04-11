@@ -15,6 +15,7 @@ import { errorLogger } from "@/lib/utils/logger"
 import Spinner from "@/components/molecules/spinner"
 import { InputContainer } from "@/components/Form"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
+import AuthLayout from "@/components/Layout/Auth"
 
 type Props = {}
 
@@ -108,11 +109,11 @@ const ResetPassword = (props: Props) => {
   })
 
   return (
-    <HomeWrapper>
-      <>
-        <div className="py-24 font-rubik">
-          <div className="flex items-center justify-center">
-            <section className="max-w-xl w-full space-y-12 rounded-lg border p-8">
+    <AuthLayout>
+      <div className="w-full grid grid-cols-12">
+        <div className="py-24 font-rubik col-start-3 col-end-11">
+          <div className="">
+            <section className="w-full space-y-12 rounded-lg border p-8">
               <header>
                 <h1 className="text-center text-xl font-medium">
                   Reset Password
@@ -195,8 +196,8 @@ const ResetPassword = (props: Props) => {
           </div>
         </div>
         <PasswordResetSuccess isOpen={isOpen} setIsOpen={setIsOpen} />
-      </>
-    </HomeWrapper>
+      </div>
+    </AuthLayout>
   )
 }
 
