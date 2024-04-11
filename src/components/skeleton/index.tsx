@@ -194,7 +194,7 @@ export const ProductCardSkeleton = ({
 }: ProductCardSkeletonProps) => {
   return (
     <Card
-      className={cn("h-full overflow-hidden rounded-sm", className)}
+      className={cn("h-full w-full overflow-hidden rounded-sm", className)}
       {...props}
     >
       <CardHeader className="border-b p-0">

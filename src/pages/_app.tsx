@@ -19,12 +19,14 @@ import "@smastrom/react-rating/style.css"
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import ErrorBoundary from "./error"
 import { errorLogger } from "@/lib/utils/logger"
+import useUserStore from "@/lib/store/user.store"
 
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
   const refreshToken = useRefreshToken()
+  const { setUserLoading } = useUserStore((state) => state)
   const { user } = useAuth()
   const staticPaths = [
     "/legal/terms-and-condition",
@@ -45,8 +47,10 @@ export default function App({
         await refreshToken()
       } catch (err) {
         errorLogger({ url: router.asPath, message: "", err: err })
+        setUserLoading(false)
         setIsLoading(false)
       } finally {
+        setUserLoading(false)
         isMounted && setIsLoading(false)
       }
     }

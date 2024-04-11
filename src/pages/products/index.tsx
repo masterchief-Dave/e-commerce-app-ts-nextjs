@@ -48,14 +48,17 @@ function Products() {
               <div className="col-start-2 col-end-12">
                 <section className="products-component space-y-12 bg-white py-12">
                   <section className="flex justify-center px-8">
-                    <div className="">
+                    <div className="w-full">
                       {isLoading ? (
-                        <div className="grid w-full grid-cols-1 justify-center gap-x-8 gap-y-20 md:grid-cols-2 xl:grid-cols-4">
+                        <div className="grid w-full grid-cols-4 justify-center gap-x-8 gap-y-20">
                           {new Array(8).fill(2).map((_, index) => {
                             return (
-                              <ProductCardSkeleton
+                              <div
+                                className="w-full"
                                 key={`Products page ${index + 1}`}
-                              />
+                              >
+                                <ProductCardSkeleton className="w-full" />
+                              </div>
                             )
                           })}
                         </div>
