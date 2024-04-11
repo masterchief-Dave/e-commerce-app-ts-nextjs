@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useFormik } from "formik"
 import { useRouter } from "next/router"
 import axios from "axios"
-import { loginUser } from "@/lib/helpers"
+// import { loginUser } from "@/lib/helpers"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import AuthLayout from "@/components/Layout/Auth"
@@ -19,11 +19,12 @@ import {
 } from "lucide-react"
 import { registerSchema, registerVal } from "@/lib/schema/auth.schema"
 import { useState } from "react"
-import { errorLogger, info } from "@/lib/utils/logger"
+import { errorLogger } from "@/lib/utils/logger"
 import useAuth from "@/lib/hooks/useAuth"
 import AuthService from "@/lib/services/auth/auth.service"
 import Spinner from "@/components/molecules/spinner"
 import { useToast } from "@/components/ui/use-toast"
+import useUserStore from "@/lib/store/user.store"
 
 interface FormData {
   name: string
@@ -34,6 +35,7 @@ interface FormData {
 
 const Register = () => {
   const { setUser } = useAuth()
+  const { setUserLoading } = useUserStore((state) => state)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const [show, setShow] = useState({
@@ -83,6 +85,7 @@ const Register = () => {
         token: response.user.token,
         role: response.user.role,
       })
+      setUserLoading(false)
       toast({
         variant: "success",
         title: "Registration Successful!",

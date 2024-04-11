@@ -1,18 +1,14 @@
 import { useState } from "react"
-import axios from "axios"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { XMarkIcon } from "@heroicons/react/24/outline"
-
-import { Layout } from "@/components/Layout"
 import ResetEmailSentModal from "@/components/Modal/ResetEmailSent"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import HomeWrapper from "@/components/Layout/Home"
 import AuthService from "@/lib/services/auth/auth.service"
 import { useToast } from "@/components/ui/use-toast"
 import { errorLogger } from "@/lib/utils/logger"
 import Spinner from "@/components/molecules/spinner"
+import AuthLayout from "@/components/Layout/Auth"
 
 type Props = {}
 
@@ -21,7 +17,6 @@ const ForgotPassword = (props: Props) => {
   let [isOpen, setIsOpen] = useState(true)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [email, setEmail] = useState<string>("")
-  const [notification, setNotification] = useState<null | string>("")
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
 
@@ -65,7 +60,7 @@ const ForgotPassword = (props: Props) => {
   }
 
   return (
-    <HomeWrapper>
+    <AuthLayout>
       <div>
         {showModal && (
           <ResetEmailSentModal
@@ -75,20 +70,8 @@ const ForgotPassword = (props: Props) => {
             setIsOpen={setIsOpen}
           />
         )}
-        <div className="space-y-24 py-16">
-          {notification && (
-            <div className="fixed left-0 right-0 text-center top-[1rem] flex items-center justify-center">
-              <div className="border border-dashed text-red-500 bg-white p-8 space-y-4">
-                <header className="flex justify-end">
-                  <div onClick={() => setNotification(null)}>
-                    <XMarkIcon className="h-10 w-10" />
-                  </div>
-                </header>
-                <p className=" font-medium">{notification}</p>
-              </div>
-            </div>
-          )}
-          <div className="px-12">
+        <div className="space-y-12 py-16">
+          <div className="flex items-center justify-start">
             <p className="">
               Return to{" "}
               <span className="text-text-primary-link">
@@ -132,7 +115,7 @@ const ForgotPassword = (props: Props) => {
           </div>
         </div>
       </div>
-    </HomeWrapper>
+    </AuthLayout>
   )
 }
 

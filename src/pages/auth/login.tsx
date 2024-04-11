@@ -4,8 +4,9 @@ import AuthService from "@/lib/services/auth/auth.service"
 import axios from "axios"
 import { useRouter } from "next/router"
 import useAuth from "@/lib/hooks/useAuth"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { errorLogger, info } from "@/lib/utils/logger"
+import useUserStore from "@/lib/store/user.store"
 
 type Props = {
   myCookieValue: string
@@ -20,6 +21,7 @@ const Login = ({ myCookieValue, data }: Props) => {
     state: false,
     message: "",
   })
+  const { setUserLoading } = useUserStore((state) => state)
 
   const handleSubmit = async (email: string, password: string) => {
     try {
@@ -40,6 +42,7 @@ const Login = ({ myCookieValue, data }: Props) => {
           token: response.user.token,
           role: response.user.role,
         })
+        setUserLoading(false)
         return router.push("/")
       }
 
