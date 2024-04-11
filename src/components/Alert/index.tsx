@@ -32,18 +32,16 @@ const AlertDialogComp = ({
   showBtn = false,
 }: Props) => {
   const styles = {
-    btn: `text-[1.4rem] px-8 py-4 h-[4rem] font-rubik`,
+    btn: `text-sm px-4 py-2 font-rubik`,
   }
 
   return (
     <AlertDialog open={open} onOpenChange={onClose}>
       {/* <AlertDialogTrigger>Open</AlertDialogTrigger> */}
-      <AlertDialogContent className="w-[500px] max-w-[500px]">
+      <AlertDialogContent className="w-[500px] max-w-[500px] font-rubik">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-[1.8rem]">
-            {headerText}
-          </AlertDialogTitle>
-          <AlertDialogDescription className=" font-normal">
+          <AlertDialogTitle className="text-xl">{headerText}</AlertDialogTitle>
+          <AlertDialogDescription className="text-base font-normal">
             {description}
           </AlertDialogDescription>
         </AlertDialogHeader>
