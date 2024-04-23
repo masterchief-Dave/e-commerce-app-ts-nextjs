@@ -14,7 +14,7 @@ import { Navbar } from "@/components/Navbar"
 import { ShoppingFixedBag } from "@/components/ShoppingBag"
 import { Footer } from "@/components/Footer"
 import AuthenticatedModal from "@/components/Modal/AuthenticatedModal"
-import { ProductTab } from "@/components/Tabs/Product"
+// import { ProductTab } from "@/components/Tabs/Product"
 import useAuth from "@/lib/hooks/useAuth"
 import {
   CheckCircleIcon,
@@ -31,6 +31,7 @@ import {
 import fetchProduct from "@/utils/fetchProduct"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { useToast } from "@/components/ui/use-toast"
+import ProductTab from "@/components/organisms/product-tab"
 
 type Props = {
   product: Product
@@ -286,8 +287,9 @@ const ProductSlug = ({ product }: Props) => {
         </div>
 
         {/* product breakdown tab */}
-        <div className="col-span-full col-start-2 col-end-12 bg-[#f6f6f6] py-2">
+        <div className="col-span-full col-start-2 col-end-12 py-2">
           {product && <ProductTab product={product} />}
+          {/* {product && <ProductTab product={product} />} */}
         </div>
       </main>
       <Footer />

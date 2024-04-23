@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://e-commerce-app-ts-nextjs.vercel.app/
+
+# Sitemaps
+Sitemap: https://e-commerce-app-ts-nextjs.vercel.app/sitemap.xml
