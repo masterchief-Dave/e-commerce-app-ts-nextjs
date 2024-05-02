@@ -3,7 +3,7 @@ import { ChatInterface } from "@/lib/schema/chat.schema"
 
 class ChatService {
   static async chat(messages: ChatInterface) {
-    return apiService(`/message`, "POST", {
+    return apiService(`/chat`, "POST", {
       messages,
     })
   }
