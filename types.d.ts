@@ -140,7 +140,7 @@ declare global {
 }
 
 declare global {
-  interface User {
+  type User = {
     success: boolean
     token: string | null
     _id?: string | Types.ObjectId
@@ -164,6 +164,10 @@ declare global {
       reviews: string[]
     }
   }
+}
+
+export type UserSession = Omit<User, "success" | "token" | "_id"> & {
+  message: string
 }
 
 declare global {
@@ -203,6 +207,7 @@ declare global {
     success: boolean
     token: string | null
     role: "USER" | "ADMIN" | "NO USER"
+    cart: number
   }
 }
 

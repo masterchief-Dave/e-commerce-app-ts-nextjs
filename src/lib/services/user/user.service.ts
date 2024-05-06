@@ -3,6 +3,10 @@ import { errorLogger } from "@/lib/utils/logger"
 import axios from "axios"
 
 class UserService {
+  static async getMe() {
+    return await apiService(`/user`, "GET")
+  }
+
   static async getWishlist() {
     return await apiService(`/user/wishlist`)
   }

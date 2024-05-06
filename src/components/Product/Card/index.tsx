@@ -92,6 +92,8 @@ export const ProductCard = ({ page, data }: Props) => {
     })
   }
 
+  console.log(data.ratings)
+
   return (
     <>
       <div className="max-w-[250px] rounded-lg space-y-4 p-2 shadow-sm border">
@@ -156,14 +158,14 @@ export const ProductCard = ({ page, data }: Props) => {
             </h5>
             {/* <h6 className='text-[#e94560] font-medium text-[1.3rem] line-through'>$550</h6> */}
           </div>
-          <div className="flex items-center justify-center gap-4 text-center">
+          {/* <div className="flex items-center justify-center gap-4 text-center">
             <div className="flex items-center">
-              {new Array(Math.floor(data.ratings))
+              {new Array(Math.ceil(data?.ratings))
                 .fill("0")
                 .map((rating, index) => {
                   return <RenderRating color="#edab56" rating={4} key={index} />
                 })}
-              {new Array(5 - Math.floor(data.ratings))
+              {new Array(5 - Math.ceil(data.ratings))
                 .fill("0")
                 .map((rating, index) => {
                   return (
@@ -171,8 +173,8 @@ export const ProductCard = ({ page, data }: Props) => {
                   )
                 })}
             </div>
-            {/* <span className=''>{data.ratings}</span> */}
-          </div>
+          
+          </div> */}
           <button
             className={`flex h-[35px] w-full items-center text-sm justify-center gap-x-4 rounded-md border font-semibold hover:transition-all hover:delay-75 ${
               userCartIds?.includes(data._id)

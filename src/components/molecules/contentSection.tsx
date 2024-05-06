@@ -25,15 +25,15 @@ function ContentSection({
             </h2>
             <p>{description}</p>
           </div>
-          <Button className="w-fit" variant="default">
-            <Link
-              href={slug}
-              className="flex items-center justify-center gap-x-2"
+          <Link href={slug}>
+            <Button
+              className="w-fit flex items-center justify-center gap-x-2"
+              variant="default"
             >
               {btnText}
               <MoveRightIcon className="h-5 w-5" />
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </header>
       </div>
     </section>

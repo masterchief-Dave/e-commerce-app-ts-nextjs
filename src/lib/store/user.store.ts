@@ -21,6 +21,7 @@ const useUserStore = create<State & Actions>((set) => ({
     photo: "",
     token: "",
     role: "NO USER",
+    cart: 0,
   },
   setUser: (data) => set((state) => ({ user: data })),
   setUserLoading: (data) => set((state) => ({ userLoading: data })),

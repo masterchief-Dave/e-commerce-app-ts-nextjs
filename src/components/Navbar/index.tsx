@@ -27,10 +27,10 @@ import Spinner from "../molecules/spinner"
 type Props = {
   session: UserLoginSession | null
   isTop: boolean
-  cart: UserCart[]
+  // cart: UserCart[]
   handleSignOut: () => void
   user: Omit<UserSession, "success"> | null
-  data: Session | null
+
   // i am not using these states any more i am using formik to validate and manage the state of the input for searching
   searchTerm?: string
   setSearchTerm?: React.Dispatch<React.SetStateAction<string>>
@@ -45,9 +45,8 @@ type MobileProps = Omit<Props, "isTop">
 export const Navbar = () => {
   const logout = useLogout()
   const { isTop } = useStickyNavbar()
-  const { data } = useSession()
+  // const { data } = useSession()
   const { user } = useAuth()
-  const cart = useGetCart()
 
   return (
     <div className="">
@@ -56,17 +55,16 @@ export const Navbar = () => {
           handleSignOut={logout}
           session={null}
           user={user}
-          data={data}
-          cart={cart.data?.message === "success" ? cart?.data?.data : []}
+
+          // cart={cart.data?.message === "success" ? cart?.data?.data : []}
         />
       </div>
 
       <div className="hidden lg:block">
         <Desktop
           isTop={isTop}
-          cart={cart.data?.message === "success" ? cart?.data?.data : []}
+          // cart={cart.data?.message === "success" ? cart?.data?.data : []}
           handleSignOut={logout}
-          data={data}
           session={null}
           user={user}
         />
@@ -75,14 +73,8 @@ export const Navbar = () => {
   )
 }
 
-const Desktop = ({
-  session,
-  isTop,
-  cart,
-  handleSignOut,
-  user,
-  data,
-}: Props) => {
+const Desktop = ({ session, isTop, handleSignOut, user }: Props) => {
+  // const { data, isLoading } = useGetCart()
   const router = useRouter()
   const { isAuthenticated, userLoading } = useAuth()
   const { params, setParams } = useProductStore((state) => state)
@@ -117,16 +109,16 @@ const Desktop = ({
   }
 
   // move the items in the cart into the searchurl params
-  const onCartClick = () => {
-    const cartIds = cart.map((product) => product._id)
+  // const onCartClick = () => {
+  //   const cartIds = data?.data?.map((product) => product._id) || []
 
-    router.push("/cart", {
-      pathname: "/cart",
-      query: {
-        id: [...cartIds],
-      },
-    })
-  }
+  //   router.push("/cart", {
+  //     pathname: "/cart",
+  //     query: {
+  //       id: [...cartIds],
+  //     },
+  //   })
+  // }
   /**
    *  className={`grid grid-cols-12 bg-primary-blue-100/30 py-4  ${
         isTop ? "fixed top-0 right-0 z-[99] w-full backdrop-blur-xl" : ""
@@ -184,11 +176,24 @@ const Desktop = ({
           {userLoading ? (
             <Spinner className="h-5 w-5 text-black" />
           ) : user?._id ? (
-            <UserAccountDropdown
-              photo={user.photo}
-              alt={user.name}
-              fallback={user.name}
-            />
+            <div className="flex items-center gap-x-4">
+              <UserAccountDropdown
+                photo={user.photo}
+                alt={user.name}
+                fallback={user.name}
+              />
+              <Link href="/cart">
+                <Button
+                  className="relative bg-transparent border-0"
+                  type="button"
+                >
+                  <ShoppingBagIcon className="h-8 w-8 text-black" />
+                  <span className="absolute top-0 left-[30px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary-yellow-200 text-white">
+                    {user?.cart}
+                  </span>
+                </Button>
+              </Link>
+            </div>
           ) : (
             <div
               className={`flex items-center gap-x-8 ${
@@ -241,7 +246,7 @@ const Desktop = ({
             </div>
           )} */}
 
-          {isAuthenticated && (
+          {/* {isAuthenticated && (
             <li>
               <Button
                 className="relative bg-transparent border-0"
@@ -249,18 +254,18 @@ const Desktop = ({
               >
                 <ShoppingBagIcon className="h-8 w-8 text-black" />
                 <span className="absolute top-0 left-[30px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary-yellow-200 text-white">
-                  {cart?.length}
+                  {data?.data?.length}
                 </span>
               </Button>
             </li>
-          )}
+          )} */}
         </div>
       </ul>
     </nav>
   )
 }
 
-const MobileNavbar = ({ handleSignOut, cart }: MobileProps) => {
+const MobileNavbar = ({ handleSignOut }: MobileProps) => {
   const [showMenu, setShowMenu] = useState<Boolean>(false)
   const mobileNavbarRef = useRef<HTMLDivElement | null>(null)
   const barIconRef = useRef<HTMLLIElement | null>(null)

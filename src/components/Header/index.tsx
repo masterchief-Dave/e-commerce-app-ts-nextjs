@@ -4,6 +4,7 @@ import Slider from "react-slick"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 
 import { data } from "@/globals/header"
+import { AspectRatio } from "../ui/aspect-ratio"
 
 type Props = {}
 
@@ -51,19 +52,24 @@ export const Header = (props: Props) => {
   }
 
   return (
-    <div className="mx-auto h-[20rem] w-full  overflow-hidden lg:h-[40rem]">
+    <div className="mx-auto h-[20rem] w-full overflow-hidden lg:h-[40rem]">
       <Slider {...settings} ref={sliderRef}>
         {data.map((data: Header, index: number): JSX.Element => {
           return (
-            <div className="relative h-[100%] w-full max-w-[100vw]" key={index}>
-              <div className="relative h-full w-full ">
+            <div
+              className="relative h-[100%] w-full max-w-[100vw] overflow-hidden"
+              key={index}
+            >
+              <div className="relative h-full w-full">
+                {/* <AspectRatio ratio={2 / 3}>
+                  </AspectRatio> */}
                 <Image
                   src={data.img}
                   alt={data.title}
-                  className="h-[20rem] w-full object-cover lg:h-[40rem]"
-                  width="1000"
-                  height="1000"
+                  className="w-full object-cover overflow-hidden"
                   priority
+                  width={1000}
+                  height={1000}
                 />
                 <div className="absolute top-0 z-10  grid h-full w-full grid-cols-12 flex-col items-center justify-center">
                   <div

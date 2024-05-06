@@ -78,7 +78,7 @@ export default function App({
                   <div className={`antialiased`}>
                     <Component {...pageProps} />
                     <Toaster />
-                    <Chat />
+                    {/* <Chat /> */}
                   </div>
                 </ErrorBoundary>
               )}

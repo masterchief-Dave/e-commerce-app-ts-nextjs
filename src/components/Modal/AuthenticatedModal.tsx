@@ -52,6 +52,7 @@ const AuthenticatedModal = ({ openModal, setOpenModal }: Props) => {
             photo: response.user.photo,
             token: response.user.token,
             role: response.user.role,
+            cart: response.user.cart,
           })
           // router.push('/')
           setOpenModal(false)
