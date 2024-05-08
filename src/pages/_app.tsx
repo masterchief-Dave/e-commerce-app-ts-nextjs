@@ -20,6 +20,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import ErrorBoundary from "./error"
 import { errorLogger } from "@/lib/utils/logger"
 import useUserStore from "@/lib/store/user.store"
+import Chat from "@/components/organisms/chat"
 
 export default function App({
   Component,
@@ -77,6 +78,7 @@ export default function App({
                   <div className={`antialiased`}>
                     <Component {...pageProps} />
                     <Toaster />
+                    {/* <Chat /> */}
                   </div>
                 </ErrorBoundary>
               )}

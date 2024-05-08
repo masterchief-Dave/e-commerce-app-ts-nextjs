@@ -35,22 +35,31 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       // Render fallback UI
       return (
-        <Card>
-          <CardContent className="p-8">
-            <CardTitle>Oops, something went wrong!</CardTitle>
-            <CardDescription>
-              <h2>An Error has occured!</h2>
-              <Button
-                className="w-fit"
-                type="button"
-                onClick={() => this.setState({ hasError: false })}
-              >
-                Try again
-              </Button>
-            </CardDescription>
-          </CardContent>
-          {/* You can provide more helpful information or actions here */}
-        </Card>
+        <div className="flex items-center justify-center min-h-screen w-full">
+          <div className="max-w-md">
+            <Card>
+              <CardContent className="p-8 flex flex-col items-center justify-center gap-y-8">
+                <CardTitle className="text-red-500">
+                  Oops, something went wrong!
+                </CardTitle>
+                <CardDescription>
+                  <h2>An Error has occured!</h2>
+                  <Button
+                    className="w-fit"
+                    type="button"
+                    onClick={() => {
+                      this.setState({ hasError: false })
+                      window.location.reload()
+                    }}
+                  >
+                    Try again
+                  </Button>
+                </CardDescription>
+              </CardContent>
+              {/* You can provide more helpful information or actions here */}
+            </Card>
+          </div>
+        </div>
       )
     }
 

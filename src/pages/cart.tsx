@@ -15,6 +15,7 @@ import { Card, CardTitle } from "@/components/ui/card"
 const Cart = () => {
   const { data, isLoading } = useGetCart()
 
+  console.log(data?.data)
   return (
     <Layout>
       <div className="mb-24">
@@ -72,9 +73,12 @@ const ItemInCart = ({ cart }: { cart: UserCart[] }) => {
   const [openModal, setOpenModal] = useState(false)
   // const totalPrice = 0
 
-  const totalPrice = cart.reduce((acc, item) => {
-    return item.price + acc
-  }, 0)
+  const totalPrice =
+    cart?.length >= 1
+      ? cart?.reduce((acc, item) => {
+          return item.price + acc
+        }, 0)
+      : 0
 
   const handleProceedToCheckout = () => {
     if (isAuthenticated === false) {

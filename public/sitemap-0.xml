@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/account/add-billing-address</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/account/add-payment</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/account/delivery-address</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/account/orders</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/account/profile</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/auth/forgot-password</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/auth/forgot-password-email-sent</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/auth/login</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/auth/register</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/auth/reset-password-success</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/cart</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/category</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/checkout</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/company/refund-policy</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/company/shipping-returns</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/demos/demo</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/demos/demo-ts</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/demos/trial</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/error</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/featured</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/legal/privacy-policy</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/legal/terms-and-condition</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/products</loc><lastmod>2024-05-08T08:22:58.591Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/search</loc><lastmod>2024-05-08T08:22:58.592Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://e-commerce-app-ts-nextjs.vercel.app/wishlist</loc><lastmod>2024-05-08T08:22:58.592Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>

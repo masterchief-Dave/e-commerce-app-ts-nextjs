@@ -45,7 +45,7 @@ const Wishlist = (props: Props) => {
             )}
           </section>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Layout>
   )

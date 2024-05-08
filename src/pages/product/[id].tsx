@@ -14,14 +14,9 @@ import { Navbar } from "@/components/Navbar"
 import { ShoppingFixedBag } from "@/components/ShoppingBag"
 import { Footer } from "@/components/Footer"
 import AuthenticatedModal from "@/components/Modal/AuthenticatedModal"
-import { ProductTab } from "@/components/Tabs/Product"
+// import { ProductTab } from "@/components/Tabs/Product"
 import useAuth from "@/lib/hooks/useAuth"
-import {
-  CheckCircleIcon,
-  CheckIcon,
-  CheckSquareIcon,
-  HeartIcon,
-} from "lucide-react"
+import { CheckSquareIcon, HeartIcon } from "lucide-react"
 import { useAddToCart, useLikeProduct } from "@/lib/hooks/product/product.hook"
 import {
   useGetCart,
@@ -31,6 +26,7 @@ import {
 import fetchProduct from "@/utils/fetchProduct"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { useToast } from "@/components/ui/use-toast"
+import ProductTab from "@/components/organisms/product-tab"
 
 type Props = {
   product: Product
@@ -118,14 +114,13 @@ const ProductSlug = ({ product }: Props) => {
         <div className="col-span-full col-start-2 col-end-12 space-y-8 mb-20">
           <section className="grid grid-cols-12">
             <div className="col-start-1 col-end-7">
-              <div className="w-full h-[450px]">
-                <AspectRatio ratio={16 / 16}>
+              <div className="w-full h-[450px] max-h-[450px] relative">
+                <AspectRatio ratio={16 / 9} className="max-h-[450px] h-[450px]">
                   <Image
                     src={product.images[0].url! as string}
                     alt={product.name}
-                    width={1000}
-                    height={1000}
-                    className="object-cover h-[450px]"
+                    fill
+                    className="object-cover h-[450px] max-h-[450px]"
                   />
                 </AspectRatio>
               </div>
@@ -286,7 +281,7 @@ const ProductSlug = ({ product }: Props) => {
         </div>
 
         {/* product breakdown tab */}
-        <div className="col-span-full col-start-2 col-end-12 bg-[#f6f6f6] py-2">
+        <div className="col-span-full col-start-2 col-end-12 py-2">
           {product && <ProductTab product={product} />}
         </div>
       </main>

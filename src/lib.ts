@@ -13,6 +13,8 @@ export async function encrypt(payload: any) {
     .setExpirationTime("10 sec from now")
     .sign(key)
 }
+// this some very cool code wil show here
+// this is another line of code
 
 export async function decrypt(input: string): Promise<any> {
   const { payload } = await jwtVerify(input, key, {

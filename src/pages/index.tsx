@@ -27,6 +27,7 @@ export default function Home() {
     const id = params?.get("id")
     const photo = params?.get("photo")
     const role = params?.get("role")
+    const cart = Number(params?.get("cart"))
 
     if (name !== undefined && name?.length! > 1) {
       axios.defaults.headers.common["Authorization"] = token
@@ -37,6 +38,7 @@ export default function Home() {
         photo: photo ?? "",
         token: token ?? "",
         role: (role as "USER" | "NO USER" | "ADMIN") ?? "NO USER",
+        cart: cart ?? 0,
       })
     }
   }, [])

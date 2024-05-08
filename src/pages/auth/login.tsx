@@ -41,6 +41,7 @@ const Login = ({ myCookieValue, data }: Props) => {
           photo: response.user.photo,
           token: response.user.token,
           role: response.user.role,
+          cart: response.user.cart,
         })
         setUserLoading(false)
         return router.push("/")

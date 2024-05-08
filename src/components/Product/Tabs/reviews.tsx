@@ -4,6 +4,7 @@ import Spinner from "@/components/molecules/spinner"
 import UserReviewComp from "@/components/organisms/userReviews"
 import { ReviewSkeleton } from "@/components/skeleton"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
@@ -99,10 +100,12 @@ export const Reviews = (props: Props) => {
   // console.log(orderQuery.data)
 
   return (
-    <section className="">
-      <h1 className="font-bold text-3xl mb-12">Reviews</h1>
-
-      <div className="space-y-12">
+    <Card className="">
+      <CardHeader>
+        {" "}
+        <CardTitle>Reviews</CardTitle>{" "}
+      </CardHeader>
+      <CardContent className="space-y-12">
         <div>
           {isReviewsLoading ? (
             <>
@@ -203,11 +206,11 @@ export const Reviews = (props: Props) => {
             </div>
           </section>
         )}
-      </div>
+      </CardContent>
       {authModal && (
         <AuthenticatedModal openModal={authModal} setOpenModal={setAuthModal} />
       )}
-    </section>
+    </Card>
   )
 }
 

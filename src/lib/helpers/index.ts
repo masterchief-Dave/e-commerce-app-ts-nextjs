@@ -6,10 +6,10 @@ interface LoginUserParams {
 }
 
 export const loginUser = async ({ email, password }: LoginUserParams) => {
-  const res = await signIn('credentials', {
+  const res = await signIn("credentials", {
     redirect: false,
     email,
-    password
+    password,
   })
 
   return res

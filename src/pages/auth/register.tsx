@@ -84,6 +84,7 @@ const Register = () => {
         photo: response.user.photo,
         token: response.user.token,
         role: response.user.role,
+        cart: response.user.cart,
       })
       setUserLoading(false)
       toast({

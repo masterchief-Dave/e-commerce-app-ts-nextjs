@@ -17,6 +17,13 @@ export const useGetLikedProducts = () => {
   )
 }
 
+export const useUser = () => {
+  // UserService.getMe().then((data) => {
+  //   console.log(data)
+  // })
+  return useSWR<UserSession>("/user", () => UserService.getMe())
+}
+
 export const useGetCart = () => {
   const { user } = useAuth()
 
